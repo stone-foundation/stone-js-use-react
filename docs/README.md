@@ -1,3 +1,7 @@
+**Use React Documentation v0.0.2**
+
+***
+
 # Stone.js: Use React
 
 [![npm](https://img.shields.io/npm/l/@stone-js/use-react)](https://opensource.org/licenses/Apache-2.0)
@@ -13,7 +17,6 @@ React integration for Stone.js, enabling React as the view layer within the Ston
 ---
 
 Get started with the [documentation](https://stonejs.com/docs/adapters/use-react).
-
 
 ## Contributing
 
