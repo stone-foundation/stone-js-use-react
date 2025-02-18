@@ -1,4 +1,7 @@
-import { IServiceProvider } from '@stone-js/core'
+import { Config } from '@stone-js/config'
+import { STONE_SNAPSHOT } from './constants'
+import { NAVIGATION_EVENT } from '@stone-js/router'
+import { IContainer, IServiceProvider } from '@stone-js/core'
 import { ReactIncomingEvent, ReactOutgoingResponse } from './declarations'
 
 /**
@@ -8,22 +11,40 @@ import { ReactIncomingEvent, ReactOutgoingResponse } from './declarations'
  */
 export class UseReactServiceProvider implements IServiceProvider<ReactIncomingEvent, ReactOutgoingResponse> {
   /**
-   * Determines if the provider should be skipped.
-   *
-   * @returns True if the provider should be skipped, false otherwise
-   * @remarks This method is used to skip the provider during SSR.
+   * Create a new UseReactServiceProvider.
    */
-  mustSkip (): boolean {
+  constructor (private readonly container: IContainer) {}
+
+  /**
+   * Determine if the application is running on the server side.
+   *
+   * @returns True if the application is running on the server side, false otherwise.
+   */
+  isSSR (): boolean {
     return import.meta.env.SSR || typeof window === 'undefined'
   }
 
   /**
    * Hook that runs once after the context is created.
    *
-   * The browser adapter only execute onInit and onPrepare hooks we first loaded.
+   * The browser adapter only execute onStart and onPrepare hooks when first loaded.
    * As Stone.js is an event-driven framework, we need to dispatch an event to continue with the flow.
    */
-  async onPrepare (): Promise<void> {
-    window.dispatchEvent(new Event('@stonejs/router.navigate'))
+  onPrepare (): void {
+    this.registerSnapshot()
+    !this.isSSR() && window.dispatchEvent(new Event(NAVIGATION_EVENT))
+  }
+
+  /**
+   * Register the snapshot.
+   *
+   * We save the snapshot on server side rendering and
+   * we use it to hydrate the application on the client side.
+  */
+  private registerSnapshot (): void {
+    const textContent = this.isSSR()
+      ? '{}'
+      : (window.document.getElementById(STONE_SNAPSHOT)?.textContent ?? '{}')
+    this.container.singletonIf('snapshot', () => Config.fromJson(textContent))
   }
 }

@@ -52,6 +52,7 @@
   },
   "peerDependencies": {
     "@stone-js/core": "file:/Users/evenspierre/Projects/StoneJS/core",
+    "@stone-js/config": "file:/Users/evenspierre/Projects/StoneJS/config",
     "@stone-js/router": "file:/Users/evenspierre/Projects/StoneJS/router",
     "@stone-js/pipeline": "file:/Users/evenspierre/Projects/StoneJS/pipeline",
     "@stone-js/http-core": "file:/Users/evenspierre/Projects/StoneJS/http-core",

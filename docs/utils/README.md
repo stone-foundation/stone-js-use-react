@@ -15,6 +15,7 @@
 - [defineClassComponent](functions/defineClassComponent.md)
 - [defineFactoryComponent](functions/defineFactoryComponent.md)
 - [getAppRootElement](functions/getAppRootElement.md)
-- [getStoneGlobalData](functions/getStoneGlobalData.md)
+- [isClient](functions/isClient.md)
+- [isServer](functions/isServer.md)
 - [resolveComponentErrorHandler](functions/resolveComponentErrorHandler.md)
 - [resolveComponentEventHandler](functions/resolveComponentEventHandler.md)

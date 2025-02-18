@@ -6,7 +6,7 @@
 
 # Interface: UseReactOptions
 
-Defined in: [use-react/src/decorators/UseReact.ts:7](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/decorators/UseReact.ts#L7)
+Defined in: [use-react/src/decorators/UseReact.ts:7](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/decorators/UseReact.ts#L7)
 
 UseReact decorator options.
 
@@ -20,7 +20,7 @@ UseReact decorator options.
 
 > `optional` **errorHandlers**: `Record`\<`string`, [`MetaComponentErrorHandler`](../../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:11](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L11)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:11](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L11)
 
 #### Inherited from
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/options/UseReactBlueprint.ts:11](https://github.com/s
 
 > `optional` **htmlTemplatePath**: `string`
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:9](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L9)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:9](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L9)
 
 #### Inherited from
 
@@ -44,7 +44,7 @@ Defined in: [use-react/src/options/UseReactBlueprint.ts:9](https://github.com/st
 
 > `optional` **layout**: `Record`\<`string`, `MetaComponentEventHandler`\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:10](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L10)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:10](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L10)
 
 #### Inherited from
 
@@ -56,7 +56,7 @@ Defined in: [use-react/src/options/UseReactBlueprint.ts:10](https://github.com/s
 
 > `optional` **rootElementId**: `string`
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:8](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L8)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:8](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L8)
 
 #### Inherited from
 

@@ -8,7 +8,7 @@
 
 > **UseReact**\<`T`\>(`options`): `ClassDecorator`
 
-Defined in: [use-react/src/decorators/UseReact.ts:18](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/decorators/UseReact.ts#L18)
+Defined in: [use-react/src/decorators/UseReact.ts:18](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/decorators/UseReact.ts#L18)
 
 UseReact decorator.
 

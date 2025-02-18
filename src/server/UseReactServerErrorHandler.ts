@@ -1,6 +1,6 @@
+import { htmlTemplate } from './utils'
 import { renderToString } from 'react-dom/server'
 import { buildAdapterErrorComponent } from '../utils'
-import { UseReactError } from '../errors/UseReactError'
 import { AdapterErrorContext, IAdapterErrorHandler, ILogger, IBlueprint } from '@stone-js/core'
 
 /**
@@ -26,13 +26,6 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
    * @param options - UseReactServerErrorHandler options.
    */
   constructor ({ blueprint, logger }: UseReactServerErrorHandlerOptions) {
-    if (logger === undefined) {
-      throw new UseReactError('Logger is required to create an UseReactServerErrorHandler instance.')
-    }
-    if (blueprint === undefined) {
-      throw new UseReactError('Blueprint is required to create an UseReactServerErrorHandler instance.')
-    }
-
     this.logger = logger
     this.blueprint = blueprint
   }
@@ -57,15 +50,10 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
   }
 
   private async getErrorBody (error: any): Promise<string> {
-    const { htmlTemplate, renderStoneGlobalData } = await import('./utils')
     const statusCode = error.statusCode ?? 500
-    const globalData = renderStoneGlobalData({ error, statusCode, ssr: true })
-    const ClientApp = await buildAdapterErrorComponent(this.blueprint, statusCode, error)
     const template = await htmlTemplate(this.blueprint)
-    const html = renderToString(ClientApp)
+    const ClientApp = await buildAdapterErrorComponent(this.blueprint, statusCode, error)
 
-    return template
-      .replace('<!--app-html-->', html)
-      .replace('<!--app-head-->', globalData)
+    return template.replace('<!--app-html-->', renderToString(ClientApp))
   }
 }

@@ -8,7 +8,7 @@
 
 > **ComponentErrorHandlerType**\<`IncomingEventType`, `OutgoingResponseType`\>: [`ComponentErrorHandlerClass`](ComponentErrorHandlerClass.md)\<`IncomingEventType`, `OutgoingResponseType`\> \| [`FactoryComponentErrorHandler`](FactoryComponentErrorHandler.md)\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:151](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L151)
+Defined in: [use-react/src/declarations.ts:164](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L164)
 
 Represents a component error handler type.
 

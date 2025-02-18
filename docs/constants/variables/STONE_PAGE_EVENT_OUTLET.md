@@ -8,4 +8,6 @@
 
 > `const` **STONE\_PAGE\_EVENT\_OUTLET**: `"stone:inject:react-page:outlet"` = `'stone:inject:react-page:outlet'`
 
-Defined in: [use-react/src/constants.ts:2](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/constants.ts#L2)
+Defined in: [use-react/src/constants.ts:9](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/constants.ts#L9)
+
+Constants for the Stone Page Event Outlet

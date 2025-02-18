@@ -6,7 +6,7 @@
 
 # Class: UseReactKernelErrorHandler
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:16](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactKernelErrorHandler.ts#L16)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:16](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L16)
 
 Class representing an UseReactUseReactKernelErrorHandler.
 
@@ -22,7 +22,7 @@ Kernel level error handler for React applications.
 
 > **new UseReactKernelErrorHandler**(`options`): [`UseReactKernelErrorHandler`](UseReactKernelErrorHandler.md)
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:24](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactKernelErrorHandler.ts#L24)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:24](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L24)
 
 Create an UseReactUseReactKernelErrorHandler.
 
@@ -44,7 +44,7 @@ UseReactUseReactKernelErrorHandler options.
 
 > **handle**(`error`, `_event`): `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactKernelErrorHandler.ts#L37)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L37)
 
 Handle an error.
 

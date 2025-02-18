@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
 import { renderToString } from 'react-dom/server'
+import { htmlTemplate, renderStoneSnapshot } from './utils'
 import { StoneErrorComponent } from '../components/StoneErrorComponent'
 import { IComponentEventHandler, MetaComponentEventHandler } from '@stone-js/router'
 import { IBlueprint, IContainer, isFunction, isObjectLikeModule, isNotEmpty } from '@stone-js/core'
 import { buildAppComponent, resolveComponentEventHandler, resolveComponentErrorHandler } from '../utils'
-import { GlobalDataType, HeadersType, IComponentErrorHandler, MetaComponentErrorHandler, ReactIncomingEvent } from '../declarations'
+import { ResponseSnapshotType, HeadersType, IComponentErrorHandler, ISnapshot, MetaComponentErrorHandler, ReactIncomingEvent } from '../declarations'
 import { OutgoingHttpResponse as OutgoingHttpResponseType, IncomingHttpEvent, OutgoingHttpResponseOptions, OutgoingHttpResponse } from '@stone-js/http-core'
 
 /**
@@ -79,7 +80,7 @@ export class ReactHttpResponse extends OutgoingHttpResponse {
     const data = await this.extractDataFromHandler(event, handler)
     const AppComponent = await buildAppComponent(event, container, componentType, layout, data, this.statusCode)
 
-    await this.hydrateContent(AppComponent, { data }, container)
+    await this.hydrateContent(AppComponent, { data }, container, event)
   }
 
   /**
@@ -104,7 +105,7 @@ export class ReactHttpResponse extends OutgoingHttpResponse {
     const data = await this.extractDataFromHandler(event, handler, error)
     const AppComponent = await buildAppComponent(event, container, componentType, layout, data, this.statusCode, error)
 
-    await this.hydrateContent(AppComponent, { data, error, layout }, container)
+    await this.hydrateContent(AppComponent, { data, error, layout, statusCode: this.statusCode }, container, event)
   }
 
   /**
@@ -170,16 +171,32 @@ export class ReactHttpResponse extends OutgoingHttpResponse {
    * @param container - The service container.
    * @returns A promise that resolves when the content is hydrated.
    */
-  private async hydrateContent (component: ReactNode, data: Partial<GlobalDataType>, container: IContainer): Promise<void> {
-    const { htmlTemplate, renderStoneGlobalData } = await import('./utils')
-    const globalData = renderStoneGlobalData({ ...data, ssr: true }).concat('\n<!--app-head-->')
-    const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
+  private async hydrateContent (
+    component: ReactNode,
+    data: Partial<ResponseSnapshotType>,
+    container: IContainer,
+    event: IncomingHttpEvent
+  ): Promise<void> {
     const html = renderToString(component).concat('\n<!--app-html-->')
+    const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
+    const snapshot = this.snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
     this.setContent(
       template
         .replace('<!--app-html-->', html)
-        .replace('<!--app-head-->', globalData)
+        .replace('<!--app-head-->', snapshot)
     )
+  }
+
+  /**
+   * Snapshot the response data.
+   *
+   * @param event - The incoming HTTP event.
+   * @param container - The service container.
+   * @param data - The data to snapshot.
+   */
+  private snapshotResponse (event: IncomingHttpEvent, container: IContainer, data: Partial<ResponseSnapshotType>): string {
+    const snapshot = container.make<ISnapshot>('snapshot')
+    return renderStoneSnapshot(snapshot.set(event.fingerprint(), { ...data, ssr: true }).toJson())
   }
 }

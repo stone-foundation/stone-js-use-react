@@ -18,6 +18,7 @@
 - [middleware/configMiddleware](middleware/configMiddleware/README.md)
 - [options/UseReactBlueprint](options/UseReactBlueprint/README.md)
 - [ReactBrowserResponse](ReactBrowserResponse/README.md)
+- [ReactRedirectBrowserResponse](ReactRedirectBrowserResponse/README.md)
 - [ReactResponse](ReactResponse/README.md)
 - [server/ReactHttpResponse](server/ReactHttpResponse/README.md)
 - [server/UseReactServerErrorHandler](server/UseReactServerErrorHandler/README.md)

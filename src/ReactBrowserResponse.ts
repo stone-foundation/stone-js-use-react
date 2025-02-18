@@ -3,8 +3,8 @@ import { StoneErrorComponent } from './components/StoneErrorComponent'
 import { IComponentEventHandler, MetaComponentEventHandler } from '@stone-js/router'
 import { IBlueprint, IContainer, isFunction, isNotEmpty, isObjectLikeModule } from '@stone-js/core'
 import { IncomingBrowserEvent, OutgoingBrowserResponse, OutgoingBrowserResponseOptions } from '@stone-js/browser-core'
-import { BrowserResponseContent, GlobalDataType, IComponentErrorHandler, MetaComponentErrorHandler, ReactIncomingEvent } from './declarations'
-import { buildAppComponent, buildPageComponent, getStoneGlobalData, resolveComponentErrorHandler, resolveComponentEventHandler } from './utils'
+import { buildAppComponent, buildPageComponent, resolveComponentErrorHandler, resolveComponentEventHandler } from './utils'
+import { BrowserResponseContent, ResponseSnapshotType, IComponentErrorHandler, MetaComponentErrorHandler, ReactIncomingEvent, ISnapshot } from './declarations'
 
 /**
  * Options for creating a React browser Response.
@@ -19,7 +19,7 @@ export interface ReactBrowserResponseOptions extends OutgoingBrowserResponseOpti
 export class ReactBrowserResponse extends OutgoingBrowserResponse {
   static REACT_BROWSER_RESPONSE = 'stonejs@react_browser_response'
 
-  private readonly globalData: GlobalDataType
+  private snapshot?: ResponseSnapshotType
 
   /**
    * Create an instance of OutgoingHttpResponse.
@@ -38,8 +38,6 @@ export class ReactBrowserResponse extends OutgoingBrowserResponse {
    */
   constructor (options: ReactBrowserResponseOptions) {
     super({ ...options, type: ReactBrowserResponse.REACT_BROWSER_RESPONSE })
-
-    this.globalData = getStoneGlobalData()
   }
 
   /**
@@ -57,8 +55,10 @@ export class ReactBrowserResponse extends OutgoingBrowserResponse {
    * @returns The current instance of the response for chaining.
    */
   async prepare (event: IncomingBrowserEvent, container: IContainer): Promise<this> {
-    if (isNotEmpty<Error>(this.globalData.error)) {
-      await this.prepareFallbackErrorPage(event, container, this.globalData.error)
+    this.snapshot = this.getResponseSnapshot(event, container)
+
+    if (isNotEmpty<Error>(this.snapshot?.error)) {
+      await this.prepareFallbackErrorPage(event, container, this.snapshot.error)
     } else if (isNotEmpty<MetaComponentErrorHandler<ReactIncomingEvent>>(this.content) && isNotEmpty(this.content.error)) {
       await this.prepareErrorPage(event, container, this.content)
     } else if (isNotEmpty<MetaComponentEventHandler<ReactIncomingEvent>>(this.content) && isFunction(this.content.module)) {
@@ -130,7 +130,7 @@ export class ReactBrowserResponse extends OutgoingBrowserResponse {
    * @param container - The service container.
    */
   private async prepareFallbackErrorPage (event: IncomingBrowserEvent, container: IContainer, error?: any): Promise<void> {
-    const { layout } = this.globalData
+    const { layout } = this.snapshot ?? {}
     error = error ?? (this.content instanceof Error ? this.content : new Error('An error occurred.'))
     const metavalue = container.make<IBlueprint>('blueprint').get<MetaComponentErrorHandler<ReactIncomingEvent>>(
       `stone.useReact.errorHandlers.${String(error.name ?? 'default')}`,
@@ -156,9 +156,9 @@ export class ReactBrowserResponse extends OutgoingBrowserResponse {
   ): Promise<any> {
     let response: any
 
-    if (this.globalData.ssr) {
-      response = this.globalData.data
-      this._statusCode = this.globalData.statusCode ?? this.statusCode
+    if (this.snapshot?.ssr === true) {
+      response = this.snapshot.data
+      this._statusCode = this.snapshot.statusCode ?? this.statusCode
     } else {
       if (isNotEmpty<Error>(error) && isObjectLikeModule<IComponentErrorHandler<IncomingBrowserEvent>>(handler)) {
         response = await handler.handle?.(error, event)
@@ -185,6 +185,17 @@ export class ReactBrowserResponse extends OutgoingBrowserResponse {
    * @param fullRender - If the component should be fully rendered.
    */
   private hydrateContent (app: ReactNode, component: ReactNode, fullRender: boolean): void {
-    this._content = { app, component, fullRender, ssr: this.globalData.ssr }
+    this._content = { app, component, fullRender, ssr: this.snapshot?.ssr === true }
+  }
+
+  /**
+   * Get the response snapshot.
+   *
+   * @param event - The incoming browser event.
+   * @param container - The service container.
+   * @returns The response snapshot.
+   */
+  private getResponseSnapshot (event: IncomingBrowserEvent, container: IContainer): ResponseSnapshotType | undefined {
+    return container.make<ISnapshot>('snapshot').get(event.fingerprint())
   }
 }

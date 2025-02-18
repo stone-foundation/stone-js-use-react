@@ -6,7 +6,7 @@
 
 # Class: ReactHttpResponse
 
-Defined in: use-react/src/server/ReactHttpResponse.ts:20
+Defined in: [use-react/src/server/ReactHttpResponse.ts:21](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/ReactHttpResponse.ts#L21)
 
 Class representing a ReactHttpResponse.
 
@@ -24,7 +24,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > **new ReactHttpResponse**(`options`): [`ReactHttpResponse`](ReactHttpResponse.md)
 
-Defined in: use-react/src/server/ReactHttpResponse.ts:38
+Defined in: [use-react/src/server/ReactHttpResponse.ts:39](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/ReactHttpResponse.ts#L39)
 
 Constructor for ReactHttpResponse.
 
@@ -50,7 +50,7 @@ Options for the React HTTP response.
 
 > `protected` `optional` **\_blueprintResolver**: () => `undefined` \| `IBlueprint`
 
-Defined in: http-core/dist/index.d.ts:889
+Defined in: http-core/dist/index.d.ts:935
 
 #### Returns
 
@@ -66,7 +66,7 @@ Defined in: http-core/dist/index.d.ts:889
 
 > `protected` `optional` **\_charset**: `Encoding`
 
-Defined in: http-core/dist/index.d.ts:886
+Defined in: http-core/dist/index.d.ts:932
 
 #### Inherited from
 
@@ -92,7 +92,7 @@ The content of the response.
 
 > `protected` `readonly` **\_cookieCollection**: `CookieCollection`
 
-Defined in: http-core/dist/index.d.ts:891
+Defined in: http-core/dist/index.d.ts:937
 
 #### Inherited from
 
@@ -104,7 +104,7 @@ Defined in: http-core/dist/index.d.ts:891
 
 > `protected` `optional` **\_formats**: `Record`\<`string`, () => `unknown`\>
 
-Defined in: http-core/dist/index.d.ts:887
+Defined in: http-core/dist/index.d.ts:933
 
 #### Inherited from
 
@@ -116,7 +116,7 @@ Defined in: http-core/dist/index.d.ts:887
 
 > `protected` `readonly` **\_headers**: `Headers`
 
-Defined in: http-core/dist/index.d.ts:890
+Defined in: http-core/dist/index.d.ts:936
 
 #### Inherited from
 
@@ -128,7 +128,7 @@ Defined in: http-core/dist/index.d.ts:890
 
 > `protected` `optional` **\_incomingEventResolver**: () => `IncomingHttpEvent`
 
-Defined in: http-core/dist/index.d.ts:888
+Defined in: http-core/dist/index.d.ts:934
 
 #### Returns
 
@@ -242,7 +242,7 @@ The type of the event.
 
 > `static` **OUTGOING\_HTTP\_RESPONSE**: `string`
 
-Defined in: http-core/dist/index.d.ts:885
+Defined in: http-core/dist/index.d.ts:931
 
 #### Inherited from
 
@@ -254,7 +254,7 @@ Defined in: http-core/dist/index.d.ts:885
 
 > `static` **REACT\_HTTP\_RESPONSE**: `string` = `'stonejs@react_http_response'`
 
-Defined in: use-react/src/server/ReactHttpResponse.ts:21
+Defined in: [use-react/src/server/ReactHttpResponse.ts:22](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/ReactHttpResponse.ts#L22)
 
 ## Accessors
 
@@ -264,7 +264,7 @@ Defined in: use-react/src/server/ReactHttpResponse.ts:21
 
 > **get** **blueprint**(): `undefined` \| `IBlueprint`
 
-Defined in: http-core/dist/index.d.ts:955
+Defined in: http-core/dist/index.d.ts:1001
 
 Get the blueprint associated with the response.
 
@@ -286,7 +286,7 @@ The blueprint or undefined if not set.
 
 > **get** **charset**(): `Encoding`
 
-Defined in: http-core/dist/index.d.ts:924
+Defined in: http-core/dist/index.d.ts:970
 
 Get the character set encoding.
 Defaults to 'utf-8' if not explicitly set.
@@ -309,7 +309,7 @@ The character set encoding.
 
 > **get** `protected` **charsetRegExp**(): `RegExp`
 
-Defined in: http-core/dist/index.d.ts:962
+Defined in: http-core/dist/index.d.ts:1008
 
 Get the regular expression for matching charset in content type.
 
@@ -353,7 +353,7 @@ The content of the outgoing response.
 
 > **get** **etag**(): `undefined` \| `string`
 
-Defined in: http-core/dist/index.d.ts:930
+Defined in: http-core/dist/index.d.ts:976
 
 Get the ETag of the response.
 
@@ -375,7 +375,7 @@ The value of the ETag header, if present.
 
 > **get** **headers**(): `Headers`
 
-Defined in: http-core/dist/index.d.ts:917
+Defined in: http-core/dist/index.d.ts:963
 
 Get the headers of the response.
 
@@ -397,7 +397,7 @@ The headers of the response as a Headers object.
 
 > **get** **incomingEvent**(): `IncomingHttpEvent`
 
-Defined in: http-core/dist/index.d.ts:949
+Defined in: http-core/dist/index.d.ts:995
 
 Get the associated IncomingHttpEvent.
 
@@ -423,7 +423,7 @@ The associated IncomingHttpEvent.
 
 > **get** **lastModified**(): `undefined` \| `string`
 
-Defined in: http-core/dist/index.d.ts:942
+Defined in: http-core/dist/index.d.ts:988
 
 Get the Last-Modified date of the response.
 
@@ -445,7 +445,7 @@ The value of the Last-Modified header, if present.
 
 > **get** **status**(): `undefined` \| `number`
 
-Defined in: http-core/dist/index.d.ts:911
+Defined in: http-core/dist/index.d.ts:957
 
 Get the HTTP status code.
 
@@ -511,7 +511,7 @@ The status message of the response, or undefined if not set.
 
 > **get** **vary**(): `undefined` \| `string`[]
 
-Defined in: http-core/dist/index.d.ts:936
+Defined in: http-core/dist/index.d.ts:982
 
 Get the Vary header as an array of values.
 
@@ -531,7 +531,7 @@ The Vary header values split by comma, or undefined if not present.
 
 > **addVary**(`field`): `this`
 
-Defined in: http-core/dist/index.d.ts:1114
+Defined in: http-core/dist/index.d.ts:1160
 
 Add a field to the Vary header.
 
@@ -559,7 +559,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **appendHeader**(`key`, `value`): `this`
 
-Defined in: http-core/dist/index.d.ts:986
+Defined in: http-core/dist/index.d.ts:1032
 
 Append a value to an existing header or create a new header.
 
@@ -593,7 +593,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > `protected` **calculateContentLength**(`generateETag`): `number`
 
-Defined in: http-core/dist/index.d.ts:1299
+Defined in: http-core/dist/index.d.ts:1345
 
 Calculate the content length.
 
@@ -621,7 +621,7 @@ The content length.
 
 > **clearCookie**(`name`, `force`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1057
+Defined in: http-core/dist/index.d.ts:1103
 
 Clear a specific cookie from the response.
 
@@ -655,7 +655,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **clearCookies**(`force`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1064
+Defined in: http-core/dist/index.d.ts:1110
 
 Clear all cookies from the response.
 
@@ -707,7 +707,7 @@ A cloned instance of the current class.
 
 > `protected` **defaultEtagFn**(`content`, `encoding`): `string`
 
-Defined in: http-core/dist/index.d.ts:1336
+Defined in: http-core/dist/index.d.ts:1382
 
 Generate a default ETag for the given content.
 
@@ -741,7 +741,7 @@ The generated ETag as a base64 string.
 
 > `protected` **ensureCharset**(`value`): `this`
 
-Defined in: http-core/dist/index.d.ts:1306
+Defined in: http-core/dist/index.d.ts:1352
 
 Ensure that the "Content-Type" header has a charset specified.
 
@@ -769,7 +769,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **format**(`formats`): `this`
 
-Defined in: http-core/dist/index.d.ts:1107
+Defined in: http-core/dist/index.d.ts:1153
 
 Handles content negotiation based on the `Accept` header of the incoming request.
 
@@ -867,7 +867,7 @@ The value associated with the key or the fallback.
 
 > `protected` **getHashedContent**(`content`, `encoding`): `string`
 
-Defined in: http-core/dist/index.d.ts:1344
+Defined in: http-core/dist/index.d.ts:1390
 
 Get the hashed content using the specified encoding.
 
@@ -903,7 +903,7 @@ The hashed content as a hexadecimal string.
 
 > **getHeader**\<`TReturn`\>(`name`): `undefined` \| `TReturn`
 
-Defined in: http-core/dist/index.d.ts:993
+Defined in: http-core/dist/index.d.ts:1039
 
 Get a header value.
 
@@ -933,7 +933,7 @@ The header value or the fallback value.
 
 > **getHeader**\<`TReturn`\>(`name`, `fallback`): `TReturn`
 
-Defined in: http-core/dist/index.d.ts:1001
+Defined in: http-core/dist/index.d.ts:1047
 
 Get a header value.
 
@@ -971,7 +971,7 @@ The header value or the fallback value.
 
 > **getHeaderNames**(): `string`[]
 
-Defined in: http-core/dist/index.d.ts:1007
+Defined in: http-core/dist/index.d.ts:1053
 
 Get all header names.
 
@@ -1061,7 +1061,7 @@ The value associated with the key or the fallback.
 
 > `protected` **handleCacheHeaders**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1280
+Defined in: http-core/dist/index.d.ts:1326
 
 Handle cache headers like ETag and Last-Modified.
 
@@ -1081,7 +1081,7 @@ The current instance of the response for chaining.
 
 > `protected` **handleContentNegotiation**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1268
+Defined in: http-core/dist/index.d.ts:1314
 
 Handles content negotiation based on the `Accept` header of the incoming request.
 
@@ -1101,7 +1101,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **hasHeader**(`key`): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1014
+Defined in: http-core/dist/index.d.ts:1060
 
 Check if a specific header exists.
 
@@ -1129,7 +1129,7 @@ True if the header exists, false otherwise.
 
 > **is1xx**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1163
+Defined in: http-core/dist/index.d.ts:1209
 
 Check if the status code represents an informational response (1xx).
 
@@ -1149,7 +1149,7 @@ True if the status code is informational, otherwise false.
 
 > **is2xx**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1169
+Defined in: http-core/dist/index.d.ts:1215
 
 Check if the status code represents a successful response (2xx).
 
@@ -1169,7 +1169,7 @@ True if the status code is successful, otherwise false.
 
 > **is3xx**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1175
+Defined in: http-core/dist/index.d.ts:1221
 
 Check if the status code represents a redirection response (3xx).
 
@@ -1189,7 +1189,7 @@ True if the status code is a redirection, otherwise false.
 
 > **is4xx**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1181
+Defined in: http-core/dist/index.d.ts:1227
 
 Check if the status code represents a client error response (4xx).
 
@@ -1209,7 +1209,7 @@ True if the status code is a client error, otherwise false.
 
 > **is5xx**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1187
+Defined in: http-core/dist/index.d.ts:1233
 
 Check if the status code represents a server error response (5xx).
 
@@ -1229,7 +1229,7 @@ True if the status code is a server error, otherwise false.
 
 > **isEmpty**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1217
+Defined in: http-core/dist/index.d.ts:1263
 
 Check if the response is empty.
 
@@ -1249,7 +1249,7 @@ True if the status code indicates an empty response, otherwise false.
 
 > **isError**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1199
+Defined in: http-core/dist/index.d.ts:1245
 
 Check if the status code is an error (i.e., 4xx or 5xx).
 
@@ -1269,7 +1269,7 @@ True if the status code is an error, otherwise false.
 
 > **isForbidden**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1242
+Defined in: http-core/dist/index.d.ts:1288
 
 Check if the status code is 403 (Forbidden).
 
@@ -1289,7 +1289,7 @@ True if the status code is 403, otherwise false.
 
 > **isInStatusRange**(`start`, `end`): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1151
+Defined in: http-core/dist/index.d.ts:1197
 
 Check if the status code falls within the specified range.
 
@@ -1323,7 +1323,7 @@ True if the status code is within the specified range, otherwise false.
 
 > **isInvalid**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1157
+Defined in: http-core/dist/index.d.ts:1203
 
 Check if the status code is invalid.
 
@@ -1343,7 +1343,7 @@ True if the status code is invalid, otherwise false.
 
 > **isMovedPermanently**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1230
+Defined in: http-core/dist/index.d.ts:1276
 
 Check if the status code is 301 (Moved Permanently).
 
@@ -1363,7 +1363,7 @@ True if the status code is 301, otherwise false.
 
 > **isNotError**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1193
+Defined in: http-core/dist/index.d.ts:1239
 
 Check if the status code is not an error (i.e., not 4xx or 5xx).
 
@@ -1383,7 +1383,7 @@ True if the status code is not an error, otherwise false.
 
 > **isNotFound**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1248
+Defined in: http-core/dist/index.d.ts:1294
 
 Check if the status code is 404 (Not Found).
 
@@ -1403,7 +1403,7 @@ True if the status code is 404, otherwise false.
 
 > **isOk**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1205
+Defined in: http-core/dist/index.d.ts:1251
 
 Check if the status code is 200 (OK).
 
@@ -1423,7 +1423,7 @@ True if the status code is 200, otherwise false.
 
 > **isRedirect**(`location`?): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1224
+Defined in: http-core/dist/index.d.ts:1270
 
 Check if the response is a redirect.
 
@@ -1451,7 +1451,7 @@ True if the status code indicates a redirect, otherwise false.
 
 > **isResetContent**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1211
+Defined in: http-core/dist/index.d.ts:1257
 
 Check if the status code is 205 (Reset Content).
 
@@ -1471,7 +1471,7 @@ True if the status code is 205, otherwise false.
 
 > **isUnauthorized**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1236
+Defined in: http-core/dist/index.d.ts:1282
 
 Check if the status code is 401 (Unauthorized).
 
@@ -1491,7 +1491,7 @@ True if the status code is 401, otherwise false.
 
 > **isValidateable**(): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1254
+Defined in: http-core/dist/index.d.ts:1300
 
 Check if the response is validateable.
 
@@ -1511,7 +1511,7 @@ True if the response has Last-Modified or ETag headers, otherwise false.
 
 > `protected` **morphToJson**(`content`, `options`?): `string`
 
-Defined in: http-core/dist/index.d.ts:1322
+Defined in: http-core/dist/index.d.ts:1368
 
 Convert the given content to a JSON string.
 
@@ -1549,7 +1549,7 @@ InternalServerError if the content cannot be converted to JSON.
 
 > **prepare**(`event`, `container`): `Promise`\<[`ReactHttpResponse`](ReactHttpResponse.md)\>
 
-Defined in: use-react/src/server/ReactHttpResponse.ts:49
+Defined in: [use-react/src/server/ReactHttpResponse.ts:50](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/ReactHttpResponse.ts#L50)
 
 Prepare the response before sending.
 
@@ -1583,7 +1583,7 @@ The current instance of the response for chaining.
 
 > `protected` **prepareContentHeaders**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1286
+Defined in: http-core/dist/index.d.ts:1332
 
 Prepare content-related headers such as Content-Length and ETag.
 
@@ -1603,7 +1603,7 @@ The current instance of the response for chaining.
 
 > `protected` **prepareCookies**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1328
+Defined in: http-core/dist/index.d.ts:1374
 
 Prepare cookies by setting the appropriate headers.
 
@@ -1623,7 +1623,7 @@ The current instance of the response for chaining.
 
 > **removeHeader**(`key`): `this`
 
-Defined in: http-core/dist/index.d.ts:1021
+Defined in: http-core/dist/index.d.ts:1067
 
 Remove headers from the response.
 
@@ -1651,7 +1651,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **secureCookies**(`value`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1071
+Defined in: http-core/dist/index.d.ts:1117
 
 Secure all cookies by setting the "Secure" attribute.
 
@@ -1679,7 +1679,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setBlueprintResolver**(`resolver`): `this`
 
-Defined in: http-core/dist/index.d.ts:1143
+Defined in: http-core/dist/index.d.ts:1189
 
 Set the resolver for the blueprint.
 
@@ -1707,7 +1707,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setCharset**(`value`): `this`
 
-Defined in: http-core/dist/index.d.ts:1078
+Defined in: http-core/dist/index.d.ts:1124
 
 Set the character set for the response.
 
@@ -1735,7 +1735,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setContent**(`value`, `options`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1040
+Defined in: http-core/dist/index.d.ts:1086
 
 Set the response content.
 If the content should be JSON, it will be converted appropriately.
@@ -1770,7 +1770,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > `protected` **setContentHeaders**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1292
+Defined in: http-core/dist/index.d.ts:1338
 
 Set content headers such as Content-Length and ETag.
 
@@ -1790,7 +1790,7 @@ The current instance of the response for chaining.
 
 > **setContentType**(`value`): `this`
 
-Defined in: http-core/dist/index.d.ts:1086
+Defined in: http-core/dist/index.d.ts:1132
 
 Set the content type of the response.
 
@@ -1822,7 +1822,7 @@ InternalServerError if the provided MIME type is invalid.
 
 > `protected` **setContentTypeIfNeeded**(): `this`
 
-Defined in: http-core/dist/index.d.ts:1274
+Defined in: http-core/dist/index.d.ts:1320
 
 Set the content type if it's not already set.
 
@@ -1842,7 +1842,7 @@ The current instance of the response for chaining.
 
 > **setCookie**(`name`, `value`, `options`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1049
+Defined in: http-core/dist/index.d.ts:1095
 
 Set a cookie for the response.
 
@@ -1882,7 +1882,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setEtag**(`etag`?, `weak`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1122
+Defined in: http-core/dist/index.d.ts:1168
 
 Set the ETag for the response.
 
@@ -1916,7 +1916,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setHeader**(`key`, `value`): `this`
 
-Defined in: http-core/dist/index.d.ts:978
+Defined in: http-core/dist/index.d.ts:1024
 
 Set a single header for the response.
 If the header is "Content-Type," ensures charset is set appropriately.
@@ -1951,7 +1951,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setHeaders**(`values`): `this`
 
-Defined in: http-core/dist/index.d.ts:969
+Defined in: http-core/dist/index.d.ts:1015
 
 Set multiple headers for the response.
 
@@ -1979,7 +1979,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setIncomingEventResolver**(`resolver`): `this`
 
-Defined in: http-core/dist/index.d.ts:1136
+Defined in: http-core/dist/index.d.ts:1182
 
 Set the resolver for the incoming HTTP event.
 
@@ -2007,7 +2007,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setLastModified**(`date`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1129
+Defined in: http-core/dist/index.d.ts:1175
 
 Set the Last-Modified header for the response.
 
@@ -2035,7 +2035,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > **setLinks**(`links`): `this`
 
-Defined in: http-core/dist/index.d.ts:1100
+Defined in: http-core/dist/index.d.ts:1146
 
 Set link headers for the response.
 
@@ -2097,7 +2097,7 @@ This Event instance.
 
 > **setStatus**(`code`, `text`?): `this`
 
-Defined in: http-core/dist/index.d.ts:1031
+Defined in: http-core/dist/index.d.ts:1077
 
 Set the HTTP status code of the response.
 Also sets a default status message if none is provided.
@@ -2136,7 +2136,7 @@ InternalServerError if the status code is invalid.
 
 > **setType**(`value`): `this`
 
-Defined in: http-core/dist/index.d.ts:1093
+Defined in: http-core/dist/index.d.ts:1139
 
 Set the content type by file extension.
 
@@ -2164,7 +2164,7 @@ The current instance of OutgoingHttpResponse for chaining.
 
 > `protected` **shouldBeJson**(`content`): `boolean`
 
-Defined in: http-core/dist/index.d.ts:1313
+Defined in: http-core/dist/index.d.ts:1359
 
 Determine if the content should be serialized as JSON.
 
@@ -2192,7 +2192,7 @@ True if the content should be serialized as JSON, otherwise false.
 
 > `protected` **stringify**(`value`, `replacer`?, `spaces`?, `escape`?): `string`
 
-Defined in: http-core/dist/index.d.ts:1354
+Defined in: http-core/dist/index.d.ts:1400
 
 Convert the given value to a JSON string with optional escaping.
 
@@ -2238,7 +2238,7 @@ The JSON string representation of the value.
 
 > `static` **create**\<`T`\>(`options`): `T`
 
-Defined in: use-react/src/server/ReactHttpResponse.ts:29
+Defined in: [use-react/src/server/ReactHttpResponse.ts:30](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/ReactHttpResponse.ts#L30)
 
 Create an instance of OutgoingHttpResponse.
 

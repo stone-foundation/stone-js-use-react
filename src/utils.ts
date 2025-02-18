@@ -1,13 +1,11 @@
 import { jsx } from 'react/jsx-runtime'
 import { ElementType, ReactNode } from 'react'
-import { STONE_GLOBAL_DATA } from './constants'
 import { StonePage } from './components/StonePage'
 import { UseReactError } from './errors/UseReactError'
 import { Container } from '@stone-js/service-container'
 import { StoneErrorComponent } from './components/StoneErrorComponent'
 import { IBlueprint, isFunctionModule, isMetaClassModule, isMetaFactoryModule, isNotEmpty } from '@stone-js/core'
 import {
-  GlobalDataType,
   StoneContextType,
   ReactIncomingEvent,
   IComponentErrorHandler,
@@ -145,16 +143,6 @@ export const buildAdapterErrorComponent = async (
 }
 
 /**
- * Get the global data from the window object.
- *
- * @returns The global data.
- */
-export const getStoneGlobalData = (): GlobalDataType => {
-  const textContent = window.document.getElementById(STONE_GLOBAL_DATA)?.textContent ?? '{}'
-  return JSON.parse(textContent)
-}
-
-/**
  * Define a class component.
  *
  * @param module - The class component module.
@@ -249,3 +237,17 @@ export const getAppRootElement = (blueprint: IBlueprint): HTMLElement => {
   if (appContainer === undefined) { throw new UseReactError('Root container is required to render React components.') }
   return appContainer
 }
+
+/**
+ * Check if the current environment is the server.
+ *
+ * @returns True if the current environment is the server.
+ */
+export const isServer = (): boolean => typeof window === 'undefined'
+
+/**
+ * Check if the current environment is the client.
+ *
+ * @returns True if the current environment is the client.
+ */
+export const isClient = (): boolean => !isServer()

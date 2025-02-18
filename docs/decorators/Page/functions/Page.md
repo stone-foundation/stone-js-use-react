@@ -8,7 +8,7 @@
 
 > **Page**\<`T`\>(`path`, `options`): `ClassDecorator`
 
-Defined in: [use-react/src/decorators/Page.ts:39](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/decorators/Page.ts#L39)
+Defined in: [use-react/src/decorators/Page.ts:39](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/decorators/Page.ts#L39)
 
 A class decorator for defining a class as a React Page route action.
 Uses the `Match` decorator internally to register the route with the HTTP `GET` method.

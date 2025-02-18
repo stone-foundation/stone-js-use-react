@@ -1,33 +1,21 @@
 import { ReactNode } from 'react'
 import { getAppRootElement } from '../utils'
 import { NextPipe } from '@stone-js/pipeline'
+import { NAVIGATION_EVENT } from '@stone-js/router'
 import { STONE_PAGE_EVENT_OUTLET } from '../constants'
 import { UseReactError } from '../errors/UseReactError'
-import { classMiddleware, IBlueprint, isNotEmpty } from '@stone-js/core'
 import { BrowserAdapterResponseBuilder } from '@stone-js/browser-adapter'
-import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
+import { classMiddleware, IBlueprint, isEmpty, isNotEmpty } from '@stone-js/core'
 import { BrowserResponseContent, ReactBrowserAdapterContext } from '../declarations'
+import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
 /**
- * Middleware for handling outgoing responses and transforming them into the appropriate browser responses.
- *
- * This middleware processes outgoing responses to be rendered in the browser.
+ * Middleware for handling outgoing responses and rendering them in the browser.
  */
 export class BrowserResponseMiddleware {
-  /**
-   * The blueprint for resolving configuration and dependencies.
-   */
   private readonly blueprint: IBlueprint
-
-  /**
-   * The React root instance.
-   */
-  private readonly isRendered: boolean
-
-  /**
-   * The React root instance.
-   */
   private reactRoot?: ReactRootInstance
+  private readonly isRendered: boolean
 
   /**
    * Create a BrowserResponseMiddleware.
@@ -36,8 +24,8 @@ export class BrowserResponseMiddleware {
    */
   constructor ({ blueprint }: { blueprint: IBlueprint }) {
     this.blueprint = blueprint
-    this.reactRoot = blueprint.get('stone.useReact.reactRoot')
-    this.isRendered = blueprint.has('stone.useReact.reactRoot')
+    this.reactRoot = blueprint.get<ReactRootInstance | undefined>('stone.useReact.reactRoot')
+    this.isRendered = isNotEmpty(this.reactRoot)
   }
 
   /**
@@ -48,46 +36,89 @@ export class BrowserResponseMiddleware {
    * @returns A promise resolving to the processed context.
    * @throws {NodeHttpAdapterError} If required components are missing in the context.
    */
-  async handle (context: ReactBrowserAdapterContext, next: NextPipe<ReactBrowserAdapterContext, BrowserAdapterResponseBuilder>): Promise<BrowserAdapterResponseBuilder> {
+  async handle (
+    context: ReactBrowserAdapterContext,
+    next: NextPipe<ReactBrowserAdapterContext, BrowserAdapterResponseBuilder>
+  ): Promise<BrowserAdapterResponseBuilder> {
     const rawResponseBuilder = await next(context)
 
-    if (context.rawEvent === undefined || context.incomingEvent === undefined || context.outgoingResponse === undefined || rawResponseBuilder?.add === undefined) {
-      throw new UseReactError('The context is missing required components.')
-    }
-
-    rawResponseBuilder
-      .add(
-        'render',
-        async () => await this.renderComponent(context.outgoingResponse?.content)
-      )
+    this.ensureValidContext(context, rawResponseBuilder)
+    rawResponseBuilder.add('render', async () => await this.renderComponent(context.outgoingResponse?.content))
 
     return rawResponseBuilder
   }
 
   /**
-   * Renders the React component.
-   *
-   * @param content - The response content to render.
-   * @throws {UseReactError} If the root container is not found.
+   * Ensures the context and response builder have the required components.
    */
-  private async renderComponent (content?: BrowserResponseContent): Promise<void> {
-    if (content?.ssr === true && isNotEmpty<BrowserResponseContent>(content?.app)) {
-      this.reactRoot = hydrateRoot(getAppRootElement(this.blueprint), content.app)
-    } else if ((!this.isRendered || content?.fullRender === true) && isNotEmpty<BrowserResponseContent>(content?.app)) {
-      this.reactRoot ??= createRoot(getAppRootElement(this.blueprint))
-      this.reactRoot.render(content.app)
-    } else if (isNotEmpty<BrowserResponseContent>(content?.component)) {
-      await this.dispatchComponentToOutlet(content.component)
-    } else {
-      throw new UseReactError('No content to render.')
+  private ensureValidContext (
+    context: ReactBrowserAdapterContext,
+    rawResponseBuilder?: BrowserAdapterResponseBuilder
+  ): void {
+    if (
+      context.rawEvent === undefined ||
+      context.incomingEvent === undefined ||
+      context.outgoingResponse === undefined ||
+      rawResponseBuilder?.add === undefined
+    ) {
+      throw new UseReactError('The context is missing required components.')
     }
-
-    !this.isRendered && this.blueprint.set('stone.useReact.reactRoot', this.reactRoot)
   }
 
   /**
-   * When no layout is defined in the response,
-   * we dispatch the component to the layout outlet.
+   * Renders the provided React content.
+   */
+  private async renderComponent (content?: BrowserResponseContent): Promise<void> {
+    if (isEmpty(content)) {
+      throw new UseReactError('No content to render.')
+    }
+
+    if (isNotEmpty<string | URL>(content.targetUrl)) {
+      return this.handleRedirect(content.targetUrl)
+    }
+
+    if (content.ssr === true && !this.isRendered && isNotEmpty(content.app)) {
+      return this.hydrateReactApp(content.app)
+    }
+
+    if ((!this.isRendered || content.fullRender === true) && isNotEmpty(content.app)) {
+      return this.renderReactApp(content.app)
+    }
+
+    if (isNotEmpty(content.component)) {
+      return await this.dispatchComponentToOutlet(content.component)
+    }
+
+    throw new UseReactError('Invalid content provided for rendering.')
+  }
+
+  /**
+   * Handles navigation redirection.
+   */
+  private handleRedirect (targetUrl: string | URL): void {
+    window.history.pushState({ path: targetUrl }, '', targetUrl)
+    window.dispatchEvent(new Event(NAVIGATION_EVENT))
+  }
+
+  /**
+   * Hydrates the React app when SSR is enabled.
+   */
+  private hydrateReactApp (app: ReactNode): void {
+    this.reactRoot = hydrateRoot(getAppRootElement(this.blueprint), app)
+    this.blueprint.set('stone.useReact.reactRoot', this.reactRoot)
+  }
+
+  /**
+   * Renders the React app.
+   */
+  private renderReactApp (app: ReactNode): void {
+    this.reactRoot ??= createRoot(getAppRootElement(this.blueprint))
+    this.reactRoot.render(app)
+    this.blueprint.set('stone.useReact.reactRoot', this.reactRoot)
+  }
+
+  /**
+   * Dispatches a component to the layout outlet when no layout is defined.
    */
   private async dispatchComponentToOutlet (component: ReactNode): Promise<void> {
     window.dispatchEvent(new CustomEvent(STONE_PAGE_EVENT_OUTLET, { detail: component }))

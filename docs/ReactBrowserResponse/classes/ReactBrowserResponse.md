@@ -6,7 +6,7 @@
 
 # Class: ReactBrowserResponse
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:19](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L19)
+Defined in: [use-react/src/ReactBrowserResponse.ts:19](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L19)
 
 Class representing a ReactBrowserResponse.
 
@@ -24,7 +24,7 @@ Mr. Stone <evensstone@gmail.com>
 
 > **new ReactBrowserResponse**(`options`): [`ReactBrowserResponse`](ReactBrowserResponse.md)
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:39](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L39)
+Defined in: [use-react/src/ReactBrowserResponse.ts:39](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L39)
 
 Constructor for ReactBrowserResponse.
 
@@ -162,7 +162,7 @@ The type of the event.
 
 > `static` **OUTGOING\_BROWSER\_RESPONSE**: `string`
 
-Defined in: browser-core/dist/index.d.ts:404
+Defined in: browser-core/dist/index.d.ts:432
 
 #### Inherited from
 
@@ -174,7 +174,7 @@ Defined in: browser-core/dist/index.d.ts:404
 
 > `static` **REACT\_BROWSER\_RESPONSE**: `string` = `'stonejs@react_browser_response'`
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:20](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L20)
+Defined in: [use-react/src/ReactBrowserResponse.ts:20](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L20)
 
 ## Accessors
 
@@ -184,7 +184,7 @@ Defined in: [use-react/src/ReactBrowserResponse.ts:20](https://github.com/stonem
 
 > **get** **content**(): [`BrowserResponseContent`](../../declarations/interfaces/BrowserResponseContent.md)
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:48](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L48)
+Defined in: [use-react/src/ReactBrowserResponse.ts:46](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L46)
 
 The content to be rendered by the React component.
 
@@ -410,7 +410,7 @@ The value associated with the key or the fallback.
 
 > **is1xx**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:438
+Defined in: browser-core/dist/index.d.ts:466
 
 Check if the status code represents an informational response (1xx).
 
@@ -430,7 +430,7 @@ True if the status code is informational, otherwise false.
 
 > **is2xx**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:444
+Defined in: browser-core/dist/index.d.ts:472
 
 Check if the status code represents a successful response (2xx).
 
@@ -450,7 +450,7 @@ True if the status code is successful, otherwise false.
 
 > **is3xx**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:450
+Defined in: browser-core/dist/index.d.ts:478
 
 Check if the status code represents a redirection response (3xx).
 
@@ -470,7 +470,7 @@ True if the status code is a redirection, otherwise false.
 
 > **is4xx**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:456
+Defined in: browser-core/dist/index.d.ts:484
 
 Check if the status code represents a client error response (4xx).
 
@@ -490,7 +490,7 @@ True if the status code is a client error, otherwise false.
 
 > **is5xx**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:462
+Defined in: browser-core/dist/index.d.ts:490
 
 Check if the status code represents a server error response (5xx).
 
@@ -510,7 +510,7 @@ True if the status code is a server error, otherwise false.
 
 > **isError**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:474
+Defined in: browser-core/dist/index.d.ts:502
 
 Check if the status code is an error (i.e., 4xx or 5xx).
 
@@ -530,7 +530,7 @@ True if the status code is an error, otherwise false.
 
 > **isForbidden**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:492
+Defined in: browser-core/dist/index.d.ts:520
 
 Check if the status code is 403 (Forbidden).
 
@@ -550,7 +550,7 @@ True if the status code is 403, otherwise false.
 
 > **isInStatusRange**(`start`, `end`): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:426
+Defined in: browser-core/dist/index.d.ts:454
 
 Check if the status code falls within the specified range.
 
@@ -584,7 +584,7 @@ True if the status code is within the specified range, otherwise false.
 
 > **isInvalid**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:432
+Defined in: browser-core/dist/index.d.ts:460
 
 Check if the status code is invalid.
 
@@ -604,7 +604,7 @@ True if the status code is invalid, otherwise false.
 
 > **isNotError**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:468
+Defined in: browser-core/dist/index.d.ts:496
 
 Check if the status code is not an error (i.e., not 4xx or 5xx).
 
@@ -624,7 +624,7 @@ True if the status code is not an error, otherwise false.
 
 > **isNotFound**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:498
+Defined in: browser-core/dist/index.d.ts:526
 
 Check if the status code is 404 (Not Found).
 
@@ -644,7 +644,7 @@ True if the status code is 404, otherwise false.
 
 > **isOk**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:480
+Defined in: browser-core/dist/index.d.ts:508
 
 Check if the status code is 200 (OK).
 
@@ -664,7 +664,7 @@ True if the status code is 200, otherwise false.
 
 > **isUnauthorized**(): `boolean`
 
-Defined in: browser-core/dist/index.d.ts:486
+Defined in: browser-core/dist/index.d.ts:514
 
 Check if the status code is 401 (Unauthorized).
 
@@ -684,7 +684,7 @@ True if the status code is 401, otherwise false.
 
 > **prepare**(`event`, `container`): `Promise`\<[`ReactBrowserResponse`](ReactBrowserResponse.md)\>
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:59](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L59)
+Defined in: [use-react/src/ReactBrowserResponse.ts:57](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L57)
 
 Prepare the response before sending.
 
@@ -752,7 +752,7 @@ This Event instance.
 
 > `static` **create**\<`T`\>(`options`): `T`
 
-Defined in: [use-react/src/ReactBrowserResponse.ts:30](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/ReactBrowserResponse.ts#L30)
+Defined in: [use-react/src/ReactBrowserResponse.ts:30](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/ReactBrowserResponse.ts#L30)
 
 Create an instance of OutgoingHttpResponse.
 

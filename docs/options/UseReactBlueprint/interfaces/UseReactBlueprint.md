@@ -6,7 +6,7 @@
 
 # Interface: UseReactBlueprint
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:18](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L18)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:18](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L18)
 
 ## Extends
 
@@ -22,7 +22,7 @@ Defined in: [use-react/src/options/UseReactBlueprint.ts:18](https://github.com/s
 
 > **stone**: [`UseReactAppConfig`](UseReactAppConfig.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:19](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L19)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:19](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L19)
 
 Application-level settings, including environment, middleware, logging, and service registration.
 

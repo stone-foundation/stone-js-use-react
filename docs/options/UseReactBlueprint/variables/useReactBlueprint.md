@@ -8,4 +8,4 @@
 
 > `const` **useReactBlueprint**: [`UseReactBlueprint`](../interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:22](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/options/UseReactBlueprint.ts#L22)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:22](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/options/UseReactBlueprint.ts#L22)

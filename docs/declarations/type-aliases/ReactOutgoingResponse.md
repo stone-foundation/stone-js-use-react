@@ -6,8 +6,8 @@
 
 # Type Alias: ReactOutgoingResponse
 
-> **ReactOutgoingResponse**: [`ReactHttpResponse`](../../server/ReactHttpResponse/classes/ReactHttpResponse.md) \| [`ReactBrowserResponse`](../../ReactBrowserResponse/classes/ReactBrowserResponse.md)
+> **ReactOutgoingResponse**: [`ReactHttpResponse`](../../server/ReactHttpResponse/classes/ReactHttpResponse.md) \| `RedirectResponse` \| [`ReactBrowserResponse`](../../ReactBrowserResponse/classes/ReactBrowserResponse.md) \| [`ReactRedirectBrowserResponse`](../../ReactRedirectBrowserResponse/classes/ReactRedirectBrowserResponse.md)
 
-Defined in: [use-react/src/declarations.ts:18](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L18)
+Defined in: [use-react/src/declarations.ts:20](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L20)
 
 Outgoing response for React.

@@ -8,7 +8,7 @@
 
 > **defineFactoryComponent**(`module`, `options`): `MetaComponentEventHandler`\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>
 
-Defined in: [use-react/src/utils.ts:178](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/utils.ts#L178)
+Defined in: [use-react/src/utils.ts:166](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/utils.ts#L166)
 
 Define a factory component.
 

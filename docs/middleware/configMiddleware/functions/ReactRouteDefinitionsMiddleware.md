@@ -8,7 +8,7 @@
 
 > **ReactRouteDefinitionsMiddleware**(`context`, `next`): `Promiseable`\<`IBlueprint`\>
 
-Defined in: [use-react/src/middleware/configMiddleware.ts:127](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/middleware/configMiddleware.ts#L127)
+Defined in: [use-react/src/middleware/configMiddleware.ts:127](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/middleware/configMiddleware.ts#L127)
 
 Middleware to process and register route definitions from modules.
 

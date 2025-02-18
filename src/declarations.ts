@@ -1,8 +1,10 @@
 import { ReactNode } from 'react'
 import { Router } from '@stone-js/router'
-import { IncomingHttpEvent } from '@stone-js/http-core'
+import { Config } from '@stone-js/config'
 import { ReactBrowserResponse } from './ReactBrowserResponse'
 import { ReactHttpResponse } from './server/ReactHttpResponse'
+import { IncomingHttpEvent, RedirectResponse } from '@stone-js/http-core'
+import { ReactRedirectBrowserResponse } from './ReactRedirectBrowserResponse'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler } from '@stone-js/core'
@@ -15,7 +17,11 @@ export type ReactIncomingEvent = IncomingHttpEvent | IncomingBrowserEvent
 /**
  * Outgoing response for React.
 */
-export type ReactOutgoingResponse = ReactHttpResponse | ReactBrowserResponse
+export type ReactOutgoingResponse =
+  | ReactHttpResponse
+  | RedirectResponse
+  | ReactBrowserResponse
+  | ReactRedirectBrowserResponse
 
 /**
  * Options for creating a React Outgoing Response.
@@ -28,6 +34,12 @@ export interface ReactOutgoingResponseOptions extends OutgoingResponseOptions {
  * Router for React.
 */
 export type IRouter = Router<ReactIncomingEvent, ReactOutgoingResponse>
+
+/**
+ * The type representing a Snapshot.
+ * An object that represents the state of the application at a given time.
+*/
+export type ISnapshot = Config
 
 /**
  * Browser Adapter Context for React.
@@ -56,9 +68,9 @@ export interface StoneContextType {
 export type HeadersType = Headers | Map<string, string | string[]> | Record<string, string | string[]>
 
 /**
- * Global data for React.
+ * Stone data snapshot type.
  */
-export interface GlobalDataType {
+export interface ResponseSnapshotType {
   data?: any
   error?: any
   ssr: boolean
@@ -71,9 +83,10 @@ export interface GlobalDataType {
  */
 export interface BrowserResponseContent {
   ssr?: boolean
-  app: ReactNode
-  fullRender: boolean
-  component: ReactNode
+  app?: ReactNode
+  fullRender?: boolean
+  component?: ReactNode
+  targetUrl?: string | URL
 }
 
 /**

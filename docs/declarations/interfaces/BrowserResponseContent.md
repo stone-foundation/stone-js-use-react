@@ -6,33 +6,33 @@
 
 # Interface: BrowserResponseContent
 
-Defined in: [use-react/src/declarations.ts:72](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L72)
+Defined in: [use-react/src/declarations.ts:84](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L84)
 
 Browser response content for React.
 
 ## Properties
 
-### app
+### app?
 
-> **app**: `ReactNode`
+> `optional` **app**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:74](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L74)
-
-***
-
-### component
-
-> **component**: `ReactNode`
-
-Defined in: [use-react/src/declarations.ts:76](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L76)
+Defined in: [use-react/src/declarations.ts:86](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L86)
 
 ***
 
-### fullRender
+### component?
 
-> **fullRender**: `boolean`
+> `optional` **component**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L75)
+Defined in: [use-react/src/declarations.ts:88](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L88)
+
+***
+
+### fullRender?
+
+> `optional` **fullRender**: `boolean`
+
+Defined in: [use-react/src/declarations.ts:87](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L87)
 
 ***
 
@@ -40,4 +40,12 @@ Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-r
 
 > `optional` **ssr**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:73](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/declarations.ts#L73)
+Defined in: [use-react/src/declarations.ts:85](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L85)
+
+***
+
+### targetUrl?
+
+> `optional` **targetUrl**: `string` \| `URL`
+
+Defined in: [use-react/src/declarations.ts:89](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L89)

@@ -1,6 +1,5 @@
 import { IBlueprint } from '@stone-js/core'
-import { GlobalDataType } from '../declarations'
-import { STONE_GLOBAL_DATA } from '../constants'
+import { STONE_SNAPSHOT } from '../constants'
 
 /**
  * Get the HTML template for the React application.
@@ -14,11 +13,11 @@ export const htmlTemplate = async (blueprint: IBlueprint): Promise<string> => {
 }
 
 /**
- * Render the global data as a script tag.
+ * Render Stone snapshot.
  *
- * @param data - The global data to render.
+ * @param snapshot - The snapshot to render.
  * @returns The script tag.
  */
-export const renderStoneGlobalData = (data: GlobalDataType): string => {
-  return `<script id="${STONE_GLOBAL_DATA}" type="application/json">${JSON.stringify(data)}</script>`
+export const renderStoneSnapshot = (snapshot: string): string => {
+  return `<script id="${STONE_SNAPSHOT}" type="application/json">${snapshot}</script>`
 }

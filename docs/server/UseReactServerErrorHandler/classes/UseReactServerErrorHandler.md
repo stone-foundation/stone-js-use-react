@@ -6,7 +6,7 @@
 
 # Class: UseReactServerErrorHandler
 
-Defined in: use-react/src/server/UseReactServerErrorHandler.ts:19
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:19](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L19)
 
 Class representing an UseReactServerErrorHandler.
 
@@ -22,7 +22,7 @@ Adapter level error handler for React applications.
 
 > **new UseReactServerErrorHandler**(`options`): [`UseReactServerErrorHandler`](UseReactServerErrorHandler.md)
 
-Defined in: use-react/src/server/UseReactServerErrorHandler.ts:28
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:28](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L28)
 
 Create an UseReactServerErrorHandler.
 
@@ -44,7 +44,7 @@ UseReactServerErrorHandler options.
 
 > **handle**(`error`, `context`): `Promise`\<`unknown`\>
 
-Defined in: use-react/src/server/UseReactServerErrorHandler.ts:47
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:40](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L40)
 
 Handle an error.
 

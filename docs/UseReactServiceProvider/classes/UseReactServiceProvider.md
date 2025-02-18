@@ -6,7 +6,7 @@
 
 # Class: UseReactServiceProvider
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:9](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactServiceProvider.ts#L9)
+Defined in: [use-react/src/UseReactServiceProvider.ts:12](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactServiceProvider.ts#L12)
 
 Class representing a UseReactServiceProvider.
 
@@ -22,7 +22,17 @@ Mr. Stone <evensstone@gmail.com>
 
 ### new UseReactServiceProvider()
 
-> **new UseReactServiceProvider**(): [`UseReactServiceProvider`](UseReactServiceProvider.md)
+> **new UseReactServiceProvider**(`container`): [`UseReactServiceProvider`](UseReactServiceProvider.md)
+
+Defined in: [use-react/src/UseReactServiceProvider.ts:16](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactServiceProvider.ts#L16)
+
+Create a new UseReactServiceProvider.
+
+#### Parameters
+
+##### container
+
+`Container`
 
 #### Returns
 
@@ -30,44 +40,36 @@ Mr. Stone <evensstone@gmail.com>
 
 ## Methods
 
-### mustSkip()
+### isSSR()
 
-> **mustSkip**(): `boolean`
+> **isSSR**(): `boolean`
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:16](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactServiceProvider.ts#L16)
+Defined in: [use-react/src/UseReactServiceProvider.ts:23](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactServiceProvider.ts#L23)
 
-Determines if the provider should be skipped.
+Determine if the application is running on the server side.
 
 #### Returns
 
 `boolean`
 
-True if the provider should be skipped, false otherwise
-
-#### Remarks
-
-This method is used to skip the provider during SSR.
-
-#### Implementation of
-
-`IServiceProvider.mustSkip`
+True if the application is running on the server side, false otherwise.
 
 ***
 
 ### onPrepare()
 
-> **onPrepare**(): `Promise`\<`void`\>
+> **onPrepare**(): `void`
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:26](https://github.com/stonemjs/use-react/blob/48b0fa89405b138aef5b9a5bc1a85e12108c1404/src/UseReactServiceProvider.ts#L26)
+Defined in: [use-react/src/UseReactServiceProvider.ts:33](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactServiceProvider.ts#L33)
 
 Hook that runs once after the context is created.
 
-The browser adapter only execute onInit and onPrepare hooks we first loaded.
+The browser adapter only execute onStart and onPrepare hooks when first loaded.
 As Stone.js is an event-driven framework, we need to dispatch an event to continue with the flow.
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 #### Implementation of
 
