@@ -4,25 +4,29 @@
 
 [Use React Documentation](../../modules.md) / [declarations](../README.md) / RenderLayoutContext
 
-# Interface: RenderLayoutContext\<UChildren, TData\>
+# Interface: RenderLayoutContext\<TChildren, UData\>
 
-Defined in: [use-react/src/declarations.ts:104](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L104)
+Defined in: [use-react/src/declarations.ts:146](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L146)
 
 React render page layout options.
 
+## Extends
+
+- [`RenderContext`](RenderContext.md)\<`UData`\>
+
 ## Type Parameters
 
-• **UChildren** = `ReactNode`
+• **TChildren** = `ReactNode`
 
-• **TData** = `any`
+• **UData** = `any`
 
 ## Properties
 
 ### children
 
-> **children**: `UChildren`
+> **children**: `TChildren`
 
-Defined in: [use-react/src/declarations.ts:106](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L106)
+Defined in: [use-react/src/declarations.ts:147](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L147)
 
 ***
 
@@ -30,15 +34,23 @@ Defined in: [use-react/src/declarations.ts:106](https://github.com/stonemjs/use-
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:107](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L107)
+Defined in: [use-react/src/declarations.ts:139](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L139)
+
+#### Inherited from
+
+[`RenderContext`](RenderContext.md).[`container`](RenderContext.md#container)
 
 ***
 
 ### data?
 
-> `optional` **data**: `TData`
+> `optional` **data**: `UData`
 
-Defined in: [use-react/src/declarations.ts:105](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L105)
+Defined in: [use-react/src/declarations.ts:138](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L138)
+
+#### Inherited from
+
+[`RenderContext`](RenderContext.md).[`data`](RenderContext.md#data)
 
 ***
 
@@ -46,4 +58,8 @@ Defined in: [use-react/src/declarations.ts:105](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:108](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L108)
+Defined in: [use-react/src/declarations.ts:140](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L140)
+
+#### Inherited from
+
+[`RenderContext`](RenderContext.md).[`event`](RenderContext.md#event)

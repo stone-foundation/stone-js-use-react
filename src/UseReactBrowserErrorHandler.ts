@@ -1,7 +1,16 @@
-import { createRoot } from 'react-dom/client'
-import { UseReactError } from './errors/UseReactError'
-import { buildAdapterErrorComponent, getAppRootElement } from './utils'
-import { AdapterErrorContext, IAdapterErrorHandler, IBlueprint, ILogger } from '@stone-js/core'
+import {
+  ILogger,
+  IBlueprint,
+  LoggerResolver,
+  AdapterErrorContext,
+  IAdapterErrorHandler,
+  defaultLoggerResolver,
+  AdapterEventBuilderType
+} from '@stone-js/core'
+import {
+  renderReactApp,
+  buildAdapterErrorComponent
+} from './UseReactComponentUtils'
 
 /**
  * UseReactBrowserErrorHandler options.
@@ -25,16 +34,9 @@ export class UseReactBrowserErrorHandler implements IAdapterErrorHandler<unknown
    *
    * @param options - UseReactBrowserErrorHandler options.
    */
-  constructor ({ blueprint, logger }: UseReactBrowserErrorHandlerOptions) {
-    if (logger === undefined) {
-      throw new UseReactError('Logger is required to create an UseReactBrowserErrorHandler instance.')
-    }
-    if (blueprint === undefined) {
-      throw new UseReactError('Blueprint is required to create an UseReactBrowserErrorHandler instance.')
-    }
-
-    this.logger = logger
+  constructor ({ blueprint }: UseReactBrowserErrorHandlerOptions) {
     this.blueprint = blueprint
+    this.logger = blueprint.get<LoggerResolver>('stone.logger.resolver', defaultLoggerResolver)(blueprint)
   }
 
   /**
@@ -44,18 +46,27 @@ export class UseReactBrowserErrorHandler implements IAdapterErrorHandler<unknown
    * @param context - The context of the adapter.
    * @returns The raw response.
    */
-  public async handle (error: any, context: AdapterErrorContext<unknown, unknown, unknown>): Promise<unknown> {
+  public async handle (
+    error: any,
+    context: AdapterErrorContext<unknown, unknown, unknown>
+  ): Promise<AdapterEventBuilderType<unknown>> {
     this.logger.error(error.message, { error })
 
     return context
       .rawResponseBuilder
       .add('render', async () => await this.renderError(error))
-      .build()
-      .respond()
   }
 
+  /**
+   * Get the error body.
+   *
+   * @param error - The error to handle.
+   * @returns The error body.
+   */
   private async renderError (error: any): Promise<void> {
-    const ClientApp = await buildAdapterErrorComponent(this.blueprint, error.statusCode ?? 500, error)
-    createRoot(getAppRootElement(this.blueprint)).render(ClientApp)
+    const app = await buildAdapterErrorComponent(this.blueprint, error.statusCode ?? 500, error)
+
+    // Render the component
+    renderReactApp(app, this.blueprint)
   }
 }

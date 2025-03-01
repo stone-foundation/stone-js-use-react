@@ -6,7 +6,7 @@
 
 # Interface: ReactOutgoingResponseOptions
 
-Defined in: [use-react/src/declarations.ts:29](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L29)
+Defined in: [use-react/src/declarations.ts:37](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L37)
 
 Options for creating a React Outgoing Response.
 
@@ -36,7 +36,7 @@ Defined in: core/dist/index.d.ts:256
 
 > `optional` **headers**: [`HeadersType`](../type-aliases/HeadersType.md)
 
-Defined in: [use-react/src/declarations.ts:30](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L30)
+Defined in: [use-react/src/declarations.ts:38](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L38)
 
 ***
 

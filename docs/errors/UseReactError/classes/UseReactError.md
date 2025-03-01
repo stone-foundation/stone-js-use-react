@@ -6,7 +6,7 @@
 
 # Class: UseReactError
 
-Defined in: [use-react/src/errors/UseReactError.ts:6](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/errors/UseReactError.ts#L6)
+Defined in: [use-react/src/errors/UseReactError.ts:6](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/errors/UseReactError.ts#L6)
 
 Custom error for react operations.
 
@@ -20,7 +20,7 @@ Custom error for react operations.
 
 > **new UseReactError**(`message`, `options`?): [`UseReactError`](UseReactError.md)
 
-Defined in: [use-react/src/errors/UseReactError.ts:7](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/errors/UseReactError.ts#L7)
+Defined in: [use-react/src/errors/UseReactError.ts:7](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/errors/UseReactError.ts#L7)
 
 #### Parameters
 
@@ -46,7 +46,7 @@ Defined in: [use-react/src/errors/UseReactError.ts:7](https://github.com/stonemj
 
 > `readonly` `optional` **cause**: `Error`
 
-Defined in: core/dist/index.d.ts:3052
+Defined in: core/dist/index.d.ts:2856
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: core/dist/index.d.ts:3052
 
 > `readonly` `optional` **code**: `string`
 
-Defined in: core/dist/index.d.ts:3051
+Defined in: core/dist/index.d.ts:2855
 
 #### Inherited from
 
@@ -70,7 +70,7 @@ Defined in: core/dist/index.d.ts:3051
 
 > `readonly` `optional` **metadata**: `unknown`
 
-Defined in: core/dist/index.d.ts:3053
+Defined in: core/dist/index.d.ts:2857
 
 #### Inherited from
 
@@ -82,7 +82,7 @@ Defined in: core/dist/index.d.ts:3053
 
 > **toString**(`multiline`?): `string`
 
-Defined in: core/dist/index.d.ts:3074
+Defined in: core/dist/index.d.ts:2878
 
 Converts the error to a formatted string representation.
 
@@ -110,7 +110,7 @@ A formatted error string.
 
 > `static` **create**\<`T`\>(`message`, `options`?): `T`
 
-Defined in: core/dist/index.d.ts:3060
+Defined in: core/dist/index.d.ts:2864
 
 Create a RuntimeError.
 

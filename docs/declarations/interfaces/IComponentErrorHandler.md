@@ -6,7 +6,7 @@
 
 # Interface: IComponentErrorHandler\<IncomingEventType, OutgoingResponseType\>
 
-Defined in: [use-react/src/declarations.ts:139](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L139)
+Defined in: [use-react/src/declarations.ts:175](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L175)
 
 Represents a component error handler.
 
@@ -26,21 +26,21 @@ The type representing the outgoing response.
 
 > `optional` **handle**: `FunctionalErrorHandler`\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:144](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L144)
+Defined in: [use-react/src/declarations.ts:179](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L179)
 
 ***
 
 ### render()
 
-> **render**: (`options`) => `unknown`
+> **render**: (`context`) => `unknown`
 
-Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L143)
+Defined in: [use-react/src/declarations.ts:180](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L180)
 
 #### Parameters
 
-##### options
+##### context
 
-`any`
+[`RenderErrorContext`](RenderErrorContext.md)
 
 #### Returns
 

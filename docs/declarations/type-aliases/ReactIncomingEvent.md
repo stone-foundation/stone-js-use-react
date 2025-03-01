@@ -8,6 +8,6 @@
 
 > **ReactIncomingEvent**: `IncomingHttpEvent` \| `IncomingBrowserEvent`
 
-Defined in: [use-react/src/declarations.ts:15](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L15)
+Defined in: [use-react/src/declarations.ts:17](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L17)
 
 Incoming event for React.

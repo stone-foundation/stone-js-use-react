@@ -6,8 +6,8 @@
 
 # Type Alias: ReactBrowserAdapterContext
 
-> **ReactBrowserAdapterContext**: `AdapterContext`\<`BrowserEvent`, `BrowserResponse`, `BrowserContext`, `IncomingBrowserEvent`, `IncomingBrowserEventOptions`, [`ReactBrowserResponse`](../../ReactBrowserResponse/classes/ReactBrowserResponse.md)\>
+> **ReactBrowserAdapterContext**: `AdapterContext`\<`BrowserEvent`, `BrowserResponse`, `BrowserContext`, `IncomingBrowserEvent`, `IncomingBrowserEventOptions`, `OutgoingBrowserResponse`\>
 
-Defined in: [use-react/src/declarations.ts:47](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L47)
+Defined in: [use-react/src/declarations.ts:94](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L94)
 
 Browser Adapter Context for React.

@@ -1,5 +1,6 @@
-import { addBlueprint, classDecoratorLegacyWrapper, ClassType } from '@stone-js/core'
-import { UseReactBlueprint, useReactBlueprint, UseReactConfig } from '../options/UseReactBlueprint'
+import { STONE_REACT_APP_KEY } from './constants'
+import { useReactBlueprint, UseReactConfig } from '../options/UseReactBlueprint'
+import { addBlueprint, classDecoratorLegacyWrapper, ClassType, setMetadata } from '@stone-js/core'
 
 /**
  * UseReact decorator options.
@@ -17,9 +18,7 @@ export interface UseReactOptions extends Partial<UseReactConfig> {}
  */
 export const UseReact = <T extends ClassType = ClassType>(options: UseReactOptions = {}): ClassDecorator => {
   return classDecoratorLegacyWrapper<T>((target: T, context: ClassDecoratorContext<T>): undefined => {
-    const blueprint: UseReactBlueprint = { stone: { useReact: options } }
-
-    // Add the modified blueprint to the target class.
-    addBlueprint(target, context, useReactBlueprint, blueprint)
+    setMetadata(context, STONE_REACT_APP_KEY, { isComponent: true, isClass: true })
+    addBlueprint(target, context, useReactBlueprint, { stone: { useReact: options } })
   })
 }

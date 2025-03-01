@@ -9,4 +9,3 @@
 ## Functions
 
 - [htmlTemplate](functions/htmlTemplate.md)
-- [renderStoneSnapshot](functions/renderStoneSnapshot.md)

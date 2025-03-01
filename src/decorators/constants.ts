@@ -14,6 +14,16 @@ export const REACT_PAGE_KEY = Symbol.for('ReactPage')
 export const REACT_PAGE_LAYOUT_KEY = Symbol.for('ReactPageLayout')
 
 /**
- * A unique symbol key to mark classes as React Error Page component.
+ * A unique symbol key to mark classes as React Error handler component.
  */
-export const REACT_ERROR_PAGE_KEY = Symbol.for('ReactErrorPage')
+export const REACT_ERROR_HANDLER_KEY = Symbol.for('ReactErrorHandler')
+
+/**
+ * A unique symbol key to mark classes as React Adapter Error handler component.
+ */
+export const REACT_ADAPTER_ERROR_HANDLER_KEY = Symbol.for('ReactAdapterErrorHandler')
+
+/**
+ * A unique symbol key to mark classes as React Stone application entry point.
+ */
+export const STONE_REACT_APP_KEY = Symbol.for('StoneReactApp')

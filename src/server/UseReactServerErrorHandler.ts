@@ -1,7 +1,15 @@
+import {
+  ILogger,
+  IBlueprint,
+  LoggerResolver,
+  AdapterErrorContext,
+  IAdapterErrorHandler,
+  defaultLoggerResolver,
+  AdapterEventBuilderType
+} from '@stone-js/core'
 import { htmlTemplate } from './utils'
 import { renderToString } from 'react-dom/server'
-import { buildAdapterErrorComponent } from '../utils'
-import { AdapterErrorContext, IAdapterErrorHandler, ILogger, IBlueprint } from '@stone-js/core'
+import { buildAdapterErrorComponent } from '../UseReactComponentUtils'
 
 /**
  * UseReactServerErrorHandler options.
@@ -25,9 +33,9 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
    *
    * @param options - UseReactServerErrorHandler options.
    */
-  constructor ({ blueprint, logger }: UseReactServerErrorHandlerOptions) {
-    this.logger = logger
+  constructor ({ blueprint }: UseReactServerErrorHandlerOptions) {
     this.blueprint = blueprint
+    this.logger = blueprint.get<LoggerResolver>('stone.logger.resolver', defaultLoggerResolver)(blueprint)
   }
 
   /**
@@ -37,7 +45,10 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
    * @param context - The context of the adapter.
    * @returns The raw response.
    */
-  public async handle (error: any, context: AdapterErrorContext<unknown, unknown, unknown>): Promise<unknown> {
+  public async handle (
+    error: any,
+    context: AdapterErrorContext<unknown, unknown, unknown>
+  ): Promise<AdapterEventBuilderType<unknown>> {
     this.logger.error(error.message, { error })
 
     return context
@@ -45,10 +56,14 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
       .add('statusCode', error.statusCode ?? 500)
       .add('body', await this.getErrorBody(error))
       .add('headers', new Headers({ 'Content-Type': 'text/html' }))
-      .build()
-      .respond()
   }
 
+  /**
+   * Get the error body.
+   *
+   * @param error - The error to handle.
+   * @returns The error body.
+  */
   private async getErrorBody (error: any): Promise<string> {
     const statusCode = error.statusCode ?? 500
     const template = await htmlTemplate(this.blueprint)

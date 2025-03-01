@@ -1,13 +1,15 @@
 import { ReactNode } from 'react'
 import { Router } from '@stone-js/router'
 import { Config } from '@stone-js/config'
-import { ReactBrowserResponse } from './ReactBrowserResponse'
-import { ReactHttpResponse } from './server/ReactHttpResponse'
-import { IncomingHttpEvent, RedirectResponse } from '@stone-js/http-core'
-import { ReactRedirectBrowserResponse } from './ReactRedirectBrowserResponse'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
-import { IncomingBrowserEvent, IncomingBrowserEventOptions } from '@stone-js/browser-core'
-import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler } from '@stone-js/core'
+import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
+import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
+import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint } from '@stone-js/core'
+
+/**
+ * Headers type for React.
+ */
+export type HeadersType = Headers | Map<string, string | string[]> | Record<string, string | string[]>
 
 /**
  * Incoming event for React.
@@ -15,19 +17,64 @@ import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, Funct
 export type ReactIncomingEvent = IncomingHttpEvent | IncomingBrowserEvent
 
 /**
+ * Incoming event options for React.
+*/
+export type ReactIncomingEventOptions = IncomingBrowserEventOptions | IncomingHttpEventOptions
+
+/**
  * Outgoing response for React.
 */
-export type ReactOutgoingResponse =
-  | ReactHttpResponse
+export type ReactOutgoingResponse = (
+  | OutgoingHttpResponse
+  | OutgoingBrowserResponse
   | RedirectResponse
-  | ReactBrowserResponse
-  | ReactRedirectBrowserResponse
+  | RedirectBrowserResponse)
+& { content: any }
 
 /**
  * Options for creating a React Outgoing Response.
 */
 export interface ReactOutgoingResponseOptions extends OutgoingResponseOptions {
   headers?: HeadersType
+}
+
+/**
+ * HookName Type.
+ *
+ * extends Core HookName.
+ */
+export type HookName = BaseHookName | UseReactHookName
+
+/**
+ * UseReactHookName Type.
+ */
+export type UseReactHookName = 'onPreparingPage'
+
+/**
+ * Use React Hook Listener Context.
+ */
+export interface UseReactHookListenerContext {
+  data: any
+  error?: any
+  container: IContainer
+  componentType: unknown
+  event: ReactIncomingEvent
+  snapshot: ResponseSnapshotType
+  response: ReactOutgoingResponse
+}
+
+/**
+ * UseReactHookListener Type.
+ *
+ * Represents a listener hook that can either be synchronous or asynchronous.
+ */
+export type UseReactHookListener = (context: UseReactHookListenerContext) => Promiseable<void>
+
+/**
+ * UseReactHook Type.
+ */
+export interface UseReactHookType {
+  onPreparingPage?: UseReactHookListener[]
 }
 
 /**
@@ -50,22 +97,8 @@ BrowserResponse,
 BrowserContext,
 IncomingBrowserEvent,
 IncomingBrowserEventOptions,
-ReactBrowserResponse
+OutgoingBrowserResponse
 >
-
-/**
- * Context for React.
- */
-export interface StoneContextType {
-  data: any
-  container: IContainer
-  event: ReactIncomingEvent
-}
-
-/**
- * Headers type for React.
- */
-export type HeadersType = Headers | Map<string, string | string[]> | Record<string, string | string[]>
 
 /**
  * Stone data snapshot type.
@@ -90,6 +123,15 @@ export interface BrowserResponseContent {
 }
 
 /**
+ * Context for React.
+ */
+export interface StoneContextType {
+  data: any
+  container: IContainer
+  event: ReactIncomingEvent
+}
+
+/**
  * React render page options.
  */
 export interface RenderContext<TData = any> {
@@ -101,22 +143,16 @@ export interface RenderContext<TData = any> {
 /**
  * React render page layout options.
  */
-export interface RenderLayoutContext<UChildren = ReactNode, TData = any> {
-  data?: TData
-  children: UChildren
-  container: IContainer
-  event: ReactIncomingEvent
+export interface RenderLayoutContext<TChildren = ReactNode, UData = any> extends RenderContext<UData> {
+  children: TChildren
 }
 
 /**
  * React render page error options.
  */
-export interface RenderErrorContext<TError = any, TData = any> {
+export interface RenderErrorContext<TError = any, UData = any> extends RenderContext<UData> {
   error: TError
-  data?: TData
   statusCode: number
-  container: IContainer
-  event: ReactIncomingEvent
 }
 
 /**
@@ -140,8 +176,8 @@ export interface IComponentErrorHandler<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > {
-  render: (options: any) => Promiseable<unknown>
   handle?: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>
+  render: (context: RenderErrorContext) => Promiseable<unknown>
 }
 
 /**
@@ -194,3 +230,91 @@ export type LazyComponentErrorHandler<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > = () => Promise<ComponentErrorHandlerType<IncomingEventType, OutgoingResponseType>>
+
+/** ****** Adapter Error page *************/
+/**
+ * React Adapter render page error options.
+ */
+export interface RenderAdapterErrorContext<TError = any, UData = any> {
+  data?: UData
+  error: TError
+  statusCode: number
+  blueprint: IBlueprint
+}
+
+/**
+ * FunctionalAdapterErrorHandler Type.
+ *
+ * Represents a function that handles errors and returns responses.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ * @param error - The error to handle.
+ * @returns The outgoing response.
+ */
+export type FunctionalAdapterErrorHandler<
+OutgoingResponseType = unknown
+> = (error: any) => Promiseable<OutgoingResponseType>
+
+/**
+ * Represents an Adapter component error handler class.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export type ComponentAdapterErrorHandlerClass<
+  OutgoingResponseType = unknown
+> = new (...args: any[]) => IComponentAdapterErrorHandler<OutgoingResponseType>
+
+/**
+ * Represents an Adapter component error handler.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export interface IComponentAdapterErrorHandler<
+  OutgoingResponseType = unknown
+> {
+  handle?: FunctionalAdapterErrorHandler<OutgoingResponseType>
+  render: (context: RenderAdapterErrorContext) => Promiseable<unknown>
+}
+
+/**
+ * Represents an Adapter factory component error handler.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export type FactoryComponentAdapterErrorHandler<
+  OutgoingResponseType = unknown
+> = (container?: IContainer | any) => IComponentAdapterErrorHandler<OutgoingResponseType>
+
+/**
+ * Represents an Adapter component error handler type.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ */
+export type ComponentAdapterErrorHandlerType<
+  OutgoingResponseType = unknown
+> = ComponentAdapterErrorHandlerClass<OutgoingResponseType> | FactoryComponentAdapterErrorHandler<OutgoingResponseType>
+
+/**
+ * Represents an Adapter meta component error handler.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ */
+export interface MetaComponentAdapterErrorHandler<
+  OutgoingResponseType = unknown
+> {
+  error?: any
+  lazy?: boolean
+  layout?: unknown
+  isClass?: boolean
+  isFactory?: boolean
+  module: ComponentAdapterErrorHandlerType<OutgoingResponseType> | LazyComponentAdapterErrorHandler<OutgoingResponseType>
+}
+
+/**
+ * Represents an Adapter lazy component error handler.
+ *
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ */
+export type LazyComponentAdapterErrorHandler<
+  OutgoingResponseType = unknown
+> = () => Promise<ComponentAdapterErrorHandlerType<OutgoingResponseType>>

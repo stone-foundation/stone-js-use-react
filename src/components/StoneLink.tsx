@@ -2,39 +2,53 @@ import { StoneContext } from '../StoneContext'
 import { NavigateOptions, Router } from '@stone-js/router'
 import { FunctionComponent, MouseEvent, ReactNode, useContext } from 'react'
 
-interface StonePageOptions {
+/**
+ * Options for configuring the Stone Link component.
+ */
+export interface StoneLinkOptions {
   href?: string
   rel?: string
   noRel?: boolean
   target?: string
   external?: boolean
+  className?: string
   children: ReactNode
-  activeClass?: string
-  exactActiveClass?: string
   to: string | NavigateOptions
   ariaCurrentValue?: 'time' | 'location' | 'page' | 'step' | 'date' | 'true' | 'false'
 }
 
-const StoneLink: FunctionComponent<StonePageOptions> = ({
+/**
+ * A navigation component that renders either an `<a>` or `<button>` element
+ * based on whether the link is external or internal.
+ *
+ * - External links render an `<a>` tag with `href`, `rel`, `target`, and `aria-current` attributes.
+ * - Internal links render a `<button>` that uses the Stone.js router for navigation.
+ *
+ * This component integrates with the `@stone-js/router` for internal navigation
+ * and respects accessibility attributes.
+ *
+ * @param options - The options to create the Stone Link.
+ * @returns The Stone Link component.
+ */
+export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
   to,
   href,
   noRel,
   target,
   external,
   children,
-  activeClass,
-  exactActiveClass,
+  className,
   ariaCurrentValue = 'page',
   rel = 'noopener noreferrer'
 }) => {
   if (external === true) {
     return (
       <a
-        href={typeof to === 'string' ? to : href}
+        target={target}
+        className={className}
         aria-current={ariaCurrentValue}
         rel={noRel === true ? undefined : rel}
-        target={target}
-        className={`${String(activeClass)} ${String(exactActiveClass)}`}
+        href={typeof to === 'string' ? to : href}
       >
         {children}
       </a>
@@ -48,15 +62,13 @@ const StoneLink: FunctionComponent<StonePageOptions> = ({
 
     return (
       <button
-        rel={noRel === true ? undefined : rel}
-        aria-current={ariaCurrentValue}
-        className={`${String(activeClass)} ${String(exactActiveClass)}`}
+        className={className}
         onClick={handleClick}
+        aria-current={ariaCurrentValue}
+        rel={noRel === true ? undefined : rel}
       >
         {children}
       </button>
     )
   }
 }
-
-export { StoneLink }

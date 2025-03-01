@@ -6,7 +6,7 @@
 
 # Interface: StoneContextType
 
-Defined in: [use-react/src/declarations.ts:59](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L59)
+Defined in: [use-react/src/declarations.ts:128](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L128)
 
 Context for React.
 
@@ -16,7 +16,7 @@ Context for React.
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:61](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L61)
+Defined in: [use-react/src/declarations.ts:130](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L130)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:61](https://github.com/stonemjs/use-r
 
 > **data**: `any`
 
-Defined in: [use-react/src/declarations.ts:60](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L60)
+Defined in: [use-react/src/declarations.ts:129](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L129)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [use-react/src/declarations.ts:60](https://github.com/stonemjs/use-r
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:62](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L62)
+Defined in: [use-react/src/declarations.ts:131](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L131)

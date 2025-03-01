@@ -8,7 +8,7 @@
 
 > **LazyComponentErrorHandler**\<`IncomingEventType`, `OutgoingResponseType`\>: () => `Promise`\<[`ComponentErrorHandlerType`](ComponentErrorHandlerType.md)\<`IncomingEventType`, `OutgoingResponseType`\>\>
 
-Defined in: [use-react/src/declarations.ts:193](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/declarations.ts#L193)
+Defined in: [use-react/src/declarations.ts:229](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L229)
 
 Represents a lazy component error handler.
 

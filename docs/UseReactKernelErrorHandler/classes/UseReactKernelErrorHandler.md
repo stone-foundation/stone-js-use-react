@@ -6,7 +6,7 @@
 
 # Class: UseReactKernelErrorHandler
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:16](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L16)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:16](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/UseReactKernelErrorHandler.ts#L16)
 
 Class representing an UseReactUseReactKernelErrorHandler.
 
@@ -22,7 +22,7 @@ Kernel level error handler for React applications.
 
 > **new UseReactKernelErrorHandler**(`options`): [`UseReactKernelErrorHandler`](UseReactKernelErrorHandler.md)
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:24](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L24)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:27](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/UseReactKernelErrorHandler.ts#L27)
 
 Create an UseReactUseReactKernelErrorHandler.
 
@@ -42,9 +42,9 @@ UseReactUseReactKernelErrorHandler options.
 
 ### handle()
 
-> **handle**(`error`, `_event`): `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
+> **handle**(`error`): `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/UseReactKernelErrorHandler.ts#L37)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/UseReactKernelErrorHandler.ts#L37)
 
 Handle an error.
 
@@ -55,12 +55,6 @@ Handle an error.
 `any`
 
 The error to handle.
-
-##### \_event
-
-[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)
-
-The incoming http event.
 
 #### Returns
 

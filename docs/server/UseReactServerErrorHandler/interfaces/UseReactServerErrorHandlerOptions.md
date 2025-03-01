@@ -6,7 +6,7 @@
 
 # Interface: UseReactServerErrorHandlerOptions
 
-Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:9](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L9)
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:17](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/server/UseReactServerErrorHandler.ts#L17)
 
 UseReactServerErrorHandler options.
 
@@ -16,7 +16,7 @@ UseReactServerErrorHandler options.
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:11](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L11)
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:19](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/server/UseReactServerErrorHandler.ts#L19)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:11](https://gith
 
 > **logger**: `ILogger`
 
-Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:10](https://github.com/stonemjs/use-react/blob/35b6e6a63b128df8b7d2db68dda3eb3286adfc69/src/server/UseReactServerErrorHandler.ts#L10)
+Defined in: [use-react/src/server/UseReactServerErrorHandler.ts:18](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/server/UseReactServerErrorHandler.ts#L18)

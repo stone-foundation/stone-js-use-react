@@ -2,11 +2,26 @@ import { isNotEmpty } from '@stone-js/core'
 import { STONE_PAGE_EVENT_OUTLET } from '../constants'
 import { ReactNode, useEffect, useState, FunctionComponent } from 'react'
 
-interface StoneOutletOptions {
+/**
+ * Stone Outlet options.
+ */
+export interface StoneOutletOptions {
   children: ReactNode
 }
 
-const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children }) => {
+/**
+ * A dynamic rendering component that updates its content based on a global event.
+ *
+ * - Listens for `stone:inject:react-page:outlet` and updates its view when triggered.
+ * - Uses `useState` to manage the currently displayed content.
+ * - Automatically cleans up event listeners on unmount.
+ *
+ * This component enables dynamic content updates within a Stone.js application.
+ *
+ * @param options - The options to create the Stone Outlet.
+ * @returns The Stone Outlet component.
+ */
+export const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children }) => {
   const [currentView, setCurrentView] = useState<ReactNode>(children)
 
   useEffect(() => {
@@ -24,5 +39,3 @@ const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children }) => {
 
   return <div data-stone-outlet='true'>{currentView}</div>
 }
-
-export { StoneOutlet }
