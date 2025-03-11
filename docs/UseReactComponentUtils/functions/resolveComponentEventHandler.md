@@ -8,7 +8,7 @@
 
 > **resolveComponentEventHandler**(`container`, `metaComponent`?): `Promise`\<`undefined` \| `IComponentEventHandler`\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: use-react/src/UseReactComponentUtils.ts:190
+Defined in: [use-react/src/UseReactComponentUtils.ts:191](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactComponentUtils.ts#L191)
 
 Resolve the event handler for the component.
 

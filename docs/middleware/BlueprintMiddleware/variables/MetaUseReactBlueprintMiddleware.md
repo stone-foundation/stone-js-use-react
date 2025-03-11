@@ -8,7 +8,7 @@
 
 > `const` **MetaUseReactBlueprintMiddleware**: `MetaPipe`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>[]
 
-Defined in: use-react/src/middleware/BlueprintMiddleware.ts:310
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:312](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/middleware/BlueprintMiddleware.ts#L312)
 
 Configuration for react processing middleware.
 

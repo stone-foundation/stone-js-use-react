@@ -21,8 +21,6 @@
 - [middleware/BlueprintMiddleware](middleware/BlueprintMiddleware/README.md)
 - [middleware/BrowserResponseMiddleware](middleware/BrowserResponseMiddleware/README.md)
 - [options/UseReactBlueprint](options/UseReactBlueprint/README.md)
-- [server/UseReactServerErrorHandler](server/UseReactServerErrorHandler/README.md)
-- [server/utils](server/utils/README.md)
 - [StoneContext](StoneContext/README.md)
 - [UseReactBrowserErrorHandler](UseReactBrowserErrorHandler/README.md)
 - [UseReactComponentUtils](UseReactComponentUtils/README.md)
@@ -30,3 +28,4 @@
 - [UseReactKernelErrorHandler](UseReactKernelErrorHandler/README.md)
 - [UseReactPageHooks](UseReactPageHooks/README.md)
 - [UseReactResponse](UseReactResponse/README.md)
+- [UseReactServerErrorHandler](UseReactServerErrorHandler/README.md)

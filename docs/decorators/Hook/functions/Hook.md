@@ -8,7 +8,7 @@
 
 > **Hook**\<`T`\>(`name`): `MethodDecorator`
 
-Defined in: use-react/src/decorators/Hook.ts:20
+Defined in: [use-react/src/decorators/Hook.ts:20](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/Hook.ts#L20)
 
 Hook decorator to mark a method as a lifecycle hook
 And automatically add it to the global lifecycle hook registry.

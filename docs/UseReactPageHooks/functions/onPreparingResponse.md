@@ -8,7 +8,7 @@
 
 > **onPreparingResponse**(`context`): `Promise`\<`void`\>
 
-Defined in: use-react/src/UseReactPageHooks.ts:50
+Defined in: [use-react/src/UseReactPageHooks.ts:52](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactPageHooks.ts#L52)
 
 Hook that runs just before preparing the response.
 

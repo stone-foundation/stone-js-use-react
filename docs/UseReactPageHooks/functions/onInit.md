@@ -8,7 +8,7 @@
 
 > **onInit**(`container`): `void`
 
-Defined in: use-react/src/UseReactPageHooks.ts:40
+Defined in: [use-react/src/UseReactPageHooks.ts:42](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactPageHooks.ts#L42)
 
 Hook that runs after the context is created.
 

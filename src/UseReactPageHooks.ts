@@ -14,11 +14,12 @@ import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
 import { STONE_SNAPSHOT } from './constants'
 import { renderToString } from 'react-dom/server'
+import { StoneError } from './components/StoneError'
 import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { IComponentEventHandler, NAVIGATION_EVENT } from '@stone-js/router'
 import { IBlueprint, IContainer, isFunction, isNotEmpty, isObjectLikeModule } from '@stone-js/core'
-import { resolveComponentErrorHandler, buildPageComponent, buildAppComponent, resolveComponentEventHandler } from './UseReactComponentUtils'
+import { resolveComponentErrorHandler, buildPageComponent, buildAppComponent, resolveComponentEventHandler, htmlTemplate } from './UseReactComponentUtils'
 
 /**
  * Options for onPreparingResponse hook.
@@ -56,10 +57,8 @@ export async function onPreparingResponse (
     await prepareFallbackErrorPage(event, response, container, snapshot)
   } else if (isNotEmpty(response.content?.error)) {
     await prepareErrorPage(event, response, container, snapshot)
-  } else if (isFunction(response.content.module)) {
+  } else if (isFunction(response.content?.module)) {
     await preparePage(event, response, container, snapshot)
-  } else {
-    await prepareFallbackErrorPage(event, response, container, snapshot)
   }
 }
 
@@ -80,18 +79,19 @@ async function preparePage (
   container: IContainer,
   snapshot: ResponseSnapshotType
 ): Promise<void> {
-  const { layout } = response.content
-  const handler = await resolveComponentEventHandler(container, response.content)
-  const componentType = handler?.render.bind(handler)
-  const data = await executeHandler(event, response, snapshot, handler)
+  const { layout = 'default' } = response.content
+  const page = await resolveComponentEventHandler(container, response.content)
+  const data = await executeHandler(event, response, snapshot, page)
+  const componentType = page?.render.bind(page)
 
   await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType })
 
+  const snapshotData = { data, layout, statusCode: response.statusCode }
   const component = await buildPageComponent(event, container, componentType, data, response.statusCode)
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, { data }, container, event)
+    ? await getServerContent(appComponent, snapshotData, container, event)
     : getBrowserContent(appComponent, component, layout, snapshot)
   )
 }
@@ -116,16 +116,17 @@ async function prepareErrorPage (
 ): Promise<void> {
   const { error, layout } = response.content
   const handler = await resolveComponentErrorHandler(container, response.content)
-  const componentType = handler?.render.bind(handler)
   const data = await executeHandler(event, response, snapshot, handler, error)
+  const componentType = handler?.render.bind(handler) ?? StoneError
 
   await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, error })
 
+  const snapshotData = { data, layout, statusCode: response.statusCode, error: { name: error.name } }
   const component = await buildPageComponent(event, container, componentType, data, response.statusCode, error)
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode, error)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, { data }, container, event)
+    ? await getServerContent(appComponent, snapshotData, container, event)
     : getBrowserContent(appComponent, component, layout, snapshot)
   )
 }
@@ -186,6 +187,8 @@ async function executeHandler (
       result = await handler.handle?.(error, event)
     } else if (isObjectLikeModule<IComponentEventHandler<IncomingBrowserEvent>>(handler)) {
       result = await handler.handle?.(event)
+    } else {
+      result = undefined
     }
   }
 
@@ -201,7 +204,7 @@ async function executeHandler (
     response.setHeaders(result.headers)
   }
 
-  return result?.content ?? result
+  return result?.content ?? result?.data ?? result
 }
 
 /**
@@ -246,8 +249,8 @@ async function getServerContent (
   event: IncomingBrowserEvent
 ): Promise<string> {
   const html = renderToString(component).concat('\n<!--app-html-->')
+  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
-  const template = await (await import('./server/utils').then(m => m.htmlTemplate))(container.make<IBlueprint>('blueprint'))
 
   return template
     .replace('<!--app-html-->', html)

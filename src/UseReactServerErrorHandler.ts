@@ -7,9 +7,8 @@ import {
   defaultLoggerResolver,
   AdapterEventBuilderType
 } from '@stone-js/core'
-import { htmlTemplate } from './utils'
 import { renderToString } from 'react-dom/server'
-import { buildAdapterErrorComponent } from '../UseReactComponentUtils'
+import { buildAdapterErrorComponent, htmlTemplate } from './UseReactComponentUtils'
 
 /**
  * UseReactServerErrorHandler options.

@@ -8,7 +8,7 @@
 
 > **SetSSRCompressionMiddleware**(`context`, `next`): `Promise`\<`IBlueprint`\>
 
-Defined in: use-react/src/middleware/BlueprintMiddleware.ts:206
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:208](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/middleware/BlueprintMiddleware.ts#L208)
 
 Blueprint middleware to set CompressionMiddleware for SSR adapter.
 

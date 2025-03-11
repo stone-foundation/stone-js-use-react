@@ -20,4 +20,4 @@
 - [SetSSRCompressionMiddleware](functions/SetSSRCompressionMiddleware.md)
 - [SetSSRStaticFileMiddleware](functions/SetSSRStaticFileMiddleware.md)
 - [SetUseReactEventHandlerMiddleware](functions/SetUseReactEventHandlerMiddleware.md)
-- [SetUseReactResponseResolverMiddleware](functions/SetUseReactResponseResolverMiddleware.md)
+- [SetUseReactHooksMiddleware](functions/SetUseReactHooksMiddleware.md)

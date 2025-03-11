@@ -6,7 +6,7 @@
 
 # Interface: UseReactHookListenerContext
 
-Defined in: [use-react/src/declarations.ts:56](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L56)
+Defined in: [use-react/src/declarations.ts:56](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L56)
 
 Use React Hook Listener Context.
 
@@ -16,7 +16,7 @@ Use React Hook Listener Context.
 
 > **componentType**: `unknown`
 
-Defined in: [use-react/src/declarations.ts:60](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L60)
+Defined in: [use-react/src/declarations.ts:60](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L60)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:60](https://github.com/stonemjs/use-r
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:59](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L59)
+Defined in: [use-react/src/declarations.ts:59](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L59)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:59](https://github.com/stonemjs/use-r
 
 > **data**: `any`
 
-Defined in: [use-react/src/declarations.ts:57](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L57)
+Defined in: [use-react/src/declarations.ts:57](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L57)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:57](https://github.com/stonemjs/use-r
 
 > `optional` **error**: `any`
 
-Defined in: [use-react/src/declarations.ts:58](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L58)
+Defined in: [use-react/src/declarations.ts:58](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L58)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [use-react/src/declarations.ts:58](https://github.com/stonemjs/use-r
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:61](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L61)
+Defined in: [use-react/src/declarations.ts:61](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L61)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [use-react/src/declarations.ts:61](https://github.com/stonemjs/use-r
 
 > **response**: [`ReactOutgoingResponse`](../type-aliases/ReactOutgoingResponse.md)
 
-Defined in: [use-react/src/declarations.ts:63](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L63)
+Defined in: [use-react/src/declarations.ts:63](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L63)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [use-react/src/declarations.ts:63](https://github.com/stonemjs/use-r
 
 > **snapshot**: [`ResponseSnapshotType`](ResponseSnapshotType.md)
 
-Defined in: [use-react/src/declarations.ts:62](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L62)
+Defined in: [use-react/src/declarations.ts:62](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L62)

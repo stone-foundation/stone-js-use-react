@@ -6,7 +6,7 @@
 
 # Class: UseReactError
 
-Defined in: [use-react/src/errors/UseReactError.ts:6](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/errors/UseReactError.ts#L6)
+Defined in: [use-react/src/errors/UseReactError.ts:6](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/errors/UseReactError.ts#L6)
 
 Custom error for react operations.
 
@@ -20,7 +20,7 @@ Custom error for react operations.
 
 > **new UseReactError**(`message`, `options`?): [`UseReactError`](UseReactError.md)
 
-Defined in: [use-react/src/errors/UseReactError.ts:7](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/errors/UseReactError.ts#L7)
+Defined in: [use-react/src/errors/UseReactError.ts:7](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/errors/UseReactError.ts#L7)
 
 #### Parameters
 

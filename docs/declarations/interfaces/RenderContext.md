@@ -6,7 +6,7 @@
 
 # Interface: RenderContext\<TData\>
 
-Defined in: [use-react/src/declarations.ts:137](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L137)
+Defined in: [use-react/src/declarations.ts:137](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L137)
 
 React render page options.
 
@@ -25,7 +25,7 @@ React render page options.
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:139](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L139)
+Defined in: [use-react/src/declarations.ts:139](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L139)
 
 ***
 
@@ -33,7 +33,7 @@ Defined in: [use-react/src/declarations.ts:139](https://github.com/stonemjs/use-
 
 > `optional` **data**: `TData`
 
-Defined in: [use-react/src/declarations.ts:138](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L138)
+Defined in: [use-react/src/declarations.ts:138](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L138)
 
 ***
 
@@ -41,4 +41,4 @@ Defined in: [use-react/src/declarations.ts:138](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:140](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L140)
+Defined in: [use-react/src/declarations.ts:140](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L140)

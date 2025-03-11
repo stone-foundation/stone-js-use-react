@@ -6,7 +6,7 @@
 
 # Interface: UseReactKernelErrorHandlerOptions
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:7](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/UseReactKernelErrorHandler.ts#L7)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:7](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactKernelErrorHandler.ts#L7)
 
 UseReactUseReactKernelErrorHandler options.
 
@@ -16,4 +16,4 @@ UseReactUseReactKernelErrorHandler options.
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:8](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/UseReactKernelErrorHandler.ts#L8)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:8](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactKernelErrorHandler.ts#L8)

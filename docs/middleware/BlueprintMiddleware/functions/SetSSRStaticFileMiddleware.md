@@ -8,7 +8,7 @@
 
 > **SetSSRStaticFileMiddleware**(`context`, `next`): `Promise`\<`IBlueprint`\>
 
-Defined in: use-react/src/middleware/BlueprintMiddleware.ts:182
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:184](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/middleware/BlueprintMiddleware.ts#L184)
 
 Blueprint middleware to set StaticFileMiddleware for SSR adapter.
 

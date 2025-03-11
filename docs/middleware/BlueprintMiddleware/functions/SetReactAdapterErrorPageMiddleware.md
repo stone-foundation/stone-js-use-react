@@ -8,7 +8,7 @@
 
 > **SetReactAdapterErrorPageMiddleware**(`context`, `next`): `Promiseable`\<`IBlueprint`\>
 
-Defined in: use-react/src/middleware/BlueprintMiddleware.ts:136
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:138](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/middleware/BlueprintMiddleware.ts#L138)
 
 Blueprint middleware to process and register adapter error page definitions from modules.
 

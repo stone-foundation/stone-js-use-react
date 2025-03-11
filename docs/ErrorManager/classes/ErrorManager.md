@@ -6,7 +6,7 @@
 
 # Class: ErrorManager
 
-Defined in: use-react/src/ErrorManager.ts:21
+Defined in: [use-react/src/ErrorManager.ts:21](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L21)
 
 Class representing an ErrorManager.
 
@@ -20,7 +20,7 @@ After the component has been rendered.
 
 > **new ErrorManager**(`options`): [`ErrorManager`](ErrorManager.md)
 
-Defined in: use-react/src/ErrorManager.ts:30
+Defined in: [use-react/src/ErrorManager.ts:30](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L30)
 
 Create an ErrorManager.
 
@@ -42,7 +42,7 @@ ErrorManager options.
 
 > **throwError**(`error`, `statusCode`): `Promise`\<`void`\>
 
-Defined in: use-react/src/ErrorManager.ts:46
+Defined in: [use-react/src/ErrorManager.ts:46](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L46)
 
 Throw an error.
 

@@ -6,7 +6,7 @@
 
 # Interface: MetaComponentErrorHandler\<IncomingEventType, OutgoingResponseType\>
 
-Defined in: [use-react/src/declarations.ts:211](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L211)
+Defined in: [use-react/src/declarations.ts:211](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L211)
 
 Represents a meta component error handler.
 
@@ -26,7 +26,7 @@ The type representing the outgoing response.
 
 > `optional` **error**: `any`
 
-Defined in: [use-react/src/declarations.ts:215](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L215)
+Defined in: [use-react/src/declarations.ts:215](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L215)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [use-react/src/declarations.ts:215](https://github.com/stonemjs/use-
 
 > `optional` **isClass**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:218](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L218)
+Defined in: [use-react/src/declarations.ts:218](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L218)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [use-react/src/declarations.ts:218](https://github.com/stonemjs/use-
 
 > `optional` **isFactory**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:219](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L219)
+Defined in: [use-react/src/declarations.ts:219](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L219)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [use-react/src/declarations.ts:219](https://github.com/stonemjs/use-
 
 > `optional` **layout**: `unknown`
 
-Defined in: [use-react/src/declarations.ts:217](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L217)
+Defined in: [use-react/src/declarations.ts:217](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L217)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [use-react/src/declarations.ts:217](https://github.com/stonemjs/use-
 
 > `optional` **lazy**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:216](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L216)
+Defined in: [use-react/src/declarations.ts:216](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L216)
 
 ***
 
@@ -66,4 +66,4 @@ Defined in: [use-react/src/declarations.ts:216](https://github.com/stonemjs/use-
 
 > **module**: [`ComponentErrorHandlerType`](../type-aliases/ComponentErrorHandlerType.md)\<`IncomingEventType`, `OutgoingResponseType`\> \| [`LazyComponentErrorHandler`](../type-aliases/LazyComponentErrorHandler.md)\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:220](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/declarations.ts#L220)
+Defined in: [use-react/src/declarations.ts:220](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L220)

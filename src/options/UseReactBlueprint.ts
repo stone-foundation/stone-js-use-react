@@ -1,7 +1,6 @@
 import { MetaErrorManager } from '../ErrorManager'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
 import { MetaComponentEventHandler } from '@stone-js/router'
-import { onInit, onPreparingResponse } from '../UseReactPageHooks'
 import { MetaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
 import { MetaComponentErrorHandler, ReactIncomingEvent, ReactOutgoingResponse } from '../declarations'
 
@@ -72,12 +71,8 @@ export const useReactBlueprint: UseReactBlueprint = {
       middleware: MetaUseReactBlueprintMiddleware
     },
     useReact: {
-      htmlTemplatePath: './index.html'
+      htmlTemplatePath: './template.mjs'
     },
-    services: [MetaErrorManager],
-    lifecycleHooks: {
-      onInit: [onInit],
-      onPreparingResponse: [onPreparingResponse]
-    }
+    services: [MetaErrorManager]
   }
 }

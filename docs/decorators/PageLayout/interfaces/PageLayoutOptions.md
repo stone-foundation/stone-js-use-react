@@ -6,7 +6,7 @@
 
 # Interface: PageLayoutOptions
 
-Defined in: [use-react/src/decorators/PageLayout.ts:7](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/decorators/PageLayout.ts#L7)
+Defined in: [use-react/src/decorators/PageLayout.ts:7](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/PageLayout.ts#L7)
 
 Options for configuring the `PageLayout` decorator.
 
@@ -16,4 +16,4 @@ Options for configuring the `PageLayout` decorator.
 
 > **name**: `string`
 
-Defined in: [use-react/src/decorators/PageLayout.ts:8](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/decorators/PageLayout.ts#L8)
+Defined in: [use-react/src/decorators/PageLayout.ts:8](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/PageLayout.ts#L8)

@@ -27,7 +27,7 @@ export const reactResponse = async (
   }
 
   return import.meta.env.SSR
-    ? (await import('@stone-js/http-core').then(m => m.OutgoingHttpResponse)).create<OutgoingHttpResponse>(options)
+    ? OutgoingHttpResponse.create<OutgoingHttpResponse>(options)
     : OutgoingBrowserResponse.create(options)
 }
 
@@ -41,6 +41,6 @@ export const reactRedirectResponse = async (
   options: RedirectResponseOptions | RedirectBrowserResponseOptions
 ): Promise<ReactOutgoingResponse> => {
   return import.meta.env.SSR
-    ? (await import('@stone-js/http-core').then(m => m.RedirectResponse)).create<RedirectResponse>(options)
-    : RedirectBrowserResponse.create(options)
+    ? RedirectResponse.create<RedirectResponse>({ statusCode: 302, ...options })
+    : RedirectBrowserResponse.create({ statusCode: 302, ...options })
 }

@@ -33,6 +33,7 @@ import { StonePage } from './components/StonePage'
 import { UseReactError } from './errors/UseReactError'
 import { Container } from '@stone-js/service-container'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
+import { StoneError } from './components/StoneError'
 
 /**
  * Build the React application for the current route.
@@ -87,7 +88,7 @@ export const buildLayoutComponent = async (
   const metavalue = container
     .make<IBlueprint>('blueprint')
     .get<MetaComponentEventHandler<ReactIncomingEvent>>(
-      `stone.useReact.layout.${String(layoutName ?? 'default')}`
+      `stone.useReact.layout.${String(layoutName)}`
   )
 
   const handler = await resolveComponentEventHandler(container, metavalue)
@@ -146,7 +147,7 @@ export const buildAdapterErrorComponent = async (
     `stone.useReact.adapterErrorHandlers.${String(error?.name ?? 'default')}`
   )
   const layoutMetavalue = blueprint.get<MetaComponentEventHandler<ReactIncomingEvent>>(
-    `stone.useReact.layout.${String(handlerMetavalue?.layout ?? 'default')}`
+    `stone.useReact.layout.${String(handlerMetavalue?.layout)}`
   )
 
   let handler: (IComponentAdapterErrorHandler | undefined)
@@ -174,7 +175,7 @@ export const buildAdapterErrorComponent = async (
   } else if (isNotEmpty<ElementType>(componentType)) {
     return jsx(componentType, { blueprint, data, error, statusCode })
   } else {
-    return jsx('h1', { children: 'An error occurred.' })
+    return jsx(StoneError, { blueprint, data, error, statusCode })
   }
 }
 
@@ -195,6 +196,7 @@ export const resolveComponentEventHandler = async (
     metaComponent?.lazy === true &&
     isFunctionModule<LazyComponentEventHandler<ReactIncomingEvent>>(metaComponent?.module)
   ) {
+    metaComponent.lazy = false
     metaComponent.module = await metaComponent.module()
   }
 
@@ -222,6 +224,7 @@ export const resolveComponentErrorHandler = async (
     metaComponent?.lazy === true &&
     isFunctionModule<LazyComponentErrorHandler<ReactIncomingEvent>>(metaComponent?.module)
   ) {
+    metaComponent.lazy = false
     metaComponent.module = await metaComponent.module()
   }
 
@@ -319,3 +322,14 @@ export const isServer = (): boolean => typeof window === 'undefined'
  * @returns True if the current environment is the client.
  */
 export const isClient = (): boolean => !isServer()
+
+/**
+ * Get the HTML template for the React application.
+ *
+ * @param blueprint - The blueprint.
+ * @returns The HTML template.
+ */
+export const htmlTemplate = async (blueprint: IBlueprint): Promise<string> => {
+  const path = blueprint.get<string>('stone.useReact.htmlTemplatePath', './template.mjs')
+  return await import(/* @vite-ignore */path).then(v => Object.values<string>(v)[0])
+}

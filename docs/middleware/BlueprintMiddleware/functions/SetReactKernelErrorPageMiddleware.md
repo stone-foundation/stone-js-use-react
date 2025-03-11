@@ -8,7 +8,7 @@
 
 > **SetReactKernelErrorPageMiddleware**(`context`, `next`): `Promiseable`\<`IBlueprint`\>
 
-Defined in: use-react/src/middleware/BlueprintMiddleware.ts:96
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:98](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/middleware/BlueprintMiddleware.ts#L98)
 
 Blueprint middleware to process and register kernel error page definitions from modules.
 

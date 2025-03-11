@@ -1,10 +1,10 @@
-[**Use React Documentation v0.0.2**](../../README.md)
+[**Use React Documentation v0.0.2**](../README.md)
 
 ***
 
-[Use React Documentation](../../modules.md) / server/UseReactServerErrorHandler
+[Use React Documentation](../modules.md) / UseReactServerErrorHandler
 
-# server/UseReactServerErrorHandler
+# UseReactServerErrorHandler
 
 ## Classes
 

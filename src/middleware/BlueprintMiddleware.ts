@@ -17,22 +17,22 @@ import {
   defineErrorHandler,
   defineAdapterErrorHandler
 } from '@stone-js/core'
-import { reactResponse } from '../UseReactResponse'
-import { PageRouteDefinition } from '@stone-js/router'
 import { MetaPipe, NextPipe } from '@stone-js/pipeline'
 import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
 import { PageLayoutOptions } from '../decorators/PageLayout'
 import { UseReactEventHandler } from '../UseReactEventHandler'
-import { ReactOutgoingResponseOptions } from '../declarations'
 import { ErrorHandlerOptions } from '../decorators/ErrorHandler'
+import { onInit, onPreparingResponse } from '../UseReactPageHooks'
 import { UseReactKernelErrorHandler } from '../UseReactKernelErrorHandler'
+import { UseReactServerErrorHandler } from '../UseReactServerErrorHandler'
 import { MetaBrowserResponseMiddleware } from './BrowserResponseMiddleware'
 import { UseReactBrowserErrorHandler } from '../UseReactBrowserErrorHandler'
+import { NODE_CONSOLE_PLATFORM, PageRouteDefinition } from '@stone-js/router'
 import { AdapterErrorHandlerOptions } from '../decorators/AdapterErrorHandler'
-import { UseReactServerErrorHandler } from '../server/UseReactServerErrorHandler'
+import { MetaCompressionMiddleware, StaticFileMiddleware } from '@stone-js/http-core'
 
 /**
- * Blueprint middleware to dynamically set response resolver for react.
+ * Blueprint middleware to dynamically set lifecycle hooks for react.
  *
  * @param context - The configuration context containing modules and blueprint.
  * @param next - The next pipeline function to continue processing.
@@ -40,17 +40,19 @@ import { UseReactServerErrorHandler } from '../server/UseReactServerErrorHandler
  *
  * @example
  * ```typescript
- * SetUseReactResponseResolverMiddleware(context, next)
+ * SetUseReactHooksMiddleware(context, next)
  * ```
  */
-export const SetUseReactResponseResolverMiddleware = (
+export const SetUseReactHooksMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
   next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
-  context.blueprint.set(
-    'stone.kernel.responseResolver',
-    async (options: ReactOutgoingResponseOptions) => await reactResponse(options)
-  )
+  if (context.blueprint.get<string>('stone.adapter.platform') !== NODE_CONSOLE_PLATFORM) {
+    context
+      .blueprint
+      .add('stone.lifecycleHooks.onInit', [onInit])
+      .add('stone.lifecycleHooks.onPreparingResponse', [onPreparingResponse])
+  }
 
   return next(context)
 }
@@ -185,7 +187,7 @@ export const SetSSRStaticFileMiddleware = async (
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
-    [classMiddleware(await import('@stone-js/http-core').then(m => m.StaticFileMiddleware))]
+    [classMiddleware(StaticFileMiddleware, { priority: 0 })]
   )
 
   return await next(context)
@@ -209,7 +211,7 @@ export const SetSSRCompressionMiddleware = async (
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
-    [classMiddleware(await import('@stone-js/http-core').then(m => m.CompressionMiddleware))]
+    [MetaCompressionMiddleware]
   )
 
   return await next(context)
@@ -309,12 +311,12 @@ export async function SetUseReactEventHandlerMiddleware (
  */
 export const MetaUseReactBlueprintMiddleware: Array<MetaPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
   { module: SetSSRStaticFileMiddleware, priority: 10 },
-  { module: SetSSRCompressionMiddleware, priority: 10 },
+  { module: SetUseReactHooksMiddleware, priority: 10 },
+  // { module: SetSSRCompressionMiddleware, priority: 10 },
   { module: SetReactPageLayoutMiddleware, priority: 10 },
   { module: SetUseReactEventHandlerMiddleware, priority: 2 },
   { module: SetReactKernelErrorPageMiddleware, priority: 10 },
   { module: SetReactAdapterErrorPageMiddleware, priority: 10 },
   { module: SetReactRouteDefinitionsMiddleware, priority: 10 },
-  { module: SetUseReactResponseResolverMiddleware, priority: 10 },
   { module: SetBrowserResponseMiddlewareMiddleware, priority: 10 }
 ]

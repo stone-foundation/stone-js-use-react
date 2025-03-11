@@ -8,6 +8,6 @@
 
 > `const` **REACT\_PAGE\_KEY**: *typeof* [`REACT_PAGE_KEY`](REACT_PAGE_KEY.md)
 
-Defined in: [use-react/src/decorators/constants.ts:9](https://github.com/stonemjs/use-react/blob/d8ec502192c16b8752fc9e1bf85bd5600bcf9813/src/decorators/constants.ts#L9)
+Defined in: [use-react/src/decorators/constants.ts:9](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/constants.ts#L9)
 
 A unique symbol key to mark classes as React Page component.

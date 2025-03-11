@@ -15,6 +15,7 @@
 - [defineClassComponent](functions/defineClassComponent.md)
 - [defineFactoryComponent](functions/defineFactoryComponent.md)
 - [getAppRootElement](functions/getAppRootElement.md)
+- [htmlTemplate](functions/htmlTemplate.md)
 - [hydrateReactApp](functions/hydrateReactApp.md)
 - [isClient](functions/isClient.md)
 - [isServer](functions/isServer.md)
