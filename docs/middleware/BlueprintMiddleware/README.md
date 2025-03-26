@@ -8,7 +8,7 @@
 
 ## Variables
 
-- [MetaUseReactBlueprintMiddleware](variables/MetaUseReactBlueprintMiddleware.md)
+- [metaUseReactBlueprintMiddleware](variables/metaUseReactBlueprintMiddleware.md)
 
 ## Functions
 

@@ -8,7 +8,7 @@
 
 > **buildAdapterErrorComponent**(`blueprint`, `statusCode`, `error`): `Promise`\<`ReactNode`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:141](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactComponentUtils.ts#L141)
+Defined in: [use-react/src/UseReactComponentUtils.ts:141](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactComponentUtils.ts#L141)
 
 Get adapter error component.
 

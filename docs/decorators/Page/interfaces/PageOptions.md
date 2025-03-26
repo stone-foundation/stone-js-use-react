@@ -6,7 +6,7 @@
 
 # Interface: PageOptions
 
-Defined in: [use-react/src/decorators/Page.ts:11](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/Page.ts#L11)
+Defined in: [use-react/src/decorators/Page.ts:11](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/decorators/Page.ts#L11)
 
 Options for configuring the `Page` decorator.
 Extends `PageRouteDefinition` but excludes the `methods` property,
@@ -28,7 +28,7 @@ as it is predefined as `'GET'` by the decorator.
 
 > `optional` **headers**: [`HeadersType`](../../../declarations/type-aliases/HeadersType.md)
 
-Defined in: [use-react/src/decorators/Page.ts:13](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/Page.ts#L13)
+Defined in: [use-react/src/decorators/Page.ts:13](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/decorators/Page.ts#L13)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [use-react/src/decorators/Page.ts:13](https://github.com/stonemjs/us
 
 > `optional` **layout**: `string`
 
-Defined in: [use-react/src/decorators/Page.ts:12](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/decorators/Page.ts#L12)
+Defined in: [use-react/src/decorators/Page.ts:12](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/decorators/Page.ts#L12)

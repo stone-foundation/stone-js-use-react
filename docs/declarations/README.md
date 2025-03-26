@@ -11,6 +11,7 @@
 - [BrowserResponseContent](interfaces/BrowserResponseContent.md)
 - [IComponentAdapterErrorHandler](interfaces/IComponentAdapterErrorHandler.md)
 - [IComponentErrorHandler](interfaces/IComponentErrorHandler.md)
+- [IComponentEventHandler](interfaces/IComponentEventHandler.md)
 - [MetaComponentAdapterErrorHandler](interfaces/MetaComponentAdapterErrorHandler.md)
 - [MetaComponentErrorHandler](interfaces/MetaComponentErrorHandler.md)
 - [ReactOutgoingResponseOptions](interfaces/ReactOutgoingResponseOptions.md)

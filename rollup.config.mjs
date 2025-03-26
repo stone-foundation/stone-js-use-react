@@ -12,12 +12,9 @@ const inputs = {
 
 export default Object.entries(inputs).map(([name, input]) => ({
 	input,
-  output: {
-    dir: 'dist',
-    format: 'es',
-    preserveModules: true,
-    preserveModulesRoot: 'src',
-  },
+	output: [
+    { format: 'es', file: `dist/${name}.js` }
+  ],
   plugins: [
     multi({ entryFileName: 'index.js' }),
     nodeExternals(), // Must always be before `nodeResolve()`.

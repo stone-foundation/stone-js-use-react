@@ -6,7 +6,7 @@
 
 # Interface: ErrorManagerOptions
 
-Defined in: [use-react/src/ErrorManager.ts:9](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L9)
+Defined in: [use-react/src/ErrorManager.ts:9](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/ErrorManager.ts#L9)
 
 ErrorManagerOptions
 
@@ -16,7 +16,7 @@ ErrorManagerOptions
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/ErrorManager.ts:10](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L10)
+Defined in: [use-react/src/ErrorManager.ts:10](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/ErrorManager.ts#L10)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [use-react/src/ErrorManager.ts:10](https://github.com/stonemjs/use-r
 
 > **container**: `Container`
 
-Defined in: [use-react/src/ErrorManager.ts:11](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/ErrorManager.ts#L11)
+Defined in: [use-react/src/ErrorManager.ts:11](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/ErrorManager.ts#L11)

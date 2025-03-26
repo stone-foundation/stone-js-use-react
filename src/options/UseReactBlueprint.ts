@@ -1,7 +1,7 @@
 import { MetaErrorManager } from '../ErrorManager'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
 import { MetaComponentEventHandler } from '@stone-js/router'
-import { MetaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
+import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
 import { MetaComponentErrorHandler, ReactIncomingEvent, ReactOutgoingResponse } from '../declarations'
 
 /**
@@ -67,8 +67,8 @@ export interface UseReactBlueprint extends StoneBlueprint<ReactIncomingEvent, Re
  */
 export const useReactBlueprint: UseReactBlueprint = {
   stone: {
-    builder: {
-      middleware: MetaUseReactBlueprintMiddleware
+    blueprint: {
+      middleware: metaUseReactBlueprintMiddleware
     },
     useReact: {
       htmlTemplatePath: './template.mjs'

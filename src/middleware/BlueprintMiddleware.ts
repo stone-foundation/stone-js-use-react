@@ -12,9 +12,9 @@ import {
   Promiseable,
   hasMetadata,
   getMetadata,
-  classMiddleware,
   BlueprintContext,
   defineErrorHandler,
+  defineClassMiddleware,
   defineAdapterErrorHandler
 } from '@stone-js/core'
 import { MetaPipe, NextPipe } from '@stone-js/pipeline'
@@ -187,7 +187,7 @@ export const SetSSRStaticFileMiddleware = async (
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
-    [classMiddleware(StaticFileMiddleware, { priority: 0 })]
+    [defineClassMiddleware(StaticFileMiddleware, { priority: 0 })]
   )
 
   return await next(context)
@@ -309,10 +309,10 @@ export async function SetUseReactEventHandlerMiddleware (
  * This array defines a list of middleware pipes, each with a `pipe` function and a `priority`.
  * These pipes are executed in the order of their priority values, with lower values running first.
  */
-export const MetaUseReactBlueprintMiddleware: Array<MetaPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
+export const metaUseReactBlueprintMiddleware: Array<MetaPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
   { module: SetSSRStaticFileMiddleware, priority: 10 },
   { module: SetUseReactHooksMiddleware, priority: 10 },
-  // { module: SetSSRCompressionMiddleware, priority: 10 },
+  { module: SetSSRCompressionMiddleware, priority: 10 },
   { module: SetReactPageLayoutMiddleware, priority: 10 },
   { module: SetUseReactEventHandlerMiddleware, priority: 2 },
   { module: SetReactKernelErrorPageMiddleware, priority: 10 },

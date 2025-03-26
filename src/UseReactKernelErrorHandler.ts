@@ -2,11 +2,12 @@ import { IErrorHandler, IBlueprint } from '@stone-js/core'
 import { MetaComponentErrorHandler, ReactIncomingEvent } from './declarations'
 
 /**
- * UseReactUseReactKernelErrorHandler options.
+ * UseReactError response type.
  */
-export interface UseReactKernelErrorHandlerOptions {
-  blueprint: IBlueprint
-}
+export type UseReactErrorResponseType = Record<
+'content' | 'statusCode',
+Partial<MetaComponentErrorHandler<ReactIncomingEvent>> | number
+>
 
 /**
  * Class representing an UseReactUseReactKernelErrorHandler.
@@ -15,7 +16,7 @@ export interface UseReactKernelErrorHandlerOptions {
  */
 export class UseReactKernelErrorHandler implements IErrorHandler<
 ReactIncomingEvent,
-Partial<MetaComponentErrorHandler<ReactIncomingEvent>>
+UseReactErrorResponseType
 > {
   private readonly blueprint: IBlueprint
 
@@ -24,7 +25,7 @@ Partial<MetaComponentErrorHandler<ReactIncomingEvent>>
    *
    * @param options - UseReactUseReactKernelErrorHandler options.
    */
-  constructor ({ blueprint }: UseReactKernelErrorHandlerOptions) {
+  constructor ({ blueprint }: { blueprint: IBlueprint }) {
     this.blueprint = blueprint
   }
 
@@ -34,11 +35,15 @@ Partial<MetaComponentErrorHandler<ReactIncomingEvent>>
    * @param error - The error to handle.
    * @returns The outgoing http response.
    */
-  public handle (error: any): Partial<MetaComponentErrorHandler<ReactIncomingEvent>> {
+  public handle (error: any): UseReactErrorResponseType {
     const metavalue = this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
-      `stone.useReact.errorHandlers.${String(error?.name ?? 'default')}`
+      `stone.useReact.errorHandlers.${String(error?.name)}`,
+      this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+        'stone.useReact.errorHandlers.default',
+        {} as any
+      )
     )
 
-    return { ...metavalue, error }
+    return { content: { ...metavalue, error }, statusCode: error?.statusCode ?? 500 }
   }
 }

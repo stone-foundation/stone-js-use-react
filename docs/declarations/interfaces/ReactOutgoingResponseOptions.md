@@ -6,7 +6,7 @@
 
 # Interface: ReactOutgoingResponseOptions
 
-Defined in: [use-react/src/declarations.ts:37](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L37)
+Defined in: [use-react/src/declarations.ts:40](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L40)
 
 Options for creating a React Outgoing Response.
 
@@ -24,7 +24,7 @@ Options for creating a React Outgoing Response.
 
 > `optional` **content**: `unknown`
 
-Defined in: core/dist/index.d.ts:256
+Defined in: core/dist/index.d.ts:275
 
 #### Inherited from
 
@@ -36,7 +36,7 @@ Defined in: core/dist/index.d.ts:256
 
 > `optional` **headers**: [`HeadersType`](../type-aliases/HeadersType.md)
 
-Defined in: [use-react/src/declarations.ts:38](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/declarations.ts#L38)
+Defined in: [use-react/src/declarations.ts:41](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L41)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: core/dist/index.d.ts:30
 
 > `optional` **statusCode**: `number`
 
-Defined in: core/dist/index.d.ts:257
+Defined in: core/dist/index.d.ts:276
 
 #### Inherited from
 
@@ -80,7 +80,7 @@ Defined in: core/dist/index.d.ts:257
 
 > `optional` **statusMessage**: `string`
 
-Defined in: core/dist/index.d.ts:258
+Defined in: core/dist/index.d.ts:277
 
 #### Inherited from
 

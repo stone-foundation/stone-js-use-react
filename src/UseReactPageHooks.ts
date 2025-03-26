@@ -55,7 +55,7 @@ export async function onPreparingResponse (
 
   if (isNotEmpty(snapshot.error)) {
     await prepareFallbackErrorPage(event, response, container, snapshot)
-  } else if (isNotEmpty(response.content?.error)) {
+  } else if (response.isError()) {
     await prepareErrorPage(event, response, container, snapshot)
   } else if (isFunction(response.content?.module)) {
     await preparePage(event, response, container, snapshot)
@@ -114,10 +114,10 @@ async function prepareErrorPage (
   container: IContainer,
   snapshot: ResponseSnapshotType
 ): Promise<void> {
-  const { error, layout } = response.content
-  const handler = await resolveComponentErrorHandler(container, response.content)
-  const data = await executeHandler(event, response, snapshot, handler, error)
-  const componentType = handler?.render.bind(handler) ?? StoneError
+  const { error = {}, layout } = response.content
+  const errorPage = await resolveComponentErrorHandler(container, response.content)
+  const data = await executeHandler(event, response, snapshot, errorPage, error)
+  const componentType = errorPage?.render.bind(errorPage) ?? StoneError
 
   await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, error })
 
@@ -150,7 +150,11 @@ async function prepareFallbackErrorPage (
   const { layout, error, statusCode = 500 } = snapshot
   const blueprint = container.make<IBlueprint>('blueprint')
   const metavalue = blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
-    `stone.useReact.errorHandlers.${String(error.name ?? 'default')}`
+    `stone.useReact.errorHandlers.${String(error?.name)}`,
+    blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+      'stone.useReact.errorHandlers.default',
+      {} as any
+    )
   )
   const content = { ...metavalue, layout }
 
@@ -158,7 +162,7 @@ async function prepareFallbackErrorPage (
 
   response
     .setContent(content)
-    .setStatusCode(statusCode)
+    .setStatus(statusCode)
 
   await prepareErrorPage(event, response, container, snapshot)
 }
@@ -193,7 +197,7 @@ async function executeHandler (
   }
 
   if (isNotEmpty(result?.statusCode)) {
-    response.setStatusCode(result.statusCode)
+    response.setStatus(result.statusCode)
   }
 
   if (
@@ -295,7 +299,7 @@ function getResponseSnapshot (event: IncomingBrowserEvent, container: IContainer
  */
 function snapshotResponse (event: IncomingBrowserEvent, container: IContainer, data: Partial<ResponseSnapshotType>): string {
   const snapshot = container.make<ISnapshot>('snapshot')
-  return renderStoneSnapshot(snapshot.set(event.fingerprint(), { ...data, ssr: true }).toJson())
+  return renderStoneSnapshot(snapshot.add(event.fingerprint(), { ...data, ssr: true }).toJson())
 }
 
 /**

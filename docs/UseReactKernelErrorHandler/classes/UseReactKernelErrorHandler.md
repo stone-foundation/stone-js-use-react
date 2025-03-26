@@ -6,7 +6,7 @@
 
 # Class: UseReactKernelErrorHandler
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:16](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactKernelErrorHandler.ts#L16)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:17](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactKernelErrorHandler.ts#L17)
 
 Class representing an UseReactUseReactKernelErrorHandler.
 
@@ -14,7 +14,7 @@ Kernel level error handler for React applications.
 
 ## Implements
 
-- `IErrorHandler`\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>\>
+- `IErrorHandler`\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), [`UseReactErrorResponseType`](../type-aliases/UseReactErrorResponseType.md)\>
 
 ## Constructors
 
@@ -22,7 +22,7 @@ Kernel level error handler for React applications.
 
 > **new UseReactKernelErrorHandler**(`options`): [`UseReactKernelErrorHandler`](UseReactKernelErrorHandler.md)
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:27](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactKernelErrorHandler.ts#L27)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:28](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactKernelErrorHandler.ts#L28)
 
 Create an UseReactUseReactKernelErrorHandler.
 
@@ -30,9 +30,11 @@ Create an UseReactUseReactKernelErrorHandler.
 
 ##### options
 
-[`UseReactKernelErrorHandlerOptions`](../interfaces/UseReactKernelErrorHandlerOptions.md)
-
 UseReactUseReactKernelErrorHandler options.
+
+###### blueprint
+
+`IBlueprint`
 
 #### Returns
 
@@ -42,9 +44,9 @@ UseReactUseReactKernelErrorHandler options.
 
 ### handle()
 
-> **handle**(`error`): `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
+> **handle**(`error`): [`UseReactErrorResponseType`](../type-aliases/UseReactErrorResponseType.md)
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/UseReactKernelErrorHandler.ts#L37)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:38](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactKernelErrorHandler.ts#L38)
 
 Handle an error.
 
@@ -58,7 +60,7 @@ The error to handle.
 
 #### Returns
 
-`Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
+[`UseReactErrorResponseType`](../type-aliases/UseReactErrorResponseType.md)
 
 The outgoing http response.
 

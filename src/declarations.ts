@@ -1,10 +1,13 @@
 import { ReactNode } from 'react'
-import { Router } from '@stone-js/router'
 import { Config } from '@stone-js/config'
+import { Router } from '@stone-js/router'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint } from '@stone-js/core'
+
+// Export types
+export { IComponentEventHandler } from '@stone-js/router'
 
 /**
  * Headers type for React.

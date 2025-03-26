@@ -1,4 +1,5 @@
 import { StoneContext } from '../StoneContext'
+import { isObjectLikeModule } from '@stone-js/core'
 import { NavigateOptions, Router } from '@stone-js/router'
 import { FunctionComponent, MouseEvent, ReactNode, useContext } from 'react'
 
@@ -6,13 +7,14 @@ import { FunctionComponent, MouseEvent, ReactNode, useContext } from 'react'
  * Options for configuring the Stone Link component.
  */
 export interface StoneLinkOptions {
-  href?: string
   rel?: string
-  noRel?: boolean
+  href?: string
   target?: string
+  noRel?: boolean
   external?: boolean
   className?: string
   children: ReactNode
+  defaultNav?: boolean
   to: string | NavigateOptions
   ariaCurrentValue?: 'time' | 'location' | 'page' | 'step' | 'date' | 'true' | 'false'
 }
@@ -38,6 +40,7 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
   external,
   children,
   className,
+  defaultNav,
   ariaCurrentValue = 'page',
   rel = 'noopener noreferrer'
 }) => {
@@ -59,16 +62,28 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
       event.preventDefault()
       router.navigate(to)
     }
+    const path = isObjectLikeModule<NavigateOptions>(to) ? router.generate(to) : (to ?? href)
 
-    return (
-      <button
-        className={className}
-        onClick={handleClick}
-        aria-current={ariaCurrentValue}
-        rel={noRel === true ? undefined : rel}
-      >
-        {children}
-      </button>
-    )
+    return defaultNav === true
+      ? (
+        <a
+          href={path}
+          className={className}
+          aria-current={ariaCurrentValue}
+          rel={noRel === true ? undefined : rel}
+        >
+          {children}
+        </a>
+        )
+      : (
+        <button
+          className={className}
+          onClick={handleClick}
+          aria-current={ariaCurrentValue}
+          rel={noRel === true ? undefined : rel}
+        >
+          {children}
+        </button>
+        )
   }
 }

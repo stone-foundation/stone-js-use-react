@@ -10,6 +10,6 @@
 
 - [UseReactKernelErrorHandler](classes/UseReactKernelErrorHandler.md)
 
-## Interfaces
+## Type Aliases
 
-- [UseReactKernelErrorHandlerOptions](interfaces/UseReactKernelErrorHandlerOptions.md)
+- [UseReactErrorResponseType](type-aliases/UseReactErrorResponseType.md)

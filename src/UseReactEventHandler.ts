@@ -22,7 +22,7 @@ export class UseReactEventHandler<
    *
    * @param options - The UseReactEventHandler options including blueprint.
    */
-  protected constructor ({ blueprint }: { blueprint: IBlueprint }) {
+  constructor ({ blueprint }: { blueprint: IBlueprint }) {
     this.blueprint = blueprint
   }
 

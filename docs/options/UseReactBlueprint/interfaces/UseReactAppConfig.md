@@ -6,7 +6,7 @@
 
 # Interface: UseReactAppConfig
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:45](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/options/UseReactBlueprint.ts#L45)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:45](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/options/UseReactBlueprint.ts#L45)
 
 Application-level configuration that extends `AppConfig` with React-specific settings.
 
@@ -20,7 +20,7 @@ Application-level configuration that extends `AppConfig` with React-specific set
 
 > `optional` **adapter**: `Partial`\<`AdapterConfig`\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md), [`ReactOutgoingResponse`](../../../declarations/type-aliases/ReactOutgoingResponse.md)\>\>
 
-Defined in: core/dist/index.d.ts:537
+Defined in: core/dist/index.d.ts:557
 
 Current Adapter configurations for the application.
 This key allow you to specify the current adapter with the alias key.
@@ -35,9 +35,10 @@ This key allow you to specify the current adapter with the alias key.
 
 > `optional` **adapters**: `AdapterConfig`\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md), [`ReactOutgoingResponse`](../../../declarations/type-aliases/ReactOutgoingResponse.md)\>[]
 
-Defined in: core/dist/index.d.ts:541
+Defined in: core/dist/index.d.ts:562
 
 Adapter configurations for the application.
+List of all adapters used in the application.
 
 #### Inherited from
 
@@ -49,7 +50,7 @@ Adapter configurations for the application.
 
 > `optional` **aliases**: `Record`\<`string`, `any`\>
 
-Defined in: core/dist/index.d.ts:572
+Defined in: core/dist/index.d.ts:593
 
 Class aliases to be registered when the application starts.
 These aliases provide shorthand references to commonly used classes.
@@ -60,17 +61,17 @@ These aliases provide shorthand references to commonly used classes.
 
 ***
 
-### builder?
+### blueprint?
 
-> `optional` **builder**: `BuilderConfig`\<`any`\>
+> `optional` **blueprint**: `BlueprintConfig`\<`any`\>
 
-Defined in: core/dist/index.d.ts:532
+Defined in: core/dist/index.d.ts:552
 
-Configuration options for building the application, including middleware and pipe priorities.
+Configuration options for building the application blueprint, including middleware and pipe priorities.
 
 #### Inherited from
 
-`Partial.builder`
+`Partial.blueprint`
 
 ***
 
@@ -78,7 +79,7 @@ Configuration options for building the application, including middleware and pip
 
 > `optional` **debug**: `boolean`
 
-Defined in: core/dist/index.d.ts:511
+Defined in: core/dist/index.d.ts:531
 
 Determines if the application is in debug mode.
 When enabled, detailed error messages with stack traces will be shown.
@@ -93,7 +94,7 @@ When enabled, detailed error messages with stack traces will be shown.
 
 > `optional` **env**: `Environment`
 
-Defined in: core/dist/index.d.ts:506
+Defined in: core/dist/index.d.ts:526
 
 The current environment in which the application is running.
 Possible values are development, production, and test.
@@ -108,7 +109,7 @@ Possible values are development, production, and test.
 
 > `optional` **fallback\_locale**: `string`
 
-Defined in: core/dist/index.d.ts:523
+Defined in: core/dist/index.d.ts:543
 
 The fallback locale used when a translation for the default locale is unavailable.
 
@@ -122,9 +123,9 @@ The fallback locale used when a translation for the default locale is unavailabl
 
 > `optional` **kernel**: `KernelConfig`\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md), [`ReactOutgoingResponse`](../../../declarations/type-aliases/ReactOutgoingResponse.md)\>
 
-Defined in: core/dist/index.d.ts:545
+Defined in: core/dist/index.d.ts:566
 
-Global middleware settings for the application kernel.
+Kernel configurations for the application.
 
 #### Inherited from
 
@@ -136,7 +137,7 @@ Global middleware settings for the application kernel.
 
 > `optional` **lifecycleHooks**: `LifecycleHookType`\<`IBlueprint`\<`any`\>, `any`, `any`, [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md), [`ReactOutgoingResponse`](../../../declarations/type-aliases/ReactOutgoingResponse.md)\>
 
-Defined in: core/dist/index.d.ts:577
+Defined in: core/dist/index.d.ts:598
 
 Lifecycle hooks for the application.
 These hooks allow you to run custom code at different stages of the application lifecycle.
@@ -151,7 +152,7 @@ These hooks allow you to run custom code at different stages of the application 
 
 > `optional` **listeners**: `MetaEventListener`[]
 
-Defined in: core/dist/index.d.ts:558
+Defined in: core/dist/index.d.ts:579
 
 Event listeners to be automatically registered when the application starts.
 This allows you to specify functions to listen for specific events.
@@ -166,7 +167,7 @@ This allows you to specify functions to listen for specific events.
 
 > `optional` **liveConfigurations**: `MixedConfiguration`\<`any`\>[]
 
-Defined in: core/dist/index.d.ts:583
+Defined in: core/dist/index.d.ts:604
 
 Live configurations are loaded at each request.
 By default, configurations are loaded once when the application starts.
@@ -182,7 +183,7 @@ This is useful for defining dynamic configurations that do not require a restart
 
 > `optional` **locale**: `string`
 
-Defined in: core/dist/index.d.ts:519
+Defined in: core/dist/index.d.ts:539
 
 The default locale for the application.
 
@@ -196,7 +197,7 @@ The default locale for the application.
 
 > `optional` **logger**: `LoggerConfig`
 
-Defined in: core/dist/index.d.ts:549
+Defined in: core/dist/index.d.ts:570
 
 Logging settings, including the logger instance and error reporting configurations.
 
@@ -210,7 +211,7 @@ Logging settings, including the logger instance and error reporting configuratio
 
 > `optional` **name**: `string`
 
-Defined in: core/dist/index.d.ts:501
+Defined in: core/dist/index.d.ts:521
 
 The name of the application.
 
@@ -224,7 +225,7 @@ The name of the application.
 
 > `optional` **providers**: `MixedServiceProvider`[]
 
-Defined in: core/dist/index.d.ts:567
+Defined in: core/dist/index.d.ts:588
 
 Service providers to be automatically loaded for each request to the application.
 
@@ -238,7 +239,7 @@ Service providers to be automatically loaded for each request to the application
 
 > `optional` **secret**: `string`
 
-Defined in: core/dist/index.d.ts:528
+Defined in: core/dist/index.d.ts:548
 
 A secret key used for encryption purposes throughout the application.
 This key should be kept secure.
@@ -253,7 +254,7 @@ This key should be kept secure.
 
 > `optional` **services**: `MetaService`[]
 
-Defined in: core/dist/index.d.ts:553
+Defined in: core/dist/index.d.ts:574
 
 Services to be automatically registered when the application starts.
 
@@ -267,7 +268,7 @@ Services to be automatically registered when the application starts.
 
 > `optional` **subscribers**: `MixedEventSubscriber`[]
 
-Defined in: core/dist/index.d.ts:563
+Defined in: core/dist/index.d.ts:584
 
 Subscribers to be automatically registered when the application starts.
 Subscribers are used for handling and responding to events.
@@ -282,7 +283,7 @@ Subscribers are used for handling and responding to events.
 
 > `optional` **timezone**: `string`
 
-Defined in: core/dist/index.d.ts:515
+Defined in: core/dist/index.d.ts:535
 
 The default timezone for the application.
 
@@ -296,6 +297,6 @@ The default timezone for the application.
 
 > **useReact**: [`UseReactConfig`](UseReactConfig.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:49](https://github.com/stonemjs/use-react/blob/4786d31a3beb1c9f15eb30e2c9c2b12c786b755a/src/options/UseReactBlueprint.ts#L49)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:49](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/options/UseReactBlueprint.ts#L49)
 
 React integration settings, extending the base application config.

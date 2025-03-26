@@ -30,10 +30,10 @@ import {
 import { jsx } from 'react/jsx-runtime'
 import { ElementType, ReactNode } from 'react'
 import { StonePage } from './components/StonePage'
+import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
 import { Container } from '@stone-js/service-container'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
-import { StoneError } from './components/StoneError'
 
 /**
  * Build the React application for the current route.
