@@ -1,4 +1,4 @@
-import { MetaErrorManager } from '../ErrorManager'
+import { MetaReactRuntime } from '../ReactRuntime'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
 import { MetaComponentEventHandler } from '@stone-js/router'
 import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
@@ -73,6 +73,6 @@ export const useReactBlueprint: UseReactBlueprint = {
     useReact: {
       htmlTemplatePath: './template.mjs'
     },
-    services: [MetaErrorManager]
+    services: [MetaReactRuntime]
   }
 }

@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 import { NextPipe } from '@stone-js/pipeline'
-import { NAVIGATION_EVENT } from '@stone-js/router'
+import { applyHeadContextToDom } from '../DomUtils'
 import { STONE_PAGE_EVENT_OUTLET } from '../constants'
 import { UseReactError } from '../errors/UseReactError'
+import { HeadContext, NAVIGATION_EVENT } from '@stone-js/router'
 import { IBlueprint, isEmpty, isNotEmpty } from '@stone-js/core'
 import { BrowserAdapterResponseBuilder } from '@stone-js/browser-adapter'
 import { hydrateReactApp, renderReactApp } from '../UseReactComponentUtils'
@@ -77,6 +78,10 @@ export class BrowserResponseMiddleware {
 
     if (isNotEmpty<string | URL>(targetUrl)) {
       return this.handleRedirect(targetUrl)
+    }
+
+    if (isNotEmpty<HeadContext>(content?.head)) {
+      applyHeadContextToDom(document, content.head)
     }
 
     if (content?.ssr === true && !this.isRendered && isNotEmpty(content?.app)) {

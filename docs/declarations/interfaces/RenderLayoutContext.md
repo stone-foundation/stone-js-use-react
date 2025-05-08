@@ -6,7 +6,7 @@
 
 # Interface: RenderLayoutContext\<TChildren, UData\>
 
-Defined in: [use-react/src/declarations.ts:149](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L149)
+Defined in: [use-react/src/declarations.ts:151](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L151)
 
 React render page layout options.
 
@@ -26,7 +26,7 @@ React render page layout options.
 
 > **children**: `TChildren`
 
-Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L150)
+Defined in: [use-react/src/declarations.ts:152](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L152)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:142](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L142)
+Defined in: [use-react/src/declarations.ts:144](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L144)
 
 #### Inherited from
 
@@ -46,7 +46,7 @@ Defined in: [use-react/src/declarations.ts:142](https://github.com/stonemjs/use-
 
 > `optional` **data**: `UData`
 
-Defined in: [use-react/src/declarations.ts:141](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L141)
+Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L143)
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: [use-react/src/declarations.ts:141](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L143)
+Defined in: [use-react/src/declarations.ts:145](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L145)
 
 #### Inherited from
 

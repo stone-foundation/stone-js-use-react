@@ -8,7 +8,7 @@
 
 > **PageLayout**\<`T`\>(`options`): `ClassDecorator`
 
-Defined in: [use-react/src/decorators/PageLayout.ts:29](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/decorators/PageLayout.ts#L29)
+Defined in: [use-react/src/decorators/PageLayout.ts:29](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/decorators/PageLayout.ts#L29)
 
 A class decorator for defining a class as a React Page layout.
 

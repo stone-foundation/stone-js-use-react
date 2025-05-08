@@ -6,7 +6,7 @@
 
 # Interface: RenderAdapterErrorContext\<TError, UData\>
 
-Defined in: [use-react/src/declarations.ts:241](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L241)
+Defined in: [use-react/src/declarations.ts:244](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L244)
 
 React Adapter render page error options.
 
@@ -22,7 +22,7 @@ React Adapter render page error options.
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/declarations.ts:245](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L245)
+Defined in: [use-react/src/declarations.ts:248](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L248)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [use-react/src/declarations.ts:245](https://github.com/stonemjs/use-
 
 > `optional` **data**: `UData`
 
-Defined in: [use-react/src/declarations.ts:242](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L242)
+Defined in: [use-react/src/declarations.ts:245](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L245)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [use-react/src/declarations.ts:242](https://github.com/stonemjs/use-
 
 > **error**: `TError`
 
-Defined in: [use-react/src/declarations.ts:243](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L243)
+Defined in: [use-react/src/declarations.ts:246](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L246)
 
 ***
 
@@ -46,4 +46,4 @@ Defined in: [use-react/src/declarations.ts:243](https://github.com/stonemjs/use-
 
 > **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:244](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L244)
+Defined in: [use-react/src/declarations.ts:247](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L247)

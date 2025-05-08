@@ -6,7 +6,7 @@
 
 # Interface: IComponentErrorHandler\<IncomingEventType, OutgoingResponseType\>
 
-Defined in: [use-react/src/declarations.ts:178](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L178)
+Defined in: [use-react/src/declarations.ts:180](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L180)
 
 Represents a component error handler.
 
@@ -26,7 +26,25 @@ The type representing the outgoing response.
 
 > `optional` **handle**: `FunctionalErrorHandler`\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:182](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L182)
+Defined in: [use-react/src/declarations.ts:185](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L185)
+
+***
+
+### head()?
+
+> `optional` **head**: (`options`) => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
+
+Defined in: [use-react/src/declarations.ts:184](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L184)
+
+#### Parameters
+
+##### options
+
+`any`
+
+#### Returns
+
+`Promiseable`\<[`HeadContext`](HeadContext.md)\>
 
 ***
 
@@ -34,7 +52,7 @@ Defined in: [use-react/src/declarations.ts:182](https://github.com/stonemjs/use-
 
 > **render**: (`context`) => `unknown`
 
-Defined in: [use-react/src/declarations.ts:183](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L183)
+Defined in: [use-react/src/declarations.ts:186](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L186)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Class: UseReactEventHandler\<IncomingEventType\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:15](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactEventHandler.ts#L15)
+Defined in: [use-react/src/UseReactEventHandler.ts:15](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L15)
 
 A useReact event handler for processing incoming events
 For single event handler.
@@ -33,7 +33,7 @@ The type representing the incoming event.
 
 > **new UseReactEventHandler**\<`IncomingEventType`\>(`options`): [`UseReactEventHandler`](UseReactEventHandler.md)\<`IncomingEventType`\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:25](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactEventHandler.ts#L25)
+Defined in: [use-react/src/UseReactEventHandler.ts:25](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L25)
 
 Constructs a `UseReactEventHandler` instance.
 
@@ -57,7 +57,7 @@ The UseReactEventHandler options including blueprint.
 
 > **handle**(): `MetaComponentEventHandler`\<`IncomingEventType`\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:34](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactEventHandler.ts#L34)
+Defined in: [use-react/src/UseReactEventHandler.ts:34](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L34)
 
 Handle an incoming event.
 

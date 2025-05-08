@@ -8,7 +8,7 @@
 
 > **buildLayoutComponent**(`event`, `container`, `children`, `layoutName`?, `data`?, `statusCode`?, `error`?): `Promise`\<`ReactNode`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:79](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactComponentUtils.ts#L79)
+Defined in: [use-react/src/UseReactComponentUtils.ts:77](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactComponentUtils.ts#L77)
 
 Get response layout in the current route for mutli pages application.
 Or get it from the blueprint configuration for single page application.

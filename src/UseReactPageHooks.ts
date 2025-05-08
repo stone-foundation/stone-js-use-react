@@ -15,9 +15,10 @@ import { Config } from '@stone-js/config'
 import { STONE_SNAPSHOT } from './constants'
 import { renderToString } from 'react-dom/server'
 import { StoneError } from './components/StoneError'
+import { applyHeadContextToHtmlString } from './DomUtils'
 import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
-import { IComponentEventHandler, NAVIGATION_EVENT } from '@stone-js/router'
+import { HeadContext, IComponentEventHandler } from '@stone-js/router'
 import { IBlueprint, IContainer, isFunction, isNotEmpty, isObjectLikeModule } from '@stone-js/core'
 import { resolveComponentErrorHandler, buildPageComponent, buildAppComponent, resolveComponentEventHandler, htmlTemplate } from './UseReactComponentUtils'
 
@@ -33,14 +34,10 @@ export interface OnPreparingResponseOptions {
 /**
  * Hook that runs after the context is created.
  *
- * The browser adapter only execute onStart and onInit hooks when first loaded.
- * Note: As Stone.js is an event-driven framework, we need to dispatch an event to continue with the flow.
- *
  * @param container - The service container.
  */
 export function onInit (container: IContainer): void {
   registerSnapshot(container)
-  !isSSR() && window.dispatchEvent(new Event(NAVIGATION_EVENT))
 }
 
 /**
@@ -83,16 +80,17 @@ async function preparePage (
   const page = await resolveComponentEventHandler(container, response.content)
   const data = await executeHandler(event, response, snapshot, page)
   const componentType = page?.render.bind(page)
+  const head = await page?.head?.({ event, container, snapshot, data, statusCode: response.statusCode })
 
-  await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType })
+  await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, head })
 
   const snapshotData = { data, layout, statusCode: response.statusCode }
   const component = await buildPageComponent(event, container, componentType, data, response.statusCode)
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, snapshotData, container, event)
-    : getBrowserContent(appComponent, component, layout, snapshot)
+    ? await getServerContent(appComponent, snapshotData, container, event, head)
+    : getBrowserContent(appComponent, component, layout, snapshot, head)
   )
 }
 
@@ -118,16 +116,17 @@ async function prepareErrorPage (
   const errorPage = await resolveComponentErrorHandler(container, response.content)
   const data = await executeHandler(event, response, snapshot, errorPage, error)
   const componentType = errorPage?.render.bind(errorPage) ?? StoneError
+  const head = await errorPage?.head?.({ event, container, snapshot, data, statusCode: response.statusCode, error })
 
-  await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, error })
+  await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, head, error })
 
   const snapshotData = { data, layout, statusCode: response.statusCode, error: { name: error.name } }
   const component = await buildPageComponent(event, container, componentType, data, response.statusCode, error)
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode, error)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, snapshotData, container, event)
-    : getBrowserContent(appComponent, component, layout, snapshot)
+    ? await getServerContent(appComponent, snapshotData, container, event, head)
+    : getBrowserContent(appComponent, component, layout, snapshot, head)
   )
 }
 
@@ -225,15 +224,19 @@ let currentLayout: string | undefined
  *
  * @param app - The app component to render.
  * @param component - The component to render.
- * @param fullRender - If the component should be fully rendered.
+ * @param layout - The layout to use.
+ * @param snapshot - The response snapshot.
+ * @param head - The head context.
+ * @returns The browser response content.
  */
 function getBrowserContent (
   app: ReactNode,
   component: ReactNode,
   layout: any,
-  snapshot: ResponseSnapshotType
+  snapshot: ResponseSnapshotType,
+  head?: HeadContext
 ): BrowserResponseContent {
-  const content = { app, component, fullRender: currentLayout !== layout, ssr: snapshot.ssr }
+  const content = { head, app, component, fullRender: currentLayout !== layout, ssr: snapshot.ssr }
   currentLayout = layout
   return content
 }
@@ -244,19 +247,22 @@ function getBrowserContent (
  * @param component - The React component to hydrate.
  * @param data - The data to pass to the components.
  * @param container - The service container.
+ * @param event - The incoming browser event.
+ * @param head - The head context.
  * @returns A promise that resolves when the content is hydrated.
  */
 async function getServerContent (
   component: ReactNode,
   data: Partial<ResponseSnapshotType>,
   container: IContainer,
-  event: IncomingBrowserEvent
+  event: IncomingBrowserEvent,
+  head?: HeadContext
 ): Promise<string> {
   const html = renderToString(component).concat('\n<!--app-html-->')
   const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
-  return template
+  return applyHeadContextToHtmlString(head ?? {}, template)
     .replace('<!--app-html-->', html)
     .replace('<!--app-head-->', snapshot)
 }

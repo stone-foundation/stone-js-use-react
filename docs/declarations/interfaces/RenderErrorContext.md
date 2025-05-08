@@ -6,7 +6,7 @@
 
 # Interface: RenderErrorContext\<TError, UData\>
 
-Defined in: [use-react/src/declarations.ts:156](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L156)
+Defined in: [use-react/src/declarations.ts:158](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L158)
 
 React render page error options.
 
@@ -26,7 +26,7 @@ React render page error options.
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:142](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L142)
+Defined in: [use-react/src/declarations.ts:144](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L144)
 
 #### Inherited from
 
@@ -38,7 +38,7 @@ Defined in: [use-react/src/declarations.ts:142](https://github.com/stonemjs/use-
 
 > `optional` **data**: `UData`
 
-Defined in: [use-react/src/declarations.ts:141](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L141)
+Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L143)
 
 #### Inherited from
 
@@ -50,7 +50,7 @@ Defined in: [use-react/src/declarations.ts:141](https://github.com/stonemjs/use-
 
 > **error**: `TError`
 
-Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L157)
+Defined in: [use-react/src/declarations.ts:159](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L159)
 
 ***
 
@@ -58,7 +58,7 @@ Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L143)
+Defined in: [use-react/src/declarations.ts:145](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L145)
 
 #### Inherited from
 
@@ -70,4 +70,4 @@ Defined in: [use-react/src/declarations.ts:143](https://github.com/stonemjs/use-
 
 > **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:158](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L158)
+Defined in: [use-react/src/declarations.ts:160](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L160)

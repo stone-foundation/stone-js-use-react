@@ -9,6 +9,7 @@
 ## Interfaces
 
 - [BrowserResponseContent](interfaces/BrowserResponseContent.md)
+- [HeadContext](interfaces/HeadContext.md)
 - [IComponentAdapterErrorHandler](interfaces/IComponentAdapterErrorHandler.md)
 - [IComponentErrorHandler](interfaces/IComponentErrorHandler.md)
 - [IComponentEventHandler](interfaces/IComponentEventHandler.md)

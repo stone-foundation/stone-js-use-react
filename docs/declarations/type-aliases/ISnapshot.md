@@ -8,7 +8,7 @@
 
 > **ISnapshot**: `Config`
 
-Defined in: [use-react/src/declarations.ts:92](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L92)
+Defined in: [use-react/src/declarations.ts:93](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L93)
 
 The type representing a Snapshot.
 An object that represents the state of the application at a given time.

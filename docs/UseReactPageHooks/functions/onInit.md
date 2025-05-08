@@ -8,12 +8,9 @@
 
 > **onInit**(`container`): `void`
 
-Defined in: [use-react/src/UseReactPageHooks.ts:41](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactPageHooks.ts#L41)
+Defined in: [use-react/src/UseReactPageHooks.ts:39](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactPageHooks.ts#L39)
 
 Hook that runs after the context is created.
-
-The browser adapter only execute onStart and onInit hooks when first loaded.
-Note: As Stone.js is an event-driven framework, we need to dispatch an event to continue with the flow.
 
 ## Parameters
 

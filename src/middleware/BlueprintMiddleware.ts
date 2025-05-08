@@ -21,14 +21,14 @@ import { MetaPipe, NextPipe } from '@stone-js/pipeline'
 import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
 import { PageLayoutOptions } from '../decorators/PageLayout'
 import { UseReactEventHandler } from '../UseReactEventHandler'
-import { ErrorHandlerOptions } from '../decorators/ErrorHandler'
+import { ErrorPageOptions } from '../decorators/ErrorPage'
 import { onInit, onPreparingResponse } from '../UseReactPageHooks'
 import { UseReactKernelErrorHandler } from '../UseReactKernelErrorHandler'
 import { UseReactServerErrorHandler } from '../UseReactServerErrorHandler'
 import { MetaBrowserResponseMiddleware } from './BrowserResponseMiddleware'
 import { UseReactBrowserErrorHandler } from '../UseReactBrowserErrorHandler'
 import { NODE_CONSOLE_PLATFORM, PageRouteDefinition } from '@stone-js/router'
-import { AdapterErrorHandlerOptions } from '../decorators/AdapterErrorHandler'
+import { AdapterErrorPageOptions } from '../decorators/AdapterErrorPage'
 import { MetaCompressionMiddleware, StaticFileMiddleware } from '@stone-js/http-core'
 
 /**
@@ -108,7 +108,7 @@ export const SetReactKernelErrorPageMiddleware = (
     .modules
     .filter(module => hasMetadata(module, REACT_ERROR_HANDLER_KEY))
     .forEach(module => {
-      const { error, layout } = getMetadata<ClassType, ErrorHandlerOptions>(module, REACT_ERROR_HANDLER_KEY, { error: 'default' })
+      const { error, layout } = getMetadata<ClassType, ErrorPageOptions>(module, REACT_ERROR_HANDLER_KEY, { error: 'default' })
       Array(error).flat().forEach(name => {
         context
           .blueprint
@@ -152,7 +152,7 @@ export const SetReactAdapterErrorPageMiddleware = (
     .modules
     .filter(module => hasMetadata(module, REACT_ADAPTER_ERROR_HANDLER_KEY))
     .forEach(module => {
-      const { error, layout } = getMetadata<ClassType, AdapterErrorHandlerOptions>(
+      const { error, layout } = getMetadata<ClassType, AdapterErrorPageOptions>(
         module, REACT_ADAPTER_ERROR_HANDLER_KEY, { error: 'default' }
       )
       Array(error).flat().forEach(name => {
@@ -278,7 +278,7 @@ export const SetReactPageLayoutMiddleware = (
 /**
  * Blueprint middleware to set the UseReact as the main event handler for the application.
  *
- * The SetRouterEventHandlerMiddleware takes precedence over the SetUseReactEventHandlerMiddleware.
+ * Set as fallback event handler if none of the other event handlers are registered.
  *
  * @param context - The configuration context containing modules and blueprint.
  * @param next - The next function in the pipeline.
@@ -293,14 +293,16 @@ export async function SetUseReactEventHandlerMiddleware (
   context: BlueprintContext<IBlueprint, ClassType>,
   next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> {
+  const blueprint = await next(context)
   const module = context.modules.find(module => hasMetadata(module, STONE_REACT_APP_KEY))
 
+  blueprint.setIf('stone.kernel.eventHandler', { module: UseReactEventHandler, isClass: true })
+
   if (isNotEmpty<ClassType>(module)) {
-    context.blueprint.setIf('stone.kernel.eventHandler', { module: UseReactEventHandler, isClass: true })
-    context.blueprint.set('stone.useReact.componentEventHandler', { module, isComponent: true, isClass: true })
+    blueprint.set('stone.useReact.componentEventHandler', { module, isComponent: true, isClass: true })
   }
 
-  return await next(context)
+  return blueprint
 }
 
 /**

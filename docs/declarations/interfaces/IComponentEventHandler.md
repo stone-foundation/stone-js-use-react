@@ -6,7 +6,7 @@
 
 # Interface: IComponentEventHandler\<IncomingEventType, OutgoingResponseType\>
 
-Defined in: router/dist/index.d.ts:261
+Defined in: router/dist/index.d.ts:609
 
 Represents a component event handler.
 
@@ -26,7 +26,25 @@ The type representing the outgoing response.
 
 > `optional` **handle**: `FunctionalEventHandler`\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: router/dist/index.d.ts:263
+Defined in: router/dist/index.d.ts:612
+
+***
+
+### head()?
+
+> `optional` **head**: (`options`) => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
+
+Defined in: router/dist/index.d.ts:611
+
+#### Parameters
+
+##### options
+
+`any`
+
+#### Returns
+
+`Promiseable`\<[`HeadContext`](HeadContext.md)\>
 
 ***
 
@@ -34,7 +52,7 @@ Defined in: router/dist/index.d.ts:263
 
 > **render**: (`options`) => `unknown`
 
-Defined in: router/dist/index.d.ts:262
+Defined in: router/dist/index.d.ts:610
 
 #### Parameters
 

@@ -8,7 +8,7 @@
 
 > **htmlTemplate**(`blueprint`): `Promise`\<`string`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:332](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/UseReactComponentUtils.ts#L332)
+Defined in: [use-react/src/UseReactComponentUtils.ts:302](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactComponentUtils.ts#L302)
 
 Get the HTML template for the React application.
 

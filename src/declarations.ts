@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
-import { Router } from '@stone-js/router'
+import { HeadContext, Router } from '@stone-js/router'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint } from '@stone-js/core'
 
 // Export types
-export { IComponentEventHandler } from '@stone-js/router'
+export { IComponentEventHandler, HeadContext } from '@stone-js/router'
 
 /**
  * Headers type for React.
@@ -59,6 +59,7 @@ export type UseReactHookName = 'onPreparingPage'
 export interface UseReactHookListenerContext {
   data: any
   error?: any
+  head?: HeadContext
   container: IContainer
   componentType: unknown
   event: ReactIncomingEvent
@@ -120,6 +121,7 @@ export interface ResponseSnapshotType {
 export interface BrowserResponseContent {
   ssr?: boolean
   app?: ReactNode
+  head?: HeadContext
   fullRender?: boolean
   component?: ReactNode
   targetUrl?: string | URL
@@ -179,6 +181,7 @@ export interface IComponentErrorHandler<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > {
+  head?: (options: any) => Promiseable<HeadContext>
   handle?: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>
   render: (context: RenderErrorContext) => Promiseable<unknown>
 }

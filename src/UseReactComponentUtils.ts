@@ -23,9 +23,7 @@ import {
   MetaComponentEventHandler,
   LazyComponentEventHandler,
   ComponentEventHandlerClass,
-  FactoryComponentEventHandler,
-  LazyComponentEventHandlerClass,
-  LazyFactoryComponentEventHandler
+  FactoryComponentEventHandler
 } from '@stone-js/router'
 import { jsx } from 'react/jsx-runtime'
 import { ElementType, ReactNode } from 'react'
@@ -247,34 +245,6 @@ export const getAppRootElement = (blueprint: IBlueprint): HTMLElement => {
   const appContainer = document.getElementById(rootElementId) ?? undefined
   if (appContainer === undefined) { throw new UseReactError('Root container is required to render React components.') }
   return appContainer
-}
-
-/**
- * Define a class component.
- *
- * @param module - The class component module.
- * @param options - The options for the component.
- * @returns The meta component event handler.
- */
-export const defineClassComponent = (
-  module: ComponentEventHandlerClass<ReactIncomingEvent> | LazyComponentEventHandlerClass<ReactIncomingEvent>,
-  options: Pick<MetaComponentEventHandler<ReactIncomingEvent>, 'lazy' | 'layout'>
-): MetaComponentEventHandler<ReactIncomingEvent> => {
-  return { ...options, isClass: true, isFactory: false, isComponent: true, module }
-}
-
-/**
- * Define a factory component.
- *
- * @param module - The factory component module.
- * @param options - The options for the component.
- * @returns The meta component event handler.
- */
-export const defineFactoryComponent = (
-  module: FactoryComponentEventHandler<ReactIncomingEvent> | LazyFactoryComponentEventHandler<ReactIncomingEvent>,
-  options: Pick<MetaComponentEventHandler<ReactIncomingEvent>, 'lazy' | 'layout'>
-): MetaComponentEventHandler<ReactIncomingEvent> => {
-  return { ...options, isClass: false, isFactory: true, isComponent: true, module }
 }
 
 /**

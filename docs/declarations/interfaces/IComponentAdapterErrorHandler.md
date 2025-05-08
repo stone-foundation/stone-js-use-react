@@ -6,7 +6,7 @@
 
 # Interface: IComponentAdapterErrorHandler\<OutgoingResponseType\>
 
-Defined in: [use-react/src/declarations.ts:275](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L275)
+Defined in: [use-react/src/declarations.ts:278](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L278)
 
 Represents an Adapter component error handler.
 
@@ -22,7 +22,7 @@ The type representing the outgoing response.
 
 > `optional` **handle**: [`FunctionalAdapterErrorHandler`](../type-aliases/FunctionalAdapterErrorHandler.md)\<`OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:278](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L278)
+Defined in: [use-react/src/declarations.ts:281](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L281)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [use-react/src/declarations.ts:278](https://github.com/stonemjs/use-
 
 > **render**: (`context`) => `unknown`
 
-Defined in: [use-react/src/declarations.ts:279](https://github.com/stonemjs/use-react/blob/27c0c592da81eceb639bfca4a4a8f24a448ad89c/src/declarations.ts#L279)
+Defined in: [use-react/src/declarations.ts:282](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L282)
 
 #### Parameters
 
