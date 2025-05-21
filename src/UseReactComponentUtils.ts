@@ -1,30 +1,31 @@
 import {
+  Laziable,
   IBlueprint,
   isNotEmpty,
   isFunctionModule,
   isMetaClassModule,
-  isMetaFactoryModule
+  isMetaFactoryModule,
+  AdapterErrorContext
 } from '@stone-js/core'
 import {
+  IPage,
+  MetaPage,
+  PageType,
+  PageClass,
+  IErrorPage,
+  IPageLayout,
+  FactoryPage,
+  MetaErrorPage,
+  MetaPageLayout,
+  PageLayoutClass,
   StoneContextType,
+  FactoryPageLayout,
+  IAdapterErrorPage,
   ReactIncomingEvent,
-  IComponentErrorHandler,
-  MetaComponentErrorHandler,
-  LazyComponentErrorHandler,
-  ComponentErrorHandlerClass,
-  FactoryComponentErrorHandler,
-  IComponentAdapterErrorHandler,
-  MetaComponentAdapterErrorHandler,
-  ComponentAdapterErrorHandlerClass,
-  FactoryComponentAdapterErrorHandler
+  MetaAdapterErrorPage,
+  AdapterErrorPageClass,
+  FactoryAdapterErrorPage
 } from './declarations'
-import {
-  IComponentEventHandler,
-  MetaComponentEventHandler,
-  LazyComponentEventHandler,
-  ComponentEventHandlerClass,
-  FactoryComponentEventHandler
-} from '@stone-js/router'
 import { jsx } from 'react/jsx-runtime'
 import { ElementType, ReactNode } from 'react'
 import { StonePage } from './components/StonePage'
@@ -54,7 +55,7 @@ export const buildAppComponent = async (
   error?: any
 ): Promise<ReactNode> => {
   const componentElement = await buildPageComponent(event, container, component, data, statusCode, error)
-  const layoutElement = await buildLayoutComponent(event, container, componentElement, layout, data, statusCode, error)
+  const layoutElement = await buildLayoutComponent(container, componentElement, layout)
   const context: StoneContextType = { event, container, data }
   const children = layoutElement ?? componentElement
 
@@ -67,35 +68,29 @@ export const buildAppComponent = async (
  * Or get the default layout defined by the user.
  * If not defined, return undefined.
  *
- * @param event - ReactIncomingEvent
- * @param container - Service Container
+ * @param container - Service Container.
  * @param children - The children to render.
  * @param layoutName - The layout name.
- * @param data - The data to pass to the layout.
  * @returns The resolved layout element.
  */
 export const buildLayoutComponent = async (
-  event: ReactIncomingEvent,
   container: Container,
   children: ReactNode,
-  layoutName?: unknown,
-  data?: any,
-  statusCode?: number,
-  error?: any
+  layoutName?: unknown
 ): Promise<ReactNode | undefined> => {
   const metavalue = container
     .make<IBlueprint>('blueprint')
-    .get<MetaComponentEventHandler<ReactIncomingEvent>>(
+    .get<MetaPageLayout>(
       `stone.useReact.layout.${String(layoutName)}`
   )
 
-  const handler = await resolveComponentEventHandler(container, metavalue)
-  const componentType = isNotEmpty<IComponentEventHandler<ReactIncomingEvent>>(handler)
+  const handler = await resolveComponent(container, metavalue)
+  const componentType = isNotEmpty<IPageLayout>(handler)
     ? handler.render.bind(handler)
     : undefined
 
   if (isNotEmpty<ElementType>(componentType)) {
-    return jsx(componentType, { event, container, data, statusCode, error, children })
+    return jsx(componentType, { container, children })
   }
 }
 
@@ -131,49 +126,52 @@ export const buildPageComponent = (
  * This error handler is different from the kernel error handler.
  * Because there is no container at adapter level.
  *
+ * @param blueprint - The blueprint.
+ * @param context - The context of the adapter.
  * @param statusCode - The status code of the error.
  * @param error - The error object.
- * @param blueprint - The blueprint.
  * @returns The resolved layout element.
  */
-export const buildAdapterErrorComponent = async (
+export const buildAdapterErrorComponent = async <RawEventType, RawResponseType, ExecutionContextType>(
   blueprint: IBlueprint,
+  context: AdapterErrorContext<RawEventType, RawResponseType, ExecutionContextType>,
   statusCode: number,
   error: any
 ): Promise<ReactNode | undefined> => {
-  const handlerMetavalue = blueprint.get<MetaComponentAdapterErrorHandler>(
+  const handlerMetavalue = blueprint.get<MetaAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>>(
     `stone.useReact.adapterErrorHandlers.${String(error?.name ?? 'default')}`
   )
-  const layoutMetavalue = blueprint.get<MetaComponentEventHandler<ReactIncomingEvent>>(
+  const layoutMetavalue = blueprint.get<MetaPageLayout>(
     `stone.useReact.layout.${String(handlerMetavalue?.layout)}`
   )
 
-  let handler: (IComponentAdapterErrorHandler | undefined)
-  let layoutHandler: (IComponentEventHandler<ReactIncomingEvent> | undefined)
+  let layoutHandler: (IPageLayout | undefined)
+  let handler: (IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType> | undefined)
 
-  if (isMetaClassModule<ComponentAdapterErrorHandlerClass>(handlerMetavalue)) {
+  if (isMetaClassModule<AdapterErrorPageClass<RawEventType, RawResponseType, ExecutionContextType>>(handlerMetavalue)) {
     handler = new handlerMetavalue.module.prototype.constructor({ blueprint })
-  } else if (isMetaFactoryModule<FactoryComponentAdapterErrorHandler>(handlerMetavalue)) {
+  } else if (isMetaFactoryModule<FactoryAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>>(handlerMetavalue)) {
     handler = handlerMetavalue.module({ blueprint })
   }
 
-  if (isMetaClassModule<ComponentEventHandlerClass<ReactIncomingEvent>>(layoutMetavalue)) {
+  if (isMetaClassModule<PageLayoutClass>(layoutMetavalue)) {
     layoutHandler = new layoutMetavalue.module.prototype.constructor({ blueprint })
-  } else if (isMetaFactoryModule<FactoryComponentEventHandler<ReactIncomingEvent>>(layoutMetavalue)) {
+  } else if (isMetaFactoryModule<FactoryPageLayout>(layoutMetavalue)) {
     layoutHandler = layoutMetavalue.module({ blueprint })
   }
 
-  const data: any = await handler?.handle?.(error)
+  await handler?.handle?.(error, context)
+
   const componentType = handler?.render.bind(handler) as (ElementType | undefined)
   const layoutType = layoutHandler?.render.bind(layoutHandler) as (ElementType | undefined)
 
   if (isNotEmpty<ElementType>(componentType) && isNotEmpty<ElementType>(layoutType)) {
-    const children = jsx(componentType, { blueprint, data, error, statusCode })
-    return jsx(layoutType, { blueprint, data, error, statusCode, children })
+    const children = jsx(componentType, { blueprint, error, statusCode })
+    return jsx(layoutType, { blueprint, children })
   } else if (isNotEmpty<ElementType>(componentType)) {
-    return jsx(componentType, { blueprint, data, error, statusCode })
+    return jsx(componentType, { blueprint, error, statusCode })
   } else {
-    return jsx(StoneError, { blueprint, data, error, statusCode })
+    return jsx(StoneError, { blueprint, error, statusCode })
   }
 }
 
@@ -186,50 +184,22 @@ export const buildAdapterErrorComponent = async (
  * @param metaComponent - The meta component event handler.
  * @returns The resolved element type.
  */
-export const resolveComponentEventHandler = async (
+export const resolveComponent = async <T = IPage<ReactIncomingEvent> | IErrorPage<ReactIncomingEvent> | IPageLayout>(
   container: Container,
-  metaComponent?: MetaComponentEventHandler<ReactIncomingEvent>
-): Promise<IComponentEventHandler<ReactIncomingEvent> | undefined> => {
+  metaComponent?: MetaPage<ReactIncomingEvent> | MetaErrorPage<ReactIncomingEvent> | MetaPageLayout
+): Promise<T | undefined> => {
   if (
     metaComponent?.lazy === true &&
-    isFunctionModule<LazyComponentEventHandler<ReactIncomingEvent>>(metaComponent?.module)
+    isFunctionModule<Laziable<PageType<ReactIncomingEvent>>>(metaComponent?.module)
   ) {
     metaComponent.lazy = false
     metaComponent.module = await metaComponent.module()
   }
 
-  if (isMetaClassModule<ComponentEventHandlerClass<ReactIncomingEvent>>(metaComponent)) {
-    return container.resolve<IComponentEventHandler<ReactIncomingEvent>>(metaComponent.module)
-  } else if (isMetaFactoryModule<FactoryComponentEventHandler<ReactIncomingEvent>>(metaComponent)) {
-    return metaComponent.module(container)
-  }
-}
-
-/**
- * Resolve the error handler for the component.
- *
- * Can also resolve dynamically loaded components.
- *
- * @param container - The service container.
- * @param metaComponent - The meta component error handler.
- * @returns The resolved error handler.
- */
-export const resolveComponentErrorHandler = async (
-  container: Container,
-  metaComponent?: MetaComponentErrorHandler<ReactIncomingEvent>
-): Promise<IComponentErrorHandler<ReactIncomingEvent> | undefined> => {
-  if (
-    metaComponent?.lazy === true &&
-    isFunctionModule<LazyComponentErrorHandler<ReactIncomingEvent>>(metaComponent?.module)
-  ) {
-    metaComponent.lazy = false
-    metaComponent.module = await metaComponent.module()
-  }
-
-  if (isMetaClassModule<ComponentErrorHandlerClass<ReactIncomingEvent>>(metaComponent)) {
-    return container.resolve<IComponentErrorHandler<ReactIncomingEvent>>(metaComponent.module)
-  } else if (isMetaFactoryModule<FactoryComponentErrorHandler<ReactIncomingEvent>>(metaComponent)) {
-    return metaComponent.module(container)
+  if (isMetaClassModule<PageClass<ReactIncomingEvent>>(metaComponent)) {
+    return container.resolve<IPage<ReactIncomingEvent>>(metaComponent.module) as T
+  } else if (isMetaFactoryModule<FactoryPage<ReactIncomingEvent>>(metaComponent)) {
+    return metaComponent.module(container) as T
   }
 }
 
@@ -302,4 +272,13 @@ export const isClient = (): boolean => !isServer()
 export const htmlTemplate = async (blueprint: IBlueprint): Promise<string> => {
   const path = blueprint.get<string>('stone.useReact.htmlTemplatePath', './template.mjs')
   return await import(/* @vite-ignore */path).then(v => Object.values<string>(v)[0])
+}
+
+/**
+ * Determine if the application is running on the server side.
+ *
+ * @returns True if the application is running on the server side, false otherwise.
+ */
+export function isSSR (): boolean {
+  return import.meta.env.SSR || typeof window === 'undefined'
 }

@@ -1,10 +1,9 @@
 import {
+  Logger,
   ILogger,
   IBlueprint,
-  LoggerResolver,
   AdapterErrorContext,
   IAdapterErrorHandler,
-  defaultLoggerResolver,
   AdapterEventBuilderType
 } from '@stone-js/core'
 import { renderToString } from 'react-dom/server'
@@ -34,7 +33,7 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
    */
   constructor ({ blueprint }: UseReactServerErrorHandlerOptions) {
     this.blueprint = blueprint
-    this.logger = blueprint.get<LoggerResolver>('stone.logger.resolver', defaultLoggerResolver)(blueprint)
+    this.logger = Logger.getInstance()
   }
 
   /**
@@ -53,8 +52,8 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
     return context
       .rawResponseBuilder
       .add('statusCode', error.statusCode ?? 500)
-      .add('body', await this.getErrorBody(error))
       .add('headers', new Headers({ 'Content-Type': 'text/html' }))
+      .add('body', await this.getErrorBody(error, context))
   }
 
   /**
@@ -63,10 +62,10 @@ export class UseReactServerErrorHandler implements IAdapterErrorHandler<unknown,
    * @param error - The error to handle.
    * @returns The error body.
   */
-  private async getErrorBody (error: any): Promise<string> {
+  private async getErrorBody (error: any, context: AdapterErrorContext<unknown, unknown, unknown>): Promise<string> {
     const statusCode = error.statusCode ?? 500
     const template = await htmlTemplate(this.blueprint)
-    const ClientApp = await buildAdapterErrorComponent(this.blueprint, statusCode, error)
+    const ClientApp = await buildAdapterErrorComponent(this.blueprint, context, statusCode, error)
 
     return template.replace('<!--app-html-->', renderToString(ClientApp))
   }

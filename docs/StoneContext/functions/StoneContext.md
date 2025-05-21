@@ -8,7 +8,7 @@
 
 > **StoneContext**(`props`): `ReactNode`
 
-Defined in: [use-react/src/StoneContext.ts:8](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/StoneContext.ts#L8)
+Defined in: [use-react/src/StoneContext.ts:8](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/StoneContext.ts#L8)
 
 Stone context.
 Usefull to pass data to the components.

@@ -1,6 +1,5 @@
-import { ReactIncomingEvent } from './declarations'
 import { UseReactError } from './errors/UseReactError'
-import { MetaComponentEventHandler } from '@stone-js/router'
+import { MetaPage, ReactIncomingEvent } from './declarations'
 import { IBlueprint, IEventHandler, isEmpty } from '@stone-js/core'
 
 /**
@@ -14,7 +13,7 @@ import { IBlueprint, IEventHandler, isEmpty } from '@stone-js/core'
  */
 export class UseReactEventHandler<
   IncomingEventType extends ReactIncomingEvent = ReactIncomingEvent
-> implements IEventHandler<IncomingEventType, MetaComponentEventHandler<IncomingEventType>> {
+> implements IEventHandler<IncomingEventType, MetaPage<IncomingEventType>> {
   private readonly blueprint: IBlueprint
 
   /**
@@ -31,7 +30,7 @@ export class UseReactEventHandler<
    *
    * @returns The outgoing response.
    */
-  handle (): MetaComponentEventHandler<IncomingEventType> {
+  handle (): MetaPage<IncomingEventType> {
     return this.getComponentEventHandler()
   }
 
@@ -41,8 +40,8 @@ export class UseReactEventHandler<
    * @returns The component event handler.
    * @throws {UseReactError} If the component event handler is missing.
    */
-  private getComponentEventHandler (): MetaComponentEventHandler<IncomingEventType> {
-    const handler = this.blueprint.get<MetaComponentEventHandler<IncomingEventType>>(
+  private getComponentEventHandler (): MetaPage<IncomingEventType> {
+    const handler = this.blueprint.get<MetaPage<IncomingEventType>>(
       'stone.useReact.componentEventHandler'
     )
 

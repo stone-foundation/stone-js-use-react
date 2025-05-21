@@ -1,13 +1,24 @@
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
-import { HeadContext, Router } from '@stone-js/router'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
+import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext, Router } from '@stone-js/router'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
-import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint } from '@stone-js/core'
+import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable } from '@stone-js/core'
 
 // Export types
-export { IComponentEventHandler, HeadContext } from '@stone-js/router'
+export { HeadContext } from '@stone-js/router'
+
+/**
+ * The type representing a Snapshot.
+ * An object that represents the state of the application at a given time.
+*/
+export type ISnapshot = Config
+
+/**
+ * Router for React.
+*/
+export type IRouter = Router<ReactIncomingEvent, ReactOutgoingResponse>
 
 /**
  * Headers type for React.
@@ -42,16 +53,16 @@ export interface ReactOutgoingResponseOptions extends OutgoingResponseOptions {
 }
 
 /**
+ * UseReactHookName Type.
+ */
+export type UseReactHookName = 'onPreparingPage'
+
+/**
  * HookName Type.
  *
  * extends Core HookName.
  */
 export type HookName = BaseHookName | UseReactHookName
-
-/**
- * UseReactHookName Type.
- */
-export type UseReactHookName = 'onPreparingPage'
 
 /**
  * Use React Hook Listener Context.
@@ -82,15 +93,35 @@ export interface UseReactHookType {
 }
 
 /**
- * Router for React.
-*/
-export type IRouter = Router<ReactIncomingEvent, ReactOutgoingResponse>
+ * Options for configuring the `Page` decorator.
+ * Extends `PageRouteDefinition` but excludes the `methods` property,
+ * as it is predefined as `'GET'` by the decorator.
+ */
+export interface PageOptions extends DecoratorPageRouteDefinition {
+  layout?: string
+  headers?: HeadersType
+}
 
 /**
- * The type representing a Snapshot.
- * An object that represents the state of the application at a given time.
-*/
-export type ISnapshot = Config
+ * Options for configuring the `PageLayout` decorator.
+ */
+export interface PageLayoutOptions {
+  name?: string | 'default'
+}
+
+/**
+ * Options for configuring the `ErrorPage` decorator.
+ */
+export interface ErrorPageOptions extends ErrorHandlerOptions {
+  layout?: string
+}
+
+/**
+ * Options for configuring the `AdapterErrorPage` decorator.
+ */
+export interface AdapterErrorPageOptions extends AdapterErrorHandlerOptions {
+  layout?: string
+}
 
 /**
  * Browser Adapter Context for React.
@@ -137,84 +168,207 @@ export interface StoneContextType {
 }
 
 /**
- * React render page options.
+ * React page render context.
  */
-export interface RenderContext<TData = any> {
+export interface PageRenderContext<TData = any> {
   data?: TData
+  statusCode?: number
   container: IContainer
   event: ReactIncomingEvent
 }
 
 /**
- * React render page layout options.
+ * React page head context.
  */
-export interface RenderLayoutContext<TChildren = ReactNode, UData = any> extends RenderContext<UData> {
-  children: TChildren
+export interface PageHeadContext<TData = any> {
+  data?: TData
+  statusCode?: number
+  event: ReactIncomingEvent
 }
 
 /**
- * React render page error options.
- */
-export interface RenderErrorContext<TError = any, UData = any> extends RenderContext<UData> {
-  error: TError
-  statusCode: number
-}
-
-/**
- * Represents a component error handler class.
+ * Represents a page class.
  *
  * @template IncomingEventType - The type representing the incoming event.
  * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export type ComponentErrorHandlerClass<
+export type PageClass<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
-> = new (...args: any[]) => IComponentErrorHandler<IncomingEventType, OutgoingResponseType>
+> = new (...args: any[]) => IPage<IncomingEventType, OutgoingResponseType>
 
 /**
- * Represents a component error handler.
+ * Represents a page.
  *
  * @template IncomingEventType - The type representing the incoming event.
  * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export interface IComponentErrorHandler<
+export interface IPage<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > {
-  head?: (options: any) => Promiseable<HeadContext>
-  handle?: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>
-  render: (context: RenderErrorContext) => Promiseable<unknown>
+  render: <TData = any>(context: PageRenderContext<TData>) => ReactNode
+  handle?: FunctionalEventHandler<IncomingEventType, OutgoingResponseType>
+  head?: <TData = any>(context: PageHeadContext<TData>) => Promiseable<HeadContext>
 }
 
 /**
- * Represents a factory component error handler.
+ * Represents a factory page.
  *
  * @template IncomingEventType - The type representing the incoming event.
  * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export type FactoryComponentErrorHandler<
+export type FactoryPage<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
-> = (container?: IContainer | any) => IComponentErrorHandler<IncomingEventType, OutgoingResponseType>
+> = (container?: IContainer | any) => IPage<IncomingEventType, OutgoingResponseType>
 
 /**
- * Represents a component error handler type.
+ * Represents a page type.
  *
  * @template IncomingEventType - The type representing the incoming event.
  * @template OutgoingResponseType - The type representing the outgoing response.
  */
-export type ComponentErrorHandlerType<
-  IncomingEventType extends ReactIncomingEvent,
-  OutgoingResponseType = unknown
-> = ComponentErrorHandlerClass<IncomingEventType, OutgoingResponseType> | FactoryComponentErrorHandler<IncomingEventType, OutgoingResponseType>
+export type PageType<IncomingEventType extends ReactIncomingEvent, OutgoingResponseType = unknown> =
+  | PageClass<IncomingEventType, OutgoingResponseType>
+  | FactoryPage<IncomingEventType, OutgoingResponseType>
 
 /**
- * Represents a meta component error handler.
+ * Represents a meta page.
  *
  * @template IncomingEventType - The type representing the incoming event.
  * @template OutgoingResponseType - The type representing the outgoing response.
  */
-export interface MetaComponentErrorHandler<
+export interface MetaPage<
+  IncomingEventType extends ReactIncomingEvent,
+  OutgoingResponseType = unknown
+> {
+  lazy?: boolean
+  layout?: unknown
+  isClass?: boolean
+  isFactory?: boolean
+  isComponent?: boolean
+  module: PageType<IncomingEventType, OutgoingResponseType> | Laziable<PageType<IncomingEventType, OutgoingResponseType>>
+}
+
+/**
+ * React render page layout options.
+ */
+export interface PageLayoutRenderContext {
+  children: ReactNode
+  container: IContainer
+}
+
+/**
+ * React render page layout options.
+ */
+export interface AdapterPageLayoutRenderContext {
+  children: ReactNode
+  blueprint: IBlueprint
+}
+
+/**
+ * Represents a Page layout class.
+*/
+export type PageLayoutClass = new (...args: any[]) => IPageLayout
+
+/**
+ * Represents a Page layout.
+*/
+export interface IPageLayout {
+  head?: () => Promiseable<HeadContext>
+  render: (context: PageLayoutRenderContext | AdapterPageLayoutRenderContext) => ReactNode
+}
+
+/**
+ * Represents a factory page layout.
+*/
+export type FactoryPageLayout = (container?: IContainer | any) => IPageLayout
+
+/**
+ * Represents a page layout type.
+ */
+export type PageLayoutType = PageLayoutClass | FactoryPageLayout
+
+/**
+ * Represents a meta page layout.
+ */
+export interface MetaPageLayout {
+  lazy?: boolean
+  isClass?: boolean
+  isFactory?: boolean
+  module: PageLayoutType | Laziable<PageLayoutType>
+}
+
+/**
+ * React error page render context.
+ */
+export interface ErrorPageRenderContext<TError = any, UData = any> extends PageRenderContext<UData> {
+  error: TError
+}
+
+/**
+ * React error page head context.
+ */
+export interface ErrorPageHeadContext<TError = any, UData = any> extends PageHeadContext<UData> {
+  error: TError
+}
+
+/**
+ * Represents an error page class.
+ *
+ * @template IncomingEventType - The type representing the incoming event.
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export type ErrorPageClass<
+  IncomingEventType extends ReactIncomingEvent,
+  OutgoingResponseType = unknown
+> = new (...args: any[]) => IErrorPage<IncomingEventType, OutgoingResponseType>
+
+/**
+ * Represents an error page.
+ *
+ * @template IncomingEventType - The type representing the incoming event.
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export interface IErrorPage<
+  IncomingEventType extends ReactIncomingEvent,
+  OutgoingResponseType = unknown
+> {
+  handle?: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>
+  render: <TError = any, UData = any>(context: ErrorPageRenderContext<TError, UData>) => ReactNode
+  head?: <TError = any, UData = any>(context: ErrorPageHeadContext<TError, UData>) => Promiseable<HeadContext>
+}
+
+/**
+ * Represents a factory error page.
+ *
+ * @template IncomingEventType - The type representing the incoming event.
+ * @template OutgoingResponseType - The type representing the outgoing response.
+*/
+export type FactoryErrorPage<
+  IncomingEventType extends ReactIncomingEvent,
+  OutgoingResponseType = unknown
+> = (container?: IContainer | any) => IErrorPage<IncomingEventType, OutgoingResponseType>
+
+/**
+ * Represents an error page type.
+ *
+ * @template IncomingEventType - The type representing the incoming event.
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ */
+export type ErrorPageType<
+  IncomingEventType extends ReactIncomingEvent,
+  OutgoingResponseType = unknown
+> = ErrorPageClass<IncomingEventType, OutgoingResponseType> | FactoryErrorPage<IncomingEventType, OutgoingResponseType>
+
+/**
+ * Represents a meta error page.
+ *
+ * @template IncomingEventType - The type representing the incoming event.
+ * @template OutgoingResponseType - The type representing the outgoing response.
+ */
+export interface MetaErrorPage<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > {
@@ -223,104 +377,66 @@ export interface MetaComponentErrorHandler<
   layout?: unknown
   isClass?: boolean
   isFactory?: boolean
-  module: ComponentErrorHandlerType<IncomingEventType, OutgoingResponseType> | LazyComponentErrorHandler<IncomingEventType, OutgoingResponseType>
+  module: ErrorPageType<IncomingEventType, OutgoingResponseType> | Laziable<ErrorPageType<IncomingEventType, OutgoingResponseType>>
 }
-
-/**
- * Represents a lazy component error handler.
- *
- * @template IncomingEventType - The type representing the incoming event.
- * @template OutgoingResponseType - The type representing the outgoing response.
- */
-export type LazyComponentErrorHandler<
-  IncomingEventType extends ReactIncomingEvent,
-  OutgoingResponseType = unknown
-> = () => Promise<ComponentErrorHandlerType<IncomingEventType, OutgoingResponseType>>
 
 /** ****** Adapter Error page *************/
 /**
  * React Adapter render page error options.
  */
-export interface RenderAdapterErrorContext<TError = any, UData = any> {
-  data?: UData
+export interface AdapterErrorPageRenderContext<TError = any> {
   error: TError
   statusCode: number
   blueprint: IBlueprint
 }
 
 /**
- * FunctionalAdapterErrorHandler Type.
- *
- * Represents a function that handles errors and returns responses.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
- * @param error - The error to handle.
- * @returns The outgoing response.
- */
-export type FunctionalAdapterErrorHandler<
-OutgoingResponseType = unknown
-> = (error: any) => Promiseable<OutgoingResponseType>
-
-/**
  * Represents an Adapter component error handler class.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export type ComponentAdapterErrorHandlerClass<
-  OutgoingResponseType = unknown
-> = new (...args: any[]) => IComponentAdapterErrorHandler<OutgoingResponseType>
+export type AdapterErrorPageClass<
+  RawEventType, RawResponseType, ExecutionContextType
+> = new (...args: any[]) => IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>
 
 /**
  * Represents an Adapter component error handler.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export interface IComponentAdapterErrorHandler<
-  OutgoingResponseType = unknown
+export interface IAdapterErrorPage<
+  RawEventType, RawResponseType, ExecutionContextType
 > {
-  handle?: FunctionalAdapterErrorHandler<OutgoingResponseType>
-  render: (context: RenderAdapterErrorContext) => Promiseable<unknown>
+  handle?: FunctionalAdapterErrorHandler<RawEventType, RawResponseType, ExecutionContextType>
+  render: <TError = any>(context: AdapterErrorPageRenderContext<TError>) => ReactNode
 }
 
 /**
  * Represents an Adapter factory component error handler.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
 */
-export type FactoryComponentAdapterErrorHandler<
-  OutgoingResponseType = unknown
-> = (container?: IContainer | any) => IComponentAdapterErrorHandler<OutgoingResponseType>
+export type FactoryAdapterErrorPage<
+  RawEventType, RawResponseType, ExecutionContextType
+> = (container?: IContainer | any) => IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>
 
 /**
  * Represents an Adapter component error handler type.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
  */
-export type ComponentAdapterErrorHandlerType<
-  OutgoingResponseType = unknown
-> = ComponentAdapterErrorHandlerClass<OutgoingResponseType> | FactoryComponentAdapterErrorHandler<OutgoingResponseType>
+export type AdapterErrorPageType<
+  RawEventType, RawResponseType, ExecutionContextType
+> =
+  | AdapterErrorPageClass<RawEventType, RawResponseType, ExecutionContextType>
+  | FactoryAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>
 
 /**
  * Represents an Adapter meta component error handler.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
  */
-export interface MetaComponentAdapterErrorHandler<
-  OutgoingResponseType = unknown
+export interface MetaAdapterErrorPage<
+  RawEventType, RawResponseType, ExecutionContextType
 > {
   error?: any
   lazy?: boolean
   layout?: unknown
+  platform?: string
   isClass?: boolean
   isFactory?: boolean
-  module: ComponentAdapterErrorHandlerType<OutgoingResponseType> | LazyComponentAdapterErrorHandler<OutgoingResponseType>
+  adapterAlias?: string
+  module:
+  | AdapterErrorPageType<RawEventType, RawResponseType, ExecutionContextType>
+  | Laziable<AdapterErrorPageType<RawEventType, RawResponseType, ExecutionContextType>>
 }
-
-/**
- * Represents an Adapter lazy component error handler.
- *
- * @template OutgoingResponseType - The type representing the outgoing response.
- */
-export type LazyComponentAdapterErrorHandler<
-  OutgoingResponseType = unknown
-> = () => Promise<ComponentAdapterErrorHandlerType<OutgoingResponseType>>

@@ -6,10 +6,6 @@
 
 # decorators/PageLayout
 
-## Interfaces
-
-- [PageLayoutOptions](interfaces/PageLayoutOptions.md)
-
 ## Functions
 
 - [PageLayout](functions/PageLayout.md)

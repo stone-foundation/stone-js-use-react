@@ -6,7 +6,9 @@
 
 ## Modules
 
-- [BlueprintUtils](BlueprintUtils/README.md)
+- [blueprint/AdapterUtils](blueprint/AdapterUtils/README.md)
+- [blueprint/BlueprintUtils](blueprint/BlueprintUtils/README.md)
+- [blueprint/KernelUtils](blueprint/KernelUtils/README.md)
 - [constants](constants/README.md)
 - [declarations](declarations/README.md)
 - [decorators/AdapterErrorPage](decorators/AdapterErrorPage/README.md)
@@ -16,6 +18,7 @@
 - [decorators/Page](decorators/Page/README.md)
 - [decorators/PageLayout](decorators/PageLayout/README.md)
 - [decorators/PageStatus](decorators/PageStatus/README.md)
+- [decorators/Snapshot](decorators/Snapshot/README.md)
 - [decorators/UseReact](decorators/UseReact/README.md)
 - [DomUtils](DomUtils/README.md)
 - [errors/UseReactError](errors/UseReactError/README.md)
@@ -31,3 +34,4 @@
 - [UseReactPageHooks](UseReactPageHooks/README.md)
 - [UseReactResponse](UseReactResponse/README.md)
 - [UseReactServerErrorHandler](UseReactServerErrorHandler/README.md)
+- [UseReactServiceProvider](UseReactServiceProvider/README.md)

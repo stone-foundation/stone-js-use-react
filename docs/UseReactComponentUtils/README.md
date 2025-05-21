@@ -17,6 +17,6 @@
 - [hydrateReactApp](functions/hydrateReactApp.md)
 - [isClient](functions/isClient.md)
 - [isServer](functions/isServer.md)
+- [isSSR](functions/isSSR.md)
 - [renderReactApp](functions/renderReactApp.md)
-- [resolveComponentErrorHandler](functions/resolveComponentErrorHandler.md)
-- [resolveComponentEventHandler](functions/resolveComponentEventHandler.md)
+- [resolveComponent](functions/resolveComponent.md)

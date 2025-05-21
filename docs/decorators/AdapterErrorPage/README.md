@@ -6,10 +6,6 @@
 
 # decorators/AdapterErrorPage
 
-## Interfaces
-
-- [AdapterErrorPageOptions](interfaces/AdapterErrorPageOptions.md)
-
 ## Functions
 
 - [AdapterErrorPage](functions/AdapterErrorPage.md)

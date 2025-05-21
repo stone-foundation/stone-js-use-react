@@ -6,7 +6,7 @@
 
 # Class: ReactRuntime
 
-Defined in: use-react/src/ReactRuntime.ts:23
+Defined in: [use-react/src/ReactRuntime.ts:22](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L22)
 
 Class representing a ReactRuntime.
 
@@ -19,7 +19,7 @@ including create snapshots and managing errors.
 
 > **new ReactRuntime**(`options`): [`ReactRuntime`](ReactRuntime.md)
 
-Defined in: use-react/src/ReactRuntime.ts:33
+Defined in: [use-react/src/ReactRuntime.ts:39](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L39)
 
 Create a ReactRuntime.
 
@@ -35,13 +35,23 @@ ReactRuntime options.
 
 [`ReactRuntime`](ReactRuntime.md)
 
+## Properties
+
+### instance?
+
+> `static` `optional` **instance**: [`ReactRuntime`](ReactRuntime.md)
+
+Defined in: [use-react/src/ReactRuntime.ts:32](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L32)
+
+The ReactRuntime instance.
+
 ## Methods
 
 ### head()
 
 > **head**(`value`): `void`
 
-Defined in: use-react/src/ReactRuntime.ts:70
+Defined in: [use-react/src/ReactRuntime.ts:76](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L76)
 
 Set html head tags.
 
@@ -65,7 +75,7 @@ The head context to set.
 
 > **snapshot**\<`T`\>(`key`, `handler`): `Promise`\<`T`\>
 
-Defined in: use-react/src/ReactRuntime.ts:50
+Defined in: [use-react/src/ReactRuntime.ts:56](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L56)
 
 Create a snapshot.
 
@@ -103,7 +113,7 @@ The snapshot value.
 
 > **throwError**(`error`, `statusCode`): `Promise`\<`void`\>
 
-Defined in: use-react/src/ReactRuntime.ts:85
+Defined in: [use-react/src/ReactRuntime.ts:91](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L91)
 
 Throw an error.
 

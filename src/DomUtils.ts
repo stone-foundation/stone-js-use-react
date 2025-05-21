@@ -12,10 +12,10 @@ export const STONE_DOM_ATTR = 'data-stone-head'
  * @param document - The document object.
  * @param meta - The meta tag descriptor.
  */
-export const applyMeta = (document: Document, meta: HTMLMetaDescriptor) => {
-  const selector = meta.name
+export const applyMeta = (document: Document, meta: HTMLMetaDescriptor): void => {
+  const selector = isNotEmpty<string>(meta.name)
     ? `meta[name="${meta.name}"]`
-    : meta.property
+    : isNotEmpty<string>(meta.property)
       ? `meta[property="${meta.property}"]`
       : null
 
@@ -28,8 +28,8 @@ export const applyMeta = (document: Document, meta: HTMLMetaDescriptor) => {
     }
   } else {
     const el = document.createElement('meta')
-    if (meta.name) el.setAttribute('name', meta.name)
-    if (meta.property) el.setAttribute('property', meta.property)
+    if (isNotEmpty<string>(meta.name)) el.setAttribute('name', meta.name)
+    if (isNotEmpty<string>(meta.property)) el.setAttribute('property', meta.property)
     el.setAttribute('content', meta.content)
     el.setAttribute(STONE_DOM_ATTR, '')
     document.head.appendChild(el)
@@ -42,7 +42,7 @@ export const applyMeta = (document: Document, meta: HTMLMetaDescriptor) => {
  * @param document - The document object.
  * @param link - The link tag descriptor.
  */
-const applyLink = (document: Document, link: HTMLLinkDescriptor) => {
+const applyLink = (document: Document, link: HTMLLinkDescriptor): void => {
   const selector = `link[rel="${link.rel}"][href="${link.href}"][${STONE_DOM_ATTR}]`
   const existing = document.head.querySelector<HTMLLinkElement>(selector)
 
@@ -76,7 +76,7 @@ const applyLink = (document: Document, link: HTMLLinkDescriptor) => {
  * @param document - The document object.
  * @param script - The script tag descriptor.
  */
-const applyScript = (document: Document, script: HTMLScriptDescriptor) => {
+const applyScript = (document: Document, script: HTMLScriptDescriptor): void => {
   const selector = `script[src="${script.src}"][${STONE_DOM_ATTR}]`
   const existing = document.head.querySelector<HTMLScriptElement>(selector)
 
@@ -120,14 +120,14 @@ const applyScript = (document: Document, script: HTMLScriptDescriptor) => {
  * @param document - The document object.
  * @param style - The style tag descriptor.
  */
-const applyStyle = (document: Document, style: HTMLStyleDescriptor) => {
+const applyStyle = (document: Document, style: HTMLStyleDescriptor): void => {
   const existing = [...document.head.querySelectorAll<HTMLStyleElement>(`style[${STONE_DOM_ATTR}]`)]
     .find(s => s.textContent === style.content)
 
   if (existing == null) {
     const el = document.createElement('style')
-    if (style.type) el.setAttribute('type', style.type)
-    if (style.media) el.setAttribute('media', style.media)
+    if (isNotEmpty<string>(style.type)) el.setAttribute('type', style.type)
+    if (isNotEmpty<string>(style.media)) el.setAttribute('media', style.media)
     el.textContent = style.content
     el.setAttribute(STONE_DOM_ATTR, '')
     document.head.appendChild(el)
@@ -184,7 +184,7 @@ export const applyHeadContextToHtmlString = (context: HeadContext, html: string)
   if (isEmpty(context) || isEmpty(html)) return html
 
   // Replace the existing <title> tag with the new title (if provided)
-  if (context.title) {
+  if (isNotEmpty<string>(context.title)) {
     html = html.replace(
       /<title>.*?<\/title>/i,
       `<title>${escapeHtml(context.title)}</title>`
@@ -234,7 +234,7 @@ export const applyHeadContextToHtmlString = (context: HeadContext, html: string)
   })
 
   // Inject generated tags into the placeholder
-  const headString = parts.join('\n')
+  const headString = parts.join('\n').concat('\n<!--app-head-->')
 
-  return html.replace('<!--app-head-->', headString).concat('\n<!--app-head-->')
+  return html.replace('<!--app-head-->', headString)
 }

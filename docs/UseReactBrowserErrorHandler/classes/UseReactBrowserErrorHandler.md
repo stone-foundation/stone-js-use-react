@@ -6,7 +6,7 @@
 
 # Class: UseReactBrowserErrorHandler
 
-Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:28](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactBrowserErrorHandler.ts#L28)
+Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:27](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactBrowserErrorHandler.ts#L27)
 
 Class representing an UseReactBrowserErrorHandler.
 
@@ -22,7 +22,7 @@ Adapter level error handler for React applications.
 
 > **new UseReactBrowserErrorHandler**(`options`): [`UseReactBrowserErrorHandler`](UseReactBrowserErrorHandler.md)
 
-Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:37](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactBrowserErrorHandler.ts#L37)
+Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:36](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactBrowserErrorHandler.ts#L36)
 
 Create an UseReactBrowserErrorHandler.
 
@@ -44,7 +44,7 @@ UseReactBrowserErrorHandler options.
 
 > **handle**(`error`, `context`): `Promise`\<`AdapterEventBuilderType`\<`unknown`\>\>
 
-Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:49](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactBrowserErrorHandler.ts#L49)
+Defined in: [use-react/src/UseReactBrowserErrorHandler.ts:48](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactBrowserErrorHandler.ts#L48)
 
 Handle an error.
 

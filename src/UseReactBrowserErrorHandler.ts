@@ -1,10 +1,9 @@
 import {
+  Logger,
   ILogger,
   IBlueprint,
-  LoggerResolver,
   AdapterErrorContext,
   IAdapterErrorHandler,
-  defaultLoggerResolver,
   AdapterEventBuilderType
 } from '@stone-js/core'
 import {
@@ -36,7 +35,7 @@ export class UseReactBrowserErrorHandler implements IAdapterErrorHandler<unknown
    */
   constructor ({ blueprint }: UseReactBrowserErrorHandlerOptions) {
     this.blueprint = blueprint
-    this.logger = blueprint.get<LoggerResolver>('stone.logger.resolver', defaultLoggerResolver)(blueprint)
+    this.logger = Logger.getInstance()
   }
 
   /**
@@ -54,7 +53,7 @@ export class UseReactBrowserErrorHandler implements IAdapterErrorHandler<unknown
 
     return context
       .rawResponseBuilder
-      .add('render', async () => await this.renderError(error))
+      .add('render', async () => await this.renderError(error, context))
   }
 
   /**
@@ -63,8 +62,8 @@ export class UseReactBrowserErrorHandler implements IAdapterErrorHandler<unknown
    * @param error - The error to handle.
    * @returns The error body.
    */
-  private async renderError (error: any): Promise<void> {
-    const app = await buildAdapterErrorComponent(this.blueprint, error.statusCode ?? 500, error)
+  private async renderError (error: any, context: AdapterErrorContext<unknown, unknown, unknown>): Promise<void> {
+    const app = await buildAdapterErrorComponent(this.blueprint, context, error.statusCode ?? 500, error)
 
     // Render the component
     renderReactApp(app, this.blueprint)

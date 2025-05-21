@@ -1,35 +1,31 @@
 import {
-  REACT_PAGE_KEY,
-  STONE_REACT_APP_KEY,
-  REACT_PAGE_LAYOUT_KEY,
-  REACT_ERROR_HANDLER_KEY,
-  REACT_ADAPTER_ERROR_HANDLER_KEY
-} from '../decorators/constants'
-import {
   ClassType,
   IBlueprint,
   isNotEmpty,
   Promiseable,
   hasMetadata,
   getMetadata,
-  BlueprintContext,
-  defineErrorHandler,
-  defineClassMiddleware,
-  defineAdapterErrorHandler
+  isMatchedAdapter,
+  BlueprintContext
 } from '@stone-js/core'
+import {
+  REACT_PAGE_KEY,
+  STONE_REACT_APP_KEY,
+  REACT_ERROR_PAGE_KEY,
+  REACT_PAGE_LAYOUT_KEY,
+  REACT_ADAPTER_ERROR_PAGE_KEY
+} from '../decorators/constants'
 import { MetaPipe, NextPipe } from '@stone-js/pipeline'
+import { onPreparingResponse } from '../UseReactPageHooks'
 import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
-import { PageLayoutOptions } from '../decorators/PageLayout'
 import { UseReactEventHandler } from '../UseReactEventHandler'
-import { ErrorPageOptions } from '../decorators/ErrorPage'
-import { onInit, onPreparingResponse } from '../UseReactPageHooks'
 import { UseReactKernelErrorHandler } from '../UseReactKernelErrorHandler'
 import { UseReactServerErrorHandler } from '../UseReactServerErrorHandler'
 import { MetaBrowserResponseMiddleware } from './BrowserResponseMiddleware'
 import { UseReactBrowserErrorHandler } from '../UseReactBrowserErrorHandler'
 import { NODE_CONSOLE_PLATFORM, PageRouteDefinition } from '@stone-js/router'
-import { AdapterErrorPageOptions } from '../decorators/AdapterErrorPage'
-import { MetaCompressionMiddleware, StaticFileMiddleware } from '@stone-js/http-core'
+import { MetaCompressionMiddleware, MetaStaticFileMiddleware } from '@stone-js/http-core'
+import { ErrorPageOptions, AdapterErrorPageOptions, PageLayoutOptions } from '../declarations'
 
 /**
  * Blueprint middleware to dynamically set lifecycle hooks for react.
@@ -50,7 +46,6 @@ export const SetUseReactHooksMiddleware = (
   if (context.blueprint.get<string>('stone.adapter.platform') !== NODE_CONSOLE_PLATFORM) {
     context
       .blueprint
-      .add('stone.lifecycleHooks.onInit', [onInit])
       .add('stone.lifecycleHooks.onPreparingResponse', [onPreparingResponse])
   }
 
@@ -99,24 +94,20 @@ export const SetReactKernelErrorPageMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
   next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
-  context.blueprint.set(
-    'stone.kernel.errorHandlers.default',
-    defineErrorHandler(UseReactKernelErrorHandler, { isClass: true })
-  )
+  context
+    .blueprint
+    .set('stone.kernel.errorHandlers.default', { module: UseReactKernelErrorHandler, isClass: true })
 
   context
     .modules
-    .filter(module => hasMetadata(module, REACT_ERROR_HANDLER_KEY))
+    .filter(module => hasMetadata(module, REACT_ERROR_PAGE_KEY))
     .forEach(module => {
-      const { error, layout } = getMetadata<ClassType, ErrorPageOptions>(module, REACT_ERROR_HANDLER_KEY, { error: 'default' })
+      const { error, layout } = getMetadata<ClassType, ErrorPageOptions>(module, REACT_ERROR_PAGE_KEY, { error: 'default' })
       Array(error).flat().forEach(name => {
         context
           .blueprint
-          .set(`stone.useReact.errorHandlers.${name}`, { isClass: true, layout, module })
-          .set(
-            `stone.kernel.errorHandlers.${name}`,
-            defineErrorHandler(UseReactKernelErrorHandler, { isClass: true })
-          )
+          .set(`stone.useReact.errorHandlers.${name}`, { layout, module, isClass: true })
+          .set(`stone.kernel.errorHandlers.${name}`, { module: UseReactKernelErrorHandler, isClass: true })
       })
     })
 
@@ -143,27 +134,25 @@ export const SetReactAdapterErrorPageMiddleware = (
     ? UseReactServerErrorHandler
     : UseReactBrowserErrorHandler
 
-  context.blueprint.set(
-    'stone.adapter.errorHandlers.default',
-    defineAdapterErrorHandler(UseReactAdapterErrorHandler, { isClass: true })
-  )
+  context
+    .blueprint
+    .set('stone.adapter.errorHandlers.default', { module: UseReactAdapterErrorHandler, isClass: true })
 
   context
     .modules
-    .filter(module => hasMetadata(module, REACT_ADAPTER_ERROR_HANDLER_KEY))
+    .filter(module => hasMetadata(module, REACT_ADAPTER_ERROR_PAGE_KEY))
     .forEach(module => {
-      const { error, layout } = getMetadata<ClassType, AdapterErrorPageOptions>(
-        module, REACT_ADAPTER_ERROR_HANDLER_KEY, { error: 'default' }
+      const { error, layout, adapterAlias, platform } = getMetadata<ClassType, AdapterErrorPageOptions>(
+        module, REACT_ADAPTER_ERROR_PAGE_KEY, { error: 'default' }
       )
-      Array(error).flat().forEach(name => {
-        context
-          .blueprint
-          .set(`stone.useReact.adapterErrorHandlers.${name}`, { isClass: true, layout, module })
-          .set(
-            `stone.adapter.errorHandlers.${name}`,
-            defineAdapterErrorHandler(UseReactAdapterErrorHandler, { isClass: true })
-          )
-      })
+      if (isMatchedAdapter(context.blueprint, platform, adapterAlias)) {
+        Array(error).flat().forEach(name => {
+          context
+            .blueprint
+            .set(`stone.useReact.adapterErrorHandlers.${name}`, { isClass: true, layout, module })
+            .set(`stone.adapter.errorHandlers.${name}`, { module: UseReactAdapterErrorHandler, isClass: true })
+        })
+      }
     })
 
   return next(context)
@@ -187,7 +176,7 @@ export const SetSSRStaticFileMiddleware = async (
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
-    [defineClassMiddleware(StaticFileMiddleware, { priority: 0 })]
+    [MetaStaticFileMiddleware]
   )
 
   return await next(context)
@@ -268,7 +257,7 @@ export const SetReactPageLayoutMiddleware = (
     .modules
     .filter(module => hasMetadata(module, REACT_PAGE_LAYOUT_KEY))
     .forEach(module => {
-      const { name } = getMetadata<ClassType, PageLayoutOptions>(module, REACT_PAGE_LAYOUT_KEY, { name: 'default' })
+      const { name = 'default' } = getMetadata<ClassType, PageLayoutOptions>(module, REACT_PAGE_LAYOUT_KEY, { name: 'default' })
       context.blueprint.set(`stone.useReact.layout.${name}`, { isClass: true, module })
     })
 

@@ -1,17 +1,7 @@
+import { GET } from '@stone-js/router'
 import { REACT_PAGE_KEY } from './constants'
-import { HeadersType } from '../declarations'
-import { DecoratorPageRouteDefinition, GET } from '@stone-js/router'
+import { PageOptions } from '../declarations'
 import { setMetadata, classDecoratorLegacyWrapper, ClassType } from '@stone-js/core'
-
-/**
- * Options for configuring the `Page` decorator.
- * Extends `PageRouteDefinition` but excludes the `methods` property,
- * as it is predefined as `'GET'` by the decorator.
- */
-export interface PageOptions extends DecoratorPageRouteDefinition {
-  layout?: string
-  headers?: HeadersType
-}
 
 /**
  * A class decorator for defining a class as a React Page route action.

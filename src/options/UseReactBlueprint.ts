@@ -1,8 +1,8 @@
 import { MetaReactRuntime } from '../ReactRuntime'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
-import { MetaComponentEventHandler } from '@stone-js/router'
+import { MetaUseReactServiceProvider } from '../UseReactServiceProvider'
 import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
-import { MetaComponentErrorHandler, ReactIncomingEvent, ReactOutgoingResponse } from '../declarations'
+import { MetaAdapterErrorPage, MetaErrorPage, MetaPage, MetaPageLayout, ReactIncomingEvent, ReactOutgoingResponse } from '../declarations'
 
 /**
  * Configuration options for integrating React with Stone.js.
@@ -19,24 +19,24 @@ export interface UseReactConfig {
   htmlTemplatePath?: string
 
   /**
-   * Handles incoming events for the root React component.
-   */
-  componentEventHandler?: MetaComponentEventHandler<ReactIncomingEvent>
-
-  /**
    * A map of layout components with their respective event handlers.
    */
-  layout?: Record<string, MetaComponentEventHandler<ReactIncomingEvent>>
+  layout?: Record<string, MetaPageLayout>
+
+  /**
+   * Handles incoming events for the root React component.
+   */
+  componentEventHandler?: MetaPage<ReactIncomingEvent>
 
   /**
    * A map of error handlers for specific components.
    */
-  errorHandlers?: Record<string, MetaComponentErrorHandler<ReactIncomingEvent>>
+  errorHandlers?: Record<string, MetaErrorPage<ReactIncomingEvent>>
 
   /**
    * A map of error handlers for adapter-level errors.
    */
-  adapterErrorHandlers?: Record<string, MetaComponentErrorHandler<ReactIncomingEvent>>
+  adapterErrorHandlers?: Record<string, MetaAdapterErrorPage<unknown, unknown, unknown>>
 }
 
 /**
@@ -73,6 +73,7 @@ export const useReactBlueprint: UseReactBlueprint = {
     useReact: {
       htmlTemplatePath: './template.mjs'
     },
-    services: [MetaReactRuntime]
+    services: [MetaReactRuntime],
+    providers: [MetaUseReactServiceProvider]
   }
 }

@@ -1,12 +1,12 @@
 import { IErrorHandler, IBlueprint } from '@stone-js/core'
-import { MetaComponentErrorHandler, ReactIncomingEvent } from './declarations'
+import { MetaErrorPage, ReactIncomingEvent } from './declarations'
 
 /**
  * UseReactError response type.
  */
 export type UseReactErrorResponseType = Record<
 'content' | 'statusCode',
-Partial<MetaComponentErrorHandler<ReactIncomingEvent>> | number
+Partial<MetaErrorPage<ReactIncomingEvent>> | number
 >
 
 /**
@@ -36,9 +36,9 @@ UseReactErrorResponseType
    * @returns The outgoing http response.
    */
   public handle (error: any): UseReactErrorResponseType {
-    const metavalue = this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+    const metavalue = this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
       `stone.useReact.errorHandlers.${String(error?.name)}`,
-      this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+      this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
         'stone.useReact.errorHandlers.default',
         {} as any
       )

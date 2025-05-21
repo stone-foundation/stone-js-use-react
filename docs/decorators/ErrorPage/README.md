@@ -6,10 +6,6 @@
 
 # decorators/ErrorPage
 
-## Interfaces
-
-- [ErrorPageOptions](interfaces/ErrorPageOptions.md)
-
 ## Functions
 
 - [ErrorPage](functions/ErrorPage.md)

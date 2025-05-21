@@ -1,6 +1,6 @@
 # Stone.js: Use React
 
-[![npm](https://img.shields.io/npm/l/@stone-js/use-react)](https://opensource.org/licenses/Apache-2.0)
+[![npm](https://img.shields.io/npm/l/@stone-js/browser-core)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/@stone-js/use-react)](https://www.npmjs.com/package/@stone-js/use-react)
 [![npm](https://img.shields.io/npm/dm/@stone-js/use-react)](https://www.npmjs.com/package/@stone-js/use-react)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025)

@@ -6,9 +6,9 @@
 
 # Function: buildLayoutComponent()
 
-> **buildLayoutComponent**(`event`, `container`, `children`, `layoutName`?, `data`?, `statusCode`?, `error`?): `Promise`\<`ReactNode`\>
+> **buildLayoutComponent**(`container`, `children`, `layoutName`?): `Promise`\<`ReactNode`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:77](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactComponentUtils.ts#L77)
+Defined in: [use-react/src/UseReactComponentUtils.ts:76](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L76)
 
 Get response layout in the current route for mutli pages application.
 Or get it from the blueprint configuration for single page application.
@@ -17,17 +17,11 @@ If not defined, return undefined.
 
 ## Parameters
 
-### event
-
-[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)
-
-ReactIncomingEvent
-
 ### container
 
 `Container`
 
-Service Container
+Service Container.
 
 ### children
 
@@ -40,20 +34,6 @@ The children to render.
 `unknown`
 
 The layout name.
-
-### data?
-
-`any`
-
-The data to pass to the layout.
-
-### statusCode?
-
-`number`
-
-### error?
-
-`any`
 
 ## Returns
 

@@ -6,7 +6,7 @@
 
 # Interface: UseReactAppConfig
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:45](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/options/UseReactBlueprint.ts#L45)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:45](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L45)
 
 Application-level configuration that extends `AppConfig` with React-specific settings.
 
@@ -154,7 +154,7 @@ These hooks allow you to run custom code at different stages of the application 
 
 ### listeners?
 
-> `optional` **listeners**: `MetaEventListener`[]
+> `optional` **listeners**: `MetaEventListener`\<`any`\>[]
 
 Defined in: core/dist/index.d.ts:584
 
@@ -301,6 +301,6 @@ The default timezone for the application.
 
 > **useReact**: [`UseReactConfig`](UseReactConfig.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:49](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/options/UseReactBlueprint.ts#L49)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:49](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L49)
 
 React integration settings, extending the base application config.

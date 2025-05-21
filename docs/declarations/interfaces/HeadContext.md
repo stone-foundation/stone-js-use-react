@@ -6,7 +6,7 @@
 
 # Interface: HeadContext
 
-Defined in: router/dist/index.d.ts:495
+Defined in: router/dist/index.d.ts:193
 
 Head context.
 
@@ -16,7 +16,7 @@ Head context.
 
 > `optional` **description**: `string`
 
-Defined in: router/dist/index.d.ts:497
+Defined in: router/dist/index.d.ts:195
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: router/dist/index.d.ts:497
 
 > `optional` **links**: `HTMLLinkDescriptor`[]
 
-Defined in: router/dist/index.d.ts:499
+Defined in: router/dist/index.d.ts:197
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: router/dist/index.d.ts:499
 
 > `optional` **metas**: `HTMLMetaDescriptor`[]
 
-Defined in: router/dist/index.d.ts:498
+Defined in: router/dist/index.d.ts:196
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: router/dist/index.d.ts:498
 
 > `optional` **scripts**: `HTMLScriptDescriptor`[]
 
-Defined in: router/dist/index.d.ts:501
+Defined in: router/dist/index.d.ts:199
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: router/dist/index.d.ts:501
 
 > `optional` **styles**: `HTMLStyleDescriptor`[]
 
-Defined in: router/dist/index.d.ts:500
+Defined in: router/dist/index.d.ts:198
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: router/dist/index.d.ts:500
 
 > `optional` **title**: `string`
 
-Defined in: router/dist/index.d.ts:496
+Defined in: router/dist/index.d.ts:194

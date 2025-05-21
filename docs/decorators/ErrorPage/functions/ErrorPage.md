@@ -8,7 +8,7 @@
 
 > **ErrorPage**\<`T`\>(`options`): `ClassDecorator`
 
-Defined in: use-react/src/decorators/ErrorPage.ts:30
+Defined in: [use-react/src/decorators/ErrorPage.ts:23](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/decorators/ErrorPage.ts#L23)
 
 A class decorator for defining a class as a React Handler layout.
 
@@ -20,7 +20,7 @@ A class decorator for defining a class as a React Handler layout.
 
 ### options
 
-[`ErrorPageOptions`](../interfaces/ErrorPageOptions.md)
+[`ErrorPageOptions`](../../../declarations/interfaces/ErrorPageOptions.md)
 
 Configuration options for the layout definition.
 

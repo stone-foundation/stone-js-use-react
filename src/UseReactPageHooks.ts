@@ -1,26 +1,26 @@
 import {
+  IPage,
   ISnapshot,
+  IErrorPage,
+  HeadContext,
+  MetaErrorPage,
   UseReactHookName,
   UseReactHookType,
   ReactIncomingEvent,
   ResponseSnapshotType,
   ReactOutgoingResponse,
-  IComponentErrorHandler,
   BrowserResponseContent,
-  MetaComponentErrorHandler,
   UseReactHookListenerContext
 } from './declarations'
 import { ReactNode } from 'react'
-import { Config } from '@stone-js/config'
 import { STONE_SNAPSHOT } from './constants'
 import { renderToString } from 'react-dom/server'
 import { StoneError } from './components/StoneError'
 import { applyHeadContextToHtmlString } from './DomUtils'
 import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
-import { HeadContext, IComponentEventHandler } from '@stone-js/router'
 import { IBlueprint, IContainer, isFunction, isNotEmpty, isObjectLikeModule } from '@stone-js/core'
-import { resolveComponentErrorHandler, buildPageComponent, buildAppComponent, resolveComponentEventHandler, htmlTemplate } from './UseReactComponentUtils'
+import { buildPageComponent, buildAppComponent, resolveComponent, htmlTemplate, isSSR } from './UseReactComponentUtils'
 
 /**
  * Options for onPreparingResponse hook.
@@ -29,15 +29,6 @@ export interface OnPreparingResponseOptions {
   container: IContainer
   event: IncomingBrowserEvent
   response: ReactOutgoingResponse
-}
-
-/**
- * Hook that runs after the context is created.
- *
- * @param container - The service container.
- */
-export function onInit (container: IContainer): void {
-  registerSnapshot(container)
 }
 
 /**
@@ -77,10 +68,10 @@ async function preparePage (
   snapshot: ResponseSnapshotType
 ): Promise<void> {
   const { layout = 'default' } = response.content
-  const page = await resolveComponentEventHandler(container, response.content)
+  const page = await resolveComponent<IPage<ReactIncomingEvent>>(container, response.content)
   const data = await executeHandler(event, response, snapshot, page)
   const componentType = page?.render.bind(page)
-  const head = await page?.head?.({ event, container, snapshot, data, statusCode: response.statusCode })
+  const head = await page?.head?.({ event, data, statusCode: response.statusCode })
 
   await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, head })
 
@@ -113,10 +104,10 @@ async function prepareErrorPage (
   snapshot: ResponseSnapshotType
 ): Promise<void> {
   const { error = {}, layout } = response.content
-  const errorPage = await resolveComponentErrorHandler(container, response.content)
+  const errorPage = await resolveComponent<IErrorPage<ReactIncomingEvent>>(container, response.content)
   const data = await executeHandler(event, response, snapshot, errorPage, error)
   const componentType = errorPage?.render.bind(errorPage) ?? StoneError
-  const head = await errorPage?.head?.({ event, container, snapshot, data, statusCode: response.statusCode, error })
+  const head = await errorPage?.head?.({ event, data, statusCode: response.statusCode, error })
 
   await executeHooks('onPreparingPage', { event, response, container, snapshot, data, componentType, head, error })
 
@@ -148,9 +139,9 @@ async function prepareFallbackErrorPage (
 ): Promise<void> {
   const { layout, error, statusCode = 500 } = snapshot
   const blueprint = container.make<IBlueprint>('blueprint')
-  const metavalue = blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+  const metavalue = blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
     `stone.useReact.errorHandlers.${String(error?.name)}`,
-    blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+    blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
       'stone.useReact.errorHandlers.default',
       {} as any
     )
@@ -180,15 +171,15 @@ async function executeHandler (
   event: IncomingBrowserEvent,
   response: ReactOutgoingResponse,
   snapshot: ResponseSnapshotType,
-  handler?: (IComponentEventHandler<IncomingBrowserEvent> | IComponentErrorHandler<IncomingBrowserEvent>),
+  handler?: (IPage<IncomingBrowserEvent> | IErrorPage<IncomingBrowserEvent>),
   error?: any
 ): Promise<any> {
   let result: any = snapshot
 
   if (!snapshot.ssr) {
-    if (isNotEmpty<Error>(error) && isObjectLikeModule<IComponentErrorHandler<IncomingBrowserEvent>>(handler)) {
+    if (isNotEmpty<Error>(error) && isObjectLikeModule<IErrorPage<IncomingBrowserEvent>>(handler)) {
       result = await handler.handle?.(error, event)
-    } else if (isObjectLikeModule<IComponentEventHandler<IncomingBrowserEvent>>(handler)) {
+    } else if (isObjectLikeModule<IPage<IncomingBrowserEvent>>(handler)) {
       result = await handler.handle?.(event)
     } else {
       result = undefined
@@ -265,26 +256,6 @@ async function getServerContent (
   return applyHeadContextToHtmlString(head ?? {}, template)
     .replace('<!--app-html-->', html)
     .replace('<!--app-head-->', snapshot)
-}
-
-/**
- * Determine if the application is running on the server side.
- *
- * @returns True if the application is running on the server side, false otherwise.
- */
-function isSSR (): boolean {
-  return import.meta.env.SSR || typeof window === 'undefined'
-}
-
-/**
- * Register the snapshot.
- *
- * We save the snapshot on server side rendering and
- * we use it to hydrate the application on the client side.
-*/
-function registerSnapshot (container: IContainer): void {
-  const textContent = isSSR() ? '{}' : (window.document.getElementById(STONE_SNAPSHOT)?.textContent ?? '{}')
-  container.singletonIf('snapshot', () => Config.fromJson(textContent))
 }
 
 /**

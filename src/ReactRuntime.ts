@@ -1,9 +1,8 @@
 import { HeadContext } from '@stone-js/router'
 import { applyHeadContextToDom } from './DomUtils'
-import { IncomingBrowserEvent } from '@stone-js/browser-core'
+import { IErrorPage, ISnapshot, MetaErrorPage, ReactIncomingEvent } from './declarations'
 import { IBlueprint, IContainer, isEmpty, isObjectLikeModule, Promiseable } from '@stone-js/core'
-import { IComponentErrorHandler, ISnapshot, MetaComponentErrorHandler, ReactIncomingEvent } from './declarations'
-import { buildAppComponent, isServer, renderReactApp, resolveComponentErrorHandler } from './UseReactComponentUtils'
+import { buildAppComponent, isServer, renderReactApp, resolveComponent } from './UseReactComponentUtils'
 
 /**
  * ReactRuntimeOptions
@@ -24,6 +23,13 @@ export class ReactRuntime {
   private readonly _snapshot: ISnapshot
   private readonly container: IContainer
   private readonly blueprint: IBlueprint
+
+  /**
+   * The ReactRuntime instance.
+   *
+   * @type {ReactRuntime}
+   */
+  public static instance?: ReactRuntime
 
   /**
    * Create a ReactRuntime.
@@ -83,9 +89,9 @@ export class ReactRuntime {
    * @throws error
   */
   async throwError (error: any, statusCode: number = 500): Promise<void> {
-    const metavalue = this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+    const metavalue = this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
       `stone.useReact.errorHandlers.${String(error.name)}`,
-      this.blueprint.get<MetaComponentErrorHandler<ReactIncomingEvent>>(
+      this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
         'stone.useReact.errorHandlers.default',
         {} as any
       )
@@ -110,14 +116,14 @@ export class ReactRuntime {
   */
   private async renderErrorComponent (
     error: Error,
-    metavalue: MetaComponentErrorHandler<ReactIncomingEvent>,
+    metavalue: MetaErrorPage<ReactIncomingEvent>,
     statusCode: number = 500
   ): Promise<void> {
     let data: any
     const event = this.container.make<ReactIncomingEvent>('event')
-    const handler = await resolveComponentErrorHandler(this.container, { ...metavalue, error })
+    const handler = await resolveComponent(this.container, { ...metavalue, error })
 
-    if (isObjectLikeModule<IComponentErrorHandler<IncomingBrowserEvent>>(handler)) {
+    if (isObjectLikeModule<IErrorPage<ReactIncomingEvent>>(handler)) {
       const response: any = await handler.handle?.(error, event)
       data = response?.content ?? response
       statusCode = response?.statusCode ?? statusCode

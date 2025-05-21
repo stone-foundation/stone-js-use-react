@@ -8,7 +8,7 @@
 
 > `const` **MetaReactRuntime**: `object`
 
-Defined in: use-react/src/ReactRuntime.ts:145
+Defined in: [use-react/src/ReactRuntime.ts:151](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/ReactRuntime.ts#L151)
 
 MetaReactRuntime
 

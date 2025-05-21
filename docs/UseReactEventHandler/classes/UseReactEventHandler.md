@@ -6,7 +6,7 @@
 
 # Class: UseReactEventHandler\<IncomingEventType\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:15](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L15)
+Defined in: [use-react/src/UseReactEventHandler.ts:14](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactEventHandler.ts#L14)
 
 A useReact event handler for processing incoming events
 For single event handler.
@@ -25,7 +25,7 @@ The type representing the incoming event.
 
 ## Implements
 
-- `IEventHandler`\<`IncomingEventType`, `MetaComponentEventHandler`\<`IncomingEventType`\>\>
+- `IEventHandler`\<`IncomingEventType`, [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<`IncomingEventType`\>\>
 
 ## Constructors
 
@@ -33,7 +33,7 @@ The type representing the incoming event.
 
 > **new UseReactEventHandler**\<`IncomingEventType`\>(`options`): [`UseReactEventHandler`](UseReactEventHandler.md)\<`IncomingEventType`\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:25](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L25)
+Defined in: [use-react/src/UseReactEventHandler.ts:24](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactEventHandler.ts#L24)
 
 Constructs a `UseReactEventHandler` instance.
 
@@ -55,15 +55,15 @@ The UseReactEventHandler options including blueprint.
 
 ### handle()
 
-> **handle**(): `MetaComponentEventHandler`\<`IncomingEventType`\>
+> **handle**(): [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<`IncomingEventType`\>
 
-Defined in: [use-react/src/UseReactEventHandler.ts:34](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactEventHandler.ts#L34)
+Defined in: [use-react/src/UseReactEventHandler.ts:33](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactEventHandler.ts#L33)
 
 Handle an incoming event.
 
 #### Returns
 
-`MetaComponentEventHandler`\<`IncomingEventType`\>
+[`MetaPage`](../../declarations/interfaces/MetaPage.md)\<`IncomingEventType`\>
 
 The outgoing response.
 

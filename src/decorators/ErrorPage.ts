@@ -1,13 +1,6 @@
-import { REACT_ERROR_HANDLER_KEY } from './constants'
+import { ErrorPageOptions } from '../declarations'
+import { REACT_ERROR_PAGE_KEY } from './constants'
 import { setMetadata, classDecoratorLegacyWrapper, ClassType } from '@stone-js/core'
-
-/**
- * Options for configuring the `ErrorPage` decorator.
- */
-export interface ErrorPageOptions {
-  layout?: string
-  error: string | string[]
-}
 
 /**
  * A class decorator for defining a class as a React Handler layout.
@@ -29,6 +22,6 @@ export interface ErrorPageOptions {
  */
 export const ErrorPage = <T extends ClassType = ClassType>(options: ErrorPageOptions): ClassDecorator => {
   return classDecoratorLegacyWrapper((_target: T, context: ClassDecoratorContext<T>): undefined => {
-    setMetadata(context, REACT_ERROR_HANDLER_KEY, { ...options, isClass: true })
+    setMetadata(context, REACT_ERROR_PAGE_KEY, { ...options, isClass: true })
   })
 }

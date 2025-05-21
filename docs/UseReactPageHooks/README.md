@@ -12,5 +12,4 @@
 
 ## Functions
 
-- [onInit](functions/onInit.md)
 - [onPreparingResponse](functions/onPreparingResponse.md)

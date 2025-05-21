@@ -8,7 +8,7 @@
 
 > **hydrateReactApp**(`app`, `blueprint`): `Root`
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:275](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactComponentUtils.ts#L275)
+Defined in: [use-react/src/UseReactComponentUtils.ts:245](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L245)
 
 Hydrates the React app when SSR is enabled.
 

@@ -8,7 +8,7 @@
 
 > **isClient**(): `boolean`
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:294](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactComponentUtils.ts#L294)
+Defined in: [use-react/src/UseReactComponentUtils.ts:264](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L264)
 
 Check if the current environment is the client.
 

@@ -6,8 +6,8 @@
 
 # Type Alias: UseReactErrorResponseType
 
-> **UseReactErrorResponseType**: `Record`\<`"content"` \| `"statusCode"`, `Partial`\<[`MetaComponentErrorHandler`](../../declarations/interfaces/MetaComponentErrorHandler.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\> \| `number`\>
+> **UseReactErrorResponseType**: `Record`\<`"content"` \| `"statusCode"`, `Partial`\<[`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)\>\> \| `number`\>
 
-Defined in: [use-react/src/UseReactKernelErrorHandler.ts:7](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/UseReactKernelErrorHandler.ts#L7)
+Defined in: [use-react/src/UseReactKernelErrorHandler.ts:7](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactKernelErrorHandler.ts#L7)
 
 UseReactError response type.

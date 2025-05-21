@@ -1,12 +1,6 @@
+import { PageLayoutOptions } from '../declarations'
 import { REACT_PAGE_LAYOUT_KEY } from './constants'
 import { setMetadata, classDecoratorLegacyWrapper, ClassType } from '@stone-js/core'
-
-/**
- * Options for configuring the `PageLayout` decorator.
- */
-export interface PageLayoutOptions {
-  name: string
-}
 
 /**
  * A class decorator for defining a class as a React Page layout.

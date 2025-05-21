@@ -8,6 +8,6 @@
 
 > **UseReactHookName**: `"onPreparingPage"`
 
-Defined in: [use-react/src/declarations.ts:54](https://github.com/stonemjs/use-react/blob/50c96852bd65a75b7f2a00786393fb0c90af6da8/src/declarations.ts#L54)
+Defined in: [use-react/src/declarations.ts:58](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L58)
 
 UseReactHookName Type.
