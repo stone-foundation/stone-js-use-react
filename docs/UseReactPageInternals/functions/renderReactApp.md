@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / renderReactApp
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / renderReactApp
 
 # Function: renderReactApp()
 
 > **renderReactApp**(`app`, `blueprint`): `Root`
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:227](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L227)
+Defined in: use-react/src/UseReactPageInternals.ts:266
 
 Renders the React app.
 

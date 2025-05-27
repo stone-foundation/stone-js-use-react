@@ -6,7 +6,7 @@
 
 # Interface: AdapterErrorPageRenderContext\<TError\>
 
-Defined in: [use-react/src/declarations.ts:387](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L387)
+Defined in: [use-react/src/declarations.ts:392](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L392)
 
 React Adapter render page error options.
 
@@ -20,7 +20,7 @@ React Adapter render page error options.
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/declarations.ts:390](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L390)
+Defined in: [use-react/src/declarations.ts:395](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L395)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [use-react/src/declarations.ts:390](https://github.com/stonemjs/use-
 
 > **error**: `TError`
 
-Defined in: [use-react/src/declarations.ts:388](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L388)
+Defined in: [use-react/src/declarations.ts:393](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L393)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [use-react/src/declarations.ts:388](https://github.com/stonemjs/use-
 
 > **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:389](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L389)
+Defined in: [use-react/src/declarations.ts:394](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L394)

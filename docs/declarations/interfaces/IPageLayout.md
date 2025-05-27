@@ -6,7 +6,7 @@
 
 # Interface: IPageLayout
 
-Defined in: [use-react/src/declarations.ts:278](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L278)
+Defined in: [use-react/src/declarations.ts:283](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L283)
 
 Represents a Page layout.
 
@@ -16,7 +16,7 @@ Represents a Page layout.
 
 > `optional` **head**: () => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
 
-Defined in: [use-react/src/declarations.ts:279](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L279)
+Defined in: [use-react/src/declarations.ts:284](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L284)
 
 #### Returns
 
@@ -28,13 +28,13 @@ Defined in: [use-react/src/declarations.ts:279](https://github.com/stonemjs/use-
 
 > **render**: (`context`) => `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:280](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L280)
+Defined in: [use-react/src/declarations.ts:285](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L285)
 
 #### Parameters
 
 ##### context
 
-[`PageLayoutRenderContext`](PageLayoutRenderContext.md) | [`AdapterPageLayoutRenderContext`](AdapterPageLayoutRenderContext.md)
+`any`
 
 #### Returns
 

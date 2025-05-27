@@ -6,7 +6,7 @@
 
 # Interface: MetaAdapterErrorPage\<RawEventType, RawResponseType, ExecutionContextType\>
 
-Defined in: [use-react/src/declarations.ts:429](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L429)
+Defined in: [use-react/src/declarations.ts:434](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L434)
 
 Represents an Adapter meta component error handler.
 
@@ -24,7 +24,7 @@ Represents an Adapter meta component error handler.
 
 > `optional` **adapterAlias**: `string`
 
-Defined in: [use-react/src/declarations.ts:438](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L438)
+Defined in: [use-react/src/declarations.ts:443](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L443)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:438](https://github.com/stonemjs/use-
 
 > `optional` **error**: `any`
 
-Defined in: [use-react/src/declarations.ts:432](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L432)
+Defined in: [use-react/src/declarations.ts:437](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L437)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:432](https://github.com/stonemjs/use-
 
 > `optional` **isClass**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:436](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L436)
+Defined in: [use-react/src/declarations.ts:441](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L441)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [use-react/src/declarations.ts:436](https://github.com/stonemjs/use-
 
 > `optional` **isFactory**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:437](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L437)
+Defined in: [use-react/src/declarations.ts:442](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L442)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [use-react/src/declarations.ts:437](https://github.com/stonemjs/use-
 
 > `optional` **layout**: `unknown`
 
-Defined in: [use-react/src/declarations.ts:434](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L434)
+Defined in: [use-react/src/declarations.ts:439](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L439)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [use-react/src/declarations.ts:434](https://github.com/stonemjs/use-
 
 > `optional` **lazy**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:433](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L433)
+Defined in: [use-react/src/declarations.ts:438](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L438)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [use-react/src/declarations.ts:433](https://github.com/stonemjs/use-
 
 > **module**: [`AdapterErrorPageType`](../type-aliases/AdapterErrorPageType.md)\<`RawEventType`, `RawResponseType`, `ExecutionContextType`\> \| `Laziable`\<[`AdapterErrorPageType`](../type-aliases/AdapterErrorPageType.md)\<`RawEventType`, `RawResponseType`, `ExecutionContextType`\>\>
 
-Defined in: [use-react/src/declarations.ts:439](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L439)
+Defined in: [use-react/src/declarations.ts:444](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L444)
 
 ***
 
@@ -80,4 +80,4 @@ Defined in: [use-react/src/declarations.ts:439](https://github.com/stonemjs/use-
 
 > `optional` **platform**: `string`
 
-Defined in: [use-react/src/declarations.ts:435](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L435)
+Defined in: [use-react/src/declarations.ts:440](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L440)

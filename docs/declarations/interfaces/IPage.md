@@ -6,7 +6,7 @@
 
 # Interface: IPage\<IncomingEventType, OutgoingResponseType\>
 
-Defined in: [use-react/src/declarations.ts:206](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L206)
+Defined in: [use-react/src/declarations.ts:211](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L211)
 
 Represents a page.
 
@@ -26,25 +26,21 @@ The type representing the outgoing response.
 
 > `optional` **handle**: `FunctionalEventHandler`\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:211](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L211)
+Defined in: [use-react/src/declarations.ts:216](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L216)
 
 ***
 
 ### head()?
 
-> `optional` **head**: \<`TData`\>(`context`) => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
+> `optional` **head**: (`context`) => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
 
-Defined in: [use-react/src/declarations.ts:212](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L212)
-
-#### Type Parameters
-
-• **TData** = `any`
+Defined in: [use-react/src/declarations.ts:217](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L217)
 
 #### Parameters
 
 ##### context
 
-[`PageHeadContext`](PageHeadContext.md)\<`TData`\>
+[`PageHeadContext`](PageHeadContext.md)
 
 #### Returns
 
@@ -54,19 +50,15 @@ Defined in: [use-react/src/declarations.ts:212](https://github.com/stonemjs/use-
 
 ### render()
 
-> **render**: \<`TData`\>(`context`) => `ReactNode`
+> **render**: (`context`) => `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:210](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L210)
-
-#### Type Parameters
-
-• **TData** = `any`
+Defined in: [use-react/src/declarations.ts:215](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L215)
 
 #### Parameters
 
 ##### context
 
-[`PageRenderContext`](PageRenderContext.md)\<`TData`\>
+[`PageRenderContext`](PageRenderContext.md)
 
 #### Returns
 

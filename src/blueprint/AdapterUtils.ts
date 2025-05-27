@@ -27,7 +27,7 @@ export function defineAdapterErrorPage (
  */
 export function defineAdapterErrorPage (
   module: AdapterErrorPageClass<unknown, unknown, unknown>,
-  options: AdapterErrorPageOptions & { isClass: true },
+  options: AdapterErrorPageOptions & { isClass: boolean },
 ): UseReactBlueprint
 
 /**
@@ -42,7 +42,7 @@ export function defineAdapterErrorPage (
   options?: AdapterErrorPageOptions & { isClass?: boolean }
 ): UseReactBlueprint {
   const error = options?.error ?? 'default'
-  const adapterErrorHandlers = Object.fromEntries([error].flat().map((err) => [
+  const adapterErrorPages = Object.fromEntries([error].flat().map((err) => [
     err,
     {
       ...options,
@@ -55,7 +55,7 @@ export function defineAdapterErrorPage (
   return {
     stone: {
       useReact: {
-        adapterErrorHandlers
+        adapterErrorPages
       }
     }
   }

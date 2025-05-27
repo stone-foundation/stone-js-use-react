@@ -20,7 +20,7 @@ Optional adapter error page options.
 
 > **defineAdapterErrorPage**(`module`, `options`?): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: use-react/src/blueprint/AdapterUtils.ts:16
+Defined in: [use-react/src/blueprint/AdapterUtils.ts:16](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/AdapterUtils.ts#L16)
 
 Utility function to define a factory-based adapter error page.
 
@@ -58,7 +58,7 @@ Optional adapter error page options.
 
 > **defineAdapterErrorPage**(`module`, `options`): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: use-react/src/blueprint/AdapterUtils.ts:28
+Defined in: [use-react/src/blueprint/AdapterUtils.ts:28](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/AdapterUtils.ts#L28)
 
 Utility function to define a class-based adapter error page.
 

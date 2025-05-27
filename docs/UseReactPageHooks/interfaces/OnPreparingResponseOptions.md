@@ -6,7 +6,7 @@
 
 # Interface: OnPreparingResponseOptions
 
-Defined in: [use-react/src/UseReactPageHooks.ts:28](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactPageHooks.ts#L28)
+Defined in: [use-react/src/UseReactPageHooks.ts:9](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactPageHooks.ts#L9)
 
 Options for onPreparingResponse hook.
 
@@ -16,7 +16,7 @@ Options for onPreparingResponse hook.
 
 > **container**: `Container`
 
-Defined in: [use-react/src/UseReactPageHooks.ts:29](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactPageHooks.ts#L29)
+Defined in: [use-react/src/UseReactPageHooks.ts:10](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactPageHooks.ts#L10)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/UseReactPageHooks.ts:29](https://github.com/stonemjs/
 
 > **event**: `IncomingBrowserEvent`
 
-Defined in: [use-react/src/UseReactPageHooks.ts:30](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactPageHooks.ts#L30)
+Defined in: [use-react/src/UseReactPageHooks.ts:11](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactPageHooks.ts#L11)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [use-react/src/UseReactPageHooks.ts:30](https://github.com/stonemjs/
 
 > **response**: [`ReactOutgoingResponse`](../../declarations/type-aliases/ReactOutgoingResponse.md)
 
-Defined in: [use-react/src/UseReactPageHooks.ts:31](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactPageHooks.ts#L31)
+Defined in: [use-react/src/UseReactPageHooks.ts:12](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactPageHooks.ts#L12)

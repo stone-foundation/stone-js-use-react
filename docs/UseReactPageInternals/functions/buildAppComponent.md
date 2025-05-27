@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / buildAppComponent
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / buildAppComponent
 
 # Function: buildAppComponent()
 
 > **buildAppComponent**(`event`, `container`, `component`?, `layout`?, `data`?, `statusCode`?, `error`?): `Promise`\<`ReactNode`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:48](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L48)
+Defined in: use-react/src/UseReactPageInternals.ts:64
 
 Build the React application for the current route.
 Or for the main handler if the route is not defined.
@@ -29,7 +29,7 @@ Service Container
 
 ### component?
 
-`unknown`
+`ElementType`
 
 The component response.
 

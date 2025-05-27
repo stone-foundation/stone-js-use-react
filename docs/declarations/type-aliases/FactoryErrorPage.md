@@ -8,7 +8,7 @@
 
 > **FactoryErrorPage**\<`IncomingEventType`, `OutgoingResponseType`\>: (`container`?) => [`IErrorPage`](../interfaces/IErrorPage.md)\<`IncomingEventType`, `OutgoingResponseType`\>
 
-Defined in: [use-react/src/declarations.ts:349](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L349)
+Defined in: [use-react/src/declarations.ts:354](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L354)
 
 Represents a factory error page.
 

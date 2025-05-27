@@ -6,7 +6,7 @@
 
 # Interface: IAdapterErrorPage\<RawEventType, RawResponseType, ExecutionContextType\>
 
-Defined in: [use-react/src/declarations.ts:403](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L403)
+Defined in: [use-react/src/declarations.ts:408](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L408)
 
 Represents an Adapter component error handler.
 
@@ -24,25 +24,21 @@ Represents an Adapter component error handler.
 
 > `optional` **handle**: `FunctionalAdapterErrorHandler`\<`RawEventType`, `RawResponseType`, `ExecutionContextType`\>
 
-Defined in: [use-react/src/declarations.ts:406](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L406)
+Defined in: [use-react/src/declarations.ts:411](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L411)
 
 ***
 
 ### render()
 
-> **render**: \<`TError`\>(`context`) => `ReactNode`
+> **render**: (`context`) => `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:407](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L407)
-
-#### Type Parameters
-
-• **TError** = `any`
+Defined in: [use-react/src/declarations.ts:412](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L412)
 
 #### Parameters
 
 ##### context
 
-[`AdapterErrorPageRenderContext`](AdapterErrorPageRenderContext.md)\<`TError`\>
+[`AdapterErrorPageRenderContext`](AdapterErrorPageRenderContext.md)
 
 #### Returns
 

@@ -4,11 +4,11 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     globals: true,
-    environment: 'node',
+    environment: 'happy-dom',
     include: ['./tests/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
     coverage: {
       provider: 'v8',
-      include: ['src/**/*.ts'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
       reporter: ['text', 'html'],
       reportsDirectory: './coverage',
       thresholds: {

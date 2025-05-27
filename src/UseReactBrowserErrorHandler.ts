@@ -9,13 +9,12 @@ import {
 import {
   renderReactApp,
   buildAdapterErrorComponent
-} from './UseReactComponentUtils'
+} from './UseReactPageInternals'
 
 /**
  * UseReactBrowserErrorHandler options.
  */
 export interface UseReactBrowserErrorHandlerOptions {
-  logger: ILogger
   blueprint: IBlueprint
 }
 

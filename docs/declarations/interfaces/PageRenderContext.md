@@ -6,7 +6,7 @@
 
 # Interface: PageRenderContext\<TData\>
 
-Defined in: [use-react/src/declarations.ts:173](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L173)
+Defined in: [use-react/src/declarations.ts:178](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L178)
 
 React page render context.
 
@@ -24,7 +24,7 @@ React page render context.
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:176](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L176)
+Defined in: [use-react/src/declarations.ts:181](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L181)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:176](https://github.com/stonemjs/use-
 
 > `optional` **data**: `TData`
 
-Defined in: [use-react/src/declarations.ts:174](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L174)
+Defined in: [use-react/src/declarations.ts:179](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L179)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:174](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:177](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L177)
+Defined in: [use-react/src/declarations.ts:182](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L182)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [use-react/src/declarations.ts:177](https://github.com/stonemjs/use-
 
 > `optional` **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:175](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L175)
+Defined in: [use-react/src/declarations.ts:180](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L180)

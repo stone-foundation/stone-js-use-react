@@ -29,14 +29,14 @@ export interface UseReactConfig {
   componentEventHandler?: MetaPage<ReactIncomingEvent>
 
   /**
-   * A map of error handlers for specific components.
+   * A map of error pages for specific components.
    */
-  errorHandlers?: Record<string, MetaErrorPage<ReactIncomingEvent>>
+  errorPages?: Record<string, MetaErrorPage<ReactIncomingEvent>>
 
   /**
-   * A map of error handlers for adapter-level errors.
+   * A map of error pages for adapter-level errors.
    */
-  adapterErrorHandlers?: Record<string, MetaAdapterErrorPage<unknown, unknown, unknown>>
+  adapterErrorPages?: Record<string, MetaAdapterErrorPage<unknown, unknown, unknown>>
 }
 
 /**

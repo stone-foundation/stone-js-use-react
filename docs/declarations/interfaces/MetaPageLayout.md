@@ -6,7 +6,7 @@
 
 # Interface: MetaPageLayout
 
-Defined in: [use-react/src/declarations.ts:296](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L296)
+Defined in: [use-react/src/declarations.ts:301](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L301)
 
 Represents a meta page layout.
 
@@ -16,7 +16,7 @@ Represents a meta page layout.
 
 > `optional` **isClass**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:298](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L298)
+Defined in: [use-react/src/declarations.ts:303](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L303)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:298](https://github.com/stonemjs/use-
 
 > `optional` **isFactory**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:299](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L299)
+Defined in: [use-react/src/declarations.ts:304](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L304)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:299](https://github.com/stonemjs/use-
 
 > `optional` **lazy**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:297](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L297)
+Defined in: [use-react/src/declarations.ts:302](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L302)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [use-react/src/declarations.ts:297](https://github.com/stonemjs/use-
 
 > **module**: [`PageLayoutType`](../type-aliases/PageLayoutType.md) \| `Laziable`\<[`PageLayoutType`](../type-aliases/PageLayoutType.md)\>
 
-Defined in: [use-react/src/declarations.ts:300](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L300)
+Defined in: [use-react/src/declarations.ts:305](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L305)

@@ -4,7 +4,7 @@ import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser
 import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext, Router } from '@stone-js/router'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
-import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable } from '@stone-js/core'
+import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable, LifecycleHookType } from '@stone-js/core'
 
 // Export types
 export { HeadContext } from '@stone-js/router'
@@ -91,6 +91,11 @@ export type UseReactHookListener = (context: UseReactHookListenerContext) => Pro
 export interface UseReactHookType {
   onPreparingPage?: UseReactHookListener[]
 }
+
+/**
+ * ReactLifecycleHookType Type.
+ */
+export type ReactLifecycleHookType = LifecycleHookType<IBlueprint, any, any, ReactIncomingEvent, any> & UseReactHookType
 
 /**
  * Options for configuring the `Page` decorator.
@@ -207,9 +212,9 @@ export interface IPage<
   IncomingEventType extends ReactIncomingEvent,
   OutgoingResponseType = unknown
 > {
-  render: <TData = any>(context: PageRenderContext<TData>) => ReactNode
+  render: (context: PageRenderContext<any>) => ReactNode
   handle?: FunctionalEventHandler<IncomingEventType, OutgoingResponseType>
-  head?: <TData = any>(context: PageHeadContext<TData>) => Promiseable<HeadContext>
+  head?: (context: PageHeadContext<any>) => Promiseable<HeadContext>
 }
 
 /**
@@ -277,7 +282,7 @@ export type PageLayoutClass = new (...args: any[]) => IPageLayout
 */
 export interface IPageLayout {
   head?: () => Promiseable<HeadContext>
-  render: (context: PageLayoutRenderContext | AdapterPageLayoutRenderContext) => ReactNode
+  render: (context: PageLayoutRenderContext | AdapterPageLayoutRenderContext | any) => ReactNode
 }
 
 /**
@@ -336,8 +341,8 @@ export interface IErrorPage<
   OutgoingResponseType = unknown
 > {
   handle?: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>
-  render: <TError = any, UData = any>(context: ErrorPageRenderContext<TError, UData>) => ReactNode
-  head?: <TError = any, UData = any>(context: ErrorPageHeadContext<TError, UData>) => Promiseable<HeadContext>
+  render: (context: ErrorPageRenderContext<any, any>) => ReactNode
+  head?: (context: ErrorPageHeadContext<any, any>) => Promiseable<HeadContext>
 }
 
 /**
@@ -404,7 +409,7 @@ export interface IAdapterErrorPage<
   RawEventType, RawResponseType, ExecutionContextType
 > {
   handle?: FunctionalAdapterErrorHandler<RawEventType, RawResponseType, ExecutionContextType>
-  render: <TError = any>(context: AdapterErrorPageRenderContext<TError>) => ReactNode
+  render: (context: AdapterErrorPageRenderContext<any>) => ReactNode
 }
 
 /**

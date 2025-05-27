@@ -6,30 +6,27 @@
 
 # Function: defineStoneReactApp()
 
-Declares a complete Stone-React application blueprint.
-
-This utility combines a main event handler with additional blueprints and configuration options
-to define a full application. The event handler can be class-based, or factory-based.
+Defines a Stone React app using a factory-based or class-based main handler.
 
 ## Param
 
-A factory, or class that handles incoming events.
+A factory function or class constructor for the main page.
 
 ## Param
 
-Optional application-level configuration (log level, middleware, lifecycle, etc.)
+Optional application-level configuration.
 
 ## Param
 
-Additional partial blueprints to merge into the final one.
+Additional blueprints to merge.
 
 ## Call Signature
 
 > **defineStoneReactApp**\<`U`\>(`module`, `options`?, `blueprints`?): `StoneBlueprint`\<`U`\>
 
-Defined in: use-react/src/blueprint/BlueprintUtils.ts:13
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:13](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L13)
 
-Declares a complete Stone-React application blueprint using a factory-based event handler.
+Defines a Stone React app using a factory-based main handler.
 
 ### Type Parameters
 
@@ -41,47 +38,47 @@ Declares a complete Stone-React application blueprint using a factory-based even
 
 [`FactoryPage`](../../../declarations/type-aliases/FactoryPage.md)\<`U`\>
 
-A factory function that returns an event handler.
+A factory function for the main page.
 
 #### options?
 
-`Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\>
+`Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\> & `object`
 
-Application-level configuration.
+Optional application-level configuration.
 
 #### blueprints?
 
 `StoneBlueprint`\<`any`, `any`\> & `Record`\<`string`, `any`\>[]
 
-Additional partial blueprints to merge.
+Additional blueprints to merge.
 
 ### Returns
 
 `StoneBlueprint`\<`U`\>
 
-A fully merged Stone blueprint representing the application.
+A fully merged Stone blueprint.
 
 A fully merged Stone blueprint.
 
 ### Param
 
-A factory, or class that handles incoming events.
+A factory function or class constructor for the main page.
 
 ### Param
 
-Optional application-level configuration (log level, middleware, lifecycle, etc.)
+Optional application-level configuration.
 
 ### Param
 
-Additional partial blueprints to merge into the final one.
+Additional blueprints to merge.
 
 ## Call Signature
 
 > **defineStoneReactApp**\<`U`\>(`module`, `options`, `blueprints`?): `StoneBlueprint`\<`U`\>
 
-Defined in: use-react/src/blueprint/BlueprintUtils.ts:27
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:27](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L27)
 
-Declares a complete Stone-React application blueprint using a class-based event handler.
+Defines a Stone React app using a class-based main handler.
 
 ### Type Parameters
 
@@ -93,11 +90,57 @@ Declares a complete Stone-React application blueprint using a class-based event 
 
 [`PageClass`](../../../declarations/type-aliases/PageClass.md)\<`U`\>
 
-A class constructor for the event handler.
+A class constructor for the main page.
 
 #### options
 
 `Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\> & `object`
+
+Optional application-level configuration.
+
+#### blueprints?
+
+`StoneBlueprint`\<`any`, `any`\> & `Record`\<`string`, `any`\>[]
+
+Additional blueprints to merge.
+
+### Returns
+
+`StoneBlueprint`\<`U`\>
+
+A fully merged Stone blueprint.
+
+A fully merged Stone blueprint.
+
+### Param
+
+A factory function or class constructor for the main page.
+
+### Param
+
+Optional application-level configuration.
+
+### Param
+
+Additional blueprints to merge.
+
+## Call Signature
+
+> **defineStoneReactApp**\<`U`\>(`options`?, `blueprints`?): `StoneBlueprint`\<`U`\>
+
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:40](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L40)
+
+Defines a Stone React app without a main handler (router-only).
+
+### Type Parameters
+
+• **U** *extends* [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)
+
+### Parameters
+
+#### options?
+
+`Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\>
 
 Application-level configuration.
 
@@ -105,24 +148,24 @@ Application-level configuration.
 
 `StoneBlueprint`\<`any`, `any`\> & `Record`\<`string`, `any`\>[]
 
-Additional partial blueprints to merge.
+Additional blueprints to merge.
 
 ### Returns
 
 `StoneBlueprint`\<`U`\>
 
-A fully merged Stone blueprint representing the application.
+A fully merged Stone blueprint.
 
 A fully merged Stone blueprint.
 
 ### Param
 
-A factory, or class that handles incoming events.
+A factory function or class constructor for the main page.
 
 ### Param
 
-Optional application-level configuration (log level, middleware, lifecycle, etc.)
+Optional application-level configuration.
 
 ### Param
 
-Additional partial blueprints to merge into the final one.
+Additional blueprints to merge.

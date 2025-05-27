@@ -1,7 +1,7 @@
 import { Config } from '@stone-js/config'
 import { STONE_SNAPSHOT } from './constants'
 import { ReactRuntime } from './ReactRuntime'
-import { isSSR } from './UseReactComponentUtils'
+import { isSSR } from './UseReactPageInternals'
 import { IContainer, IServiceProvider, Promiseable } from '@stone-js/core'
 
 /**

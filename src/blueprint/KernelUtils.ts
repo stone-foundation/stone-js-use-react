@@ -26,19 +26,7 @@ import { UseReactBlueprint } from '../options/UseReactBlueprint'
  */
 export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
   module: FactoryPage<U>,
-  options: PageOptions
-): Partial<StoneBlueprint<U>>
-
-/**
- * Utility function to define a factory-based page.
- *
- * @param module - The EventHandler module.
- * @param options - Page definition options.
- * @returns The UseReactBlueprint.
- */
-export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
-  module: Laziable<FactoryPage<U>>,
-  options: PageOptions & { lazy: true },
+  options: PageOptions & { isClass?: undefined }
 ): Partial<StoneBlueprint<U>>
 
 /**
@@ -50,19 +38,7 @@ export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
  */
 export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
   module: PageClass<U>,
-  options: PageOptions & { isClass: true },
-): Partial<StoneBlueprint<U>>
-
-/**
- * Utility function to define a class-based page.
- *
- * @param module - The EventHandler module.
- * @param options - Page definition options.
- * @returns The UseReactBlueprint.
- */
-export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
-  module: Laziable<PageClass<U>>,
-  options: PageOptions & { lazy: true, isClass: true },
+  options: PageOptions & { isClass: true }
 ): Partial<StoneBlueprint<U>>
 
 /**
@@ -74,7 +50,7 @@ export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
  */
 export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
   module: PageType<U> | Laziable<PageType<U>>,
-  options: PageOptions & { lazy?: boolean, isClass?: boolean }
+  options: PageOptions & { isClass?: boolean }
 ): Partial<StoneBlueprint<U>> {
   return {
     stone: {
@@ -84,11 +60,10 @@ export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
             ...options,
             method: GET,
             methods: [],
-            children: [],
+            children: undefined,
             handler: {
               module,
               isComponent: true,
-              lazy: options?.lazy,
               layout: options?.layout,
               isClass: options?.isClass,
               isFactory: options?.isClass !== true
@@ -109,7 +84,7 @@ export function definePage<U extends ReactIncomingEvent = ReactIncomingEvent> (
  */
 export function definePageLayout (
   module: FactoryPageLayout,
-  options?: PageLayoutOptions,
+  options?: PageLayoutOptions & { isClass?: undefined }
 ): UseReactBlueprint
 
 /**
@@ -121,7 +96,7 @@ export function definePageLayout (
  */
 export function definePageLayout (
   module: PageLayoutClass,
-  options: PageLayoutOptions & { isClass: true },
+  options: PageLayoutOptions & { isClass: true }
 ): UseReactBlueprint
 
 /**
@@ -160,7 +135,7 @@ export function definePageLayout (
  */
 export function defineErrorPage (
   module: FactoryErrorPage<ReactIncomingEvent>,
-  options?: ErrorPageOptions
+  options?: ErrorPageOptions & { isClass?: undefined }
 ): UseReactBlueprint
 
 /**
@@ -172,7 +147,7 @@ export function defineErrorPage (
  */
 export function defineErrorPage (
   module: ErrorPageClass<ReactIncomingEvent>,
-  options: ErrorPageOptions & { isClass: true },
+  options: ErrorPageOptions & { isClass: true }
 ): UseReactBlueprint
 
 /**
@@ -187,7 +162,7 @@ export function defineErrorPage (
   options?: ErrorPageOptions & { isClass?: boolean }
 ): UseReactBlueprint {
   const error = options?.error ?? 'default'
-  const errorHandlers = Object.fromEntries([error].flat().map((err) => [
+  const errorPages = Object.fromEntries([error].flat().map((err) => [
     err,
     {
       ...options,
@@ -200,7 +175,7 @@ export function defineErrorPage (
   return {
     stone: {
       useReact: {
-        errorHandlers
+        errorPages
       }
     }
   }

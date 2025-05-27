@@ -1,9 +1,12 @@
 import {
   Laziable,
   IBlueprint,
+  isFunction,
+  IContainer,
   isNotEmpty,
   isFunctionModule,
   isMetaClassModule,
+  isObjectLikeModule,
   isMetaFactoryModule,
   AdapterErrorContext
 } from '@stone-js/core'
@@ -12,26 +15,39 @@ import {
   MetaPage,
   PageType,
   PageClass,
+  ISnapshot,
   IErrorPage,
   IPageLayout,
   FactoryPage,
+  HeadContext,
   MetaErrorPage,
   MetaPageLayout,
   PageLayoutClass,
   StoneContextType,
+  UseReactHookName,
+  UseReactHookType,
   FactoryPageLayout,
   IAdapterErrorPage,
   ReactIncomingEvent,
   MetaAdapterErrorPage,
+  ResponseSnapshotType,
   AdapterErrorPageClass,
-  FactoryAdapterErrorPage
+  ReactOutgoingResponse,
+  BrowserResponseContent,
+  FactoryAdapterErrorPage,
+  UseReactHookListenerContext
 } from './declarations'
 import { jsx } from 'react/jsx-runtime'
+import { STONE_SNAPSHOT } from './constants'
 import { ElementType, ReactNode } from 'react'
+import { renderToString } from 'react-dom/server'
 import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
 import { Container } from '@stone-js/service-container'
+import { applyHeadContextToHtmlString } from './DomUtils'
+import { OutgoingHttpResponse } from '@stone-js/http-core'
+import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
 /**
@@ -48,7 +64,7 @@ import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/cl
 export const buildAppComponent = async (
   event: ReactIncomingEvent,
   container: Container,
-  component?: unknown,
+  component?: ElementType,
   layout?: unknown,
   data?: any,
   statusCode?: number,
@@ -84,13 +100,11 @@ export const buildLayoutComponent = async (
       `stone.useReact.layout.${String(layoutName)}`
   )
 
-  const handler = await resolveComponent(container, metavalue)
-  const componentType = isNotEmpty<IPageLayout>(handler)
-    ? handler.render.bind(handler)
-    : undefined
+  const handler = await resolveComponent<IPageLayout>(container, metavalue)
+  const componentType = handler?.render.bind(handler)
 
-  if (isNotEmpty<ElementType>(componentType)) {
-    return jsx(componentType, { container, children })
+  if (componentType !== undefined) {
+    return jsx(componentType, { container, children, 'data-layout': layoutName })
   }
 }
 
@@ -109,12 +123,12 @@ export const buildLayoutComponent = async (
 export const buildPageComponent = (
   event: ReactIncomingEvent,
   container: Container,
-  component?: unknown,
+  component?: ElementType,
   data?: any,
   statusCode?: number,
   error?: any
 ): ReactNode => {
-  if (isNotEmpty<ElementType>(component)) {
+  if (component !== undefined) {
     return jsx(component, { event, container, data, statusCode, error })
   }
   return jsx('div', {})
@@ -138,12 +152,13 @@ export const buildAdapterErrorComponent = async <RawEventType, RawResponseType, 
   statusCode: number,
   error: any
 ): Promise<ReactNode | undefined> => {
-  const handlerMetavalue = blueprint.get<MetaAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>>(
-    `stone.useReact.adapterErrorHandlers.${String(error?.name ?? 'default')}`
+  const handlerMeta = blueprint.get<MetaAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>>(
+    `stone.useReact.adapterErrorPages.${String(error?.name ?? 'default')}`
   )
-  const layoutMetavalue = blueprint.get<MetaPageLayout>(
-    `stone.useReact.layout.${String(handlerMetavalue?.layout)}`
-  )
+  const handlerMetavalue = await resolveLazyComponent(handlerMeta)
+  const layoutMetavalue = await resolveLazyComponent(blueprint.get<MetaPageLayout>(
+    `stone.useReact.layout.${String(handlerMeta?.layout)}`
+  ))
 
   let layoutHandler: (IPageLayout | undefined)
   let handler: (IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType> | undefined)
@@ -165,10 +180,10 @@ export const buildAdapterErrorComponent = async <RawEventType, RawResponseType, 
   const componentType = handler?.render.bind(handler) as (ElementType | undefined)
   const layoutType = layoutHandler?.render.bind(layoutHandler) as (ElementType | undefined)
 
-  if (isNotEmpty<ElementType>(componentType) && isNotEmpty<ElementType>(layoutType)) {
+  if (componentType !== undefined && layoutType !== undefined) {
     const children = jsx(componentType, { blueprint, error, statusCode })
     return jsx(layoutType, { blueprint, children })
-  } else if (isNotEmpty<ElementType>(componentType)) {
+  } else if (componentType !== undefined) {
     return jsx(componentType, { blueprint, error, statusCode })
   } else {
     return jsx(StoneError, { blueprint, error, statusCode })
@@ -188,6 +203,34 @@ export const resolveComponent = async <T = IPage<ReactIncomingEvent> | IErrorPag
   container: Container,
   metaComponent?: MetaPage<ReactIncomingEvent> | MetaErrorPage<ReactIncomingEvent> | MetaPageLayout
 ): Promise<T | undefined> => {
+  metaComponent = await resolveLazyComponent(metaComponent)
+
+  if (isMetaClassModule<PageClass<ReactIncomingEvent>>(metaComponent)) {
+    return container.resolve<IPage<ReactIncomingEvent>>(metaComponent.module) as T
+  } else if (isMetaFactoryModule<FactoryPage<ReactIncomingEvent>>(metaComponent)) {
+    return metaComponent.module(container) as T
+  }
+}
+
+/**
+ * Resolve lazy loaded components.
+ *
+ * @param metaComponent - The meta component event handler.
+ * @returns The resolved element type.
+ */
+export const resolveLazyComponent = async (
+  metaComponent?:
+  | MetaPageLayout
+  | MetaPage<ReactIncomingEvent>
+  | MetaErrorPage<ReactIncomingEvent>
+  | MetaAdapterErrorPage<any, any, any>
+): Promise<
+MetaPageLayout |
+MetaPage<ReactIncomingEvent> |
+MetaErrorPage<ReactIncomingEvent> |
+MetaAdapterErrorPage<any, any, any> |
+undefined
+> => {
   if (
     metaComponent?.lazy === true &&
     isFunctionModule<Laziable<PageType<ReactIncomingEvent>>>(metaComponent?.module)
@@ -196,11 +239,7 @@ export const resolveComponent = async <T = IPage<ReactIncomingEvent> | IErrorPag
     metaComponent.module = await metaComponent.module()
   }
 
-  if (isMetaClassModule<PageClass<ReactIncomingEvent>>(metaComponent)) {
-    return container.resolve<IPage<ReactIncomingEvent>>(metaComponent.module) as T
-  } else if (isMetaFactoryModule<FactoryPage<ReactIncomingEvent>>(metaComponent)) {
-    return metaComponent.module(container) as T
-  }
+  return metaComponent
 }
 
 /**
@@ -281,4 +320,152 @@ export const htmlTemplate = async (blueprint: IBlueprint): Promise<string> => {
  */
 export function isSSR (): boolean {
   return import.meta.env.SSR || typeof window === 'undefined'
+}
+
+/**
+ * Execute the handler.
+ *
+ * This method will try to get data from the snapshot
+ * If the snapshot is not present, it will execute the handler.
+ * If the handler is not present, it will return undefined.
+ *
+ * @param response - The response object.
+ * @returns The data from the response.
+ */
+export async function executeHandler (
+  event: IncomingBrowserEvent,
+  response: ReactOutgoingResponse,
+  snapshot: ResponseSnapshotType,
+  handler?: (IPage<IncomingBrowserEvent> | IErrorPage<IncomingBrowserEvent>),
+  error?: any
+): Promise<any> {
+  let result: any = snapshot
+
+  if (!snapshot.ssr) {
+    if (isNotEmpty<Error>(error) && isObjectLikeModule<IErrorPage<IncomingBrowserEvent>>(handler)) {
+      result = await handler.handle?.(error, event)
+    } else if (isObjectLikeModule<IPage<IncomingBrowserEvent>>(handler)) {
+      result = await handler.handle?.(event)
+    } else {
+      result = undefined
+    }
+  }
+
+  if (isNotEmpty(result?.statusCode)) {
+    response.setStatus(result.statusCode)
+  }
+
+  if (
+    isNotEmpty(result?.headers) &&
+    isNotEmpty<OutgoingHttpResponse>(response) &&
+    isFunction(response.setHeaders)
+  ) {
+    response.setHeaders(result.headers)
+  }
+
+  return result?.content ?? result?.data ?? result
+}
+
+/**
+ * Keep track of the current layout.
+ * This is used to determine if the layout has changed.
+ * We make a full render each time the layout changes.
+ *
+ * @returns The current layout.
+ */
+let currentLayout: string | undefined
+
+/**
+ * Get the browser content.
+ *
+ * @param app - The app component to render.
+ * @param component - The component to render.
+ * @param layout - The layout to use.
+ * @param snapshot - The response snapshot.
+ * @param head - The head context.
+ * @returns The browser response content.
+ */
+export function getBrowserContent (
+  app: ReactNode,
+  component: ReactNode,
+  layout: any,
+  snapshot: ResponseSnapshotType,
+  head?: HeadContext
+): BrowserResponseContent {
+  const content = { head, app, component, fullRender: currentLayout !== layout, ssr: snapshot.ssr }
+  currentLayout = layout
+  return content
+}
+
+/**
+ * Get the server content.
+ *
+ * @param component - The React component to hydrate.
+ * @param data - The data to pass to the components.
+ * @param container - The service container.
+ * @param event - The incoming browser event.
+ * @param head - The head context.
+ * @returns A promise that resolves when the content is hydrated.
+ */
+export async function getServerContent (
+  component: ReactNode,
+  data: Partial<ResponseSnapshotType>,
+  container: IContainer,
+  event: IncomingBrowserEvent,
+  head?: HeadContext
+): Promise<string> {
+  const html = renderToString(component).concat('\n<!--app-html-->')
+  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
+  const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
+
+  return applyHeadContextToHtmlString(head ?? {}, template)
+    .replace('<!--app-html-->', html)
+    .replace('<!--app-head-->', snapshot)
+}
+
+/**
+ * Get the response snapshot.
+ *
+ * @param event - The incoming browser event.
+ * @returns The response snapshot.
+ */
+export function getResponseSnapshot (event: IncomingBrowserEvent, container: IContainer): ResponseSnapshotType {
+  return container.make<ISnapshot>('snapshot').get(event.fingerprint(), { ssr: false })
+}
+
+/**
+ * Snapshot the response data.
+ *
+ * @param event - The incoming HTTP event.
+ * @param data - The data to snapshot.
+ */
+export function snapshotResponse (event: IncomingBrowserEvent, container: IContainer, data: Partial<ResponseSnapshotType>): string {
+  const snapshot = container.make<ISnapshot>('snapshot')
+  return renderStoneSnapshot(snapshot.add(event.fingerprint(), { ...data, ssr: true }).toJson())
+}
+
+/**
+ * Render Stone snapshot.
+ *
+ * @param snapshot - The snapshot to render.
+ * @returns The script tag.
+ */
+export function renderStoneSnapshot (snapshot: string): string {
+  return `<script id="${STONE_SNAPSHOT}" type="application/json">${snapshot}</script>`
+}
+
+/**
+ * Execute hooks.
+ *
+ * @param name - The name of the hook.
+ * @param context - The context of the adapter.
+ */
+export async function executeHooks (name: UseReactHookName, context: UseReactHookListenerContext): Promise<void> {
+  const hooks = context.container.make<IBlueprint>('blueprint').get<UseReactHookType>('stone.lifecycleHooks', {})
+
+  if (Array.isArray(hooks[name])) {
+    for (const listener of hooks[name]) {
+      await listener(context)
+    }
+  }
 }

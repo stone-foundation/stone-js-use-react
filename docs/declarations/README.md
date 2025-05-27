@@ -56,6 +56,7 @@
 - [ReactBrowserAdapterContext](type-aliases/ReactBrowserAdapterContext.md)
 - [ReactIncomingEvent](type-aliases/ReactIncomingEvent.md)
 - [ReactIncomingEventOptions](type-aliases/ReactIncomingEventOptions.md)
+- [ReactLifecycleHookType](type-aliases/ReactLifecycleHookType.md)
 - [ReactOutgoingResponse](type-aliases/ReactOutgoingResponse.md)
 - [UseReactHookListener](type-aliases/UseReactHookListener.md)
 - [UseReactHookName](type-aliases/UseReactHookName.md)

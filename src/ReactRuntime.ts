@@ -2,7 +2,7 @@ import { HeadContext } from '@stone-js/router'
 import { applyHeadContextToDom } from './DomUtils'
 import { IErrorPage, ISnapshot, MetaErrorPage, ReactIncomingEvent } from './declarations'
 import { IBlueprint, IContainer, isEmpty, isObjectLikeModule, Promiseable } from '@stone-js/core'
-import { buildAppComponent, isServer, renderReactApp, resolveComponent } from './UseReactComponentUtils'
+import { buildAppComponent, isServer, renderReactApp, resolveComponent } from './UseReactPageInternals'
 
 /**
  * ReactRuntimeOptions
@@ -90,9 +90,9 @@ export class ReactRuntime {
   */
   async throwError (error: any, statusCode: number = 500): Promise<void> {
     const metavalue = this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
-      `stone.useReact.errorHandlers.${String(error.name)}`,
+      `stone.useReact.errorPages.${String(error.name)}`,
       this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
-        'stone.useReact.errorHandlers.default',
+        'stone.useReact.errorPages.default',
         {} as any
       )
     )

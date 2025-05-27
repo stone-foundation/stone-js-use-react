@@ -6,7 +6,7 @@
 
 # Interface: PageLayoutRenderContext
 
-Defined in: [use-react/src/declarations.ts:257](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L257)
+Defined in: [use-react/src/declarations.ts:262](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L262)
 
 React render page layout options.
 
@@ -16,7 +16,7 @@ React render page layout options.
 
 > **children**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:258](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L258)
+Defined in: [use-react/src/declarations.ts:263](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L263)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [use-react/src/declarations.ts:258](https://github.com/stonemjs/use-
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:259](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L259)
+Defined in: [use-react/src/declarations.ts:264](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L264)

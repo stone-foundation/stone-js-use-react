@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / htmlTemplate
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / htmlTemplate
 
 # Function: htmlTemplate()
 
 > **htmlTemplate**(`blueprint`): `Promise`\<`string`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:272](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L272)
+Defined in: use-react/src/UseReactPageInternals.ts:311
 
 Get the HTML template for the React application.
 

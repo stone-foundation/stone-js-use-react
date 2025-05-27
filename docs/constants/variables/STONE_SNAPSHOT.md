@@ -8,6 +8,6 @@
 
 > `const` **STONE\_SNAPSHOT**: `"__STONE_SNAPSHOT__"` = `'__STONE_SNAPSHOT__'`
 
-Defined in: [use-react/src/constants.ts:4](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/constants.ts#L4)
+Defined in: [use-react/src/constants.ts:4](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/constants.ts#L4)
 
 Constants for the Stone SNAPSHOT

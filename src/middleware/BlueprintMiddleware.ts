@@ -106,9 +106,17 @@ export const SetReactKernelErrorPageMiddleware = (
       Array(error).flat().forEach(name => {
         context
           .blueprint
-          .set(`stone.useReact.errorHandlers.${name}`, { layout, module, isClass: true })
-          .set(`stone.kernel.errorHandlers.${name}`, { module: UseReactKernelErrorHandler, isClass: true })
+          .set(`stone.useReact.errorPages.${name}`, { layout, module, isClass: true })
       })
+    })
+
+  // Process both eager and lazy loaded error pages
+  Object
+    .keys(context.blueprint.get('stone.useReact.errorPages', {}))
+    .forEach((name) => {
+      context
+        .blueprint
+        .set(`stone.kernel.errorHandlers.${name}`, { module: UseReactKernelErrorHandler, isClass: true })
     })
 
   return next(context)
@@ -149,10 +157,18 @@ export const SetReactAdapterErrorPageMiddleware = (
         Array(error).flat().forEach(name => {
           context
             .blueprint
-            .set(`stone.useReact.adapterErrorHandlers.${name}`, { isClass: true, layout, module })
-            .set(`stone.adapter.errorHandlers.${name}`, { module: UseReactAdapterErrorHandler, isClass: true })
+            .set(`stone.useReact.adapterErrorPages.${name}`, { isClass: true, layout, module })
         })
       }
+    })
+
+  // Process both eager and lazy loaded error pages
+  Object
+    .keys(context.blueprint.get('stone.useReact.adapterErrorPages', {}))
+    .forEach((name) => {
+      context
+        .blueprint
+        .set(`stone.adapter.errorHandlers.${name}`, { module: UseReactAdapterErrorHandler, isClass: true })
     })
 
   return next(context)

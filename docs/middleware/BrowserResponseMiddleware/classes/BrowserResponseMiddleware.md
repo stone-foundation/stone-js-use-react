@@ -6,7 +6,7 @@
 
 # Class: BrowserResponseMiddleware
 
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:16](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/middleware/BrowserResponseMiddleware.ts#L16)
+Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:16](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/middleware/BrowserResponseMiddleware.ts#L16)
 
 Adapter Middleware for handling outgoing responses and rendering them in the browser.
 
@@ -16,7 +16,7 @@ Adapter Middleware for handling outgoing responses and rendering them in the bro
 
 > **new BrowserResponseMiddleware**(`options`): [`BrowserResponseMiddleware`](BrowserResponseMiddleware.md)
 
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:25](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/middleware/BrowserResponseMiddleware.ts#L25)
+Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:25](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/middleware/BrowserResponseMiddleware.ts#L25)
 
 Create a BrowserResponseMiddleware.
 
@@ -40,7 +40,7 @@ Options for creating the BrowserResponseMiddleware.
 
 > **handle**(`context`, `next`): `Promise`\<`BrowserAdapterResponseBuilder`\>
 
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:38](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/middleware/BrowserResponseMiddleware.ts#L38)
+Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:38](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/middleware/BrowserResponseMiddleware.ts#L38)
 
 Handles the outgoing response, processes it, and invokes the next middleware in the pipeline.
 

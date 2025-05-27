@@ -36,13 +36,8 @@ UseReactErrorResponseType
    * @returns The outgoing http response.
    */
   public handle (error: any): UseReactErrorResponseType {
-    const metavalue = this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
-      `stone.useReact.errorHandlers.${String(error?.name)}`,
-      this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(
-        'stone.useReact.errorHandlers.default',
-        {} as any
-      )
-    )
+    const metavalue = this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>(`stone.useReact.errorPages.${String(error?.name)}`) ??
+      this.blueprint.get<MetaErrorPage<ReactIncomingEvent>>('stone.useReact.errorPages.default', {} as any)
 
     return { content: { ...metavalue, error }, statusCode: error?.statusCode ?? 500 }
   }

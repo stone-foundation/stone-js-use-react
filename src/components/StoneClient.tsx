@@ -1,4 +1,4 @@
-import { isClient } from '../UseReactComponentUtils'
+import { isClient } from '../UseReactPageInternals'
 import { FunctionComponent, ReactNode } from 'react'
 
 /**

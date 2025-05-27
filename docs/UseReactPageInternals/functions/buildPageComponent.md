@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / buildPageComponent
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / buildPageComponent
 
 # Function: buildPageComponent()
 
 > **buildPageComponent**(`event`, `container`, `component`?, `data`?, `statusCode`?, `error`?): `ReactNode`
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:109](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L109)
+Defined in: use-react/src/UseReactPageInternals.ts:123
 
 Get response component in the current route.
 If not defined, return an empty object.
@@ -29,7 +29,7 @@ Service Container
 
 ### component?
 
-`unknown`
+`ElementType`
 
 The component response.
 

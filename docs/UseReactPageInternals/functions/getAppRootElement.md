@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / getAppRootElement
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / getAppRootElement
 
 # Function: getAppRootElement()
 
 > **getAppRootElement**(`blueprint`): `HTMLElement`
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:213](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L213)
+Defined in: use-react/src/UseReactPageInternals.ts:252
 
 Get the root element to render the React components.
 

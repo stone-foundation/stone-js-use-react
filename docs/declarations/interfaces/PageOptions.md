@@ -6,7 +6,7 @@
 
 # Interface: PageOptions
 
-Defined in: [use-react/src/declarations.ts:100](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L100)
+Defined in: [use-react/src/declarations.ts:105](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L105)
 
 Options for configuring the `Page` decorator.
 Extends `PageRouteDefinition` but excludes the `methods` property,
@@ -28,7 +28,7 @@ as it is predefined as `'GET'` by the decorator.
 
 > `optional` **headers**: [`HeadersType`](../type-aliases/HeadersType.md)
 
-Defined in: [use-react/src/declarations.ts:102](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L102)
+Defined in: [use-react/src/declarations.ts:107](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L107)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [use-react/src/declarations.ts:102](https://github.com/stonemjs/use-
 
 > `optional` **layout**: `string`
 
-Defined in: [use-react/src/declarations.ts:101](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L101)
+Defined in: [use-react/src/declarations.ts:106](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L106)

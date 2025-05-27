@@ -7,7 +7,7 @@ import {
   AdapterEventBuilderType
 } from '@stone-js/core'
 import { renderToString } from 'react-dom/server'
-import { buildAdapterErrorComponent, htmlTemplate } from './UseReactComponentUtils'
+import { buildAdapterErrorComponent, htmlTemplate } from './UseReactPageInternals'
 
 /**
  * UseReactServerErrorHandler options.

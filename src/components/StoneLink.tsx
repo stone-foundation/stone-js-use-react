@@ -4,9 +4,9 @@ import { NavigateOptions, Router } from '@stone-js/router'
 import { FunctionComponent, MouseEvent, ReactNode, useContext } from 'react'
 
 /**
- * Options for configuring the Stone Link component.
+ * Base properties for the Stone Link component.
  */
-export interface StoneLinkOptions {
+interface BaseProps {
   rel?: string
   href?: string
   target?: string
@@ -15,9 +15,15 @@ export interface StoneLinkOptions {
   className?: string
   children: ReactNode
   defaultNav?: boolean
-  to: string | NavigateOptions
   ariaCurrentValue?: 'time' | 'location' | 'page' | 'step' | 'date' | 'true' | 'false'
 }
+
+/**
+ * Options for configuring the Stone Link component.
+ */
+export type StoneLinkOptions =
+  | (BaseProps & { href: string, to?: string | NavigateOptions })
+  | (BaseProps & { href?: undefined, to: string | NavigateOptions })
 
 /**
  * A navigation component that renders either an `<a>` or `<button>` element
@@ -60,7 +66,7 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
     const router = useContext(StoneContext).container.resolve<Router>(Router)
     const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
       event.preventDefault()
-      router.navigate(to)
+      router.navigate(to ?? href ?? '')
     }
     const path = isObjectLikeModule<NavigateOptions>(to) ? router.generate(to) : (to ?? href)
 

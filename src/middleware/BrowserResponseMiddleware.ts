@@ -6,7 +6,7 @@ import { UseReactError } from '../errors/UseReactError'
 import { HeadContext, NAVIGATION_EVENT } from '@stone-js/router'
 import { IBlueprint, isEmpty, isNotEmpty } from '@stone-js/core'
 import { BrowserAdapterResponseBuilder } from '@stone-js/browser-adapter'
-import { hydrateReactApp, renderReactApp } from '../UseReactComponentUtils'
+import { hydrateReactApp, renderReactApp } from '../UseReactPageInternals'
 import { BrowserResponseContent, ReactBrowserAdapterContext } from '../declarations'
 import { OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
 

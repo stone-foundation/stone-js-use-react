@@ -6,7 +6,7 @@
 
 # Interface: UseReactServiceProviderOptions
 
-Defined in: use-react/src/UseReactServiceProvider.ts:10
+Defined in: [use-react/src/UseReactServiceProvider.ts:10](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L10)
 
 Options for configuring the use-react service provider.
 
@@ -16,4 +16,4 @@ Options for configuring the use-react service provider.
 
 > **container**: `Container`
 
-Defined in: use-react/src/UseReactServiceProvider.ts:11
+Defined in: [use-react/src/UseReactServiceProvider.ts:11](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L11)

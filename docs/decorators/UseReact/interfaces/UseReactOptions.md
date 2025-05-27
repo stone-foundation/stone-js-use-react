@@ -6,7 +6,7 @@
 
 # Interface: UseReactOptions
 
-Defined in: [use-react/src/decorators/UseReact.ts:8](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/decorators/UseReact.ts#L8)
+Defined in: [use-react/src/decorators/UseReact.ts:8](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/decorators/UseReact.ts#L8)
 
 UseReact decorator options.
 
@@ -16,25 +16,25 @@ UseReact decorator options.
 
 ## Properties
 
-### adapterErrorHandlers?
+### adapterErrorPages?
 
-> `optional` **adapterErrorHandlers**: `Record`\<`string`, [`MetaAdapterErrorPage`](../../../declarations/interfaces/MetaAdapterErrorPage.md)\<`unknown`, `unknown`, `unknown`\>\>
+> `optional` **adapterErrorPages**: `Record`\<`string`, [`MetaAdapterErrorPage`](../../../declarations/interfaces/MetaAdapterErrorPage.md)\<`unknown`, `unknown`, `unknown`\>\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:39](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L39)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:39](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L39)
 
-A map of error handlers for adapter-level errors.
+A map of error pages for adapter-level errors.
 
 #### Inherited from
 
-`Partial.adapterErrorHandlers`
+`Partial.adapterErrorPages`
 
 ***
 
 ### componentEventHandler?
 
-> `optional` **componentEventHandler**: [`IPage`](../../../declarations/interfaces/IPage.md)\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>
+> `optional` **componentEventHandler**: [`MetaPage`](../../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:29](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L29)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:29](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L29)
 
 Handles incoming events for the root React component.
 
@@ -44,17 +44,17 @@ Handles incoming events for the root React component.
 
 ***
 
-### errorHandlers?
+### errorPages?
 
-> `optional` **errorHandlers**: `Record`\<`string`, [`MetaErrorPage`](../../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
+> `optional` **errorPages**: `Record`\<`string`, [`MetaErrorPage`](../../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)\>\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:34](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L34)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:34](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L34)
 
-A map of error handlers for specific components.
+A map of error pages for specific components.
 
 #### Inherited from
 
-`Partial.errorHandlers`
+`Partial.errorPages`
 
 ***
 
@@ -62,7 +62,7 @@ A map of error handlers for specific components.
 
 > `optional` **htmlTemplatePath**: `string`
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:19](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L19)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:19](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L19)
 
 Path to the HTML template used for server-side rendering.
 
@@ -76,7 +76,7 @@ Path to the HTML template used for server-side rendering.
 
 > `optional` **layout**: `Record`\<`string`, [`MetaPageLayout`](../../../declarations/interfaces/MetaPageLayout.md)\>
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:24](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L24)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:24](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L24)
 
 A map of layout components with their respective event handlers.
 
@@ -90,7 +90,7 @@ A map of layout components with their respective event handlers.
 
 > `optional` **rootElementId**: `string`
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:14](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/options/UseReactBlueprint.ts#L14)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:14](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L14)
 
 The ID of the root DOM element where React will be mounted.
 

@@ -6,7 +6,7 @@
 
 # Interface: AdapterErrorPageOptions
 
-Defined in: [use-react/src/declarations.ts:122](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L122)
+Defined in: [use-react/src/declarations.ts:127](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L127)
 
 Options for configuring the `AdapterErrorPage` decorator.
 
@@ -20,7 +20,7 @@ Options for configuring the `AdapterErrorPage` decorator.
 
 > `optional` **adapterAlias**: `string`
 
-Defined in: core/dist/index.d.ts:948
+Defined in: core/dist/index.d.ts:956
 
 The alias name for which the AdapterErrorHandler is used.
 
@@ -34,7 +34,7 @@ The alias name for which the AdapterErrorHandler is used.
 
 > **error**: `string` \| `string`[]
 
-Defined in: core/dist/index.d.ts:944
+Defined in: core/dist/index.d.ts:952
 
 Additional configuration settings for the AdapterErrorHandler, if needed.
 
@@ -48,7 +48,7 @@ Additional configuration settings for the AdapterErrorHandler, if needed.
 
 > `optional` **layout**: `string`
 
-Defined in: [use-react/src/declarations.ts:123](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L123)
+Defined in: [use-react/src/declarations.ts:128](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L128)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [use-react/src/declarations.ts:123](https://github.com/stonemjs/use-
 
 > `optional` **platform**: `string`
 
-Defined in: core/dist/index.d.ts:952
+Defined in: core/dist/index.d.ts:960
 
 The platform name for which the AdapterErrorHandler is used.
 

@@ -1,33 +1,38 @@
-// import { describe, it, expect, vi } from 'vitest'
-// import * as Utils from '../../src/BlueprintUtils'
-// import { render, screen } from '@testing-library/react'
-// import { StoneClient } from '../../src/components/StoneClient'
+import { render } from '@testing-library/react'
+import { isClient } from '../../src/UseReactPageInternals'
+import { StoneClient } from '../../src/components/StoneClient'
 
-// describe('StoneClient', () => {
-//   it('should render children when isClient returns true', () => {
-//     // Mock isClient to return true
-//     vi.spyOn(Utils, 'isClient').mockReturnValue(true)
+// Mock isClient from UseReactPageInternals
+vi.mock('../../src/UseReactPageInternals', async (mod) => {
+  const actual: any = await mod()
+  return {
+    ...actual,
+    isClient: vi.fn()
+  }
+})
 
-//     render(
-//       <StoneClient>
-//         <span data-testid='client-content'>Client Only</span>
-//       </StoneClient>
-//     )
+describe('StoneClient', () => {
+  it('should render children if isClient returns true', () => {
+    vi.mocked(isClient).mockReturnValue(true)
 
-//     expect(screen.getByTestId('client-content')).toBeInTheDocument()
-//   })
+    const { container } = render(
+      <StoneClient>
+        <p>Client Only</p>
+      </StoneClient>
+    )
 
-//   it('should render nothing when isClient returns false', () => {
-//     // Mock isClient to return false
-//     vi.spyOn(Utils, 'isClient').mockReturnValue(false)
+    expect(container.innerHTML).toContain('Client Only')
+  })
 
-//     const { container } = render(
-//       <StoneClient>
-//         <span data-testid='client-content'>Client Only</span>
-//       </StoneClient>
-//     )
+  it('should render nothing if isClient returns false', () => {
+    vi.mocked(isClient).mockReturnValue(false)
 
-//     // Should render an empty fragment
-//     expect(container).toBeEmptyDOMElement()
-//   })
-// })
+    const { container } = render(
+      <StoneClient>
+        <p>Client Only</p>
+      </StoneClient>
+    )
+
+    expect(container.innerHTML).toBe('')
+  })
+})

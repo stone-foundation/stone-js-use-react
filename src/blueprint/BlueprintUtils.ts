@@ -1,13 +1,13 @@
-import { FactoryPage, PageClass, ReactIncomingEvent } from '../declarations'
-import { mergeBlueprints, stoneBlueprint, StoneBlueprint } from '@stone-js/core'
 import { UseReactAppConfig, useReactBlueprint } from '../options/UseReactBlueprint'
+import { FactoryPage, PageClass, PageType, ReactIncomingEvent } from '../declarations'
+import { isFunctionModule, isNotEmpty, isObjectLikeModule, mergeBlueprints, stoneBlueprint, StoneBlueprint } from '@stone-js/core'
 
 /**
- * Declares a complete Stone-React application blueprint using a factory-based event handler.
+ * Defines a Stone React app using a factory-based main handler.
  *
- * @param module - A factory function that returns an event handler.
- * @param options - Application-level configuration.
- * @param blueprints - Additional partial blueprints to merge.
+ * @param module - A factory function for the main page.
+ * @param options - Optional application-level configuration.
+ * @param blueprints - Additional blueprints to merge.
  * @returns A fully merged Stone blueprint.
  */
 export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncomingEvent> (
@@ -17,52 +17,85 @@ export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncoming
 ): StoneBlueprint<U>
 
 /**
- * Declares a complete Stone-React application blueprint using a class-based event handler.
+ * Defines a Stone React app using a class-based main handler.
  *
- * @param module - A class constructor for the event handler.
- * @param options - Application-level configuration.
- * @param blueprints - Additional partial blueprints to merge.
+ * @param module - A class constructor for the main page.
+ * @param options - Optional application-level configuration.
+ * @param blueprints - Additional blueprints to merge.
  * @returns A fully merged Stone blueprint.
  */
 export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncomingEvent> (
   module: PageClass<U>,
-  options: Partial<UseReactAppConfig> & { isClass: true },
+  options: Partial<UseReactAppConfig> & { isClass: boolean },
   blueprints?: Array<StoneBlueprint<any, any> & Record<string, any>>
 ): StoneBlueprint<U>
 
 /**
- * Declares a complete Stone-React application blueprint.
+ * Defines a Stone React app without a main handler (router-only).
  *
- * This utility combines a main event handler with additional blueprints and configuration options
- * to define a full application. The event handler can be class-based, or factory-based.
- *
- * @param module - A factory, or class that handles incoming events.
- * @param options - Optional application-level configuration (log level, middleware, lifecycle, etc.)
- * @param blueprints - Additional partial blueprints to merge into the final one.
- * @returns A fully merged Stone blueprint representing the application.
+ * @param options - Application-level configuration.
+ * @param blueprints - Additional blueprints to merge.
+ * @returns A fully merged Stone blueprint.
  */
 export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncomingEvent> (
-  module: PageClass<U> | FactoryPage<U>,
-  options: Partial<UseReactAppConfig> & { isClass?: boolean } = {},
-  blueprints: Array<StoneBlueprint<any, any> & Record<string, any>> = []
+  options?: Partial<UseReactAppConfig>,
+  blueprints?: Array<StoneBlueprint<any, any> & Record<string, any>>
+): StoneBlueprint<U>
+
+/**
+ * Defines a Stone React app using a factory-based or class-based main handler.
+ *
+ * @param moduleOrOptions - A factory function or class constructor for the main page.
+ * @param optionsOrBlueprints - Optional application-level configuration.
+ * @param maybeBlueprints - Additional blueprints to merge.
+ * @returns A fully merged Stone blueprint.
+ */
+export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncomingEvent> (
+  moduleOrOptions: PageType<U> | Partial<UseReactAppConfig> = {},
+  optionsOrBlueprints?: (Partial<UseReactAppConfig> & { isClass?: boolean }) | Array<StoneBlueprint<any, any> & Record<string, any>>,
+  maybeBlueprints?: Array<StoneBlueprint<any, any> & Record<string, any>>
 ): StoneBlueprint<ReactIncomingEvent> {
+  let module: PageClass<U> | FactoryPage<U> | undefined
+  let options: Partial<UseReactAppConfig> & { isClass?: boolean } = {}
+  let blueprints: Array<StoneBlueprint<any, any> & Record<string, any>> = []
+
+  // Pattern: defineStoneReactApp(handler, options?, blueprints?)
+  if (isFunctionModule<PageClass<U> | FactoryPage<U>>(moduleOrOptions)) {
+    module = moduleOrOptions
+
+    if (
+      isObjectLikeModule<Partial<UseReactAppConfig>>(optionsOrBlueprints)
+    ) {
+      options = optionsOrBlueprints
+      blueprints = Array.isArray(maybeBlueprints) ? maybeBlueprints : []
+    }
+  } else if (
+    isObjectLikeModule<Partial<UseReactAppConfig>>(moduleOrOptions)
+  ) { // Pattern: defineStoneReactApp(options, blueprints?)
+    options = moduleOrOptions
+    blueprints = Array.isArray(optionsOrBlueprints) ? optionsOrBlueprints : []
+  }
+
+  const stonePart: Record<string, any> = {
+    ...options,
+    useReact: {
+      ...options.useReact
+    }
+  }
+
+  if (isNotEmpty(module)) {
+    stonePart.useReact.componentEventHandler = {
+      module,
+      isComponent: true,
+      isClass: options.isClass,
+      isFactory: options.isClass !== true
+    }
+  }
+
   return mergeBlueprints<ReactIncomingEvent>(
     stoneBlueprint,
     useReactBlueprint,
     ...blueprints,
-    {
-      stone: {
-        ...options,
-        useReact: {
-          ...options.useReact,
-          componentEventHandler: {
-            module,
-            isComponent: true,
-            isClass: options.isClass,
-            isFactory: options.isClass !== true
-          }
-        }
-      }
-    }
+    { stone: stonePart }
   )
 }

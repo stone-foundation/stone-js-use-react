@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactComponentUtils](../README.md) / resolveComponent
+[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / resolveComponent
 
 # Function: resolveComponent()
 
 > **resolveComponent**\<`T`\>(`container`, `metaComponent`?): `Promise`\<`undefined` \| `T`\>
 
-Defined in: [use-react/src/UseReactComponentUtils.ts:187](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/UseReactComponentUtils.ts#L187)
+Defined in: use-react/src/UseReactPageInternals.ts:202
 
 Resolve the event handler for the component.
 

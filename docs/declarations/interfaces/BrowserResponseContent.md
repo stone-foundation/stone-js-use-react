@@ -6,7 +6,7 @@
 
 # Interface: BrowserResponseContent
 
-Defined in: [use-react/src/declarations.ts:152](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L152)
+Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L157)
 
 Browser response content for React.
 
@@ -16,7 +16,7 @@ Browser response content for React.
 
 > `optional` **app**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:154](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L154)
+Defined in: [use-react/src/declarations.ts:159](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L159)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:154](https://github.com/stonemjs/use-
 
 > `optional` **component**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L157)
+Defined in: [use-react/src/declarations.ts:162](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L162)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-
 
 > `optional` **fullRender**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:156](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L156)
+Defined in: [use-react/src/declarations.ts:161](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L161)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:156](https://github.com/stonemjs/use-
 
 > `optional` **head**: [`HeadContext`](HeadContext.md)
 
-Defined in: [use-react/src/declarations.ts:155](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L155)
+Defined in: [use-react/src/declarations.ts:160](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L160)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [use-react/src/declarations.ts:155](https://github.com/stonemjs/use-
 
 > `optional` **ssr**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:153](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L153)
+Defined in: [use-react/src/declarations.ts:158](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L158)
 
 ***
 
@@ -56,4 +56,4 @@ Defined in: [use-react/src/declarations.ts:153](https://github.com/stonemjs/use-
 
 > `optional` **targetUrl**: `string` \| `URL`
 
-Defined in: [use-react/src/declarations.ts:158](https://github.com/stonemjs/use-react/blob/9a749b225241b8e0ac2a5483904ca8322927b1d4/src/declarations.ts#L158)
+Defined in: [use-react/src/declarations.ts:163](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L163)
