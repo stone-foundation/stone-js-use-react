@@ -3,7 +3,7 @@ import { defineAdapterErrorPage } from '../../src/blueprint/AdapterUtils'
 
 describe('defineAdapterErrorPage', () => {
   it('defines a factory-based adapter error page with default error name', () => {
-    const factory = () => ({ render: () => 'component' })
+    const factory = (): any => ({ render: () => 'component' })
     const result = defineAdapterErrorPage(factory)
 
     expect(result).toEqual({
@@ -22,7 +22,7 @@ describe('defineAdapterErrorPage', () => {
   })
 
   it('defines a factory-based error page with a single error name', () => {
-    const factory = () => ({ render: () => 'component' })
+    const factory = (): any => ({ render: () => 'component' })
     const options: AdapterErrorPageOptions = { error: 'NotFound', layout: 'main' }
     const result = defineAdapterErrorPage(factory, options)
 
@@ -43,7 +43,7 @@ describe('defineAdapterErrorPage', () => {
   })
 
   it('defines a factory-based error page with multiple error names', () => {
-    const factory = () => ({ render: () => 'component' })
+    const factory = (): any => ({ render: () => 'component' })
     const options: AdapterErrorPageOptions = { error: ['A', 'B'], layout: 'err' }
     const result = defineAdapterErrorPage(factory, options)
 
@@ -65,7 +65,7 @@ describe('defineAdapterErrorPage', () => {
 
   it('defines a class-based error page with isClass: true', () => {
     class MyErrorComponent {
-      render () {
+      render (): string {
         return 'Error Component'
       }
     }

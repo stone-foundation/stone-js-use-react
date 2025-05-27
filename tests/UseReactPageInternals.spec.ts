@@ -1,10 +1,12 @@
 import { ReactElement } from 'react'
+import { createRoot } from 'react-dom/client'
 import { StonePage } from '../src/components/StonePage'
 import { StoneError } from '../src/components/StoneError'
 import { UseReactError } from '../src/errors/UseReactError'
 import { applyHeadContextToHtmlString } from '../src/DomUtils'
-import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, htmlTemplate, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
-import { createRoot, hydrateRoot } from 'react-dom/client'
+import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
+
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 
 vi.mock('react-dom/client', async (importOriginal) => {
   const actual: any = await importOriginal()
@@ -37,7 +39,7 @@ describe('buildAppComponent', () => {
       })
     }
 
-    const PageComponent = () => 'Page'
+    const PageComponent = (): string => 'Page'
 
     const data = { msg: 'hello' }
     const component = PageComponent
@@ -51,8 +53,8 @@ describe('buildAppComponent', () => {
 
   it('renders layout with page inside and wraps in <StonePage>', async () => {
     const event = {} as any
-    const Layout = (props: any) => `Layout(${props.children})`
-    const pageLayout = () => ({ render: Layout })
+    const Layout = (props: any): string => `Layout(${String(props.children)})`
+    const pageLayout = (): any => ({ render: Layout })
 
     const container: any = {
       make: vi.fn().mockReturnValue({
@@ -60,7 +62,7 @@ describe('buildAppComponent', () => {
       })
     }
 
-    const PageComponent = () => 'Page'
+    const PageComponent = (): string => 'Page'
 
     const layout = 'default'
     const data = { msg: 'hello' }
@@ -69,7 +71,7 @@ describe('buildAppComponent', () => {
     const result = await buildAppComponent(event, container, component, layout, data) as ReactElement<any, any>
 
     expect(result.type).toBe(StonePage)
-    expect(result.props.children.type).toBeInstanceOf(Function)
+    expect(result.props.children.type({ children: PageComponent })).toBe(Layout({ children: PageComponent }))
     expect(result.props.context).toEqual({ event, container, data })
     expect(result.props.children.props.children.type).toBe(PageComponent)
   })
@@ -135,68 +137,96 @@ describe('buildAdapterErrorComponent', () => {
     context = { rawResponseBuilder: { add: vi.fn() } }
   })
 
-  // it('returns full layout with component as children (class modules)', async () => {
-  //   const LayoutComponent = vi.fn(() => 'LayoutComponent')
-  //   const ErrorComponent = vi.fn(() => 'ErrorComponent')
+  it('returns full layout with component as children (factory modules)', async () => {
+    const handler = {
+      handle: vi.fn(),
+      render: () => 'ErrorComponent'
+    }
+    const layoutHandler = {
+      render: () => 'LayoutComponent'
+    }
 
-  //   const handler = {
-  //     render: vi.fn().mockReturnValue(ErrorComponent),
-  //     handle: vi.fn()
-  //   }
-  //   const layoutHandler = {
-  //     render: vi.fn().mockReturnValue(LayoutComponent)
-  //   }
+    const handlerMeta = {
+      lazy: false,
+      isFactory: true,
+      module: () => handler
+    }
+    const layoutMeta = {
+      lazy: false,
+      isFactory: true,
+      module: () => layoutHandler
+    }
 
-  //   const handlerMeta = {
-  //     module: function () {},
-  //     lazy: false
-  //   }
-  //   const layoutMeta = {
-  //     module: function () {},
-  //     lazy: false
-  //   }
+    blueprint = {
+      get: vi.fn()
+        .mockReturnValueOnce(handlerMeta) // error handler
+        .mockReturnValueOnce(layoutMeta) // layout handler
+    }
 
-  //   handlerMeta.module.prototype = { constructor: vi.fn(() => handler) }
-  //   layoutMeta.module.prototype = { constructor: vi.fn(() => layoutHandler) }
+    const result = await buildAdapterErrorComponent(blueprint, context, statusCode, error) as ReactElement<any, any>
 
-  //   blueprint = {
-  //     get: vi.fn()
-  //       .mockReturnValueOnce(handlerMeta) // error handler
-  //       .mockReturnValueOnce(layoutMeta)  // layout handler
-  //   }
+    expect(result?.type()).toBe(layoutHandler.render())
+    expect(result?.props.children.type()).toBe(handler.render())
+  })
 
-  //   const result = await buildAdapterErrorComponent(blueprint, context, statusCode, error) as ReactElement<any, any>
+  it('returns full layout with component as children (class modules)', async () => {
+    class Handler {
+      handle = vi.fn()
+      render = (): string => 'ErrorComponent'
+    }
 
-  //   expect(handler.render).toHaveBeenCalled()
-  //   expect(layoutHandler.render).toHaveBeenCalled()
-  //   expect(result?.type).toBe(layoutHandler.render())
-  //   expect(result?.props.children.type).toBe(handler.render())
-  // })
+    class LayoutHandler {
+      render = (): string => 'LayoutComponent'
+    }
 
-  // it('returns component alone if layout is missing', async () => {
-  //   const ErrorComponent = vi.fn(() => 'ErrorOnly')
-  //   const handler = {
-  //     render: vi.fn().mockReturnValue(ErrorComponent),
-  //     handle: vi.fn()
-  //   }
+    const handlerMeta = {
+      lazy: false,
+      isClass: true,
+      module: Handler
+    }
+    const layoutMeta = {
+      lazy: false,
+      isClass: true,
+      module: LayoutHandler
+    }
 
-  //   const handlerMeta = {
-  //     module: function () {},
-  //     lazy: false
-  //   }
-  //   handlerMeta.module.prototype = { constructor: vi.fn(() => handler) }
+    // @ts-expect-error
+    error.name = undefined
 
-  //   blueprint = {
-  //     get: vi.fn()
-  //       .mockReturnValueOnce(handlerMeta) // error handler
-  //       .mockReturnValueOnce(undefined)   // layout handler not found
-  //   }
+    blueprint = {
+      get: vi.fn()
+        .mockReturnValueOnce(handlerMeta) // error handler
+        .mockReturnValueOnce(layoutMeta) // layout handler
+    }
 
-  //   const result = await buildAdapterErrorComponent(blueprint, context, statusCode, error) as ReactElement<any, any>
+    const result = await buildAdapterErrorComponent(blueprint, context, statusCode, error) as ReactElement<any, any>
 
-  //   expect(handler.render).toHaveBeenCalled()
-  //   expect(result?.type).toBe(handler.render())
-  // })
+    expect(result?.type()).toBe(new LayoutHandler().render())
+    expect(result?.props.children.type()).toBe(new Handler().render())
+  })
+
+  it('returns component alone if layout is missing', async () => {
+    class Handler {
+      handle = vi.fn()
+      render = (): string => 'ErrorComponent'
+    }
+
+    const handlerMeta = {
+      lazy: false,
+      isClass: true,
+      module: Handler
+    }
+
+    blueprint = {
+      get: vi.fn()
+        .mockReturnValueOnce(handlerMeta) // error handler
+        .mockReturnValueOnce(undefined) // layout handler not found
+    }
+
+    const result = await buildAdapterErrorComponent(blueprint, context, statusCode, error) as ReactElement<any, any>
+
+    expect(result?.type()).toBe(new Handler().render())
+  })
 
   it('returns StoneError if nothing found', async () => {
     blueprint = {
@@ -359,7 +389,7 @@ describe('renderReactApp', () => {
 
     const blueprint = {
       get: vi.fn(v => v === 'stone.useReact.reactRoot' ? undefined : 'app-root'),
-      setIf: vi.fn(),
+      setIf: vi.fn()
     }
 
     vi.mocked(createRoot).mockReturnValue(root as any)
@@ -373,14 +403,13 @@ describe('renderReactApp', () => {
 
 describe('hydrateReactApp', () => {
   it('hydrates the app and stores root in blueprint', () => {
-    const root: any = { render: vi.fn() }
     const rootElement = document.createElement('div')
     rootElement.id = 'app-root'
     document.body.appendChild(rootElement)
 
     const blueprint: any = {
       setIf: vi.fn(),
-      get: vi.fn(v => 'app-root'),
+      get: vi.fn(v => 'app-root')
     }
 
     const result: any = hydrateReactApp('App', blueprint)

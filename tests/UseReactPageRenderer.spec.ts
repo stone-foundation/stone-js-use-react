@@ -2,44 +2,44 @@ import { ResponseSnapshotType } from '../src/declarations'
 import { isSSR, resolveComponent } from '../src/UseReactPageInternals'
 import { prepareErrorPage, prepareFallbackErrorPage, preparePage } from '../src/UseReactPageRenderer'
 
-const createMockContainer = () => ({
+const createMockContainer = (): any => ({
   make: vi.fn((key: string) => {
     if (key === 'blueprint') {
       return {
         get: vi.fn().mockImplementation((key: string) => {
           if (key.includes('default')) return { layout: 'default', module: {} }
           return {}
-        }),
+        })
       }
     }
     if (key === 'snapshot') {
       return {
-        add: vi.fn().mockReturnValue({ toJson: () => '{}' }),
+        add: vi.fn().mockReturnValue({ toJson: () => '{}' })
       }
     }
   }),
-  resolve: vi.fn(),
+  resolve: vi.fn()
 })
 
-const createMockResponse = () => ({
+const createMockResponse = (): any => ({
   content: {
     error: { name: 'ErrorName' },
-    layout: 'default',
+    layout: 'default'
   },
   setContent: vi.fn().mockReturnThis(),
   setStatus: vi.fn().mockReturnThis(),
-  statusCode: 500,
+  statusCode: 500
 })
 
-const createMockEvent = () => ({
-  fingerprint: vi.fn().mockReturnValue('event-id'),
+const createMockEvent = (): any => ({
+  fingerprint: vi.fn().mockReturnValue('event-id')
 })
 
 const createSnapshot = (): ResponseSnapshotType => ({
   ssr: false,
   error: { name: 'ErrorName' },
   layout: 'default',
-  statusCode: 500,
+  statusCode: 500
 })
 
 vi.mock('../src/UseReactPageInternals', async () => {
@@ -49,7 +49,7 @@ vi.mock('../src/UseReactPageInternals', async () => {
     resolveComponent: vi.fn().mockResolvedValue({
       render: vi.fn().mockReturnValue(() => {}),
       handle: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
-      head: vi.fn().mockResolvedValue(undefined),
+      head: vi.fn().mockResolvedValue(undefined)
     }),
     executeHandler: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
     executeHooks: vi.fn().mockResolvedValue(undefined),
@@ -57,7 +57,7 @@ vi.mock('../src/UseReactPageInternals', async () => {
     buildAppComponent: vi.fn().mockResolvedValue('<div>App</div>'),
     getServerContent: vi.fn().mockResolvedValue('<html>SSR</html>'),
     getBrowserContent: vi.fn().mockReturnValue({ head: {}, app: '<div>App</div>' }),
-    isSSR: vi.fn().mockReturnValue(false),
+    isSSR: vi.fn().mockReturnValue(false)
   }
 })
 
@@ -125,7 +125,7 @@ describe('UseReactPageRenderer', () => {
       vi.mocked(resolveComponent).mockResolvedValue({
         render: vi.fn().mockReturnValue(() => {}),
         handle: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
-        head: vi.fn().mockResolvedValue(undefined),
+        head: vi.fn().mockResolvedValue(undefined)
       })
 
       const container: any = createMockContainer()

@@ -5,7 +5,7 @@ describe('defineStoneReactApp', () => {
   const mockBlueprint = { stone: { useReact: { custom: true } } }
 
   it('creates blueprint using factory module (default)', () => {
-    const handler = () => ({ render: () => 'Main' })
+    const handler = (): any => ({ render: () => 'Main' })
     const result = defineStoneReactApp(handler) as UseReactBlueprint
 
     expect(result.stone.useReact.componentEventHandler).toEqual({
@@ -18,7 +18,7 @@ describe('defineStoneReactApp', () => {
 
   it('creates blueprint using class module (isClass: true)', () => {
     class Page {
-      render () {
+      render (): string {
         return 'Main'
       }
     }
@@ -49,7 +49,7 @@ describe('defineStoneReactApp', () => {
   })
 
   it('creates blueprint with handler + blueprints array', () => {
-    const handler = () => ({ render: () => 'Main' })
+    const handler = (): any => ({ render: () => 'Main' })
     const result = defineStoneReactApp(handler, {}, [mockBlueprint]) as UseReactBlueprint
 
     expect(result.stone.useReact.componentEventHandler?.module).toBe(handler)
@@ -57,7 +57,7 @@ describe('defineStoneReactApp', () => {
 
   it('creates blueprint with class handler + options + blueprints', () => {
     class MyPage {
-      render () {
+      render (): string {
         return 'Main'
       }
     }

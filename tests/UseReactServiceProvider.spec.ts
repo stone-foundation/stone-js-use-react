@@ -25,22 +25,22 @@ describe('UseReactServiceProvider', () => {
     vi.restoreAllMocks()
   })
 
-  it('should call registerSnapshot in register()', () => {
+  it('should call registerSnapshot in register()', async () => {
     const provider = new UseReactServiceProvider(container)
     // @ts-expect-error - private access
     provider.registerSnapshot = vi.fn()
-    provider.register()
+    await provider.register()
 
     // @ts-expect-error - private access
     expect(provider.registerSnapshot).toHaveBeenCalled()
   })
 
-  it('should set ReactRuntime.instance in boot()', () => {
-    const mockRuntime = {} as ReactRuntime
+  it('should set ReactRuntime.instance in boot()', async () => {
+    const mockRuntime = {} as unknown as ReactRuntime
     vi.spyOn(container, 'make').mockReturnValue(mockRuntime)
 
     const provider = new UseReactServiceProvider(container)
-    provider.boot()
+    await provider.boot()
 
     expect(container.make).toHaveBeenCalledWith(ReactRuntime)
     expect(ReactRuntime.instance).toBe(mockRuntime)

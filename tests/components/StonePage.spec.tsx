@@ -24,7 +24,7 @@ describe('StonePage', () => {
   it('provides context to child components', () => {
     let receivedContext: StoneContextType | undefined
 
-    const ChildComponent = () => {
+    const ChildComponent = (): any => {
       receivedContext = React.useContext(StoneContext)
       return <div>Child</div>
     }

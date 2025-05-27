@@ -1,3 +1,4 @@
+/* c8 ignore next */
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'

@@ -1,9 +1,11 @@
 import { GET } from '@stone-js/router'
 import { definePage, definePageLayout, defineErrorPage } from '../../src/blueprint/KernelUtils'
+import { ReactNode } from 'react'
+import { IPage } from '../../src/declarations'
 
 describe('definePage', () => {
   it('defines a factory-based page', () => {
-    const factory = () => ({ render: () => 'component' })
+    const factory = (): any => ({ render: () => 'component' })
     const result: any = definePage(factory, { path: '/home', layout: 'main' })
 
     expect(result.stone.router.definitions).toEqual([
@@ -25,8 +27,8 @@ describe('definePage', () => {
   })
 
   it('defines a class-based page', () => {
-    class Page {
-      render () {
+    class Page implements IPage<any> {
+      render (): ReactNode {
         return 'Page Content'
       }
     }
@@ -44,7 +46,7 @@ describe('definePage', () => {
 
 describe('definePageLayout', () => {
   it('defines a factory-based layout with default name', () => {
-    const layoutFactory = () => ({ render: () => 'Layout' })
+    const layoutFactory = (): any => ({ render: () => 'Layout' })
     const result = definePageLayout(layoutFactory)
 
     expect(result.stone.useReact.layout?.default).toEqual({
@@ -56,7 +58,7 @@ describe('definePageLayout', () => {
 
   it('defines a class-based layout with custom name', () => {
     class Layout {
-      render () {
+      render (): string {
         return 'Layout Content'
       }
     }
@@ -72,7 +74,7 @@ describe('definePageLayout', () => {
 
 describe('defineErrorPage', () => {
   it('defines a factory-based error page with default error name', () => {
-    const errorFactory = () => ({ render: () => 'Error Page' })
+    const errorFactory = (): any => ({ render: () => 'Error Page' })
     const result = defineErrorPage(errorFactory)
 
     expect(result.stone.useReact.errorPages?.default).toEqual({
@@ -83,7 +85,7 @@ describe('defineErrorPage', () => {
   })
 
   it('defines a factory-based error page with custom error name', () => {
-    const errorFactory = () => ({ render: () => 'Not Found' })
+    const errorFactory = (): any => ({ render: () => 'Not Found' })
     const result = defineErrorPage(errorFactory, { error: 'NotFound', layout: 'minimal' })
 
     expect(result.stone.useReact.errorPages?.NotFound).toEqual({
@@ -96,7 +98,7 @@ describe('defineErrorPage', () => {
 
   it('defines a class-based error page with multiple error names', () => {
     class CrashPage {
-      render () {
+      render (): string {
         return 'Crash Page'
       }
     }

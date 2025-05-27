@@ -13,7 +13,7 @@ vi.mock('react-dom/server', () => ({
 
 describe('UseReactServerErrorHandler', () => {
   const loggerError = vi.fn()
-  const blueprint = {} as IBlueprint
+  const blueprint = {} as unknown as IBlueprint
   const logger = { error: loggerError } as unknown as ILogger
 
   beforeEach(() => {
@@ -75,7 +75,7 @@ describe('UseReactServerErrorHandler', () => {
     const error = { message: 'Oops' }
 
     const fakeTemplate = '<html><!--app-html--></html>'
-    const fakeComponent = () => null
+    const fakeComponent = (): any => null
     const rendered = '<div>Rendered</div>'
 
     vi.mocked(Utils.htmlTemplate).mockResolvedValue(fakeTemplate)

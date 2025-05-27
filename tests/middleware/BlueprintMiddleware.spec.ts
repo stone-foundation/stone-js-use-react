@@ -17,7 +17,7 @@ beforeEach(() => {
   vi.clearAllMocks()
 })
 
-const mockBlueprint = () => {
+const mockBlueprint = (): any => {
   const store: Record<string, any> = {}
   return {
     get: vi.fn((key: string, fallback: any) => store[key] ?? fallback),
@@ -25,17 +25,17 @@ const mockBlueprint = () => {
       store[key] = value
     }),
     setIf: vi.fn((key: string, value: any) => {
-      if (!store[key]) store[key] = value
+      if (store[key] === undefined) store[key] = value
     }),
     add: vi.fn((key: string, value: any[]) => {
       if (!Array.isArray(store[key])) store[key] = []
       store[key].push(...value)
     }),
-    has: vi.fn((key: string) => !!store[key])
+    has: vi.fn((key: string) => store[key] !== undefined)
   }
 }
 
-const runMiddleware = async (middleware: any, contextOverrides: any = {}) => {
+const runMiddleware = async (middleware: any, contextOverrides: any = {}): Promise<any> => {
   const blueprint = contextOverrides.blueprint ?? mockBlueprint()
   const modules = contextOverrides.modules ?? []
   const context = {
@@ -79,7 +79,7 @@ describe('BlueprintMiddleware', () => {
     vi.mocked(getMetadata).mockReturnValue({ error: 'NotFound', layout: 'default' })
     const blueprint = mockBlueprint()
 
-    blueprint.set('stone.useReact.errorPages', { NotFound: { module: () => {}}})
+    blueprint.set('stone.useReact.errorPages', { NotFound: { module: () => {} } })
 
     const fakeModule = class {}
     await runMiddleware(SetReactKernelErrorPageMiddleware, {
@@ -98,7 +98,7 @@ describe('BlueprintMiddleware', () => {
     vi.mocked(getMetadata).mockReturnValue({ error: 'default', layout: 'x', adapterAlias: 'a', platform: 'p' })
     const blueprint = mockBlueprint()
 
-    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {}}})
+    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {} } })
 
     const fakeModule = class {}
     await runMiddleware(SetReactAdapterErrorPageMiddleware, {
@@ -118,7 +118,7 @@ describe('BlueprintMiddleware', () => {
     vi.mocked(getMetadata).mockReturnValue({ error: 'default', layout: 'x', adapterAlias: 'a', platform: 'p' })
     const blueprint = mockBlueprint()
 
-    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {}}})
+    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {} } })
 
     const fakeModule = class {}
     await runMiddleware(SetReactAdapterErrorPageMiddleware, {

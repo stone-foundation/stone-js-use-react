@@ -18,7 +18,7 @@ describe('BrowserResponseMiddleware', () => {
   const blueprint = { has: vi.fn().mockReturnValue(false) } as any
   const middleware = new BrowserResponseMiddleware({ blueprint })
 
-  const createResponse = (content: any = {}) => ({
+  const createResponse = (content: any = {}): any => ({
     content
   }) as any
 

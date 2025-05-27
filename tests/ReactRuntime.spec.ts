@@ -14,16 +14,16 @@ vi.mock('../src/DomUtils', () => ({
   applyHeadContextToDom: vi.fn()
 }))
 
-const createMockSnapshot = () => ({
+const createMockSnapshot = (): any => ({
   get: vi.fn(),
   set: vi.fn()
 })
 
-const createMockContainer = () => ({
+const createMockContainer = (): any => ({
   make: vi.fn().mockReturnValue({ fingerprint: () => 'abc123' })
 })
 
-const createMockBlueprint = () => ({
+const createMockBlueprint = (): any => ({
   get: vi.fn()
 })
 

@@ -1,4 +1,4 @@
-import { ILogger, Logger } from '@stone-js/core'
+import { Logger } from '@stone-js/core'
 import { UseReactBrowserErrorHandler } from '../src/UseReactBrowserErrorHandler'
 import { buildAdapterErrorComponent, renderReactApp } from '../src/UseReactPageInternals'
 
@@ -9,8 +9,6 @@ vi.mock('../src/UseReactPageInternals', () => ({
 
 describe('UseReactBrowserErrorHandler', () => {
   const blueprint: any = { get: vi.fn() } as any
-  const loggerError = vi.fn()
-  const logger = { error: loggerError } as unknown as ILogger
   const error: any = new Error('Something went wrong')
   error.statusCode = 500
 
@@ -40,7 +38,7 @@ describe('UseReactBrowserErrorHandler', () => {
   })
 
   it('calls buildAdapterErrorComponent and renderReactApp inside render()', async () => {
-    const App = () => 'ErrorComponent'
+    const App = (): string => 'ErrorComponent'
     error.statusCode = undefined
 
     // @ts-expect-error

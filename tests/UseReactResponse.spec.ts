@@ -24,7 +24,7 @@ vi.mock('@stone-js/browser-core', () => ({
 }))
 
 describe('reactResponse and reactRedirectResponse', () => {
-  const setSSR = (value: boolean) => {
+  const setSSR = (value: boolean): void => {
     import.meta.env.SSR = value
   }
 
