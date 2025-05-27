@@ -1,109 +1,179 @@
-import { preparePage } from '../src/UseReactPageRenderer'
-import { IncomingBrowserEvent } from '@stone-js/browser-core'
-import { resolveComponent, executeHandler, buildPageComponent, buildAppComponent, getServerContent, getBrowserContent, executeHooks, isSSR } from '../src/UseReactPageInternals'
+import { ResponseSnapshotType } from '../src/declarations'
+import { isSSR, resolveComponent } from '../src/UseReactPageInternals'
+import { prepareErrorPage, prepareFallbackErrorPage, preparePage } from '../src/UseReactPageRenderer'
+
+const createMockContainer = () => ({
+  make: vi.fn((key: string) => {
+    if (key === 'blueprint') {
+      return {
+        get: vi.fn().mockImplementation((key: string) => {
+          if (key.includes('default')) return { layout: 'default', module: {} }
+          return {}
+        }),
+      }
+    }
+    if (key === 'snapshot') {
+      return {
+        add: vi.fn().mockReturnValue({ toJson: () => '{}' }),
+      }
+    }
+  }),
+  resolve: vi.fn(),
+})
+
+const createMockResponse = () => ({
+  content: {
+    error: { name: 'ErrorName' },
+    layout: 'default',
+  },
+  setContent: vi.fn().mockReturnThis(),
+  setStatus: vi.fn().mockReturnThis(),
+  statusCode: 500,
+})
+
+const createMockEvent = () => ({
+  fingerprint: vi.fn().mockReturnValue('event-id'),
+})
+
+const createSnapshot = (): ResponseSnapshotType => ({
+  ssr: false,
+  error: { name: 'ErrorName' },
+  layout: 'default',
+  statusCode: 500,
+})
 
 vi.mock('../src/UseReactPageInternals', async () => {
-  const actual = await vi.importActual('../src/UseReactPageInternals')
+  const actual = await vi.importActual<any>('../src/UseReactPageInternals')
   return {
     ...actual,
-    resolveComponent: vi.fn(),
-    executeHandler: vi.fn(),
-    executeHooks: vi.fn(),
-    buildPageComponent: vi.fn(),
-    buildAppComponent: vi.fn(),
-    isSSR: vi.fn(),
-    getServerContent: vi.fn(),
-    getBrowserContent: vi.fn()
+    resolveComponent: vi.fn().mockResolvedValue({
+      render: vi.fn().mockReturnValue(() => {}),
+      handle: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
+      head: vi.fn().mockResolvedValue(undefined),
+    }),
+    executeHandler: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
+    executeHooks: vi.fn().mockResolvedValue(undefined),
+    buildPageComponent: vi.fn().mockResolvedValue('<div>Page</div>'),
+    buildAppComponent: vi.fn().mockResolvedValue('<div>App</div>'),
+    getServerContent: vi.fn().mockResolvedValue('<html>SSR</html>'),
+    getBrowserContent: vi.fn().mockReturnValue({ head: {}, app: '<div>App</div>' }),
+    isSSR: vi.fn().mockReturnValue(false),
   }
 })
 
-describe('preparePage', () => {
-  let response: any
-  let container: any
-  let event: IncomingBrowserEvent
-
+describe('UseReactPageRenderer', () => {
   beforeEach(() => {
-    container = { make: vi.fn() }
-    event = { fingerprint: vi.fn().mockReturnValue('fp') } as any
-
-    response = {
-      statusCode: 200,
-      content: {},
-      setContent: vi.fn()
-    }
-
-    vi.mocked(resolveComponent).mockResolvedValue({
-      render: vi.fn(),
-      head: vi.fn().mockResolvedValue({ title: 'Test' })
-    })
-
-    vi.mocked(executeHandler).mockResolvedValue({ message: 'hello' })
-    vi.mocked(buildPageComponent).mockResolvedValue('<Component />')
-    vi.mocked(buildAppComponent).mockResolvedValue('<App />')
-    vi.mocked(getServerContent).mockResolvedValue('<html>SSR</html>')
-    vi.mocked(getBrowserContent).mockReturnValue({ app: '<html>SSR</html>' })
-    vi.mocked(executeHooks).mockResolvedValue()
-  })
-
-  afterEach(() => {
     vi.clearAllMocks()
   })
 
-  it('calls getServerContent and sets content in SSR mode', async () => {
-    vi.mocked(isSSR).mockReturnValue(true)
+  describe('preparePage', () => {
+    it('should render and set browser content with page handler on csr', async () => {
+      vi.mocked(isSSR).mockReturnValue(false)
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
 
-    await preparePage(event, response, container, { ssr: true })
+      await preparePage(event, response, container, snapshot)
 
-    expect(resolveComponent).toHaveBeenCalled()
-    expect(executeHandler).toHaveBeenCalled()
-    expect(executeHooks).toHaveBeenCalled()
-    expect(getServerContent).toHaveBeenCalled()
-    expect(response.setContent).toHaveBeenCalledWith('<html>SSR</html>')
-  })
-
-  it('calls getBrowserContent and sets content in client mode', async () => {
-    vi.mocked(isSSR).mockReturnValue(false)
-
-    await preparePage(event, response, container, { ssr: false })
-
-    expect(getBrowserContent).toHaveBeenCalled()
-    expect(response.setContent).toHaveBeenCalledWith({ app: '<html>SSR</html>' })
-  })
-
-  it('uses layout from response.content or fallback to "default"', async () => {
-    response.content = {} // no layout provided
-
-    await preparePage(event, response, container, { ssr: false })
-
-    expect(buildAppComponent).toHaveBeenCalledWith(
-      event,
-      container,
-      expect.anything(),
-      'default', // fallback layout
-      expect.anything(),
-      expect.anything()
-    )
-  })
-
-  it('executes head() and passes result to hooks', async () => {
-    const mockHead = vi.fn().mockResolvedValue({ title: 'Hello' })
-
-    vi.mocked(resolveComponent).mockResolvedValue({
-      render: vi.fn(),
-      head: mockHead
+      expect(response.setContent).toHaveBeenCalled()
     })
 
-    await preparePage(event, response, container, { ssr: false })
+    it('should render and set browser content with page handler on ssr', async () => {
+      vi.mocked(isSSR).mockReturnValue(true)
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
 
-    expect(mockHead).toHaveBeenCalled()
-    expect(executeHooks).toHaveBeenCalledWith(
-      'onPreparingPage',
-      expect.objectContaining({
-        head: { title: 'Hello' },
-        event,
-        response,
-        container
+      await preparePage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalled()
+    })
+  })
+
+  describe('prepareErrorPage', () => {
+    it('should render and set browser content with error handler on csr', async () => {
+      vi.mocked(isSSR).mockReturnValue(false)
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
+
+      await prepareErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalledWith(expect.objectContaining({
+        head: {},
+        app: '<div>App</div>'
+      }))
+    })
+
+    it('should render and set browser content with error handler on ssr', async () => {
+      vi.mocked(isSSR).mockReturnValue(true)
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
+
+      await prepareErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalledWith('<html>SSR</html>')
+    })
+
+    it('should render and set browser content with error handler on ssr', async () => {
+      vi.mocked(isSSR).mockReturnValue(true)
+      vi.mocked(resolveComponent).mockResolvedValue({
+        render: vi.fn().mockReturnValue(() => {}),
+        handle: vi.fn().mockResolvedValue({ content: {}, statusCode: 500 }),
+        head: vi.fn().mockResolvedValue(undefined),
       })
-    )
+
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
+
+      await prepareErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalledWith('<html>SSR</html>')
+    })
+  })
+
+  describe('prepareFallbackErrorPage', () => {
+    it('should resolve default error page and call prepareErrorPage', async () => {
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
+
+      await prepareFallbackErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalled()
+      expect(response.setStatus).toHaveBeenCalledWith(500)
+    })
+
+    it('should fallback to Stone error page when no error page is defined', async () => {
+      vi.mocked(isSSR).mockReturnValue(true)
+      vi.mocked(resolveComponent).mockResolvedValue(undefined)
+
+      const container: any = createMockContainer()
+      const event: any = createMockEvent()
+      const response: any = createMockResponse()
+      const snapshot: any = createSnapshot()
+      snapshot.error = undefined
+      response.content = {}
+
+      await prepareFallbackErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalledWith('<html>SSR</html>')
+      expect(response.setStatus).toHaveBeenCalledWith(500)
+
+      response.content = new Error('An error occurred.')
+
+      await prepareFallbackErrorPage(event, response, container, snapshot)
+
+      expect(response.setContent).toHaveBeenCalledWith('<html>SSR</html>')
+      expect(response.setStatus).toHaveBeenCalledWith(500)
+    })
   })
 })

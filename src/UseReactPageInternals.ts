@@ -50,6 +50,9 @@ import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
+/* c8 ignore next -- dynamic import cannot be tested directly */
+const defaultImporter = async (path: string): Promise<Record<string, string>> => await import(/* @vite-ignore */ path)
+
 /**
  * Build the React application for the current route.
  * Or for the main handler if the route is not defined.
@@ -308,9 +311,12 @@ export const isClient = (): boolean => !isServer()
  * @param blueprint - The blueprint.
  * @returns The HTML template.
  */
-export const htmlTemplate = async (blueprint: IBlueprint): Promise<string> => {
+export const htmlTemplate = async (
+  blueprint: IBlueprint,
+  importer: (path: string) => Promise<Record<string, string>> = defaultImporter
+): Promise<string> => {
   const path = blueprint.get<string>('stone.useReact.htmlTemplatePath', './template.mjs')
-  return await import(/* @vite-ignore */path).then(v => Object.values<string>(v)[0])
+  return await importer(path).then(v => Object.values<string>(v)[0])
 }
 
 /**
@@ -412,10 +418,11 @@ export async function getServerContent (
   data: Partial<ResponseSnapshotType>,
   container: IContainer,
   event: IncomingBrowserEvent,
-  head?: HeadContext
+  head?: HeadContext,
+  importer: (path: string) => Promise<Record<string, string>> = defaultImporter
 ): Promise<string> {
   const html = renderToString(component).concat('\n<!--app-html-->')
-  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
+  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'), importer)
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
   return applyHeadContextToHtmlString(head ?? {}, template)

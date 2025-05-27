@@ -27,9 +27,11 @@ describe('UseReactServiceProvider', () => {
 
   it('should call registerSnapshot in register()', () => {
     const provider = new UseReactServiceProvider(container)
+    // @ts-expect-error - private access
     provider.registerSnapshot = vi.fn()
     provider.register()
 
+    // @ts-expect-error - private access
     expect(provider.registerSnapshot).toHaveBeenCalled()
   })
 
@@ -48,6 +50,7 @@ describe('UseReactServiceProvider', () => {
     vi.spyOn(Utils, 'isSSR').mockReturnValue(true)
 
     const provider = new UseReactServiceProvider(container)
+    // @ts-expect-error - private access
     provider.registerSnapshot()
 
     expect(Config.fromJson).toHaveBeenCalledWith('{}')
@@ -70,6 +73,7 @@ describe('UseReactServiceProvider', () => {
     })
 
     const provider = new UseReactServiceProvider(container)
+    // @ts-expect-error - private access
     provider.registerSnapshot()
 
     expect(window.document.getElementById).toHaveBeenCalledWith(STONE_SNAPSHOT)
@@ -86,6 +90,7 @@ describe('UseReactServiceProvider', () => {
     })
 
     const provider = new UseReactServiceProvider(container)
+    // @ts-expect-error - private access
     provider.registerSnapshot()
 
     expect(Config.fromJson).toHaveBeenCalledWith('{}')

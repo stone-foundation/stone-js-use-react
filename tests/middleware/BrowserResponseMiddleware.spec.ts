@@ -55,6 +55,7 @@ describe('BrowserResponseMiddleware', () => {
 
   it('throws if no response is provided', async () => {
     await expect(
+      // @ts-expect-error - private access
       middleware.renderComponent(undefined)
     ).rejects.toThrow('No response provided for rendering.')
   })
@@ -63,6 +64,7 @@ describe('BrowserResponseMiddleware', () => {
     const spyPush = vi.spyOn(window.history, 'pushState').mockImplementation(() => {})
     const spyDispatch = vi.spyOn(window, 'dispatchEvent').mockImplementation(() => true)
 
+    // @ts-expect-error - private access
     await middleware.renderComponent({ targetUrl: '/test' } as any)
 
     expect(spyDispatch.mock.calls[0][0].type).toBe(NAVIGATION_EVENT)
@@ -73,6 +75,7 @@ describe('BrowserResponseMiddleware', () => {
     const head = { title: 'My Page' }
     const context = createContext({ ssr: true, app: 'App', head })
 
+    // @ts-expect-error - private access
     await middleware.renderComponent(context.outgoingResponse)
 
     expect(applyHeadContextToDom).toHaveBeenCalledWith(document, head)
@@ -80,6 +83,7 @@ describe('BrowserResponseMiddleware', () => {
 
   it('hydrates app when ssr=true, not rendered, and app is present', async () => {
     const context = createContext({ ssr: true, app: 'App' })
+    // @ts-expect-error - private access
     await middleware.renderComponent(context.outgoingResponse)
 
     expect(hydrateReactApp).toHaveBeenCalledWith('App', blueprint)
@@ -89,6 +93,7 @@ describe('BrowserResponseMiddleware', () => {
     const blueprintWithRendered = { has: () => true }
     const mw = new BrowserResponseMiddleware({ blueprint: blueprintWithRendered } as any)
 
+    // @ts-expect-error - private access
     await mw.renderComponent({
       content: { app: 'RenderedApp', fullRender: true }
     } as any)
@@ -99,6 +104,7 @@ describe('BrowserResponseMiddleware', () => {
   it('dispatches component if no layout but component is set', async () => {
     const spyDispatch = vi.spyOn(window, 'dispatchEvent')
 
+    // @ts-expect-error - private access
     await middleware.renderComponent({
       content: { component: 'LooseComponent' }
     } as any)
@@ -108,6 +114,7 @@ describe('BrowserResponseMiddleware', () => {
 
   it('throws if content is invalid or missing everything', async () => {
     await expect(
+      // @ts-expect-error - private access
       middleware.renderComponent({ content: {} } as any)
     ).rejects.toThrow('Invalid content provided for rendering.')
   })

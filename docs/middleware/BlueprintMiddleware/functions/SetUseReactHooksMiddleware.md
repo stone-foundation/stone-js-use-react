@@ -8,7 +8,7 @@
 
 > **SetUseReactHooksMiddleware**(`context`, `next`): `Promiseable`\<`IBlueprint`\>
 
-Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:42](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/middleware/BlueprintMiddleware.ts#L42)
+Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:42](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/middleware/BlueprintMiddleware.ts#L42)
 
 Blueprint middleware to dynamically set lifecycle hooks for react.
 

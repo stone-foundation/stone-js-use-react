@@ -6,7 +6,7 @@
 
 # Interface: ErrorPageOptions
 
-Defined in: [use-react/src/declarations.ts:120](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L120)
+Defined in: [use-react/src/declarations.ts:120](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L120)
 
 Options for configuring the `ErrorPage` decorator.
 
@@ -34,4 +34,4 @@ Additional configuration settings for the ErrorHandler, if needed.
 
 > `optional` **layout**: `string`
 
-Defined in: [use-react/src/declarations.ts:121](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L121)
+Defined in: [use-react/src/declarations.ts:121](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L121)

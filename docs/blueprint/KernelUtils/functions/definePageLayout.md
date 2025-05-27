@@ -20,7 +20,7 @@ Optional page layout definition options.
 
 > **definePageLayout**(`module`, `options`?): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:85](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L85)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:85](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L85)
 
 Utility function to define a factory-based page layout.
 
@@ -58,7 +58,7 @@ Optional page layout definition options.
 
 > **definePageLayout**(`module`, `options`): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:97](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L97)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:97](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L97)
 
 Utility function to define a class-based page layout.
 

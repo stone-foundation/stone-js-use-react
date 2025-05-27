@@ -8,7 +8,7 @@
 
 > **buildPageComponent**(`event`, `container`, `component`?, `data`?, `statusCode`?, `error`?): `ReactNode`
 
-Defined in: use-react/src/UseReactPageInternals.ts:123
+Defined in: [use-react/src/UseReactPageInternals.ts:123](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageInternals.ts#L123)
 
 Get response component in the current route.
 If not defined, return an empty object.

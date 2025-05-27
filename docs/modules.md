@@ -32,6 +32,7 @@
 - [UseReactKernelErrorHandler](UseReactKernelErrorHandler/README.md)
 - [UseReactPageHooks](UseReactPageHooks/README.md)
 - [UseReactPageInternals](UseReactPageInternals/README.md)
+- [UseReactPageRenderer](UseReactPageRenderer/README.md)
 - [UseReactResponse](UseReactResponse/README.md)
 - [UseReactServerErrorHandler](UseReactServerErrorHandler/README.md)
 - [UseReactServiceProvider](UseReactServiceProvider/README.md)

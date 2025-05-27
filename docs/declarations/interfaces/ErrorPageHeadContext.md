@@ -6,7 +6,7 @@
 
 # Interface: ErrorPageHeadContext\<TError, UData\>
 
-Defined in: [use-react/src/declarations.ts:318](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L318)
+Defined in: [use-react/src/declarations.ts:318](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L318)
 
 React error page head context.
 
@@ -26,7 +26,7 @@ React error page head context.
 
 > `optional` **data**: `UData`
 
-Defined in: [use-react/src/declarations.ts:189](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L189)
+Defined in: [use-react/src/declarations.ts:189](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L189)
 
 #### Inherited from
 
@@ -38,7 +38,7 @@ Defined in: [use-react/src/declarations.ts:189](https://github.com/stonemjs/use-
 
 > **error**: `TError`
 
-Defined in: [use-react/src/declarations.ts:319](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L319)
+Defined in: [use-react/src/declarations.ts:319](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L319)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [use-react/src/declarations.ts:319](https://github.com/stonemjs/use-
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:191](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L191)
+Defined in: [use-react/src/declarations.ts:191](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L191)
 
 #### Inherited from
 
@@ -58,7 +58,7 @@ Defined in: [use-react/src/declarations.ts:191](https://github.com/stonemjs/use-
 
 > `optional` **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:190](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L190)
+Defined in: [use-react/src/declarations.ts:190](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L190)
 
 #### Inherited from
 

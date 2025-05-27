@@ -20,7 +20,7 @@ Page definition options.
 
 > **definePage**\<`U`\>(`module`, `options`): `Partial`\<`StoneBlueprint`\<`U`\>\>
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:27](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L27)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:27](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L27)
 
 Utility function to define a factory-based page.
 
@@ -62,7 +62,7 @@ Page definition options.
 
 > **definePage**\<`U`\>(`module`, `options`): `Partial`\<`StoneBlueprint`\<`U`\>\>
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:39](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L39)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:39](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L39)
 
 Utility function to define a class-based page.
 

@@ -14,7 +14,6 @@ describe('UseReactKernelErrorHandler', () => {
 
   it('returns matching error page and statusCode', () => {
     const error = new Error('NotFound')
-    // @ts-expect-error
     error.name = 'NotFound'
     // @ts-expect-error
     error.statusCode = 404

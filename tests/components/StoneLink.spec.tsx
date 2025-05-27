@@ -68,6 +68,29 @@ describe('StoneLink', () => {
     expect(mockGenerate).toHaveBeenCalledWith(routeObj)
   })
 
+  it('respects noRel prop on button', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink href='https://no-rel.com' noRel>
+        NoRel
+      </StoneLink>
+    )
+
+    const button = getByRole('button')
+    expect(button.getAttribute('rel')).toBeFalsy()
+    fireEvent.click(button)
+  })
+
+  it('respects noRel prop on link', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='https://no-rel.com' defaultNav noRel>
+        NoRel
+      </StoneLink>
+    )
+
+    const link = getByRole('link')
+    expect(link.getAttribute('rel')).toBeFalsy()
+  })
+
   it('respects noRel prop on external link', () => {
     const { getByRole } = renderWithContext(
       <StoneLink to='https://no-rel.com' external noRel>

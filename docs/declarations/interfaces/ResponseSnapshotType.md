@@ -6,7 +6,7 @@
 
 # Interface: ResponseSnapshotType
 
-Defined in: [use-react/src/declarations.ts:146](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L146)
+Defined in: [use-react/src/declarations.ts:146](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L146)
 
 Stone data snapshot type.
 
@@ -16,7 +16,7 @@ Stone data snapshot type.
 
 > `optional` **data**: `any`
 
-Defined in: [use-react/src/declarations.ts:147](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L147)
+Defined in: [use-react/src/declarations.ts:147](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L147)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:147](https://github.com/stonemjs/use-
 
 > `optional` **error**: `any`
 
-Defined in: [use-react/src/declarations.ts:148](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L148)
+Defined in: [use-react/src/declarations.ts:148](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L148)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:148](https://github.com/stonemjs/use-
 
 > `optional` **layout**: `unknown`
 
-Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L150)
+Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L150)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-
 
 > **ssr**: `boolean`
 
-Defined in: [use-react/src/declarations.ts:149](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L149)
+Defined in: [use-react/src/declarations.ts:149](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L149)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [use-react/src/declarations.ts:149](https://github.com/stonemjs/use-
 
 > `optional` **statusCode**: `number`
 
-Defined in: [use-react/src/declarations.ts:151](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L151)
+Defined in: [use-react/src/declarations.ts:151](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L151)

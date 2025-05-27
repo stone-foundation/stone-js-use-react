@@ -2,13 +2,13 @@
 
 ***
 
-[Use React Documentation](../../modules.md) / [UseReactPageInternals](../README.md) / prepareErrorPage
+[Use React Documentation](../../modules.md) / [UseReactPageRenderer](../README.md) / prepareErrorPage
 
 # Function: prepareErrorPage()
 
 > **prepareErrorPage**(`event`, `response`, `container`, `snapshot`): `Promise`\<`void`\>
 
-Defined in: use-react/src/UseReactPageInternals.ts:372
+Defined in: [use-react/src/UseReactPageRenderer.ts:54](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageRenderer.ts#L54)
 
 Prepare the error page to render.
 

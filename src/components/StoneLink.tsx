@@ -66,7 +66,7 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
     const router = useContext(StoneContext).container.resolve<Router>(Router)
     const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
       event.preventDefault()
-      router.navigate(to ?? href ?? '')
+      router.navigate(to ?? '')
     }
     const path = isObjectLikeModule<NavigateOptions>(to) ? router.generate(to) : (to ?? href)
 

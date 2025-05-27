@@ -8,7 +8,7 @@
 
 > **PageStatus**\<`T`\>(`statusCode`, `headers`): `MethodDecorator`
 
-Defined in: [use-react/src/decorators/PageStatus.ts:24](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/decorators/PageStatus.ts#L24)
+Defined in: [use-react/src/decorators/PageStatus.ts:24](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/decorators/PageStatus.ts#L24)
 
 Decorator to set the status code of the response.
 

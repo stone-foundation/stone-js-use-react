@@ -20,7 +20,7 @@ Optional page layout definition options.
 
 > **defineErrorPage**(`module`, `options`?): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:136](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L136)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:136](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L136)
 
 Utility function to define a factory-based error page.
 
@@ -58,7 +58,7 @@ Optional page layout definition options.
 
 > **defineErrorPage**(`module`, `options`): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/blueprint/KernelUtils.ts:148](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/KernelUtils.ts#L148)
+Defined in: [use-react/src/blueprint/KernelUtils.ts:148](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L148)
 
 Utility function to define a class-based error page.
 

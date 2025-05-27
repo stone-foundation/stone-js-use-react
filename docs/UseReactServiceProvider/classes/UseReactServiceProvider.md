@@ -6,7 +6,7 @@
 
 # Class: UseReactServiceProvider
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:17](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L17)
+Defined in: [use-react/src/UseReactServiceProvider.ts:17](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L17)
 
 Use React Service Provider.
 
@@ -20,7 +20,7 @@ Use React Service Provider.
 
 > **new UseReactServiceProvider**(`container`): [`UseReactServiceProvider`](UseReactServiceProvider.md)
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:23](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L23)
+Defined in: [use-react/src/UseReactServiceProvider.ts:23](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L23)
 
 Constructs a new `UseReactServiceProvider` instance.
 
@@ -42,7 +42,7 @@ The container to register services in.
 
 > **boot**(): `Promiseable`\<`void`\>
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:35](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L35)
+Defined in: [use-react/src/UseReactServiceProvider.ts:35](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L35)
 
 Boot method for the service provider.
 
@@ -60,7 +60,7 @@ Boot method for the service provider.
 
 > **register**(): `Promiseable`\<`void`\>
 
-Defined in: [use-react/src/UseReactServiceProvider.ts:28](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/UseReactServiceProvider.ts#L28)
+Defined in: [use-react/src/UseReactServiceProvider.ts:28](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L28)
 
 Register method for the service provider.
 

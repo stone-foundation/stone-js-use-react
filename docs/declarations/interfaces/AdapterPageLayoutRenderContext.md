@@ -6,7 +6,7 @@
 
 # Interface: AdapterPageLayoutRenderContext
 
-Defined in: [use-react/src/declarations.ts:270](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L270)
+Defined in: [use-react/src/declarations.ts:270](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L270)
 
 React render page layout options.
 
@@ -16,7 +16,7 @@ React render page layout options.
 
 > **blueprint**: `IBlueprint`
 
-Defined in: [use-react/src/declarations.ts:272](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L272)
+Defined in: [use-react/src/declarations.ts:272](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L272)
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: [use-react/src/declarations.ts:272](https://github.com/stonemjs/use-
 
 > **children**: `ReactNode`
 
-Defined in: [use-react/src/declarations.ts:271](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L271)
+Defined in: [use-react/src/declarations.ts:271](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L271)

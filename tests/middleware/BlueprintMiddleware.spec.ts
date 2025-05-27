@@ -36,25 +36,29 @@ const mockBlueprint = () => {
 }
 
 const runMiddleware = async (middleware: any, contextOverrides: any = {}) => {
-  const blueprint = mockBlueprint()
+  const blueprint = contextOverrides.blueprint ?? mockBlueprint()
+  const modules = contextOverrides.modules ?? []
   const context = {
-    modules: [],
-    blueprint,
-    ...contextOverrides
+    modules,
+    blueprint
   }
   const next = vi.fn().mockResolvedValue(blueprint)
   const result = await middleware(context, next)
   return { blueprint, context, result, next }
 }
 
-describe('metaUseReactBlueprintMiddleware', () => {
-  // it('SetUseReactHooksMiddleware adds onPreparingResponse if not console', async () => {
-  //   const platform = 'node-http'
-  //   const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
-  //     blueprint: { ...mockBlueprint(), get: () => platform, add: vi.fn() }
-  //   })
-  //   expect(blueprint.add).toHaveBeenCalledWith('stone.lifecycleHooks.onPreparingResponse', expect.any(Array))
-  // })
+describe('BlueprintMiddleware', () => {
+  beforeEach(() => {
+    import.meta.env.SSR = false // Reset SSR flag before each test
+  })
+
+  it('SetUseReactHooksMiddleware adds onPreparingResponse if not console', async () => {
+    const platform = 'node-http'
+    const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
+      blueprint: { ...mockBlueprint(), get: () => platform, add: vi.fn() }
+    })
+    expect(blueprint.add).toHaveBeenCalledWith('stone.lifecycleHooks.onPreparingResponse', expect.any(Array))
+  })
 
   it('SetUseReactHooksMiddleware skips for console platform', async () => {
     const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
@@ -63,34 +67,62 @@ describe('metaUseReactBlueprintMiddleware', () => {
     expect(blueprint.add).not.toHaveBeenCalled()
   })
 
-  // it('SetBrowserResponseMiddlewareMiddleware adds adapter middleware if platform is browser', async () => {
-  //   const { blueprint } = await runMiddleware(SetBrowserResponseMiddlewareMiddleware, {
-  //     blueprint: { ...mockBlueprint(), get: () => BROWSER_PLATFORM }
-  //   })
-  //   expect(blueprint.add).toHaveBeenCalledWith('stone.adapter.middleware', expect.any(Array))
-  // })
+  it('SetBrowserResponseMiddlewareMiddleware adds adapter middleware if platform is browser', async () => {
+    const { blueprint } = await runMiddleware(SetBrowserResponseMiddlewareMiddleware, {
+      blueprint: { ...mockBlueprint(), get: () => BROWSER_PLATFORM }
+    })
+    expect(blueprint.add).toHaveBeenCalledWith('stone.adapter.middleware', expect.any(Array))
+  })
 
   it('SetReactKernelErrorPageMiddleware sets default and named handlers from metadata', async () => {
     vi.mocked(hasMetadata).mockReturnValue(true)
     vi.mocked(getMetadata).mockReturnValue({ error: 'NotFound', layout: 'default' })
+    const blueprint = mockBlueprint()
+
+    blueprint.set('stone.useReact.errorPages', { NotFound: { module: () => {}}})
 
     const fakeModule = class {}
-    const { blueprint } = await runMiddleware(SetReactKernelErrorPageMiddleware, {
+    await runMiddleware(SetReactKernelErrorPageMiddleware, {
+      blueprint,
       modules: [fakeModule]
     })
 
     expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.default', expect.objectContaining({ isClass: true }))
     expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.errorPages.NotFound', expect.objectContaining({ layout: 'default' }))
-    // expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.NotFound', expect.objectContaining({ isClass: true }))
+    expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.NotFound', expect.objectContaining({ isClass: true }))
   })
 
-  it('SetReactAdapterErrorPageMiddleware sets default and platform/alias matched handlers', async () => {
+  it('SetReactAdapterErrorPageMiddleware sets default and platform/alias matched handlers for csr', async () => {
     vi.mocked(hasMetadata).mockReturnValue(true)
     vi.mocked(isMatchedAdapter).mockReturnValue(true)
     vi.mocked(getMetadata).mockReturnValue({ error: 'default', layout: 'x', adapterAlias: 'a', platform: 'p' })
+    const blueprint = mockBlueprint()
+
+    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {}}})
 
     const fakeModule = class {}
-    const { blueprint } = await runMiddleware(SetReactAdapterErrorPageMiddleware, {
+    await runMiddleware(SetReactAdapterErrorPageMiddleware, {
+      blueprint,
+      modules: [fakeModule]
+    })
+
+    expect(blueprint.set).toHaveBeenCalledWith('stone.adapter.errorHandlers.default', expect.objectContaining({ isClass: true }))
+    expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.adapterErrorPages.default', expect.objectContaining({ layout: 'x' }))
+    expect(blueprint.set).toHaveBeenCalledWith('stone.adapter.errorHandlers.default', expect.objectContaining({ isClass: true }))
+  })
+
+  it('SetReactAdapterErrorPageMiddleware sets default and platform/alias matched handlers for ssr', async () => {
+    import.meta.env.SSR = true
+    vi.mocked(hasMetadata).mockReturnValue(true)
+    vi.mocked(isMatchedAdapter).mockReturnValue(true)
+    vi.mocked(getMetadata).mockReturnValue({ error: 'default', layout: 'x', adapterAlias: 'a', platform: 'p' })
+    const blueprint = mockBlueprint()
+
+    blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {}}})
+
+    const fakeModule = class {}
+    await runMiddleware(SetReactAdapterErrorPageMiddleware, {
+      blueprint,
       modules: [fakeModule]
     })
 

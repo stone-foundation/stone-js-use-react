@@ -6,7 +6,7 @@
 
 # Interface: UseReactBlueprint
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:55](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L55)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:55](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/options/UseReactBlueprint.ts#L55)
 
 Stone.js blueprint for a React-based application.
 
@@ -24,7 +24,7 @@ Stone.js blueprint for a React-based application.
 
 > **stone**: [`UseReactAppConfig`](UseReactAppConfig.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:60](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L60)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:60](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/options/UseReactBlueprint.ts#L60)
 
 Contains the full application configuration, including middleware,
 lifecycle hooks, and React integration settings.

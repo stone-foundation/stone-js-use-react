@@ -24,7 +24,7 @@ Additional blueprints to merge.
 
 > **defineStoneReactApp**\<`U`\>(`module`, `options`?, `blueprints`?): `StoneBlueprint`\<`U`\>
 
-Defined in: [use-react/src/blueprint/BlueprintUtils.ts:13](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L13)
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:13](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/BlueprintUtils.ts#L13)
 
 Defines a Stone React app using a factory-based main handler.
 
@@ -42,7 +42,7 @@ A factory function for the main page.
 
 #### options?
 
-`Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\> & `object`
+`Partial`\<[`UseReactAppConfig`](../../../options/UseReactBlueprint/interfaces/UseReactAppConfig.md)\>
 
 Optional application-level configuration.
 
@@ -76,7 +76,7 @@ Additional blueprints to merge.
 
 > **defineStoneReactApp**\<`U`\>(`module`, `options`, `blueprints`?): `StoneBlueprint`\<`U`\>
 
-Defined in: [use-react/src/blueprint/BlueprintUtils.ts:27](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L27)
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:27](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/BlueprintUtils.ts#L27)
 
 Defines a Stone React app using a class-based main handler.
 
@@ -128,7 +128,7 @@ Additional blueprints to merge.
 
 > **defineStoneReactApp**\<`U`\>(`options`?, `blueprints`?): `StoneBlueprint`\<`U`\>
 
-Defined in: [use-react/src/blueprint/BlueprintUtils.ts:40](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/blueprint/BlueprintUtils.ts#L40)
+Defined in: [use-react/src/blueprint/BlueprintUtils.ts:40](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/BlueprintUtils.ts#L40)
 
 Defines a Stone React app without a main handler (router-only).
 

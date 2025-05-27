@@ -8,7 +8,7 @@
 
 > `const` **useReactBlueprint**: [`UseReactBlueprint`](../interfaces/UseReactBlueprint.md)
 
-Defined in: [use-react/src/options/UseReactBlueprint.ts:68](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/options/UseReactBlueprint.ts#L68)
+Defined in: [use-react/src/options/UseReactBlueprint.ts:68](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/options/UseReactBlueprint.ts#L68)
 
 Default blueprint for a React-based Stone.js application.
 

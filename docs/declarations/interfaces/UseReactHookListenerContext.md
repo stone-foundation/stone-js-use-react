@@ -6,7 +6,7 @@
 
 # Interface: UseReactHookListenerContext
 
-Defined in: [use-react/src/declarations.ts:70](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L70)
+Defined in: [use-react/src/declarations.ts:70](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L70)
 
 Use React Hook Listener Context.
 
@@ -16,7 +16,7 @@ Use React Hook Listener Context.
 
 > **componentType**: `unknown`
 
-Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L75)
+Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L75)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-r
 
 > **container**: `Container`
 
-Defined in: [use-react/src/declarations.ts:74](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L74)
+Defined in: [use-react/src/declarations.ts:74](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L74)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [use-react/src/declarations.ts:74](https://github.com/stonemjs/use-r
 
 > **data**: `any`
 
-Defined in: [use-react/src/declarations.ts:71](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L71)
+Defined in: [use-react/src/declarations.ts:71](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L71)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [use-react/src/declarations.ts:71](https://github.com/stonemjs/use-r
 
 > `optional` **error**: `any`
 
-Defined in: [use-react/src/declarations.ts:72](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L72)
+Defined in: [use-react/src/declarations.ts:72](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L72)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [use-react/src/declarations.ts:72](https://github.com/stonemjs/use-r
 
 > **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
-Defined in: [use-react/src/declarations.ts:76](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L76)
+Defined in: [use-react/src/declarations.ts:76](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L76)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [use-react/src/declarations.ts:76](https://github.com/stonemjs/use-r
 
 > `optional` **head**: [`HeadContext`](HeadContext.md)
 
-Defined in: [use-react/src/declarations.ts:73](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L73)
+Defined in: [use-react/src/declarations.ts:73](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L73)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [use-react/src/declarations.ts:73](https://github.com/stonemjs/use-r
 
 > **response**: [`ReactOutgoingResponse`](../type-aliases/ReactOutgoingResponse.md)
 
-Defined in: [use-react/src/declarations.ts:78](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L78)
+Defined in: [use-react/src/declarations.ts:78](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L78)
 
 ***
 
@@ -72,4 +72,4 @@ Defined in: [use-react/src/declarations.ts:78](https://github.com/stonemjs/use-r
 
 > **snapshot**: [`ResponseSnapshotType`](ResponseSnapshotType.md)
 
-Defined in: [use-react/src/declarations.ts:77](https://github.com/stonemjs/use-react/blob/a85b32b76e105a7bc655ce084e0841ade8b0df8a/src/declarations.ts#L77)
+Defined in: [use-react/src/declarations.ts:77](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L77)

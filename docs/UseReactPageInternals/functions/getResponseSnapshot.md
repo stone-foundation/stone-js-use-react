@@ -8,7 +8,7 @@
 
 > **getResponseSnapshot**(`event`, `container`): [`ResponseSnapshotType`](../../declarations/interfaces/ResponseSnapshotType.md)
 
-Defined in: use-react/src/UseReactPageInternals.ts:539
+Defined in: [use-react/src/UseReactPageInternals.ts:432](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageInternals.ts#L432)
 
 Get the response snapshot.
 

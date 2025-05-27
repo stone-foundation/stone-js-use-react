@@ -8,7 +8,7 @@
 
 > **buildAppComponent**(`event`, `container`, `component`?, `layout`?, `data`?, `statusCode`?, `error`?): `Promise`\<`ReactNode`\>
 
-Defined in: use-react/src/UseReactPageInternals.ts:64
+Defined in: [use-react/src/UseReactPageInternals.ts:64](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageInternals.ts#L64)
 
 Build the React application for the current route.
 Or for the main handler if the route is not defined.

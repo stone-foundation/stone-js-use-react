@@ -2,56 +2,78 @@ import { ReactElement } from 'react'
 import { StonePage } from '../src/components/StonePage'
 import { StoneError } from '../src/components/StoneError'
 import { UseReactError } from '../src/errors/UseReactError'
-import { buildAdapterErrorComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
 import { applyHeadContextToHtmlString } from '../src/DomUtils'
+import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, htmlTemplate, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 
 vi.mock('react-dom/client', async (importOriginal) => {
   const actual: any = await importOriginal()
   return {
     ...actual,
+    hydrateRoot: vi.fn(() => ({ id: 'hydrated-root' })),
     createRoot: vi.fn(() => ({
       render: vi.fn()
     }))
   }
 })
+
 vi.mock('react-dom/server', () => ({
   renderToString: vi.fn().mockReturnValue('<div>SSR Content</div>')
 }))
-vi.mock('react-dom', () => ({
-  hydrateRoot: vi.fn(() => ({ id: 'hydrated-root' }))
-}))
+
 vi.mock('../src/DomUtils', () => ({
   applyHeadContextToHtmlString: vi.fn((head, template) => {
     return template.replace('<!--app-html-->', '').replace('<!--app-head-->', '')
   })
 }))
 
-// describe('buildAppComponent', () => {
-//   it('renders layout with page inside and wraps in <StonePage>', async () => {
-//     const event = {} as any
-//     const Layout = (props: any) => `Layout(${props.children})`
-//     const pageLayout = () => ({ render: Layout })
+describe('buildAppComponent', () => {
+  it('renders page inside and wraps in <StonePage>', async () => {
+    const event = {} as any
 
-//     const container: any = {
-//       make: vi.fn().mockReturnValue({
-//         get: vi.fn().mockReturnValue({ module: pageLayout, isFactory: true })
-//       })
-//     }
+    const container: any = {
+      make: vi.fn().mockReturnValue({
+        get: vi.fn().mockReturnValue({})
+      })
+    }
 
-//     const PageComponent = () => 'Page'
+    const PageComponent = () => 'Page'
 
-//     const layout = 'default'
-//     const data = { msg: 'hello' }
-//     const component = PageComponent
+    const data = { msg: 'hello' }
+    const component = PageComponent
 
-//     const result = await buildAppComponent(event, container, component, layout, data) as ReactElement<any, any>
+    const result = await buildAppComponent(event, container, component, undefined, data) as ReactElement<any, any>
 
-//     expect(result.type).toBe(StonePage)
-//     expect(result.props.children.type).toBe(Layout)
-//     expect(result.props.context).toEqual({ event, container, data })
-//     expect(result.props.children.props.children.type).toBe(PageComponent)
-//   })
-// })
+    expect(result.type).toBe(StonePage)
+    expect(result.props.children.type).toBe(PageComponent)
+    expect(result.props.context).toEqual({ event, container, data })
+  })
+
+  it('renders layout with page inside and wraps in <StonePage>', async () => {
+    const event = {} as any
+    const Layout = (props: any) => `Layout(${props.children})`
+    const pageLayout = () => ({ render: Layout })
+
+    const container: any = {
+      make: vi.fn().mockReturnValue({
+        get: vi.fn().mockReturnValue({ module: pageLayout, isFactory: true })
+      })
+    }
+
+    const PageComponent = () => 'Page'
+
+    const layout = 'default'
+    const data = { msg: 'hello' }
+    const component = PageComponent
+
+    const result = await buildAppComponent(event, container, component, layout, data) as ReactElement<any, any>
+
+    expect(result.type).toBe(StonePage)
+    expect(result.props.children.type).toBeInstanceOf(Function)
+    expect(result.props.context).toEqual({ event, container, data })
+    expect(result.props.children.props.children.type).toBe(PageComponent)
+  })
+})
 
 describe('buildLayoutComponent', () => {
   it('returns undefined if no layout is found', async () => {
@@ -77,7 +99,7 @@ describe('buildLayoutComponent', () => {
   //   }
 
   //   const layout = await buildLayoutComponent(container as any, 'CHILDREN', 'main') as ReactElement<any, any>
-  //   expect(layout?.type).toBe(Layout)
+  //   // expect(layout?.type).toBe(Layout)
   //   expect(layout?.props.children).toBe('CHILDREN')
   //   expect(layout?.props['data-layout']).toBe('main')
   // })
@@ -288,44 +310,28 @@ describe('resolveComponent', () => {
   })
 })
 
-// describe('getAppRootElement', () => {
-//   beforeEach(() => {
-//     global.document = {
-//       getElementById: vi.fn(),
-//       ...global.document,
-//       body: {
-//         innerHTML: '<div id="app-root"></div>'
-//       }
-//     } as any // Mock document body
-//   })
+describe('getAppRootElement', () => {
+  it('returns the DOM element by id', () => {
+    const blueprint = {
+      get: vi.fn().mockReturnValue('app-root')
+    }
+    const rootElement = document.createElement('div')
+    rootElement.id = 'app-root'
+    document.body.appendChild(rootElement)
 
-//   afterEach(() => {
-//     global.document = {
-//       ...global.document,
-//       body: {
-//         innerHTML: ''
-//       }
-//     } as any // Mock document body
-//   })
+    const el = getAppRootElement(blueprint as any)
+    expect(el).toBeInstanceOf(HTMLElement)
+    expect(el.id).toBe('app-root')
+  })
 
-//   it('returns the DOM element by id', () => {
-//     const blueprint = {
-//       get: vi.fn().mockReturnValue('app-root')
-//     }
+  it('throws UseReactError if element not found', () => {
+    const blueprint = {
+      get: vi.fn().mockReturnValue('missing-root')
+    }
 
-//     const el = getAppRootElement(blueprint as any)
-//     expect(el).toBeInstanceOf(HTMLElement)
-//     expect(el.id).toBe('app-root')
-//   })
-
-//   it('throws UseReactError if element not found', () => {
-//     const blueprint = {
-//       get: vi.fn().mockReturnValue('missing-root')
-//     }
-
-//     expect(() => getAppRootElement(blueprint as any)).toThrow(UseReactError)
-//   })
-// })
+    expect(() => getAppRootElement(blueprint as any)).toThrow(UseReactError)
+  })
+})
 
 describe('renderReactApp', () => {
   const app = 'MyApp'
@@ -345,33 +351,44 @@ describe('renderReactApp', () => {
     expect(result).toBe(root)
   })
 
-  // it('creates and stores root if not defined', () => {
-  //   const root = { render: vi.fn() }
+  it('creates and stores root if not defined', () => {
+    const root = { render: vi.fn() }
+    const rootElement = document.createElement('div')
+    rootElement.id = 'app-root'
+    document.body.appendChild(rootElement)
 
-  //   const blueprint = {
-  //     get: vi.fn().mockReturnValue(undefined),
-  //     setIf: vi.fn(),
-  //   }
+    const blueprint = {
+      get: vi.fn(v => v === 'stone.useReact.reactRoot' ? undefined : 'app-root'),
+      setIf: vi.fn(),
+    }
 
-  //   const result = renderReactApp(app, blueprint as any)
+    vi.mocked(createRoot).mockReturnValue(root as any)
 
-  //   expect(root.render).toHaveBeenCalledWith(app)
-  //   expect(blueprint.setIf).toHaveBeenCalledWith('stone.useReact.reactRoot', result)
-  // })
+    const result = renderReactApp(app, blueprint as any)
+
+    expect(root.render).toHaveBeenCalledWith(app)
+    expect(blueprint.setIf).toHaveBeenCalledWith('stone.useReact.reactRoot', result)
+  })
 })
 
-// describe('hydrateReactApp', () => {
-//   it('hydrates the app and stores root in blueprint', () => {
-//     const blueprint: any = {
-//       setIf: vi.fn()
-//     }
+describe('hydrateReactApp', () => {
+  it('hydrates the app and stores root in blueprint', () => {
+    const root: any = { render: vi.fn() }
+    const rootElement = document.createElement('div')
+    rootElement.id = 'app-root'
+    document.body.appendChild(rootElement)
 
-//     const result = hydrateReactApp('App', blueprint)
+    const blueprint: any = {
+      setIf: vi.fn(),
+      get: vi.fn(v => 'app-root'),
+    }
 
-//     expect(result.id).toBe('hydrated-root')
-//     expect(blueprint.setIf).toHaveBeenCalledWith('stone.useReact.reactRoot', result)
-//   })
-// })
+    const result: any = hydrateReactApp('App', blueprint)
+
+    expect(result.id).toBe('hydrated-root')
+    expect(blueprint.setIf).toHaveBeenCalledWith('stone.useReact.reactRoot', result)
+  })
+})
 
 describe('environment detection', () => {
   const originalWindow = global.window
@@ -429,33 +446,39 @@ describe('environment detection', () => {
   })
 })
 
-// describe('getServerContent', () => {
-//   it('renders SSR HTML with app and snapshot', async () => {
-//     const container = {
-//       make: vi.fn().mockReturnValue({
-//         get: vi.fn().mockReturnValue('./template.mjs')
-//       })
-//     }
+describe('getServerContent', () => {
+  it('renders SSR HTML with app and snapshot', async () => {
+    const container = {
+      make: vi.fn().mockReturnValue({
+        add: vi.fn().mockReturnThis(),
+        get: vi.fn().mockReturnValue('./template.mjs'),
+        toJson: vi.fn().mockReturnValue('{"ssr":true}')
+      })
+    }
 
-//     const event = { fingerprint: vi.fn().mockReturnValue('fp') }
-//     const component = '<App />'
-//     const data = { statusCode: 200, data: 'page' }
+    const mockImporter = vi.fn().mockResolvedValue({ default: '<html>Mock Template</html>' })
 
-//     vi.mocked(applyHeadContextToHtmlString).mockReturnValue(`
-//       <html><!--app-html--><!--app-head--></html>
-//     `)
+    const event = { fingerprint: vi.fn().mockReturnValue('fp') }
+    const component = '<App />'
+    const data = { statusCode: 200, data: 'page' }
 
-//     const result = await getServerContent(
-//       component as any,
-//       data,
-//       container as any,
-//       event as any
-//     )
+    vi.mocked(applyHeadContextToHtmlString).mockReturnValue(`
+      <html><!--app-html--><!--app-head--></html>
+    `)
 
-//     expect(result).toContain('<script id="__STONE_SNAPSHOT__" type="application/json">')
-//     expect(result).toContain('</html>')
-//   })
-// })
+    const result = await getServerContent(
+      component as any,
+      data,
+      container as any,
+      event as any,
+      undefined,
+      mockImporter
+    )
+
+    expect(result).toContain('<script id="__STONE_SNAPSHOT__" type="application/json">')
+    expect(result).toContain('</html>')
+  })
+})
 
 describe('getBrowserContent', () => {
   it('toggles fullRender based on layout change', () => {
@@ -541,8 +564,15 @@ describe('executeHandler', () => {
     snapshot = { ssr: false }
   })
 
+  it('returns undefined when no error nor handler are defined', async () => {
+    snapshot = { data: 'static' }
+
+    const result = await executeHandler(event, response, snapshot)
+    expect(result).toBeUndefined()
+  })
+
   it('returns snapshot directly in SSR mode', async () => {
-    snapshot = { ssr: true, content: 'static' }
+    snapshot = { ssr: true, data: 'static' }
 
     const result = await executeHandler(event, response, snapshot)
     expect(result).toBe('static')
