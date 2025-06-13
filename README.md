@@ -13,7 +13,7 @@
 [![Dependabot Status](https://img.shields.io/badge/Dependabot-enabled-brightgreen.svg)](https://github.com/stone-foundation/stone-js-use-react/network/updates)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-React integration for [Stone.js](https://stonejs.dev), universal rendering, SSR hydration, layouts, pages, snapshots, head management, and more.
+React integration for Stone.js, universal rendering, SSR hydration, layouts, pages, snapshots, head management, and more.
 
 ---
 
