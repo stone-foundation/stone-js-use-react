@@ -1,16 +1,16 @@
 {
   "name": "@stone-js/use-react",
   "version": "0.0.2",
-  "description": "React view integration for Stone.js, enabling seamless React rendering within the Stone architecture.",
+  "description": "React integration for Stone.js, universal rendering, SSR hydration, layouts, pages, snapshots, head management, and more.",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/stonemjs/use-react.git"
+    "url": "git+ssh://git@github.com/stone-foundation/stone-js-use-react.git"
   },
   "homepage": "https://stonejs.dev",
   "bugs": {
-    "url": "https://github.com/stonemjs/use-react/issues"
+    "url": "https://github.com/stone-foundation/stone-js-use-react/issues"
   },
   "keywords": [
     "browser",
@@ -89,6 +89,7 @@
   "ts-standard": {
     "globals": [
       "it",
+      "test",
       "expect",
       "describe",
       "beforeEach"
