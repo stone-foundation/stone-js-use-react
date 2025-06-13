@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [UseReactServiceProvider](../README.md) / UseReactServiceProvider
-
 # Class: UseReactServiceProvider
-
-Defined in: [use-react/src/UseReactServiceProvider.ts:17](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L17)
 
 Use React Service Provider.
 
@@ -16,11 +8,11 @@ Use React Service Provider.
 
 ## Constructors
 
-### new UseReactServiceProvider()
+### Constructor
 
-> **new UseReactServiceProvider**(`container`): [`UseReactServiceProvider`](UseReactServiceProvider.md)
-
-Defined in: [use-react/src/UseReactServiceProvider.ts:23](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L23)
+```ts
+new UseReactServiceProvider(container): UseReactServiceProvider;
+```
 
 Constructs a new `UseReactServiceProvider` instance.
 
@@ -34,15 +26,15 @@ The container to register services in.
 
 #### Returns
 
-[`UseReactServiceProvider`](UseReactServiceProvider.md)
+`UseReactServiceProvider`
 
 ## Methods
 
 ### boot()
 
-> **boot**(): `Promiseable`\<`void`\>
-
-Defined in: [use-react/src/UseReactServiceProvider.ts:35](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L35)
+```ts
+boot(): Promiseable<void>;
+```
 
 Boot method for the service provider.
 
@@ -52,15 +44,17 @@ Boot method for the service provider.
 
 #### Implementation of
 
-`IServiceProvider.boot`
+```ts
+IServiceProvider.boot
+```
 
 ***
 
 ### register()
 
-> **register**(): `Promiseable`\<`void`\>
-
-Defined in: [use-react/src/UseReactServiceProvider.ts:28](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactServiceProvider.ts#L28)
+```ts
+register(): Promiseable<void>;
+```
 
 Register method for the service provider.
 
@@ -70,4 +64,6 @@ Register method for the service provider.
 
 #### Implementation of
 
-`IServiceProvider.register`
+```ts
+IServiceProvider.register
+```

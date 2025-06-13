@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / BrowserResponseContent
-
 # Interface: BrowserResponseContent
-
-Defined in: [use-react/src/declarations.ts:157](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L157)
 
 Browser response content for React.
 
@@ -14,46 +6,46 @@ Browser response content for React.
 
 ### app?
 
-> `optional` **app**: `ReactNode`
-
-Defined in: [use-react/src/declarations.ts:159](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L159)
+```ts
+optional app: ReactNode;
+```
 
 ***
 
 ### component?
 
-> `optional` **component**: `ReactNode`
-
-Defined in: [use-react/src/declarations.ts:162](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L162)
+```ts
+optional component: ReactNode;
+```
 
 ***
 
 ### fullRender?
 
-> `optional` **fullRender**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:161](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L161)
+```ts
+optional fullRender: boolean;
+```
 
 ***
 
 ### head?
 
-> `optional` **head**: [`HeadContext`](HeadContext.md)
-
-Defined in: [use-react/src/declarations.ts:160](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L160)
+```ts
+optional head: HeadContext;
+```
 
 ***
 
 ### ssr?
 
-> `optional` **ssr**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:158](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L158)
+```ts
+optional ssr: boolean;
+```
 
 ***
 
 ### targetUrl?
 
-> `optional` **targetUrl**: `string` \| `URL`
-
-Defined in: [use-react/src/declarations.ts:163](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L163)
+```ts
+optional targetUrl: string | URL;
+```

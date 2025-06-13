@@ -1,9 +1,3 @@
-[**Use React Documentation v0.0.2**](../README.md)
-
-***
-
-[Use React Documentation](../modules.md) / declarations
-
 # declarations
 
 ## Interfaces
@@ -15,7 +9,6 @@
 - [ErrorPageHeadContext](interfaces/ErrorPageHeadContext.md)
 - [ErrorPageOptions](interfaces/ErrorPageOptions.md)
 - [ErrorPageRenderContext](interfaces/ErrorPageRenderContext.md)
-- [HeadContext](interfaces/HeadContext.md)
 - [IAdapterErrorPage](interfaces/IAdapterErrorPage.md)
 - [IErrorPage](interfaces/IErrorPage.md)
 - [IPage](interfaces/IPage.md)
@@ -45,8 +38,10 @@
 - [FactoryErrorPage](type-aliases/FactoryErrorPage.md)
 - [FactoryPage](type-aliases/FactoryPage.md)
 - [FactoryPageLayout](type-aliases/FactoryPageLayout.md)
+- [HeadContext](type-aliases/HeadContext.md)
 - [HeadersType](type-aliases/HeadersType.md)
 - [HookName](type-aliases/HookName.md)
+- [IRoute](type-aliases/IRoute.md)
 - [IRouter](type-aliases/IRouter.md)
 - [ISnapshot](type-aliases/ISnapshot.md)
 - [PageClass](type-aliases/PageClass.md)

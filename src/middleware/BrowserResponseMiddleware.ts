@@ -1,12 +1,11 @@
 import { ReactNode } from 'react'
-import { NextPipe } from '@stone-js/pipeline'
 import { applyHeadContextToDom } from '../DomUtils'
 import { STONE_PAGE_EVENT_OUTLET } from '../constants'
 import { UseReactError } from '../errors/UseReactError'
 import { HeadContext, NAVIGATION_EVENT } from '@stone-js/router'
-import { IBlueprint, isEmpty, isNotEmpty } from '@stone-js/core'
 import { BrowserAdapterResponseBuilder } from '@stone-js/browser-adapter'
 import { hydrateReactApp, renderReactApp } from '../UseReactPageInternals'
+import { IBlueprint, isEmpty, isNotEmpty, NextMiddleware } from '@stone-js/core'
 import { BrowserResponseContent, ReactBrowserAdapterContext } from '../declarations'
 import { OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
 
@@ -37,7 +36,7 @@ export class BrowserResponseMiddleware {
    */
   async handle (
     context: ReactBrowserAdapterContext,
-    next: NextPipe<ReactBrowserAdapterContext, BrowserAdapterResponseBuilder>
+    next: NextMiddleware<ReactBrowserAdapterContext, BrowserAdapterResponseBuilder>
   ): Promise<BrowserAdapterResponseBuilder> {
     const rawResponseBuilder = await next(context)
 

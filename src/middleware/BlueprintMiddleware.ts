@@ -5,6 +5,8 @@ import {
   Promiseable,
   hasMetadata,
   getMetadata,
+  NextMiddleware,
+  MetaMiddleware,
   isMatchedAdapter,
   BlueprintContext
 } from '@stone-js/core'
@@ -15,7 +17,6 @@ import {
   REACT_PAGE_LAYOUT_KEY,
   REACT_ADAPTER_ERROR_PAGE_KEY
 } from '../decorators/constants'
-import { MetaPipe, NextPipe } from '@stone-js/pipeline'
 import { onPreparingResponse } from '../UseReactPageHooks'
 import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
 import { UseReactEventHandler } from '../UseReactEventHandler'
@@ -41,7 +42,7 @@ import { ErrorPageOptions, AdapterErrorPageOptions, PageLayoutOptions } from '..
  */
 export const SetUseReactHooksMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
   if (context.blueprint.get<string>('stone.adapter.platform') !== NODE_CONSOLE_PLATFORM) {
     context
@@ -69,7 +70,7 @@ export const SetUseReactHooksMiddleware = (
  */
 export const SetBrowserResponseMiddlewareMiddleware = async (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> => {
   if (context.blueprint.get<string>('stone.adapter.platform') === BROWSER_PLATFORM) {
     context.blueprint.add('stone.adapter.middleware', [MetaBrowserResponseMiddleware])
@@ -92,7 +93,7 @@ export const SetBrowserResponseMiddlewareMiddleware = async (
  */
 export const SetReactKernelErrorPageMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
   context
     .blueprint
@@ -136,7 +137,7 @@ export const SetReactKernelErrorPageMiddleware = (
  */
 export const SetReactAdapterErrorPageMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
   const UseReactAdapterErrorHandler = import.meta.env.SSR
     ? UseReactServerErrorHandler
@@ -188,7 +189,7 @@ export const SetReactAdapterErrorPageMiddleware = (
  */
 export const SetSSRStaticFileMiddleware = async (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
@@ -212,7 +213,7 @@ export const SetSSRStaticFileMiddleware = async (
  */
 export const SetSSRCompressionMiddleware = async (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> => {
   import.meta.env.SSR && context.blueprint.add(
     'stone.kernel.middleware',
@@ -236,7 +237,7 @@ export const SetSSRCompressionMiddleware = async (
  */
 export const SetReactRouteDefinitionsMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
   context
     .modules
@@ -267,7 +268,7 @@ export const SetReactRouteDefinitionsMiddleware = (
  */
 export const SetReactPageLayoutMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
   context
     .modules
@@ -296,7 +297,7 @@ export const SetReactPageLayoutMiddleware = (
  */
 export async function SetUseReactEventHandlerMiddleware (
   context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
+  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promise<IBlueprint> {
   const blueprint = await next(context)
   const module = context.modules.find(module => hasMetadata(module, STONE_REACT_APP_KEY))
@@ -316,7 +317,7 @@ export async function SetUseReactEventHandlerMiddleware (
  * This array defines a list of middleware pipes, each with a `pipe` function and a `priority`.
  * These pipes are executed in the order of their priority values, with lower values running first.
  */
-export const metaUseReactBlueprintMiddleware: Array<MetaPipe<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
+export const metaUseReactBlueprintMiddleware: Array<MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
   { module: SetSSRStaticFileMiddleware, priority: 10 },
   { module: SetUseReactHooksMiddleware, priority: 10 },
   { module: SetSSRCompressionMiddleware, priority: 10 },

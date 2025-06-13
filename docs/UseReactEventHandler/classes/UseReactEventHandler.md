@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [UseReactEventHandler](../README.md) / UseReactEventHandler
-
 # Class: UseReactEventHandler\<IncomingEventType\>
-
-Defined in: [use-react/src/UseReactEventHandler.ts:14](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactEventHandler.ts#L14)
 
 A useReact event handler for processing incoming events
 For single event handler.
@@ -19,7 +11,9 @@ The type representing the outgoing response.
 
 ## Type Parameters
 
-• **IncomingEventType** *extends* [`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)
+### IncomingEventType
+
+`IncomingEventType` *extends* [`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md)
 
 The type representing the incoming event.
 
@@ -29,11 +23,11 @@ The type representing the incoming event.
 
 ## Constructors
 
-### new UseReactEventHandler()
+### Constructor
 
-> **new UseReactEventHandler**\<`IncomingEventType`\>(`options`): [`UseReactEventHandler`](UseReactEventHandler.md)\<`IncomingEventType`\>
-
-Defined in: [use-react/src/UseReactEventHandler.ts:24](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactEventHandler.ts#L24)
+```ts
+new UseReactEventHandler<IncomingEventType>(options): UseReactEventHandler<IncomingEventType>;
+```
 
 Constructs a `UseReactEventHandler` instance.
 
@@ -49,15 +43,15 @@ The UseReactEventHandler options including blueprint.
 
 #### Returns
 
-[`UseReactEventHandler`](UseReactEventHandler.md)\<`IncomingEventType`\>
+`UseReactEventHandler`\<`IncomingEventType`\>
 
 ## Methods
 
 ### handle()
 
-> **handle**(): [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<`IncomingEventType`\>
-
-Defined in: [use-react/src/UseReactEventHandler.ts:33](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactEventHandler.ts#L33)
+```ts
+handle(): MetaPage<IncomingEventType>;
+```
 
 Handle an incoming event.
 
@@ -69,4 +63,6 @@ The outgoing response.
 
 #### Implementation of
 
-`IEventHandler.handle`
+```ts
+IEventHandler.handle
+```

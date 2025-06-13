@@ -4,7 +4,7 @@ import { StonePage } from '../src/components/StonePage'
 import { StoneError } from '../src/components/StoneError'
 import { UseReactError } from '../src/errors/UseReactError'
 import { applyHeadContextToHtmlString } from '../src/DomUtils'
-import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
+import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, htmlTemplate, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 
@@ -475,17 +475,24 @@ describe('environment detection', () => {
   })
 })
 
+describe('htmlTemplate', () => {
+  it('should throw an exception when the template is not defined', () => {
+    const blueprint: any = {
+      get: vi.fn().mockReturnValue(undefined)
+    }
+    expect(() => htmlTemplate(blueprint)).toThrow(UseReactError)
+  })
+})
+
 describe('getServerContent', () => {
   it('renders SSR HTML with app and snapshot', async () => {
     const container = {
       make: vi.fn().mockReturnValue({
         add: vi.fn().mockReturnThis(),
-        get: vi.fn().mockReturnValue('./template.mjs'),
+        get: vi.fn().mockReturnValue('<html><!--app-html--><!--app-head--></html>'),
         toJson: vi.fn().mockReturnValue('{"ssr":true}')
       })
     }
-
-    const mockImporter = vi.fn().mockResolvedValue({ default: '<html>Mock Template</html>' })
 
     const event = { fingerprint: vi.fn().mockReturnValue('fp') }
     const component = '<App />'
@@ -500,8 +507,7 @@ describe('getServerContent', () => {
       data,
       container as any,
       event as any,
-      undefined,
-      mockImporter
+      undefined
     )
 
     expect(result).toContain('<script id="__STONE_SNAPSHOT__" type="application/json">')

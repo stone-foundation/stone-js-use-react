@@ -1,9 +1,3 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [blueprint/AdapterUtils](../README.md) / defineAdapterErrorPage
-
 # Function: defineAdapterErrorPage()
 
 Utility function to define an adapter error page.
@@ -18,9 +12,9 @@ Optional adapter error page options.
 
 ## Call Signature
 
-> **defineAdapterErrorPage**(`module`, `options`?): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
-
-Defined in: [use-react/src/blueprint/AdapterUtils.ts:16](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/AdapterUtils.ts#L16)
+```ts
+function defineAdapterErrorPage(module, options?): UseReactBlueprint;
+```
 
 Utility function to define a factory-based adapter error page.
 
@@ -44,8 +38,6 @@ Optional adapter error page options.
 
 The UseReactBlueprint.
 
-The UseReactBlueprint.
-
 ### Param
 
 The adapter error page module.
@@ -56,9 +48,9 @@ Optional adapter error page options.
 
 ## Call Signature
 
-> **defineAdapterErrorPage**(`module`, `options`): [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
-
-Defined in: [use-react/src/blueprint/AdapterUtils.ts:28](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/AdapterUtils.ts#L28)
+```ts
+function defineAdapterErrorPage(module, options): UseReactBlueprint;
+```
 
 Utility function to define a class-based adapter error page.
 
@@ -79,8 +71,6 @@ Adapter error page options.
 ### Returns
 
 [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
-
-The UseReactBlueprint.
 
 The UseReactBlueprint.
 

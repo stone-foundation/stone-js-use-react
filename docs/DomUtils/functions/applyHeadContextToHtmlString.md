@@ -1,14 +1,8 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [DomUtils](../README.md) / applyHeadContextToHtmlString
-
 # Function: applyHeadContextToHtmlString()
 
-> **applyHeadContextToHtmlString**(`context`, `html`): `string`
-
-Defined in: [use-react/src/DomUtils.ts:183](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/DomUtils.ts#L183)
+```ts
+function applyHeadContextToHtmlString(context, html): string;
+```
 
 Escape HTML special characters in a string.
 
@@ -16,7 +10,7 @@ Escape HTML special characters in a string.
 
 ### context
 
-[`HeadContext`](../../declarations/interfaces/HeadContext.md)
+`HeadContext`
 
 The head context containing meta, link, script, and style descriptors.
 

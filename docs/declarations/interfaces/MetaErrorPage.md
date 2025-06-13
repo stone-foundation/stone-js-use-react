@@ -1,22 +1,18 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / MetaErrorPage
-
 # Interface: MetaErrorPage\<IncomingEventType, OutgoingResponseType\>
-
-Defined in: [use-react/src/declarations.ts:376](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L376)
 
 Represents a meta error page.
 
 ## Type Parameters
 
-• **IncomingEventType** *extends* [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
+### IncomingEventType
+
+`IncomingEventType` *extends* [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
 The type representing the incoming event.
 
-• **OutgoingResponseType** = `unknown`
+### OutgoingResponseType
+
+`OutgoingResponseType` = `unknown`
 
 The type representing the outgoing response.
 
@@ -24,46 +20,48 @@ The type representing the outgoing response.
 
 ### error?
 
-> `optional` **error**: `any`
-
-Defined in: [use-react/src/declarations.ts:380](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L380)
+```ts
+optional error: any;
+```
 
 ***
 
 ### isClass?
 
-> `optional` **isClass**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:383](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L383)
+```ts
+optional isClass: boolean;
+```
 
 ***
 
 ### isFactory?
 
-> `optional` **isFactory**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:384](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L384)
+```ts
+optional isFactory: boolean;
+```
 
 ***
 
 ### layout?
 
-> `optional` **layout**: `unknown`
-
-Defined in: [use-react/src/declarations.ts:382](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L382)
+```ts
+optional layout: unknown;
+```
 
 ***
 
 ### lazy?
 
-> `optional` **lazy**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:381](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L381)
+```ts
+optional lazy: boolean;
+```
 
 ***
 
 ### module
 
-> **module**: [`ErrorPageType`](../type-aliases/ErrorPageType.md)\<`IncomingEventType`, `OutgoingResponseType`\> \| `Laziable`\<[`ErrorPageType`](../type-aliases/ErrorPageType.md)\<`IncomingEventType`, `OutgoingResponseType`\>\>
-
-Defined in: [use-react/src/declarations.ts:385](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L385)
+```ts
+module: 
+  | ErrorPageType<IncomingEventType, OutgoingResponseType>
+| Laziable<ErrorPageType<IncomingEventType, OutgoingResponseType>>;
+```

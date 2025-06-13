@@ -14,9 +14,12 @@ export interface UseReactConfig {
   rootElementId?: string
 
   /**
-   * Path to the HTML template used for server-side rendering.
+   * The content of the HTML template as a string.
+   * This can be used to define the structure of the HTML document.
+   * This is useful for inline templates or when the template is dynamically generated.
+   * Note: This is not a file path, but the actual HTML content.
    */
-  htmlTemplatePath?: string
+  htmlTemplateContent?: string
 
   /**
    * A map of layout components with their respective event handlers.
@@ -67,11 +70,9 @@ export interface UseReactBlueprint extends StoneBlueprint<ReactIncomingEvent, Re
  */
 export const useReactBlueprint: UseReactBlueprint = {
   stone: {
+    useReact: {},
     blueprint: {
       middleware: metaUseReactBlueprintMiddleware
-    },
-    useReact: {
-      htmlTemplatePath: './template.mjs'
     },
     services: [MetaReactRuntime],
     providers: [MetaUseReactServiceProvider]

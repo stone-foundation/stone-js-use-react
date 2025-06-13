@@ -44,14 +44,10 @@ import { renderToString } from 'react-dom/server'
 import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
-import { Container } from '@stone-js/service-container'
 import { applyHeadContextToHtmlString } from './DomUtils'
 import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
-
-/* c8 ignore next -- dynamic import cannot be tested directly */
-const defaultImporter = async (path: string): Promise<Record<string, string>> => await import(/* @vite-ignore */ path)
 
 /**
  * Build the React application for the current route.
@@ -66,7 +62,7 @@ const defaultImporter = async (path: string): Promise<Record<string, string>> =>
  */
 export const buildAppComponent = async (
   event: ReactIncomingEvent,
-  container: Container,
+  container: IContainer,
   component?: ElementType,
   layout?: unknown,
   data?: any,
@@ -93,7 +89,7 @@ export const buildAppComponent = async (
  * @returns The resolved layout element.
  */
 export const buildLayoutComponent = async (
-  container: Container,
+  container: IContainer,
   children: ReactNode,
   layoutName?: unknown
 ): Promise<ReactNode | undefined> => {
@@ -125,7 +121,7 @@ export const buildLayoutComponent = async (
  */
 export const buildPageComponent = (
   event: ReactIncomingEvent,
-  container: Container,
+  container: IContainer,
   component?: ElementType,
   data?: any,
   statusCode?: number,
@@ -203,7 +199,7 @@ export const buildAdapterErrorComponent = async <RawEventType, RawResponseType, 
  * @returns The resolved element type.
  */
 export const resolveComponent = async <T = IPage<ReactIncomingEvent> | IErrorPage<ReactIncomingEvent> | IPageLayout>(
-  container: Container,
+  container: IContainer,
   metaComponent?: MetaPage<ReactIncomingEvent> | MetaErrorPage<ReactIncomingEvent> | MetaPageLayout
 ): Promise<T | undefined> => {
   metaComponent = await resolveLazyComponent(metaComponent)
@@ -311,12 +307,15 @@ export const isClient = (): boolean => !isServer()
  * @param blueprint - The blueprint.
  * @returns The HTML template.
  */
-export const htmlTemplate = async (
-  blueprint: IBlueprint,
-  importer: (path: string) => Promise<Record<string, string>> = defaultImporter
-): Promise<string> => {
-  const path = blueprint.get<string>('stone.useReact.htmlTemplatePath', './template.mjs')
-  return await importer(path).then(v => Object.values<string>(v)[0])
+export const htmlTemplate = (
+  blueprint: IBlueprint
+): string => {
+  const content = blueprint.get<string>('stone.useReact.htmlTemplateContent')
+  if (isNotEmpty<string>(content)) {
+    return content
+  } throw new UseReactError(
+    'HTML template content is required for server-side rendering. Please provide the `htmlTemplateContent` in the blueprint configuration.'
+  )
 }
 
 /**
@@ -418,11 +417,10 @@ export async function getServerContent (
   data: Partial<ResponseSnapshotType>,
   container: IContainer,
   event: IncomingBrowserEvent,
-  head?: HeadContext,
-  importer: (path: string) => Promise<Record<string, string>> = defaultImporter
+  head?: HeadContext
 ): Promise<string> {
   const html = renderToString(component).concat('\n<!--app-html-->')
-  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'), importer)
+  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
   return applyHeadContextToHtmlString(head ?? {}, template)

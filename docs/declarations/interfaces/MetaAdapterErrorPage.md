@@ -1,83 +1,83 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / MetaAdapterErrorPage
-
 # Interface: MetaAdapterErrorPage\<RawEventType, RawResponseType, ExecutionContextType\>
-
-Defined in: [use-react/src/declarations.ts:434](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L434)
 
 Represents an Adapter meta component error handler.
 
 ## Type Parameters
 
-• **RawEventType**
+### RawEventType
 
-• **RawResponseType**
+`RawEventType`
 
-• **ExecutionContextType**
+### RawResponseType
+
+`RawResponseType`
+
+### ExecutionContextType
+
+`ExecutionContextType`
 
 ## Properties
 
 ### adapterAlias?
 
-> `optional` **adapterAlias**: `string`
-
-Defined in: [use-react/src/declarations.ts:443](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L443)
+```ts
+optional adapterAlias: string;
+```
 
 ***
 
 ### error?
 
-> `optional` **error**: `any`
-
-Defined in: [use-react/src/declarations.ts:437](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L437)
+```ts
+optional error: any;
+```
 
 ***
 
 ### isClass?
 
-> `optional` **isClass**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:441](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L441)
+```ts
+optional isClass: boolean;
+```
 
 ***
 
 ### isFactory?
 
-> `optional` **isFactory**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:442](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L442)
+```ts
+optional isFactory: boolean;
+```
 
 ***
 
 ### layout?
 
-> `optional` **layout**: `unknown`
-
-Defined in: [use-react/src/declarations.ts:439](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L439)
+```ts
+optional layout: unknown;
+```
 
 ***
 
 ### lazy?
 
-> `optional` **lazy**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:438](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L438)
+```ts
+optional lazy: boolean;
+```
 
 ***
 
 ### module
 
-> **module**: [`AdapterErrorPageType`](../type-aliases/AdapterErrorPageType.md)\<`RawEventType`, `RawResponseType`, `ExecutionContextType`\> \| `Laziable`\<[`AdapterErrorPageType`](../type-aliases/AdapterErrorPageType.md)\<`RawEventType`, `RawResponseType`, `ExecutionContextType`\>\>
-
-Defined in: [use-react/src/declarations.ts:444](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L444)
+```ts
+module: 
+  | AdapterErrorPageType<RawEventType, RawResponseType, ExecutionContextType>
+| Laziable<AdapterErrorPageType<RawEventType, RawResponseType, ExecutionContextType>>;
+```
 
 ***
 
 ### platform?
 
-> `optional` **platform**: `string`
-
-Defined in: [use-react/src/declarations.ts:440](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L440)
+```ts
+optional platform: string;
+```

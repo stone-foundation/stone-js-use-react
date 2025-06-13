@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / ResponseSnapshotType
-
 # Interface: ResponseSnapshotType
-
-Defined in: [use-react/src/declarations.ts:146](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L146)
 
 Stone data snapshot type.
 
@@ -14,38 +6,38 @@ Stone data snapshot type.
 
 ### data?
 
-> `optional` **data**: `any`
-
-Defined in: [use-react/src/declarations.ts:147](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L147)
+```ts
+optional data: any;
+```
 
 ***
 
 ### error?
 
-> `optional` **error**: `any`
-
-Defined in: [use-react/src/declarations.ts:148](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L148)
+```ts
+optional error: any;
+```
 
 ***
 
 ### layout?
 
-> `optional` **layout**: `unknown`
-
-Defined in: [use-react/src/declarations.ts:150](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L150)
+```ts
+optional layout: unknown;
+```
 
 ***
 
 ### ssr
 
-> **ssr**: `boolean`
-
-Defined in: [use-react/src/declarations.ts:149](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L149)
+```ts
+ssr: boolean;
+```
 
 ***
 
 ### statusCode?
 
-> `optional` **statusCode**: `number`
-
-Defined in: [use-react/src/declarations.ts:151](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L151)
+```ts
+optional statusCode: number;
+```

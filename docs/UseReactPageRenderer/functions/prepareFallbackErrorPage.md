@@ -1,14 +1,12 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [UseReactPageRenderer](../README.md) / prepareFallbackErrorPage
-
 # Function: prepareFallbackErrorPage()
 
-> **prepareFallbackErrorPage**(`event`, `response`, `container`, `snapshot`): `Promise`\<`void`\>
-
-Defined in: [use-react/src/UseReactPageRenderer.ts:88](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageRenderer.ts#L88)
+```ts
+function prepareFallbackErrorPage(
+   event, 
+   response, 
+   container, 
+snapshot): Promise<void>;
+```
 
 Prepare the fallback error page to render.
 

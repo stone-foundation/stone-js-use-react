@@ -1,21 +1,17 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [decorators/Page](../README.md) / Page
-
 # Function: Page()
 
-> **Page**\<`T`\>(`path`, `options`): `ClassDecorator`
-
-Defined in: [use-react/src/decorators/Page.ts:29](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/decorators/Page.ts#L29)
+```ts
+function Page<T>(path, options): ClassDecorator;
+```
 
 A class decorator for defining a class as a React Page route action.
 Uses the `Match` decorator internally to register the route with the HTTP `GET` method.
 
 ## Type Parameters
 
-• **T** *extends* `ClassType` = `ClassType`
+### T
+
+`T` *extends* `ClassType` = `ClassType`
 
 ## Parameters
 

@@ -1,13 +1,7 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [decorators/constants](../README.md) / REACT\_PAGE\_LAYOUT\_KEY
-
 # Variable: REACT\_PAGE\_LAYOUT\_KEY
 
-> `const` **REACT\_PAGE\_LAYOUT\_KEY**: *typeof* [`REACT_PAGE_LAYOUT_KEY`](REACT_PAGE_LAYOUT_KEY.md)
-
-Defined in: [use-react/src/decorators/constants.ts:14](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/decorators/constants.ts#L14)
+```ts
+const REACT_PAGE_LAYOUT_KEY: typeof REACT_PAGE_LAYOUT_KEY;
+```
 
 A unique symbol key to mark classes as React Page layout component.

@@ -1,24 +1,22 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / FactoryErrorPage
-
 # Type Alias: FactoryErrorPage()\<IncomingEventType, OutgoingResponseType\>
 
-> **FactoryErrorPage**\<`IncomingEventType`, `OutgoingResponseType`\>: (`container`?) => [`IErrorPage`](../interfaces/IErrorPage.md)\<`IncomingEventType`, `OutgoingResponseType`\>
-
-Defined in: [use-react/src/declarations.ts:354](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L354)
+```ts
+type FactoryErrorPage<IncomingEventType, OutgoingResponseType> = (container?) => IErrorPage<IncomingEventType, OutgoingResponseType>;
+```
 
 Represents a factory error page.
 
 ## Type Parameters
 
-• **IncomingEventType** *extends* [`ReactIncomingEvent`](ReactIncomingEvent.md)
+### IncomingEventType
+
+`IncomingEventType` *extends* [`ReactIncomingEvent`](ReactIncomingEvent.md)
 
 The type representing the incoming event.
 
-• **OutgoingResponseType** = `unknown`
+### OutgoingResponseType
+
+`OutgoingResponseType` = `unknown`
 
 The type representing the outgoing response.
 

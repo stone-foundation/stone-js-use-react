@@ -13,15 +13,13 @@ export const STONE_DOM_ATTR = 'data-stone-head'
  * @param meta - The meta tag descriptor.
  */
 export const applyMeta = (document: Document, meta: HTMLMetaDescriptor): void => {
-  const selector = isNotEmpty<string>(meta.name)
-    ? `meta[name="${meta.name}"]`
-    : isNotEmpty<string>(meta.property)
-      ? `meta[property="${meta.property}"]`
-      : null
+  const metaProp = isNotEmpty<string>(meta.property) ? `meta[property="${meta.property}"]` : null
+  const selector = isNotEmpty<string>(meta.name) ? `meta[name="${meta.name}"]` : metaProp
 
   if (isEmpty(selector)) return
 
   const existing = document.head.querySelector<HTMLMetaElement>(`${selector}[${STONE_DOM_ATTR}]`)
+
   if (isNotEmpty<HTMLMetaElement>(existing)) {
     if (existing.content !== meta.content) {
       existing.content = meta.content
@@ -71,7 +69,38 @@ const applyLink = (document: Document, link: HTMLLinkDescriptor): void => {
 }
 
 /**
- * Apply script tags to the document document.head.
+ * Update attributes of an HTML element.
+ *
+ * @param el - The HTML element to update.
+ * @param attrs - The attributes to set on the element.
+ */
+const updateAttributes = (el: HTMLElement, attrs: Record<string, unknown>): void => {
+  for (const [key, value] of Object.entries(attrs)) {
+    if (typeof value === 'boolean') {
+      value ? el.setAttribute(key, '') : el.removeAttribute(key)
+    } else {
+      el.setAttribute(key, String(value))
+    }
+  }
+  el.setAttribute(STONE_DOM_ATTR, '')
+}
+
+/**
+ * Check if an element needs attribute updates.
+ *
+ * @param el - The HTML element to check.
+ * @param attrs - The attributes to compare against the element's current attributes.
+ * @returns True if any attribute needs updating, false otherwise.
+ */
+const needsAttributeUpdate = (el: HTMLElement, attrs: Record<string, unknown>): boolean => {
+  return Object.entries(attrs).some(([key, value]) => {
+    const attr = el.getAttribute(key)
+    return typeof value === 'boolean' ? attr !== '' : attr !== String(value)
+  })
+}
+
+/**
+ * Apply script tags to the document.head.
  *
  * @param document - The document object.
  * @param script - The script tag descriptor.
@@ -81,35 +110,12 @@ const applyScript = (document: Document, script: HTMLScriptDescriptor): void => 
   const existing = document.head.querySelector<HTMLScriptElement>(selector)
 
   if (existing != null) {
-    let needsUpdate = false
-    for (const [key, value] of Object.entries(script)) {
-      const attr = existing.getAttribute(key)
-      if ((typeof value === 'boolean' ? attr !== '' : attr !== String(value))) {
-        needsUpdate = true
-        break
-      }
-    }
-    if (needsUpdate) {
-      for (const [key, value] of Object.entries(script)) {
-        if (typeof value === 'boolean') {
-          if (value) existing.setAttribute(key, '')
-          else existing.removeAttribute(key)
-        } else {
-          existing.setAttribute(key, String(value))
-        }
-      }
-      existing.setAttribute(STONE_DOM_ATTR, '')
+    if (needsAttributeUpdate(existing, script)) {
+      updateAttributes(existing, script)
     }
   } else {
     const el = document.createElement('script')
-    for (const [key, value] of Object.entries(script)) {
-      if (typeof value === 'boolean') {
-        if (value) el.setAttribute(key, '')
-      } else {
-        el.setAttribute(key, String(value))
-      }
-    }
-    el.setAttribute(STONE_DOM_ATTR, '')
+    updateAttributes(el, script)
     document.head.appendChild(el)
   }
 }
@@ -212,10 +218,11 @@ export const applyHeadContextToHtmlString = (context: HeadContext, html: string)
 
   // Script tags
   context.scripts?.forEach((script) => {
+    const getKeyValue = (key: string, value: any): string => isNotEmpty(value) ? `${key}` : ''
     const attrs = Object.entries(script)
       .map(([key, value]) =>
         typeof value === 'boolean'
-          ? (value ? `${key}` : '')
+          ? getKeyValue(key, value)
           : `${key}="${escapeHtml(String(value))}"`
       )
       .filter(Boolean)

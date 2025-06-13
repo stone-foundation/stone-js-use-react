@@ -1,14 +1,8 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [UseReactResponse](../README.md) / reactResponse
-
 # Function: reactResponse()
 
-> **reactResponse**(`options`): `Promise`\<[`ReactOutgoingResponse`](../../declarations/type-aliases/ReactOutgoingResponse.md)\>
-
-Defined in: [use-react/src/UseReactResponse.ts:12](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactResponse.ts#L12)
+```ts
+function reactResponse(options): Promise<ReactOutgoingResponse>;
+```
 
 Create an UseReact response.
 

@@ -174,7 +174,7 @@ describe('DomUtils', () => {
       scripts: [{ src: '/skip.js', async: false }]
     }, html)
 
-    const scriptTag = result.match(/<script([^>]*)><\/script>/)?.[1] ?? ''
+    const scriptTag = /<script([^>]*)><\/script>/.exec(result)?.[1] ?? ''
     expect(scriptTag).toContain('src="/skip.js"')
     expect(scriptTag).not.toContain('async') // ✅ async was false → not included
   })

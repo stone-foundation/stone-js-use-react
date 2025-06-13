@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [ReactRuntime](../README.md) / ReactRuntime
-
 # Class: ReactRuntime
-
-Defined in: [use-react/src/ReactRuntime.ts:22](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L22)
 
 Class representing a ReactRuntime.
 
@@ -15,11 +7,11 @@ including create snapshots and managing errors.
 
 ## Constructors
 
-### new ReactRuntime()
+### Constructor
 
-> **new ReactRuntime**(`options`): [`ReactRuntime`](ReactRuntime.md)
-
-Defined in: [use-react/src/ReactRuntime.ts:39](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L39)
+```ts
+new ReactRuntime(options): ReactRuntime;
+```
 
 Create a ReactRuntime.
 
@@ -33,15 +25,15 @@ ReactRuntime options.
 
 #### Returns
 
-[`ReactRuntime`](ReactRuntime.md)
+`ReactRuntime`
 
 ## Properties
 
 ### instance?
 
-> `static` `optional` **instance**: [`ReactRuntime`](ReactRuntime.md)
-
-Defined in: [use-react/src/ReactRuntime.ts:32](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L32)
+```ts
+static optional instance: ReactRuntime;
+```
 
 The ReactRuntime instance.
 
@@ -49,9 +41,9 @@ The ReactRuntime instance.
 
 ### head()
 
-> **head**(`value`): `void`
-
-Defined in: [use-react/src/ReactRuntime.ts:76](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L76)
+```ts
+head(value): void;
+```
 
 Set html head tags.
 
@@ -61,7 +53,7 @@ This method will set the head elements in the document.
 
 ##### value
 
-[`HeadContext`](../../declarations/interfaces/HeadContext.md)
+`HeadContext`
 
 The head context to set.
 
@@ -73,9 +65,9 @@ The head context to set.
 
 ### snapshot()
 
-> **snapshot**\<`T`\>(`key`, `handler`): `Promise`\<`T`\>
-
-Defined in: [use-react/src/ReactRuntime.ts:56](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L56)
+```ts
+snapshot<T>(key, handler): Promise<T>;
+```
 
 Create a snapshot.
 
@@ -85,7 +77,9 @@ If the environment is client, it will return the snapshot.
 
 #### Type Parameters
 
-• **T**
+##### T
+
+`T`
 
 #### Parameters
 
@@ -97,7 +91,7 @@ The key to store the snapshot.
 
 ##### handler
 
-(`container`?) => `Promiseable`\<`T`\>
+(`container?`) => `Promiseable`\<`T`\>
 
 The handler to create the snapshot.
 
@@ -111,9 +105,9 @@ The snapshot value.
 
 ### throwError()
 
-> **throwError**(`error`, `statusCode`): `Promise`\<`void`\>
-
-Defined in: [use-react/src/ReactRuntime.ts:91](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/ReactRuntime.ts#L91)
+```ts
+throwError(error, statusCode): Promise<void>;
+```
 
 Throw an error.
 

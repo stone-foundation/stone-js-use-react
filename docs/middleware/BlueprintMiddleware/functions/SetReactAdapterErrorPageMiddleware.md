@@ -1,14 +1,8 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [middleware/BlueprintMiddleware](../README.md) / SetReactAdapterErrorPageMiddleware
-
 # Function: SetReactAdapterErrorPageMiddleware()
 
-> **SetReactAdapterErrorPageMiddleware**(`context`, `next`): `Promiseable`\<`IBlueprint`\>
-
-Defined in: [use-react/src/middleware/BlueprintMiddleware.ts:137](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/middleware/BlueprintMiddleware.ts#L137)
+```ts
+function SetReactAdapterErrorPageMiddleware(context, next): Promiseable<IBlueprint>;
+```
 
 Blueprint middleware to process and register adapter error page definitions from modules.
 
@@ -22,7 +16,7 @@ The configuration context containing modules and blueprint.
 
 ### next
 
-`NextPipe`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
+`NextMiddleware`\<`BlueprintContext`\<`IBlueprint`, `ClassType`\>, `IBlueprint`\>
 
 The next pipeline function to continue processing.
 

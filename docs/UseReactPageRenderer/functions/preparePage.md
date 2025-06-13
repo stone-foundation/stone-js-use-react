@@ -1,14 +1,12 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [UseReactPageRenderer](../README.md) / preparePage
-
 # Function: preparePage()
 
-> **preparePage**(`event`, `response`, `container`, `snapshot`): `Promise`\<`void`\>
-
-Defined in: [use-react/src/UseReactPageRenderer.ts:18](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/UseReactPageRenderer.ts#L18)
+```ts
+function preparePage(
+   event, 
+   response, 
+   container, 
+snapshot): Promise<void>;
+```
 
 Prepare the page to render.
 

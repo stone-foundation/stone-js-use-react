@@ -1,22 +1,14 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [middleware/BrowserResponseMiddleware](../README.md) / BrowserResponseMiddleware
-
 # Class: BrowserResponseMiddleware
-
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:16](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/middleware/BrowserResponseMiddleware.ts#L16)
 
 Adapter Middleware for handling outgoing responses and rendering them in the browser.
 
 ## Constructors
 
-### new BrowserResponseMiddleware()
+### Constructor
 
-> **new BrowserResponseMiddleware**(`options`): [`BrowserResponseMiddleware`](BrowserResponseMiddleware.md)
-
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:25](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/middleware/BrowserResponseMiddleware.ts#L25)
+```ts
+new BrowserResponseMiddleware(options): BrowserResponseMiddleware;
+```
 
 Create a BrowserResponseMiddleware.
 
@@ -32,15 +24,15 @@ Options for creating the BrowserResponseMiddleware.
 
 #### Returns
 
-[`BrowserResponseMiddleware`](BrowserResponseMiddleware.md)
+`BrowserResponseMiddleware`
 
 ## Methods
 
 ### handle()
 
-> **handle**(`context`, `next`): `Promise`\<`BrowserAdapterResponseBuilder`\>
-
-Defined in: [use-react/src/middleware/BrowserResponseMiddleware.ts:38](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/middleware/BrowserResponseMiddleware.ts#L38)
+```ts
+handle(context, next): Promise<BrowserAdapterResponseBuilder>;
+```
 
 Handles the outgoing response, processes it, and invokes the next middleware in the pipeline.
 
@@ -54,7 +46,7 @@ The adapter context containing the raw event, execution context, and other data.
 
 ##### next
 
-`NextPipe`\<[`ReactBrowserAdapterContext`](../../../declarations/type-aliases/ReactBrowserAdapterContext.md), `BrowserAdapterResponseBuilder`\>
+`NextMiddleware`\<[`ReactBrowserAdapterContext`](../../../declarations/type-aliases/ReactBrowserAdapterContext.md), `BrowserAdapterResponseBuilder`\>
 
 The next middleware to be invoked in the pipeline.
 

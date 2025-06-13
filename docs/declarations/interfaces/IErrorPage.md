@@ -1,22 +1,18 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / IErrorPage
-
 # Interface: IErrorPage\<IncomingEventType, OutgoingResponseType\>
-
-Defined in: [use-react/src/declarations.ts:339](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L339)
 
 Represents an error page.
 
 ## Type Parameters
 
-• **IncomingEventType** *extends* [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
+### IncomingEventType
+
+`IncomingEventType` *extends* [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
 
 The type representing the incoming event.
 
-• **OutgoingResponseType** = `unknown`
+### OutgoingResponseType
+
+`OutgoingResponseType` = `unknown`
 
 The type representing the outgoing response.
 
@@ -24,41 +20,41 @@ The type representing the outgoing response.
 
 ### handle?
 
-> `optional` **handle**: `FunctionalErrorHandler`\<`IncomingEventType`, `OutgoingResponseType`\>
-
-Defined in: [use-react/src/declarations.ts:343](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L343)
+```ts
+optional handle: FunctionalErrorHandler<IncomingEventType, OutgoingResponseType>;
+```
 
 ***
 
 ### head()?
 
-> `optional` **head**: (`context`) => `Promiseable`\<[`HeadContext`](HeadContext.md)\>
-
-Defined in: [use-react/src/declarations.ts:345](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L345)
+```ts
+optional head: (context) => Promiseable<HeadContext>;
+```
 
 #### Parameters
 
 ##### context
 
-[`ErrorPageHeadContext`](ErrorPageHeadContext.md)
+[`ErrorPageHeadContext`](ErrorPageHeadContext.md)\<`any`, `any`\>
 
 #### Returns
 
-`Promiseable`\<[`HeadContext`](HeadContext.md)\>
+`Promiseable`\<`HeadContext`\>
 
 ***
 
 ### render()
 
-> **render**: (`context`) => `ReactNode`
-
-Defined in: [use-react/src/declarations.ts:344](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L344)
+```ts
+render: (context) => ReactNode;
+```
 
 #### Parameters
 
 ##### context
 
-[`ErrorPageRenderContext`](ErrorPageRenderContext.md)
+[`ErrorPageRenderContext`](ErrorPageRenderContext.md)\<`any`, `any`\>
 
 #### Returns
 

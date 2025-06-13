@@ -9,7 +9,10 @@ const mockGenerate = vi.fn((to) => (typeof to === 'string' ? to : '/generated-pa
 
 const mockRouter = {
   navigate: mockNavigate,
-  generate: mockGenerate
+  generate: mockGenerate,
+  getCurrentRoute: () => ({ path: '/about' }),
+  on: vi.fn((_, handler) => handler({ get: () => ({ path: '/about' }) })),
+  off: vi.fn((_, handler) => handler({ get: () => ({ path: '/about' }) }))
 } as unknown as Router
 
 const renderWithContext = (ui: JSX.Element): any =>

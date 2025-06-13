@@ -1,11 +1,5 @@
-[**Use React Documentation v0.0.2**](../README.md)
-
-***
-
-[Use React Documentation](../modules.md) / StoneContext
-
 # StoneContext
 
-## Functions
+## Variables
 
-- [StoneContext](functions/StoneContext.md)
+- [StoneContext](variables/StoneContext.md)

@@ -2,19 +2,28 @@
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
-import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext, Router } from '@stone-js/router'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
+import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext as BaseHeadContext, Route, Router } from '@stone-js/router'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable, LifecycleHookType } from '@stone-js/core'
 
-// Export types
-export { HeadContext } from '@stone-js/router'
+/**
+ * The type representing the Head Context for React.
+ * It extends the BaseHeadContext to include additional properties specific to React.
+ * This type is used to manage the head elements of a React application.
+*/
+export type HeadContext = BaseHeadContext
 
 /**
  * The type representing a Snapshot.
  * An object that represents the state of the application at a given time.
 */
 export type ISnapshot = Config
+
+/**
+ * Route for React.
+*/
+export type IRoute = Route<ReactIncomingEvent, ReactOutgoingResponse>
 
 /**
  * Router for React.
@@ -112,7 +121,7 @@ export interface PageOptions extends DecoratorPageRouteDefinition {
  * Options for configuring the `PageLayout` decorator.
  */
 export interface PageLayoutOptions {
-  name?: string | 'default'
+  name?: 'default' | string
 }
 
 /**

@@ -1,9 +1,3 @@
-[**Use React Documentation v0.0.2**](../../../README.md)
-
-***
-
-[Use React Documentation](../../../modules.md) / [blueprint/KernelUtils](../README.md) / definePage
-
 # Function: definePage()
 
 Utility function to define a page.
@@ -18,15 +12,17 @@ Page definition options.
 
 ## Call Signature
 
-> **definePage**\<`U`\>(`module`, `options`): `Partial`\<`StoneBlueprint`\<`U`\>\>
-
-Defined in: [use-react/src/blueprint/KernelUtils.ts:27](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L27)
+```ts
+function definePage<U>(module, options): Partial<StoneBlueprint<U>>;
+```
 
 Utility function to define a factory-based page.
 
 ### Type Parameters
 
-• **U** *extends* [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)
+#### U
+
+`U` *extends* [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)
 
 ### Parameters
 
@@ -48,8 +44,6 @@ Page definition options.
 
 The UseReactBlueprint.
 
-The UseReactBlueprint.
-
 ### Param
 
 The EventHandler module.
@@ -60,15 +54,17 @@ Page definition options.
 
 ## Call Signature
 
-> **definePage**\<`U`\>(`module`, `options`): `Partial`\<`StoneBlueprint`\<`U`\>\>
-
-Defined in: [use-react/src/blueprint/KernelUtils.ts:39](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/blueprint/KernelUtils.ts#L39)
+```ts
+function definePage<U>(module, options): Partial<StoneBlueprint<U>>;
+```
 
 Utility function to define a class-based page.
 
 ### Type Parameters
 
-• **U** *extends* [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)
+#### U
+
+`U` *extends* [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md) = [`ReactIncomingEvent`](../../../declarations/type-aliases/ReactIncomingEvent.md)
 
 ### Parameters
 
@@ -87,8 +83,6 @@ Page definition options.
 ### Returns
 
 `Partial`\<`StoneBlueprint`\<`U`\>\>
-
-The UseReactBlueprint.
 
 The UseReactBlueprint.
 

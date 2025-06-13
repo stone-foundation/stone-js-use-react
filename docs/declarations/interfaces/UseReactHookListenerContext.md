@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / UseReactHookListenerContext
-
 # Interface: UseReactHookListenerContext
-
-Defined in: [use-react/src/declarations.ts:70](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L70)
 
 Use React Hook Listener Context.
 
@@ -14,62 +6,62 @@ Use React Hook Listener Context.
 
 ### componentType
 
-> **componentType**: `unknown`
-
-Defined in: [use-react/src/declarations.ts:75](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L75)
+```ts
+componentType: unknown;
+```
 
 ***
 
 ### container
 
-> **container**: `Container`
-
-Defined in: [use-react/src/declarations.ts:74](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L74)
+```ts
+container: Container;
+```
 
 ***
 
 ### data
 
-> **data**: `any`
-
-Defined in: [use-react/src/declarations.ts:71](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L71)
+```ts
+data: any;
+```
 
 ***
 
 ### error?
 
-> `optional` **error**: `any`
-
-Defined in: [use-react/src/declarations.ts:72](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L72)
+```ts
+optional error: any;
+```
 
 ***
 
 ### event
 
-> **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
-
-Defined in: [use-react/src/declarations.ts:76](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L76)
+```ts
+event: ReactIncomingEvent;
+```
 
 ***
 
 ### head?
 
-> `optional` **head**: [`HeadContext`](HeadContext.md)
-
-Defined in: [use-react/src/declarations.ts:73](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L73)
+```ts
+optional head: HeadContext;
+```
 
 ***
 
 ### response
 
-> **response**: [`ReactOutgoingResponse`](../type-aliases/ReactOutgoingResponse.md)
-
-Defined in: [use-react/src/declarations.ts:78](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L78)
+```ts
+response: ReactOutgoingResponse;
+```
 
 ***
 
 ### snapshot
 
-> **snapshot**: [`ResponseSnapshotType`](ResponseSnapshotType.md)
-
-Defined in: [use-react/src/declarations.ts:77](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L77)
+```ts
+snapshot: ResponseSnapshotType;
+```

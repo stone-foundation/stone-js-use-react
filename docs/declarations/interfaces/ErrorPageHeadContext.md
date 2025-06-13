@@ -1,12 +1,4 @@
-[**Use React Documentation v0.0.2**](../../README.md)
-
-***
-
-[Use React Documentation](../../modules.md) / [declarations](../README.md) / ErrorPageHeadContext
-
 # Interface: ErrorPageHeadContext\<TError, UData\>
-
-Defined in: [use-react/src/declarations.ts:318](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L318)
 
 React error page head context.
 
@@ -16,17 +8,21 @@ React error page head context.
 
 ## Type Parameters
 
-• **TError** = `any`
+### TError
 
-• **UData** = `any`
+`TError` = `any`
+
+### UData
+
+`UData` = `any`
 
 ## Properties
 
 ### data?
 
-> `optional` **data**: `UData`
-
-Defined in: [use-react/src/declarations.ts:189](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L189)
+```ts
+optional data: UData;
+```
 
 #### Inherited from
 
@@ -36,17 +32,17 @@ Defined in: [use-react/src/declarations.ts:189](https://github.com/stonemjs/use-
 
 ### error
 
-> **error**: `TError`
-
-Defined in: [use-react/src/declarations.ts:319](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L319)
+```ts
+error: TError;
+```
 
 ***
 
 ### event
 
-> **event**: [`ReactIncomingEvent`](../type-aliases/ReactIncomingEvent.md)
-
-Defined in: [use-react/src/declarations.ts:191](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L191)
+```ts
+event: ReactIncomingEvent;
+```
 
 #### Inherited from
 
@@ -56,9 +52,9 @@ Defined in: [use-react/src/declarations.ts:191](https://github.com/stonemjs/use-
 
 ### statusCode?
 
-> `optional` **statusCode**: `number`
-
-Defined in: [use-react/src/declarations.ts:190](https://github.com/stonemjs/use-react/blob/0635de04acc6b3a5c28dcf07d1e12a39a8b5e0b9/src/declarations.ts#L190)
+```ts
+optional statusCode: number;
+```
 
 #### Inherited from
 
