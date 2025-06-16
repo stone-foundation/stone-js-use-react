@@ -2,9 +2,9 @@
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
-import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, RedirectResponse } from '@stone-js/http-core'
 import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext as BaseHeadContext, Route, Router } from '@stone-js/router'
-import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, RedirectBrowserResponse } from '@stone-js/browser-core'
+import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, OutgoingHttpResponseOptions, RedirectResponse, RedirectResponseOptions } from '@stone-js/http-core'
+import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, OutgoingBrowserResponseOptions, RedirectBrowserResponse, RedirectBrowserResponseOptions } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable, LifecycleHookType } from '@stone-js/core'
 
 /**
@@ -44,6 +44,22 @@ export type ReactIncomingEvent = IncomingHttpEvent | IncomingBrowserEvent
  * Incoming event options for React.
 */
 export type ReactIncomingEventOptions = IncomingBrowserEventOptions | IncomingHttpEventOptions
+
+/**
+ * Redirect response options for React.
+*/
+export type ReactRedirectResponseOptions =
+  | RedirectResponseOptions
+  | RedirectBrowserResponseOptions
+
+/**
+ * Outgoing response options for React.
+*/
+export type ReactResponseOptions =
+  | OutgoingHttpResponseOptions
+  | ReactOutgoingResponseOptions
+  | ReactRedirectResponseOptions
+  | OutgoingBrowserResponseOptions
 
 /**
  * Outgoing response for React.

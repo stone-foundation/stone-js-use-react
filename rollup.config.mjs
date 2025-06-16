@@ -8,7 +8,32 @@ import nodeExternals from 'rollup-plugin-node-externals'
 
 export default [
   {
-    input: 'src/**/*.{ts,tsx}',
+    input: [
+      'src/**/*.{ts,tsx}',
+      '!src/server/**/*' // browser build
+    ],
+    output: [
+      { format: 'es', file: 'dist/browser.js' }
+    ],
+    plugins: [
+      multi(),
+      nodeExternals(), // Must always be before `nodeResolve()`.
+      nodeResolve({
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
+        exportConditions: ['node', 'import', 'require', 'default']
+      }),
+      typescript({
+        noEmitOnError: true,
+        tsconfig: './tsconfig.build.json',
+      }),
+      commonjs()
+    ]
+  },
+  {
+    input: [
+      'src/**/*.{ts,tsx}',
+      '!src/browser/**/*' // server build
+    ],
     output: [
       { format: 'es', file: 'dist/index.js' }
     ],
@@ -27,7 +52,10 @@ export default [
     ]
   },
   {
-    input: 'dist/**/*.d.ts',
+    input: [
+      'dist/**/*.d.ts',
+      '!dist/server/**/*.d.ts' // browser build
+    ],
     output: [{ format: 'es' , file: 'dist/index.d.ts' }],
     plugins: [
       multi(),

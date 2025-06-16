@@ -8,4 +8,4 @@
 
 ## Variables
 
-- [useReactBlueprint](variables/useReactBlueprint.md)
+- [internalUseReactBlueprint](variables/internalUseReactBlueprint.md)

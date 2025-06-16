@@ -421,11 +421,9 @@ describe('hydrateReactApp', () => {
 
 describe('environment detection', () => {
   const originalWindow = global.window
-  const originalImportMeta = import.meta.env.SSR
 
   afterEach(() => {
     global.window = originalWindow
-    import.meta.env.SSR = originalImportMeta
   })
 
   describe('isServer', () => {
@@ -455,20 +453,13 @@ describe('environment detection', () => {
   })
 
   describe('isSSR', () => {
-    it('returns true when import.meta.env.SSR is true', () => {
-      import.meta.env.SSR = true
-      expect(isSSR()).toBe(true)
-    })
-
-    it('returns true when window is undefined even if SSR flag is false', () => {
-      import.meta.env.SSR = false
+    it('returns true when window is undefined', () => {
       // @ts-expect-error
       delete global.window
       expect(isSSR()).toBe(true)
     })
 
-    it('returns false when SSR is false and window is defined', () => {
-      import.meta.env.SSR = false
+    it('returns false when window is defined', () => {
       global.window = {} as any
       expect(isSSR()).toBe(false)
     })
