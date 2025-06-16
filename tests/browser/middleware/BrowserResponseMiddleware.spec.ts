@@ -56,7 +56,7 @@ describe('BrowserResponseMiddleware', () => {
   it('throws if no response is provided', async () => {
     await expect(
       // @ts-expect-error - private access
-      middleware.renderComponent(undefined)
+      middleware.renderComponent()
     ).rejects.toThrow('No response provided for rendering.')
   })
 

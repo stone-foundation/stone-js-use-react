@@ -476,7 +476,7 @@ describe('htmlTemplate', () => {
 })
 
 describe('getServerContent', () => {
-  it('renders SSR HTML with app and snapshot', async () => {
+  it('renders SSR HTML with app and snapshot', () => {
     const container = {
       make: vi.fn().mockReturnValue({
         add: vi.fn().mockReturnThis(),
@@ -493,7 +493,7 @@ describe('getServerContent', () => {
       <html><!--app-html--><!--app-head--></html>
     `)
 
-    const result = await getServerContent(
+    const result = getServerContent(
       component as any,
       data,
       container as any,
