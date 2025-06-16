@@ -24,6 +24,7 @@
 - [DomUtils](DomUtils/README.md)
 - [errors/UseReactError](errors/UseReactError/README.md)
 - [middleware/BlueprintMiddleware](middleware/BlueprintMiddleware/README.md)
+- [middleware/utils](middleware/utils/README.md)
 - [options/UseReactBlueprint](options/UseReactBlueprint/README.md)
 - [ReactRuntime](ReactRuntime/README.md)
 - [server/decorators/UseReact](server/decorators/UseReact/README.md)

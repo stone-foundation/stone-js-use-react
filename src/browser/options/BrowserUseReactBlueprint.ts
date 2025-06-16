@@ -1,10 +1,10 @@
-import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
+import { metaBrowserUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
 import { internalUseReactBlueprint, UseReactBlueprint } from '../../options/UseReactBlueprint'
 
 /**
  * Middleware for the React blueprint.
  */
-internalUseReactBlueprint.stone.blueprint = { middleware: metaUseReactBlueprintMiddleware }
+internalUseReactBlueprint.stone.blueprint = { middleware: metaBrowserUseReactBlueprintMiddleware }
 
 /**
  * Default blueprint for a React-based Stone.js application.

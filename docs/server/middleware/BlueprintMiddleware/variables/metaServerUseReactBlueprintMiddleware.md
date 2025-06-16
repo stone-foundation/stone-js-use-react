@@ -1,7 +1,7 @@
-# Variable: metaUseReactBlueprintMiddleware
+# Variable: metaServerUseReactBlueprintMiddleware
 
 ```ts
-const metaUseReactBlueprintMiddleware: MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>[];
+const metaServerUseReactBlueprintMiddleware: MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>[];
 ```
 
 Configuration for react processing middleware.

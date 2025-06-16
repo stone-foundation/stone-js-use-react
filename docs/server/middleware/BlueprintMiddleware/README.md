@@ -2,7 +2,7 @@
 
 ## Variables
 
-- [metaUseReactBlueprintMiddleware](variables/metaUseReactBlueprintMiddleware.md)
+- [metaServerUseReactBlueprintMiddleware](variables/metaServerUseReactBlueprintMiddleware.md)
 
 ## Functions
 

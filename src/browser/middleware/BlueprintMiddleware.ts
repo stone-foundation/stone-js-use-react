@@ -2,11 +2,8 @@ import {
   ClassType,
   IBlueprint,
   Promiseable,
-  hasMetadata,
-  getMetadata,
   NextMiddleware,
   MetaMiddleware,
-  isMatchedAdapter,
   BlueprintContext
 } from '@stone-js/core'
 import {
@@ -16,8 +13,7 @@ import {
   SetReactKernelErrorPageMiddleware,
   SetReactRouteDefinitionsMiddleware
 } from '../../middleware/BlueprintMiddleware'
-import { AdapterErrorPageOptions } from '../../declarations'
-import { REACT_ADAPTER_ERROR_PAGE_KEY } from '../../decorators/constants'
+import { setUseReactAdapterErrorHandler } from '../../middleware/utils'
 import { MetaBrowserResponseMiddleware } from './BrowserResponseMiddleware'
 import { UseReactBrowserErrorHandler } from '../UseReactBrowserErrorHandler'
 
@@ -61,36 +57,7 @@ export const SetReactAdapterErrorPageMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
   next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
-  context
-    .blueprint
-    .set('stone.adapter.errorHandlers.default', { module: UseReactBrowserErrorHandler, isClass: true })
-
-  context
-    .modules
-    .filter(module => hasMetadata(module, REACT_ADAPTER_ERROR_PAGE_KEY))
-    .forEach(module => {
-      const { error, layout, adapterAlias, platform } = getMetadata<ClassType, AdapterErrorPageOptions>(
-        module, REACT_ADAPTER_ERROR_PAGE_KEY, { error: 'default' }
-      )
-      if (isMatchedAdapter(context.blueprint, platform, adapterAlias)) {
-        Array(error).flat().forEach(name => {
-          context
-            .blueprint
-            .set(`stone.useReact.adapterErrorPages.${name}`, { isClass: true, layout, module })
-        })
-      }
-    })
-
-  // Process both eager and lazy loaded error pages
-  Object
-    .keys(context.blueprint.get('stone.useReact.adapterErrorPages', {}))
-    .forEach((name) => {
-      context
-        .blueprint
-        .set(`stone.adapter.errorHandlers.${name}`, { module: UseReactBrowserErrorHandler, isClass: true })
-    })
-
-  return next(context)
+  return next(setUseReactAdapterErrorHandler(UseReactBrowserErrorHandler, context))
 }
 
 /**
@@ -99,7 +66,7 @@ export const SetReactAdapterErrorPageMiddleware = (
  * This array defines a list of middleware pipes, each with a `pipe` function and a `priority`.
  * These pipes are executed in the order of their priority values, with lower values running first.
  */
-export const metaUseReactBlueprintMiddleware: Array<MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
+export const metaBrowserUseReactBlueprintMiddleware: Array<MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
   { module: SetUseReactHooksMiddleware, priority: 10 },
   { module: SetReactPageLayoutMiddleware, priority: 10 },
   { module: SetUseReactEventHandlerMiddleware, priority: 2 },

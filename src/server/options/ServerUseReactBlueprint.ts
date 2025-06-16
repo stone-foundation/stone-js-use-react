@@ -1,12 +1,12 @@
 import { NODE_CONSOLE_PLATFORM } from '@stone-js/router'
-import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
+import { metaServerUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
 import { internalUseReactBlueprint, UseReactBlueprint } from '../../options/UseReactBlueprint'
 
 /**
  * Middleware for the React blueprint.
  */
 internalUseReactBlueprint.stone.useReact.ignorePlatforms = [NODE_CONSOLE_PLATFORM]
-internalUseReactBlueprint.stone.blueprint = { middleware: metaUseReactBlueprintMiddleware }
+internalUseReactBlueprint.stone.blueprint = { middleware: metaServerUseReactBlueprintMiddleware }
 
 /**
  * Default blueprint for a React-based Stone.js application.
