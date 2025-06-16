@@ -2,14 +2,17 @@ import { GET } from '@stone-js/router'
 import { Page } from '../../src/decorators/Page'
 import { Hook } from '../../src/decorators/Hook'
 import { ReactRuntime } from '../../src/ReactRuntime'
-import { UseReact } from '../../src/decorators/UseReact'
 import { Snapshot } from '../../src/decorators/Snapshot'
 import { ErrorPage } from '../../src/decorators/ErrorPage'
 import { PageLayout } from '../../src/decorators/PageLayout'
 import { PageStatus } from '../../src/decorators/PageStatus'
+import { UseReact } from '../../src/browser/decorators/UseReact'
 import { AdapterErrorPage } from '../../src/decorators/AdapterErrorPage'
-import { setMetadata, addBlueprint, addMetadata, LIFECYCLE_HOOK_KEY } from '@stone-js/core'
-import { STONE_REACT_APP_KEY, REACT_PAGE_KEY, REACT_ADAPTER_ERROR_PAGE_KEY, REACT_ERROR_PAGE_KEY, REACT_PAGE_LAYOUT_KEY } from '../../src/decorators/constants'
+import { UseReact as ServerUseReact } from '../../src/server/decorators/UseReact'
+import { useReactBlueprint } from '../../src/browser/options/BrowserUseReactBlueprint'
+import { setMetadata, addMetadata, LIFECYCLE_HOOK_KEY, addBlueprint } from '@stone-js/core'
+import { useReactBlueprint as serverUseReactBlueprint } from '../../src/server/options/ServerUseReactBlueprint'
+import { REACT_PAGE_KEY, REACT_ADAPTER_ERROR_PAGE_KEY, REACT_ERROR_PAGE_KEY, REACT_PAGE_LAYOUT_KEY, STONE_REACT_APP_KEY } from '../../src/decorators/constants'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 
@@ -21,10 +24,10 @@ vi.mock('@stone-js/core', async (importOriginal) => {
     addMetadata: vi.fn(() => {}),
     setMetadata: vi.fn(() => {}),
     addBlueprint: vi.fn(() => {}),
-    classDecoratorLegacyWrapper: (fn: Function) => {
+    classDecoratorLegacyWrapper: vi.fn((fn: Function) => {
       fn(class {}, { kind: 'class' })
       return fn
-    }
+    })
   }
 })
 
@@ -32,6 +35,13 @@ describe('UseReact', () => {
   it('should call setMetadata and addBlueprint with provided options', () => {
     const options: any = { foo: 'bar' }
     UseReact(options)(class {})
+    ServerUseReact(options)(class {})
+
+    expect(setMetadata).toHaveBeenCalledWith(
+      expect.any(Object),
+      STONE_REACT_APP_KEY,
+      { isComponent: true, isClass: true }
+    )
 
     expect(setMetadata).toHaveBeenCalledWith(
       expect.any(Object),
@@ -42,18 +52,33 @@ describe('UseReact', () => {
     expect(addBlueprint).toHaveBeenCalledWith(
       expect.any(Function),
       expect.any(Object),
-      expect.anything(),
+      useReactBlueprint,
+      { stone: { useReact: options } }
+    )
+
+    expect(addBlueprint).toHaveBeenCalledWith(
+      expect.any(Function),
+      expect.any(Object),
+      serverUseReactBlueprint,
       { stone: { useReact: options } }
     )
   })
 
   it('should use empty options if none are passed', () => {
     UseReact()(class {})
+    ServerUseReact()(class {})
 
     expect(addBlueprint).toHaveBeenCalledWith(
       expect.anything(),
       expect.anything(),
+      useReactBlueprint,
+      { stone: { useReact: {} } }
+    )
+
+    expect(addBlueprint).toHaveBeenCalledWith(
       expect.anything(),
+      expect.anything(),
+      serverUseReactBlueprint,
       { stone: { useReact: {} } }
     )
   })

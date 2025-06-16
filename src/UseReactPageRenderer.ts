@@ -34,7 +34,7 @@ export async function preparePage (
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, snapshotData, container, event, head)
+    ? getServerContent(appComponent, snapshotData, container, event, head)
     : getBrowserContent(appComponent, component, layout, snapshot, head)
   )
 }
@@ -70,7 +70,7 @@ export async function prepareErrorPage (
   const appComponent = await buildAppComponent(event, container, componentType, layout, data, response.statusCode, error)
 
   response.setContent(isSSR()
-    ? await getServerContent(appComponent, snapshotData, container, event, head)
+    ? getServerContent(appComponent, snapshotData, container, event, head)
     : getBrowserContent(appComponent, component, layout, snapshot, head)
   )
 }

@@ -1,5 +1,5 @@
-import { UseReactAppConfig, useReactBlueprint } from '../options/UseReactBlueprint'
 import { FactoryPage, PageClass, PageType, ReactIncomingEvent } from '../declarations'
+import { UseReactAppConfig, internalUseReactBlueprint } from '../options/UseReactBlueprint'
 import { isFunctionModule, isNotEmpty, isObjectLikeModule, mergeBlueprints, stoneBlueprint, StoneBlueprint } from '@stone-js/core'
 
 /**
@@ -94,7 +94,7 @@ export function defineStoneReactApp<U extends ReactIncomingEvent = ReactIncoming
 
   return mergeBlueprints<ReactIncomingEvent>(
     stoneBlueprint,
-    useReactBlueprint,
+    internalUseReactBlueprint,
     ...blueprints,
     { stone: stonePart }
   )

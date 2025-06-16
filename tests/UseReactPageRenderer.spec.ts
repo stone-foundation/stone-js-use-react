@@ -55,7 +55,7 @@ vi.mock('../src/UseReactPageInternals', async () => {
     executeHooks: vi.fn().mockResolvedValue(undefined),
     buildPageComponent: vi.fn().mockResolvedValue('<div>Page</div>'),
     buildAppComponent: vi.fn().mockResolvedValue('<div>App</div>'),
-    getServerContent: vi.fn().mockResolvedValue('<html>SSR</html>'),
+    getServerContent: vi.fn().mockReturnValue('<html>SSR</html>'),
     getBrowserContent: vi.fn().mockReturnValue({ head: {}, app: '<div>App</div>' }),
     isSSR: vi.fn().mockReturnValue(false)
   }

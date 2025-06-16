@@ -1,7 +1,13 @@
 import { NODE_CONSOLE_PLATFORM } from '@stone-js/router'
 import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
 import { hasMetadata, getMetadata, isMatchedAdapter } from '@stone-js/core'
-import { SetUseReactHooksMiddleware, SetBrowserResponseMiddlewareMiddleware, SetReactKernelErrorPageMiddleware, SetReactAdapterErrorPageMiddleware, SetSSRStaticFileMiddleware, SetSSRCompressionMiddleware, SetReactRouteDefinitionsMiddleware, SetReactPageLayoutMiddleware, SetUseReactEventHandlerMiddleware } from '../../src/middleware/BlueprintMiddleware'
+import {
+  SetSSRStaticFileMiddleware,
+  SetSSRCompressionMiddleware,
+  SetReactAdapterErrorPageMiddleware as ServerSetReactAdapterErrorPageMiddleware
+} from '../../src/server/middleware/BlueprintMiddleware'
+import { SetBrowserResponseMiddlewareMiddleware, SetReactAdapterErrorPageMiddleware } from '../../src/browser/middleware/BlueprintMiddleware'
+import { SetUseReactHooksMiddleware, SetReactKernelErrorPageMiddleware, SetReactRouteDefinitionsMiddleware, SetReactPageLayoutMiddleware, SetUseReactEventHandlerMiddleware } from '../../src/middleware/BlueprintMiddleware'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 
@@ -47,49 +53,12 @@ const runMiddleware = async (middleware: any, contextOverrides: any = {}): Promi
   return { blueprint, context, result, next }
 }
 
-describe('BlueprintMiddleware', () => {
-  beforeEach(() => {
-    import.meta.env.SSR = false // Reset SSR flag before each test
-  })
-
-  it('SetUseReactHooksMiddleware adds onPreparingResponse if not console', async () => {
-    const platform = 'node-http'
-    const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
-      blueprint: { ...mockBlueprint(), get: () => platform, add: vi.fn() }
-    })
-    expect(blueprint.add).toHaveBeenCalledWith('stone.lifecycleHooks.onPreparingResponse', expect.any(Array))
-  })
-
-  it('SetUseReactHooksMiddleware skips for console platform', async () => {
-    const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
-      blueprint: { ...mockBlueprint(), get: () => NODE_CONSOLE_PLATFORM, add: vi.fn() }
-    })
-    expect(blueprint.add).not.toHaveBeenCalled()
-  })
-
+describe('BlueprintMiddleware Browser', () => {
   it('SetBrowserResponseMiddlewareMiddleware adds adapter middleware if platform is browser', async () => {
     const { blueprint } = await runMiddleware(SetBrowserResponseMiddlewareMiddleware, {
       blueprint: { ...mockBlueprint(), get: () => BROWSER_PLATFORM }
     })
     expect(blueprint.add).toHaveBeenCalledWith('stone.adapter.middleware', expect.any(Array))
-  })
-
-  it('SetReactKernelErrorPageMiddleware sets default and named handlers from metadata', async () => {
-    vi.mocked(hasMetadata).mockReturnValue(true)
-    vi.mocked(getMetadata).mockReturnValue({ error: 'NotFound', layout: 'default' })
-    const blueprint = mockBlueprint()
-
-    blueprint.set('stone.useReact.errorPages', { NotFound: { module: () => {} } })
-
-    const fakeModule = class {}
-    await runMiddleware(SetReactKernelErrorPageMiddleware, {
-      blueprint,
-      modules: [fakeModule]
-    })
-
-    expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.default', expect.objectContaining({ isClass: true }))
-    expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.errorPages.NotFound', expect.objectContaining({ layout: 'default' }))
-    expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.NotFound', expect.objectContaining({ isClass: true }))
   })
 
   it('SetReactAdapterErrorPageMiddleware sets default and platform/alias matched handlers for csr', async () => {
@@ -110,9 +79,10 @@ describe('BlueprintMiddleware', () => {
     expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.adapterErrorPages.default', expect.objectContaining({ layout: 'x' }))
     expect(blueprint.set).toHaveBeenCalledWith('stone.adapter.errorHandlers.default', expect.objectContaining({ isClass: true }))
   })
+})
 
+describe('BlueprintMiddleware Server', () => {
   it('SetReactAdapterErrorPageMiddleware sets default and platform/alias matched handlers for ssr', async () => {
-    import.meta.env.SSR = true
     vi.mocked(hasMetadata).mockReturnValue(true)
     vi.mocked(isMatchedAdapter).mockReturnValue(true)
     vi.mocked(getMetadata).mockReturnValue({ error: 'default', layout: 'x', adapterAlias: 'a', platform: 'p' })
@@ -121,7 +91,7 @@ describe('BlueprintMiddleware', () => {
     blueprint.set('stone.useReact.adapterErrorPages', { NotFound: { module: () => {} } })
 
     const fakeModule = class {}
-    await runMiddleware(SetReactAdapterErrorPageMiddleware, {
+    await runMiddleware(ServerSetReactAdapterErrorPageMiddleware, {
       blueprint,
       modules: [fakeModule]
     })
@@ -132,15 +102,53 @@ describe('BlueprintMiddleware', () => {
   })
 
   it('SetSSRStaticFileMiddleware adds static middleware only on SSR', async () => {
-    import.meta.env.SSR = true
     const { blueprint } = await runMiddleware(SetSSRStaticFileMiddleware)
     expect(blueprint.add).toHaveBeenCalledWith('stone.kernel.middleware', expect.any(Array))
   })
 
   it('SetSSRCompressionMiddleware adds compression middleware only on SSR', async () => {
-    import.meta.env.SSR = true
     const { blueprint } = await runMiddleware(SetSSRCompressionMiddleware)
     expect(blueprint.add).toHaveBeenCalledWith('stone.kernel.middleware', expect.any(Array))
+  })
+})
+
+describe('BlueprintMiddleware', () => {
+  it('SetUseReactHooksMiddleware adds onPreparingResponse if not an ignorePlatforms', async () => {
+    const get = vi.fn()
+      .mockReturnValueOnce('browser-adapter')
+      .mockReturnValueOnce(['node-cli', 'node-http'])
+    const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
+      blueprint: { ...mockBlueprint(), get, add: vi.fn() }
+    })
+    expect(blueprint.add).toHaveBeenCalledWith('stone.lifecycleHooks.onPreparingResponse', expect.any(Array))
+  })
+
+  it('SetUseReactHooksMiddleware skips for console platform', async () => {
+    const get = vi.fn()
+      .mockReturnValueOnce(NODE_CONSOLE_PLATFORM)
+      .mockReturnValueOnce([NODE_CONSOLE_PLATFORM, 'node-http'])
+    const { blueprint } = await runMiddleware(SetUseReactHooksMiddleware, {
+      blueprint: { ...mockBlueprint(), get, add: vi.fn() }
+    })
+    expect(blueprint.add).not.toHaveBeenCalled()
+  })
+
+  it('SetReactKernelErrorPageMiddleware sets default and named handlers from metadata', async () => {
+    vi.mocked(hasMetadata).mockReturnValue(true)
+    vi.mocked(getMetadata).mockReturnValue({ error: 'NotFound', layout: 'default' })
+    const blueprint = mockBlueprint()
+
+    blueprint.set('stone.useReact.errorPages', { NotFound: { module: () => {} } })
+
+    const fakeModule = class {}
+    await runMiddleware(SetReactKernelErrorPageMiddleware, {
+      blueprint,
+      modules: [fakeModule]
+    })
+
+    expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.default', expect.objectContaining({ isClass: true }))
+    expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.errorPages.NotFound', expect.objectContaining({ layout: 'default' }))
+    expect(blueprint.set).toHaveBeenCalledWith('stone.kernel.errorHandlers.NotFound', expect.objectContaining({ isClass: true }))
   })
 
   it('SetReactRouteDefinitionsMiddleware sets page route definitions', async () => {

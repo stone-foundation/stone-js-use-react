@@ -6,27 +6,19 @@ import {
   hasMetadata,
   getMetadata,
   NextMiddleware,
-  MetaMiddleware,
-  isMatchedAdapter,
   BlueprintContext
 } from '@stone-js/core'
 import {
   REACT_PAGE_KEY,
   STONE_REACT_APP_KEY,
   REACT_ERROR_PAGE_KEY,
-  REACT_PAGE_LAYOUT_KEY,
-  REACT_ADAPTER_ERROR_PAGE_KEY
+  REACT_PAGE_LAYOUT_KEY
 } from '../decorators/constants'
+import { PageRouteDefinition } from '@stone-js/router'
 import { onPreparingResponse } from '../UseReactPageHooks'
-import { BROWSER_PLATFORM } from '@stone-js/browser-adapter'
 import { UseReactEventHandler } from '../UseReactEventHandler'
+import { ErrorPageOptions, PageLayoutOptions } from '../declarations'
 import { UseReactKernelErrorHandler } from '../UseReactKernelErrorHandler'
-import { UseReactServerErrorHandler } from '../UseReactServerErrorHandler'
-import { MetaBrowserResponseMiddleware } from './BrowserResponseMiddleware'
-import { UseReactBrowserErrorHandler } from '../UseReactBrowserErrorHandler'
-import { NODE_CONSOLE_PLATFORM, PageRouteDefinition } from '@stone-js/router'
-import { MetaCompressionMiddleware, MetaStaticFileMiddleware } from '@stone-js/http-core'
-import { ErrorPageOptions, AdapterErrorPageOptions, PageLayoutOptions } from '../declarations'
 
 /**
  * Blueprint middleware to dynamically set lifecycle hooks for react.
@@ -44,39 +36,16 @@ export const SetUseReactHooksMiddleware = (
   context: BlueprintContext<IBlueprint, ClassType>,
   next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
 ): Promiseable<IBlueprint> => {
-  if (context.blueprint.get<string>('stone.adapter.platform') !== NODE_CONSOLE_PLATFORM) {
+  const currentPlatform = context.blueprint.get<string>('stone.adapter.platform', '')
+  const ignorePlatforms = context.blueprint.get<string[]>('stone.useReact.ignorePlatforms', [])
+
+  if (!ignorePlatforms.includes(currentPlatform)) {
     context
       .blueprint
       .add('stone.lifecycleHooks.onPreparingResponse', [onPreparingResponse])
   }
 
   return next(context)
-}
-
-/**
- * Blueprint middleware to set BrowserResponseMiddleware for the Browser adapter.
- *
- * The MetaBrowserResponseMiddleware is an adapter middleware and is useful
- * for handling outgoing responses and rendering them in the browser.
- *
- * @param context - The configuration context containing modules and blueprint.
- * @param next - The next pipeline function to continue processing.
- * @returns The updated blueprint or a promise resolving to it.
- *
- * @example
- * ```typescript
- * SetBrowserResponseMiddlewareMiddleware(context, next)
- * ```
- */
-export const SetBrowserResponseMiddlewareMiddleware = async (
-  context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
-): Promise<IBlueprint> => {
-  if (context.blueprint.get<string>('stone.adapter.platform') === BROWSER_PLATFORM) {
-    context.blueprint.add('stone.adapter.middleware', [MetaBrowserResponseMiddleware])
-  }
-
-  return await next(context)
 }
 
 /**
@@ -121,106 +90,6 @@ export const SetReactKernelErrorPageMiddleware = (
     })
 
   return next(context)
-}
-
-/**
- * Blueprint middleware to process and register adapter error page definitions from modules.
- *
- * @param context - The configuration context containing modules and blueprint.
- * @param next - The next pipeline function to continue processing.
- * @returns The updated blueprint or a promise resolving to it.
- *
- * @example
- * ```typescript
- * SetReactAdapterErrorPageMiddleware(context, next)
- * ```
- */
-export const SetReactAdapterErrorPageMiddleware = (
-  context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
-): Promiseable<IBlueprint> => {
-  const UseReactAdapterErrorHandler = import.meta.env.SSR
-    ? UseReactServerErrorHandler
-    : UseReactBrowserErrorHandler
-
-  context
-    .blueprint
-    .set('stone.adapter.errorHandlers.default', { module: UseReactAdapterErrorHandler, isClass: true })
-
-  context
-    .modules
-    .filter(module => hasMetadata(module, REACT_ADAPTER_ERROR_PAGE_KEY))
-    .forEach(module => {
-      const { error, layout, adapterAlias, platform } = getMetadata<ClassType, AdapterErrorPageOptions>(
-        module, REACT_ADAPTER_ERROR_PAGE_KEY, { error: 'default' }
-      )
-      if (isMatchedAdapter(context.blueprint, platform, adapterAlias)) {
-        Array(error).flat().forEach(name => {
-          context
-            .blueprint
-            .set(`stone.useReact.adapterErrorPages.${name}`, { isClass: true, layout, module })
-        })
-      }
-    })
-
-  // Process both eager and lazy loaded error pages
-  Object
-    .keys(context.blueprint.get('stone.useReact.adapterErrorPages', {}))
-    .forEach((name) => {
-      context
-        .blueprint
-        .set(`stone.adapter.errorHandlers.${name}`, { module: UseReactAdapterErrorHandler, isClass: true })
-    })
-
-  return next(context)
-}
-
-/**
- * Blueprint middleware to set StaticFileMiddleware for SSR adapter.
- *
- * @param context - The configuration context containing modules and blueprint.
- * @param next - The next pipeline function to continue processing.
- * @returns The updated blueprint or a promise resolving to it.
- *
- * @example
- * ```typescript
- * SetSSRStaticFileMiddleware(context, next)
- * ```
- */
-export const SetSSRStaticFileMiddleware = async (
-  context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
-): Promise<IBlueprint> => {
-  import.meta.env.SSR && context.blueprint.add(
-    'stone.kernel.middleware',
-    [MetaStaticFileMiddleware]
-  )
-
-  return await next(context)
-}
-
-/**
- * Blueprint middleware to set CompressionMiddleware for SSR adapter.
- *
- * @param context - The configuration context containing modules and blueprint.
- * @param next - The next pipeline function to continue processing.
- * @returns The updated blueprint or a promise resolving to it.
- *
- * @example
- * ```typescript
- * SetSSRCompressionMiddleware(context, next)
- * ```
- */
-export const SetSSRCompressionMiddleware = async (
-  context: BlueprintContext<IBlueprint, ClassType>,
-  next: NextMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>
-): Promise<IBlueprint> => {
-  import.meta.env.SSR && context.blueprint.add(
-    'stone.kernel.middleware',
-    [MetaCompressionMiddleware]
-  )
-
-  return await next(context)
 }
 
 /**
@@ -310,21 +179,3 @@ export async function SetUseReactEventHandlerMiddleware (
 
   return blueprint
 }
-
-/**
- * Configuration for react processing middleware.
- *
- * This array defines a list of middleware pipes, each with a `pipe` function and a `priority`.
- * These pipes are executed in the order of their priority values, with lower values running first.
- */
-export const metaUseReactBlueprintMiddleware: Array<MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
-  { module: SetSSRStaticFileMiddleware, priority: 10 },
-  { module: SetUseReactHooksMiddleware, priority: 10 },
-  { module: SetSSRCompressionMiddleware, priority: 10 },
-  { module: SetReactPageLayoutMiddleware, priority: 10 },
-  { module: SetUseReactEventHandlerMiddleware, priority: 2 },
-  { module: SetReactKernelErrorPageMiddleware, priority: 10 },
-  { module: SetReactAdapterErrorPageMiddleware, priority: 10 },
-  { module: SetReactRouteDefinitionsMiddleware, priority: 10 },
-  { module: SetBrowserResponseMiddlewareMiddleware, priority: 10 }
-]

@@ -47,6 +47,18 @@ Note: This is not a file path, but the actual HTML content.
 
 ***
 
+### ignorePlatforms?
+
+```ts
+optional ignorePlatforms: string[];
+```
+
+A list of platforms to ignore for React rendering.
+This can be used to disable React rendering on specific platforms.
+For example, you might want to ignore rendering on CLI platforms.
+
+***
+
 ### layout?
 
 ```ts

@@ -1,7 +1,6 @@
 import { MetaReactRuntime } from '../ReactRuntime'
 import { AppConfig, StoneBlueprint } from '@stone-js/core'
 import { MetaUseReactServiceProvider } from '../UseReactServiceProvider'
-import { metaUseReactBlueprintMiddleware } from '../middleware/BlueprintMiddleware'
 import { MetaAdapterErrorPage, MetaErrorPage, MetaPage, MetaPageLayout, ReactIncomingEvent, ReactOutgoingResponse } from '../declarations'
 
 /**
@@ -25,6 +24,13 @@ export interface UseReactConfig {
    * A map of layout components with their respective event handlers.
    */
   layout?: Record<string, MetaPageLayout>
+
+  /**
+   * A list of platforms to ignore for React rendering.
+   * This can be used to disable React rendering on specific platforms.
+   * For example, you might want to ignore rendering on CLI platforms.
+   */
+  ignorePlatforms?: string[]
 
   /**
    * Handles incoming events for the root React component.
@@ -68,12 +74,9 @@ export interface UseReactBlueprint extends StoneBlueprint<ReactIncomingEvent, Re
  *
  * - Defines middleware, lifecycle hooks, and the default HTML template path.
  */
-export const useReactBlueprint: UseReactBlueprint = {
+export const internalUseReactBlueprint: UseReactBlueprint = {
   stone: {
     useReact: {},
-    blueprint: {
-      middleware: metaUseReactBlueprintMiddleware
-    },
     services: [MetaReactRuntime],
     providers: [MetaUseReactServiceProvider]
   }

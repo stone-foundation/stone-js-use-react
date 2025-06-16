@@ -6,7 +6,7 @@ function getServerContent(
    data, 
    container, 
    event, 
-head?): Promise<string>;
+   head?): string;
 ```
 
 Get the server content.
@@ -45,6 +45,6 @@ The head context.
 
 ## Returns
 
-`Promise`\<`string`\>
+`string`
 
-A promise that resolves when the content is hydrated.
+The server response content as a string.

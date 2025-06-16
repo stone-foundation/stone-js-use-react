@@ -45,7 +45,6 @@ import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
 import { applyHeadContextToHtmlString } from './DomUtils'
-import { OutgoingHttpResponse } from '@stone-js/http-core'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
@@ -324,7 +323,7 @@ export const htmlTemplate = (
  * @returns True if the application is running on the server side, false otherwise.
  */
 export function isSSR (): boolean {
-  return import.meta.env.SSR || typeof window === 'undefined'
+  return typeof window === 'undefined'
 }
 
 /**
@@ -362,7 +361,7 @@ export async function executeHandler (
 
   if (
     isNotEmpty(result?.headers) &&
-    isNotEmpty<OutgoingHttpResponse>(response) &&
+    isNotEmpty<{ setHeaders: Function }>(response) &&
     isFunction(response.setHeaders)
   ) {
     response.setHeaders(result.headers)
@@ -410,17 +409,17 @@ export function getBrowserContent (
  * @param container - The service container.
  * @param event - The incoming browser event.
  * @param head - The head context.
- * @returns A promise that resolves when the content is hydrated.
+ * @returns The server response content as a string.
  */
-export async function getServerContent (
+export function getServerContent (
   component: ReactNode,
   data: Partial<ResponseSnapshotType>,
   container: IContainer,
   event: IncomingBrowserEvent,
   head?: HeadContext
-): Promise<string> {
+): string {
   const html = renderToString(component).concat('\n<!--app-html-->')
-  const template = await htmlTemplate(container.make<IBlueprint>('blueprint'))
+  const template = htmlTemplate(container.make<IBlueprint>('blueprint'))
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
   return applyHeadContextToHtmlString(head ?? {}, template)
