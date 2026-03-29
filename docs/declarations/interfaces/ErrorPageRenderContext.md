@@ -21,7 +21,7 @@ React error page render context.
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 #### Inherited from
@@ -33,7 +33,7 @@ container: Container;
 ### data?
 
 ```ts
-optional data: UData;
+optional data?: UData;
 ```
 
 #### Inherited from
@@ -65,7 +65,7 @@ event: ReactIncomingEvent;
 ### statusCode?
 
 ```ts
-optional statusCode: number;
+optional statusCode?: number;
 ```
 
 #### Inherited from

@@ -1,7 +1,7 @@
 # Function: UseReact()
 
 ```ts
-function UseReact<T>(options): ClassDecorator;
+function UseReact<T>(options?): ClassDecorator;
 ```
 
 UseReact decorator.
@@ -17,7 +17,7 @@ The decorator is used to define the React configuration for the class.
 
 ## Parameters
 
-### options
+### options?
 
 [`UseReactOptions`](../interfaces/UseReactOptions.md) = `{}`
 

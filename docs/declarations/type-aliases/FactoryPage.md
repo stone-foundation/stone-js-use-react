@@ -1,4 +1,4 @@
-# Type Alias: FactoryPage()\<IncomingEventType, OutgoingResponseType\>
+# Type Alias: FactoryPage\<IncomingEventType, OutgoingResponseType\>
 
 ```ts
 type FactoryPage<IncomingEventType, OutgoingResponseType> = (container?) => IPage<IncomingEventType, OutgoingResponseType>;
@@ -24,7 +24,7 @@ The type representing the outgoing response.
 
 ### container?
 
-`IContainer` | `any`
+`IContainer` \| `any`
 
 ## Returns
 

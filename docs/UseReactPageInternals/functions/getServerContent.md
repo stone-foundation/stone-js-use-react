@@ -27,7 +27,7 @@ The data to pass to the components.
 
 ### container
 
-`Container`
+`IContainer`
 
 The service container.
 

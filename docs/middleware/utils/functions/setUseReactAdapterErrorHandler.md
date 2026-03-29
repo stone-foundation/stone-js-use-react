@@ -10,9 +10,10 @@ Sets the error handler for the React adapter and registers error pages.
 
 ### errorHandler
 
-The error handler to set for the React adapter.
+  \| *typeof* [`UseReactBrowserErrorHandler`](../../../browser/UseReactBrowserErrorHandler/classes/UseReactBrowserErrorHandler.md)
+  \| *typeof* [`UseReactServerErrorHandler`](../../../server/UseReactServerErrorHandler/classes/UseReactServerErrorHandler.md)
 
-*typeof* [`UseReactBrowserErrorHandler`](../../../browser/UseReactBrowserErrorHandler/classes/UseReactBrowserErrorHandler.md) | *typeof* [`UseReactServerErrorHandler`](../../../server/UseReactServerErrorHandler/classes/UseReactServerErrorHandler.md)
+The error handler to set for the React adapter.
 
 ### context
 

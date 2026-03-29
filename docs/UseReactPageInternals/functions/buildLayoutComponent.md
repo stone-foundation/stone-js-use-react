@@ -16,7 +16,7 @@ If not defined, return undefined.
 
 ### container
 
-`Container`
+`IContainer`
 
 Service Container.
 

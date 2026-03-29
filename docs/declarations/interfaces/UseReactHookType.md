@@ -7,5 +7,5 @@ UseReactHook Type.
 ### onPreparingPage?
 
 ```ts
-optional onPreparingPage: UseReactHookListener[];
+optional onPreparingPage?: UseReactHookListener[];
 ```

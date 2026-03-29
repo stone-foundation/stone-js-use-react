@@ -15,7 +15,7 @@ blueprint: IBlueprint;
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 ***

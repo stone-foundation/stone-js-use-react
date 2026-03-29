@@ -7,7 +7,7 @@ Represents a meta page layout.
 ### isClass?
 
 ```ts
-optional isClass: boolean;
+optional isClass?: boolean;
 ```
 
 ***
@@ -15,7 +15,7 @@ optional isClass: boolean;
 ### isFactory?
 
 ```ts
-optional isFactory: boolean;
+optional isFactory?: boolean;
 ```
 
 ***
@@ -23,7 +23,7 @@ optional isFactory: boolean;
 ### lazy?
 
 ```ts
-optional lazy: boolean;
+optional lazy?: boolean;
 ```
 
 ***

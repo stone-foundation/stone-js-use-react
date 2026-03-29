@@ -15,7 +15,7 @@ componentType: unknown;
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 ***
@@ -31,7 +31,7 @@ data: any;
 ### error?
 
 ```ts
-optional error: any;
+optional error?: any;
 ```
 
 ***
@@ -47,7 +47,7 @@ event: ReactIncomingEvent;
 ### head?
 
 ```ts
-optional head: HeadContext;
+optional head?: HeadContext;
 ```
 
 ***

@@ -11,5 +11,5 @@ Options for configuring the `AdapterErrorPage` decorator.
 ### layout?
 
 ```ts
-optional layout: string;
+optional layout?: string;
 ```

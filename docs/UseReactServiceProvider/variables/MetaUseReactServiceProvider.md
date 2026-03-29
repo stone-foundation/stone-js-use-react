@@ -6,7 +6,7 @@ const MetaUseReactServiceProvider: object;
 
 MetaUseReactServiceProvider
 
-## Type declaration
+## Type Declaration
 
 ### isClass
 

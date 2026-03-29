@@ -1,4 +1,4 @@
-# Type Alias: FactoryErrorPage()\<IncomingEventType, OutgoingResponseType\>
+# Type Alias: FactoryErrorPage\<IncomingEventType, OutgoingResponseType\>
 
 ```ts
 type FactoryErrorPage<IncomingEventType, OutgoingResponseType> = (container?) => IErrorPage<IncomingEventType, OutgoingResponseType>;
@@ -24,7 +24,7 @@ The type representing the outgoing response.
 
 ### container?
 
-`IContainer` | `any`
+`IContainer` \| `any`
 
 ## Returns
 

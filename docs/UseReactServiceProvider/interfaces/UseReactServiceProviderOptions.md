@@ -7,5 +7,5 @@ Options for configuring the use-react service provider.
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```

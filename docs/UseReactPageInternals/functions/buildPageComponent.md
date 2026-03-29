@@ -23,7 +23,7 @@ ReactIncomingEvent
 
 ### container
 
-`Container`
+`IContainer`
 
 Service Container
 

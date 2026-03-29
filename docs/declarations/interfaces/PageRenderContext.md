@@ -17,7 +17,7 @@ React page render context.
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 ***
@@ -25,7 +25,7 @@ container: Container;
 ### data?
 
 ```ts
-optional data: TData;
+optional data?: TData;
 ```
 
 ***
@@ -41,5 +41,5 @@ event: ReactIncomingEvent;
 ### statusCode?
 
 ```ts
-optional statusCode: number;
+optional statusCode?: number;
 ```

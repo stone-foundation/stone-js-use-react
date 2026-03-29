@@ -10,7 +10,7 @@ type ReactOutgoingResponse =
 
 Outgoing response for React.
 
-## Type declaration
+## Type Declaration
 
 ### content
 

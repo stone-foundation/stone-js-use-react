@@ -20,7 +20,7 @@ Constructs a new `UseReactServiceProvider` instance.
 
 ##### container
 
-`Container`
+`IContainer`
 
 The container to register services in.
 

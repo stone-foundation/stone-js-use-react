@@ -1,7 +1,7 @@
 # Function: Page()
 
 ```ts
-function Page<T>(path, options): ClassDecorator;
+function Page<T>(path, options?): ClassDecorator;
 ```
 
 A class decorator for defining a class as a React Page route action.
@@ -17,9 +17,9 @@ Uses the `Match` decorator internally to register the route with the HTTP `GET` 
 
 ### path
 
-`string`
+`string` \| `string`[]
 
-### options
+### options?
 
 [`PageOptions`](../../../declarations/interfaces/PageOptions.md) = `{}`
 

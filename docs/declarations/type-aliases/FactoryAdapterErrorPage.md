@@ -1,4 +1,4 @@
-# Type Alias: FactoryAdapterErrorPage()\<RawEventType, RawResponseType, ExecutionContextType\>
+# Type Alias: FactoryAdapterErrorPage\<RawEventType, RawResponseType, ExecutionContextType\>
 
 ```ts
 type FactoryAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType> = (container?) => IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>;
@@ -24,7 +24,7 @@ Represents an Adapter factory component error handler.
 
 ### container?
 
-`IContainer` | `any`
+`IContainer` \| `any`
 
 ## Returns
 

@@ -1,4 +1,4 @@
-# Type Alias: AdapterErrorPageClass()\<RawEventType, RawResponseType, ExecutionContextType\>
+# Type Alias: AdapterErrorPageClass\<RawEventType, RawResponseType, ExecutionContextType\>
 
 ```ts
 type AdapterErrorPageClass<RawEventType, RawResponseType, ExecutionContextType> = (...args) => IAdapterErrorPage<RawEventType, RawResponseType, ExecutionContextType>;

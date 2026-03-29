@@ -7,5 +7,5 @@ Options for configuring the `PageLayout` decorator.
 ### name?
 
 ```ts
-optional name: string;
+optional name?: string;
 ```

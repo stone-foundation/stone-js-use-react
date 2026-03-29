@@ -1,4 +1,4 @@
-# Type Alias: PageLayoutClass()
+# Type Alias: PageLayoutClass
 
 ```ts
 type PageLayoutClass = (...args) => IPageLayout;

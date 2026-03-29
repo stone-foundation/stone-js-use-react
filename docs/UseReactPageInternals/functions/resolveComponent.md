@@ -1,7 +1,7 @@
 # Function: resolveComponent()
 
 ```ts
-function resolveComponent<T>(container, metaComponent?): Promise<undefined | T>;
+function resolveComponent<T>(container, metaComponent?): Promise<T | undefined>;
 ```
 
 Resolve the event handler for the component.
@@ -21,18 +21,20 @@ Can also resolve dynamically loaded components.
 
 ### container
 
-`Container`
+`IContainer`
 
 The service container.
 
 ### metaComponent?
 
-The meta component event handler.
+  \| [`MetaPageLayout`](../../declarations/interfaces/MetaPageLayout.md)
+  \| [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
+  \| [`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
 
-[`MetaPageLayout`](../../declarations/interfaces/MetaPageLayout.md) | [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\> | [`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
+The meta component event handler.
 
 ## Returns
 
-`Promise`\<`undefined` \| `T`\>
+`Promise`\<`T` \| `undefined`\>
 
 The resolved element type.

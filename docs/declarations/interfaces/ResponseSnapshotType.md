@@ -7,7 +7,7 @@ Stone data snapshot type.
 ### data?
 
 ```ts
-optional data: any;
+optional data?: any;
 ```
 
 ***
@@ -15,7 +15,7 @@ optional data: any;
 ### error?
 
 ```ts
-optional error: any;
+optional error?: any;
 ```
 
 ***
@@ -23,7 +23,7 @@ optional error: any;
 ### layout?
 
 ```ts
-optional layout: unknown;
+optional layout?: unknown;
 ```
 
 ***
@@ -39,5 +39,5 @@ ssr: boolean;
 ### statusCode?
 
 ```ts
-optional statusCode: number;
+optional statusCode?: number;
 ```

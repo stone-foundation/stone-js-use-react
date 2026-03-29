@@ -6,7 +6,7 @@ const MetaBrowserResponseMiddleware: object;
 
 Meta Middleware for processing browser responses.
 
-## Type declaration
+## Type Declaration
 
 ### isClass
 

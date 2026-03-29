@@ -26,7 +26,7 @@ import { setMetadata, classDecoratorLegacyWrapper, ClassType } from '@stone-js/c
  * }
  * ```
  */
-export const Page = <T extends ClassType = ClassType>(path: string, options: PageOptions = {}): ClassDecorator => {
+export const Page = <T extends ClassType = ClassType>(path: string | string[], options: PageOptions = {}): ClassDecorator => {
   return classDecoratorLegacyWrapper((target: T, context: ClassDecoratorContext<T>): undefined => {
     setMetadata(
       context,

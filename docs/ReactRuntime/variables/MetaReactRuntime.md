@@ -6,7 +6,7 @@ const MetaReactRuntime: object;
 
 MetaReactRuntime
 
-## Type declaration
+## Type Declaration
 
 ### alias
 

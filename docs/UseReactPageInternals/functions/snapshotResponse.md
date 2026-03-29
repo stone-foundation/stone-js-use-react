@@ -19,7 +19,7 @@ The incoming HTTP event.
 
 ### container
 
-`Container`
+`IContainer`
 
 ### data
 

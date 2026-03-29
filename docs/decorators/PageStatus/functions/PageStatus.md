@@ -1,7 +1,7 @@
 # Function: PageStatus()
 
 ```ts
-function PageStatus<T>(statusCode, headers): MethodDecorator;
+function PageStatus<T>(statusCode?, headers?): MethodDecorator;
 ```
 
 Decorator to set the status code of the response.
@@ -14,13 +14,13 @@ Decorator to set the status code of the response.
 
 ## Parameters
 
-### statusCode
+### statusCode?
 
 `number` = `200`
 
 The status code of the response.
 
-### headers
+### headers?
 
 [`HeadersType`](../../../declarations/type-aliases/HeadersType.md) = `{}`
 
