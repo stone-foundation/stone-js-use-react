@@ -55,7 +55,7 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
     if (event.defaultPrevented || isExternal) return
 
     event.preventDefault()
-    router.navigate(to ?? '/')
+    isNotEmpty<string | NavigateOptions>(to) && router.navigate(to)
   }
 
   if (isEmpty(to) && isEmpty(href)) {
