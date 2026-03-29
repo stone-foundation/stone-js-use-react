@@ -1,4 +1,4 @@
-# Type Alias: UseReactHookListener()
+# Type Alias: UseReactHookListener
 
 ```ts
 type UseReactHookListener = (context) => Promiseable<void>;

@@ -21,7 +21,7 @@ React error page head context.
 ### data?
 
 ```ts
-optional data: UData;
+optional data?: UData;
 ```
 
 #### Inherited from
@@ -53,7 +53,7 @@ event: ReactIncomingEvent;
 ### statusCode?
 
 ```ts
-optional statusCode: number;
+optional statusCode?: number;
 ```
 
 #### Inherited from

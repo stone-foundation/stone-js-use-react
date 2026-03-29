@@ -7,7 +7,7 @@ Browser response content for React.
 ### app?
 
 ```ts
-optional app: ReactNode;
+optional app?: ReactNode;
 ```
 
 ***
@@ -15,7 +15,7 @@ optional app: ReactNode;
 ### component?
 
 ```ts
-optional component: ReactNode;
+optional component?: ReactNode;
 ```
 
 ***
@@ -23,7 +23,7 @@ optional component: ReactNode;
 ### fullRender?
 
 ```ts
-optional fullRender: boolean;
+optional fullRender?: boolean;
 ```
 
 ***
@@ -31,7 +31,7 @@ optional fullRender: boolean;
 ### head?
 
 ```ts
-optional head: HeadContext;
+optional head?: HeadContext;
 ```
 
 ***
@@ -39,7 +39,7 @@ optional head: HeadContext;
 ### ssr?
 
 ```ts
-optional ssr: boolean;
+optional ssr?: boolean;
 ```
 
 ***
@@ -47,5 +47,5 @@ optional ssr: boolean;
 ### targetUrl?
 
 ```ts
-optional targetUrl: string | URL;
+optional targetUrl?: string | URL;
 ```

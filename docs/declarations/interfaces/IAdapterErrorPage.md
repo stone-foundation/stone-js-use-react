@@ -21,12 +21,12 @@ Represents an Adapter component error handler.
 ### handle?
 
 ```ts
-optional handle: FunctionalAdapterErrorHandler<RawEventType, RawResponseType, ExecutionContextType>;
+optional handle?: FunctionalAdapterErrorHandler<RawEventType, RawResponseType, ExecutionContextType>;
 ```
 
 ***
 
-### render()
+### render
 
 ```ts
 render: (context) => ReactNode;

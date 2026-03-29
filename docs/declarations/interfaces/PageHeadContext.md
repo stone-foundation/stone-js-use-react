@@ -17,7 +17,7 @@ React page head context.
 ### data?
 
 ```ts
-optional data: TData;
+optional data?: TData;
 ```
 
 ***
@@ -33,5 +33,5 @@ event: ReactIncomingEvent;
 ### statusCode?
 
 ```ts
-optional statusCode: number;
+optional statusCode?: number;
 ```

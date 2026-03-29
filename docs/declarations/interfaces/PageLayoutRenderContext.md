@@ -15,5 +15,5 @@ children: ReactNode;
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```

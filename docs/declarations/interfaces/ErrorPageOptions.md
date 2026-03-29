@@ -11,5 +11,5 @@ Options for configuring the `ErrorPage` decorator.
 ### layout?
 
 ```ts
-optional layout: string;
+optional layout?: string;
 ```

@@ -16,7 +16,7 @@ The incoming browser event.
 
 ### container
 
-`Container`
+`IContainer`
 
 ## Returns
 

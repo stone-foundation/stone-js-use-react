@@ -1,4 +1,4 @@
-# Type Alias: ErrorPageClass()\<IncomingEventType, OutgoingResponseType\>
+# Type Alias: ErrorPageClass\<IncomingEventType, OutgoingResponseType\>
 
 ```ts
 type ErrorPageClass<IncomingEventType, OutgoingResponseType> = (...args) => IErrorPage<IncomingEventType, OutgoingResponseType>;

@@ -1,4 +1,4 @@
-# Type Alias: FactoryPageLayout()
+# Type Alias: FactoryPageLayout
 
 ```ts
 type FactoryPageLayout = (container?) => IPageLayout;
@@ -10,7 +10,7 @@ Represents a factory page layout.
 
 ### container?
 
-`IContainer` | `any`
+`IContainer` \| `any`
 
 ## Returns
 

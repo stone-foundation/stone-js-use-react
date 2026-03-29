@@ -7,7 +7,7 @@ Context for React.
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 ***

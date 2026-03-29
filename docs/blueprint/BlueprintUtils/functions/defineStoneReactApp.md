@@ -57,18 +57,6 @@ Additional blueprints to merge.
 
 A fully merged Stone blueprint.
 
-### Param
-
-A factory function or class constructor for the main page.
-
-### Param
-
-Optional application-level configuration.
-
-### Param
-
-Additional blueprints to merge.
-
 ## Call Signature
 
 ```ts
@@ -112,18 +100,6 @@ Additional blueprints to merge.
 
 A fully merged Stone blueprint.
 
-### Param
-
-A factory function or class constructor for the main page.
-
-### Param
-
-Optional application-level configuration.
-
-### Param
-
-Additional blueprints to merge.
-
 ## Call Signature
 
 ```ts
@@ -157,15 +133,3 @@ Additional blueprints to merge.
 `StoneBlueprint`\<`U`\>
 
 A fully merged Stone blueprint.
-
-### Param
-
-A factory function or class constructor for the main page.
-
-### Param
-
-Optional application-level configuration.
-
-### Param
-
-Additional blueprints to merge.

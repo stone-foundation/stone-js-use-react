@@ -1,23 +1,21 @@
 import {
+  useMemo,
   useState,
   ReactNode,
   useEffect,
   useContext,
   MouseEvent,
-  FunctionComponent
+  FunctionComponent,
+  AnchorHTMLAttributes
 } from 'react'
 import { StoneContext } from '../StoneContext'
 import { IRouter, IRoute } from '../declarations'
-import { isObjectLikeModule } from '@stone-js/core'
 import { NavigateOptions, RouteEvent, Router } from '@stone-js/router'
+import { isEmpty, isNotEmpty, isObjectLikeModule, Logger } from '@stone-js/core'
 
-interface BaseProps {
-  rel?: string
-  href?: string
-  target?: string
+interface BaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   noRel?: boolean
   external?: boolean
-  className?: string
   children: ReactNode
   defaultNav?: boolean
   selectedClass?: string
@@ -31,26 +29,37 @@ export type StoneLinkOptions =
 /**
  * Internal link component using Stone.js router.
  */
-const InternalLink: FunctionComponent<StoneLinkOptions> = ({
+export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
   to,
   href,
   noRel,
+  external,
   children,
-  className,
-  defaultNav,
-  selectedClass = 'selected',
   ariaCurrentValue = 'page',
-  rel = 'noopener noreferrer'
+  selectedClass = 'selected',
+  ...rest
 }) => {
+  const isExternal = external === true
+  const shouldHandleNav = !isExternal && isNotEmpty(to)
   const router = useContext(StoneContext).container.resolve<IRouter>(Router)
-  const path = isObjectLikeModule<NavigateOptions>(to) ? router.generate(to) : to ?? href
+  const path = useMemo(() => {
+    return isObjectLikeModule<NavigateOptions>(to) ? router.generate(to) : to ?? href ?? '#'
+  }, [to, href, router])
   const [currentRoute, setCurrentRoute] = useState<IRoute | undefined>(router.getCurrentRoute())
   const selectedClassName = currentRoute?.path === path ? selectedClass : undefined
-  const elemClassName = [className, selectedClassName].filter(Boolean).join(' ').trim()
+  const elemClassName = [rest.className, selectedClassName].filter(Boolean).join(' ').trim()
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>): void => {
+    rest.onClick?.(event)
+
+    if (event.defaultPrevented || isExternal) return
+
     event.preventDefault()
-    router.navigate(to ?? '')
+    isNotEmpty<string | NavigateOptions>(to) && router.navigate(to)
+  }
+
+  if (isEmpty(to) && isEmpty(href)) {
+    Logger.warn('StoneLink: missing "to" or "href"')
   }
 
   useEffect(() => {
@@ -65,56 +74,24 @@ const InternalLink: FunctionComponent<StoneLinkOptions> = ({
     }
   }, [router])
 
-  return defaultNav === true
-    ? (
-      <a
-        href={path}
-        className={elemClassName}
-        aria-current={ariaCurrentValue}
-        rel={noRel !== undefined ? undefined : rel}
-      >
-        {children}
-      </a>
-      )
-    : (
-      <button
-        onClick={handleClick}
-        className={elemClassName}
-        aria-current={ariaCurrentValue}
-        rel={noRel !== undefined ? undefined : rel}
-      >
-        {children}
-      </button>
-      )
-}
-
-/**
- * External link component rendering a regular <a> tag.
- */
-const ExternalLink: FunctionComponent<StoneLinkOptions> = ({
-  to,
-  href,
-  noRel,
-  target,
-  children,
-  className,
-  ariaCurrentValue = 'page',
-  rel = 'noopener noreferrer'
-}) => (
-  <a
-    target={target}
-    className={className}
-    aria-current={ariaCurrentValue}
-    rel={noRel !== undefined ? undefined : rel}
-    href={typeof to === 'string' ? to : href}
-  >
-    {children}
-  </a>
-)
-
-/**
- * Main StoneLink component delegating to internal or external versions.
- */
-export const StoneLink: FunctionComponent<StoneLinkOptions> = (props) => {
-  return props.external === true ? <ExternalLink {...props} /> : <InternalLink {...props} />
+  return (
+    // eslint-disable-next-line react/jsx-no-target-blank
+    <a
+      {...rest}
+      href={path}
+      className={elemClassName}
+      target={isExternal ? '_blank' : rest.target}
+      aria-current={isNotEmpty(selectedClassName) ? ariaCurrentValue : undefined}
+      rel={
+        noRel === true
+          ? undefined
+          : isExternal
+            ? 'noopener noreferrer'
+            : rest.rel
+      }
+      onClick={shouldHandleNav ? handleClick : rest.onClick}
+    >
+      {children}
+    </a>
+  )
 }

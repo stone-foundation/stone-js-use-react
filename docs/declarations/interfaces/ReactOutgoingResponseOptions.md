@@ -17,5 +17,5 @@ Options for creating a React Outgoing Response.
 ### headers?
 
 ```ts
-optional headers: HeadersType;
+optional headers?: HeadersType;
 ```

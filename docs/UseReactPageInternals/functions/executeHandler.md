@@ -33,7 +33,8 @@ The response object.
 
 ### handler?
 
-[`IPage`](../../declarations/interfaces/IPage.md)\<`IncomingBrowserEvent`, `unknown`\> | [`IErrorPage`](../../declarations/interfaces/IErrorPage.md)\<`IncomingBrowserEvent`, `unknown`\>
+  \| [`IPage`](../../declarations/interfaces/IPage.md)\<`IncomingBrowserEvent`, `unknown`\>
+  \| [`IErrorPage`](../../declarations/interfaces/IErrorPage.md)\<`IncomingBrowserEvent`, `unknown`\>
 
 ### error?
 

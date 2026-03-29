@@ -38,14 +38,6 @@ Optional page layout definition options.
 
 The UseReactBlueprint.
 
-### Param
-
-The layout module.
-
-### Param
-
-Optional page layout definition options.
-
 ## Call Signature
 
 ```ts
@@ -73,11 +65,3 @@ Optional page layout definition options.
 [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
 The UseReactBlueprint.
-
-### Param
-
-The layout module.
-
-### Param
-
-Optional page layout definition options.

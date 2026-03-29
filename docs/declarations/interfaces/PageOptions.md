@@ -23,7 +23,7 @@ as it is predefined as `'GET'` by the decorator.
 ### headers?
 
 ```ts
-optional headers: HeadersType;
+optional headers?: HeadersType;
 ```
 
 ***
@@ -31,5 +31,5 @@ optional headers: HeadersType;
 ### layout?
 
 ```ts
-optional layout: string;
+optional layout?: string;
 ```

@@ -38,14 +38,6 @@ Optional adapter error page options.
 
 The UseReactBlueprint.
 
-### Param
-
-The adapter error page module.
-
-### Param
-
-Optional adapter error page options.
-
 ## Call Signature
 
 ```ts
@@ -73,11 +65,3 @@ Adapter error page options.
 [`UseReactBlueprint`](../../../options/UseReactBlueprint/interfaces/UseReactBlueprint.md)
 
 The UseReactBlueprint.
-
-### Param
-
-The adapter error page module.
-
-### Param
-
-Optional adapter error page options.

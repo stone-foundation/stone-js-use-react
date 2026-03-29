@@ -4,10 +4,10 @@ Represents a Page layout.
 
 ## Properties
 
-### head()?
+### head?
 
 ```ts
-optional head: () => Promiseable<HeadContext>;
+optional head?: () => Promiseable<HeadContext>;
 ```
 
 #### Returns
@@ -16,7 +16,7 @@ optional head: () => Promiseable<HeadContext>;
 
 ***
 
-### render()
+### render
 
 ```ts
 render: (context) => ReactNode;

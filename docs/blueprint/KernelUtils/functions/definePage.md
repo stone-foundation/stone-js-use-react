@@ -44,14 +44,6 @@ Page definition options.
 
 The UseReactBlueprint.
 
-### Param
-
-The EventHandler module.
-
-### Param
-
-Page definition options.
-
 ## Call Signature
 
 ```ts
@@ -85,11 +77,3 @@ Page definition options.
 `Partial`\<`StoneBlueprint`\<`U`\>\>
 
 The UseReactBlueprint.
-
-### Param
-
-The EventHandler module.
-
-### Param
-
-Page definition options.

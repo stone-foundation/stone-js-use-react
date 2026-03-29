@@ -32,7 +32,7 @@ ReactRuntime options.
 ### instance?
 
 ```ts
-static optional instance: ReactRuntime;
+static optional instance?: ReactRuntime;
 ```
 
 The ReactRuntime instance.
@@ -106,7 +106,7 @@ The snapshot value.
 ### throwError()
 
 ```ts
-throwError(error, statusCode): Promise<void>;
+throwError(error, statusCode?): Promise<void>;
 ```
 
 Throw an error.
@@ -122,7 +122,7 @@ If no error handler is found, the error will be thrown.
 
 The error to throw.
 
-##### statusCode
+##### statusCode?
 
 `number` = `500`
 

@@ -2,11 +2,11 @@
 
 ```ts
 function resolveLazyComponent(metaComponent?): Promise<
-  | undefined
   | MetaPageLayout
   | MetaPage<ReactIncomingEvent, unknown>
   | MetaErrorPage<ReactIncomingEvent, unknown>
-| MetaAdapterErrorPage<any, any, any>>;
+  | MetaAdapterErrorPage<any, any, any>
+| undefined>;
 ```
 
 Resolve lazy loaded components.
@@ -15,17 +15,20 @@ Resolve lazy loaded components.
 
 ### metaComponent?
 
-The meta component event handler.
+  \| [`MetaPageLayout`](../../declarations/interfaces/MetaPageLayout.md)
+  \| [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
+  \| [`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
+  \| [`MetaAdapterErrorPage`](../../declarations/interfaces/MetaAdapterErrorPage.md)\<`any`, `any`, `any`\>
 
-[`MetaPageLayout`](../../declarations/interfaces/MetaPageLayout.md) | [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\> | [`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\> | [`MetaAdapterErrorPage`](../../declarations/interfaces/MetaAdapterErrorPage.md)\<`any`, `any`, `any`\>
+The meta component event handler.
 
 ## Returns
 
 `Promise`\<
-  \| `undefined`
   \| [`MetaPageLayout`](../../declarations/interfaces/MetaPageLayout.md)
   \| [`MetaPage`](../../declarations/interfaces/MetaPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
   \| [`MetaErrorPage`](../../declarations/interfaces/MetaErrorPage.md)\<[`ReactIncomingEvent`](../../declarations/type-aliases/ReactIncomingEvent.md), `unknown`\>
-  \| [`MetaAdapterErrorPage`](../../declarations/interfaces/MetaAdapterErrorPage.md)\<`any`, `any`, `any`\>\>
+  \| [`MetaAdapterErrorPage`](../../declarations/interfaces/MetaAdapterErrorPage.md)\<`any`, `any`, `any`\>
+  \| `undefined`\>
 
 The resolved element type.

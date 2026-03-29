@@ -11,55 +11,49 @@ UseReact decorator options.
 ### adapterErrorPages?
 
 ```ts
-optional adapterErrorPages: Record<string, MetaAdapterErrorPage<unknown, unknown, unknown>>;
+optional adapterErrorPages?: Record<string, MetaAdapterErrorPage<unknown, unknown, unknown>>;
 ```
 
 A map of error pages for adapter-level errors.
 
 #### Inherited from
 
-```ts
-Partial.adapterErrorPages
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`adapterErrorPages`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#adaptererrorpages)
 
 ***
 
 ### componentEventHandler?
 
 ```ts
-optional componentEventHandler: MetaPage<ReactIncomingEvent, unknown>;
+optional componentEventHandler?: MetaPage<ReactIncomingEvent, unknown>;
 ```
 
 Handles incoming events for the root React component.
 
 #### Inherited from
 
-```ts
-Partial.componentEventHandler
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`componentEventHandler`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#componenteventhandler)
 
 ***
 
 ### errorPages?
 
 ```ts
-optional errorPages: Record<string, MetaErrorPage<ReactIncomingEvent, unknown>>;
+optional errorPages?: Record<string, MetaErrorPage<ReactIncomingEvent, unknown>>;
 ```
 
 A map of error pages for specific components.
 
 #### Inherited from
 
-```ts
-Partial.errorPages
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`errorPages`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#errorpages)
 
 ***
 
 ### htmlTemplateContent?
 
 ```ts
-optional htmlTemplateContent: string;
+optional htmlTemplateContent?: string;
 ```
 
 The content of the HTML template as a string.
@@ -69,16 +63,14 @@ Note: This is not a file path, but the actual HTML content.
 
 #### Inherited from
 
-```ts
-Partial.htmlTemplateContent
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`htmlTemplateContent`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#htmltemplatecontent)
 
 ***
 
 ### ignorePlatforms?
 
 ```ts
-optional ignorePlatforms: string[];
+optional ignorePlatforms?: string[];
 ```
 
 A list of platforms to ignore for React rendering.
@@ -87,38 +79,32 @@ For example, you might want to ignore rendering on CLI platforms.
 
 #### Inherited from
 
-```ts
-Partial.ignorePlatforms
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`ignorePlatforms`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#ignoreplatforms)
 
 ***
 
 ### layout?
 
 ```ts
-optional layout: Record<string, MetaPageLayout>;
+optional layout?: Record<string, MetaPageLayout>;
 ```
 
 A map of layout components with their respective event handlers.
 
 #### Inherited from
 
-```ts
-Partial.layout
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`layout`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#layout)
 
 ***
 
 ### rootElementId?
 
 ```ts
-optional rootElementId: string;
+optional rootElementId?: string;
 ```
 
 The ID of the root DOM element where React will be mounted.
 
 #### Inherited from
 
-```ts
-Partial.rootElementId
-```
+[`UseReactConfig`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md).[`rootElementId`](../../../../options/UseReactBlueprint/interfaces/UseReactConfig.md#rootelementid)

@@ -30,7 +30,7 @@ The outgoing HTTP response.
 
 ### container
 
-`Container`
+`IContainer`
 
 The service container.
 

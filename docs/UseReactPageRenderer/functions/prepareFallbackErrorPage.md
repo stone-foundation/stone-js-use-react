@@ -28,7 +28,7 @@ The outgoing response.
 
 ### container
 
-`Container`
+`IContainer`
 
 The service container.
 

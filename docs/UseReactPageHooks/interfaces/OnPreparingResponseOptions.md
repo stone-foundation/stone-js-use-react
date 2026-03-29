@@ -7,7 +7,7 @@ Options for onPreparingResponse hook.
 ### container
 
 ```ts
-container: Container;
+container: IContainer;
 ```
 
 ***

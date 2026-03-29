@@ -1,13 +1,11 @@
 import { isNotEmpty } from '@stone-js/core'
 import { STONE_PAGE_EVENT_OUTLET } from '../constants'
-import { ReactNode, useEffect, useState, FunctionComponent } from 'react'
+import { ReactNode, useEffect, useState, FunctionComponent, HTMLAttributes } from 'react'
 
 /**
  * Stone Outlet options.
  */
-export interface StoneOutletOptions {
-  children: ReactNode
-}
+export interface StoneOutletOptions extends HTMLAttributes<HTMLDivElement> {}
 
 /**
  * A dynamic rendering component that updates its content based on a global event.
@@ -21,7 +19,7 @@ export interface StoneOutletOptions {
  * @param options - The options to create the Stone Outlet.
  * @returns The Stone Outlet component.
  */
-export const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children }) => {
+export const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children, ...rest }) => {
   const [currentView, setCurrentView] = useState<ReactNode>(children)
 
   useEffect(() => {
@@ -37,5 +35,5 @@ export const StoneOutlet: FunctionComponent<StoneOutletOptions> = ({ children })
     return () => window.removeEventListener(eventName, handleEvent)
   }, [])
 
-  return <div data-stone-outlet='true'>{currentView}</div>
+  return <div {...rest} data-stone-outlet='true'>{currentView}</div>
 }

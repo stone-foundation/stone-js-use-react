@@ -1,4 +1,4 @@
-# Type Alias: PageClass()\<IncomingEventType, OutgoingResponseType\>
+# Type Alias: PageClass\<IncomingEventType, OutgoingResponseType\>
 
 ```ts
 type PageClass<IncomingEventType, OutgoingResponseType> = (...args) => IPage<IncomingEventType, OutgoingResponseType>;

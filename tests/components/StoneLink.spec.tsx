@@ -1,8 +1,9 @@
 import { JSX } from 'react'
+import { Logger } from '@stone-js/core'
 import { Router } from '@stone-js/router'
 import { StoneContext } from '../../src/StoneContext'
 import { StoneLink } from '../../src/components/StoneLink'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, RenderResult } from '@testing-library/react'
 
 const mockNavigate = vi.fn()
 const mockGenerate = vi.fn((to) => (typeof to === 'string' ? to : '/generated-path'))
@@ -12,15 +13,19 @@ const mockRouter = {
   generate: mockGenerate,
   getCurrentRoute: () => ({ path: '/about' }),
   on: vi.fn((_, handler) => handler({ get: () => ({ path: '/about' }) })),
-  off: vi.fn((_, handler) => handler({ get: () => ({ path: '/about' }) }))
+  off: vi.fn()
 } as unknown as Router
 
-const renderWithContext = (ui: JSX.Element): any =>
+const renderWithContext = (ui: JSX.Element): RenderResult =>
   render(
     <StoneContext.Provider value={{ container: { resolve: () => mockRouter } } as any}>
       {ui}
     </StoneContext.Provider>
   )
+
+beforeEach(() => {
+  vi.clearAllMocks()
+})
 
 describe('StoneLink', () => {
   it('renders an external link', () => {
@@ -34,74 +39,119 @@ describe('StoneLink', () => {
     expect(link.textContent).toBe('External')
     expect(link.getAttribute('href')).toBe('https://example.com')
     expect(link.getAttribute('rel')).toBe('noopener noreferrer')
+    expect(link.getAttribute('target')).toBe('_blank')
   })
 
-  it('renders a defaultNav internal link as <a>', () => {
-    const { getByRole } = renderWithContext(
-      <StoneLink href='/about' defaultNav>
-        About
-      </StoneLink>
-    )
-
-    const link = getByRole('link')
-    expect(link.textContent).toBe('About')
-    expect(link.getAttribute('href')).toBe('/about')
-  })
-
-  it('renders a button for internal link when defaultNav is false', () => {
+  it('renders an internal link', () => {
     const { getByRole } = renderWithContext(
       <StoneLink to='/home'>Home</StoneLink>
     )
 
-    const button = getByRole('button')
-    expect(button.textContent).toBe('Home')
+    const link = getByRole('link')
+    expect(link.textContent).toBe('Home')
+    expect(link.getAttribute('href')).toBe('/home')
+  })
 
-    fireEvent.click(button)
+  it('navigates using router on click', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='/home'>Home</StoneLink>
+    )
+
+    const link = getByRole('link')
+    fireEvent.click(link)
+
     expect(mockNavigate).toHaveBeenCalledWith('/home')
   })
 
   it('calls router.generate when to is an object', () => {
     const routeObj = { name: 'user', params: { id: '1' } }
-    const { getByRole } = renderWithContext(
+
+    renderWithContext(
       <StoneLink to={routeObj}>User</StoneLink>
     )
 
-    const button = getByRole('button')
-    expect(button.textContent).toBe('User')
     expect(mockGenerate).toHaveBeenCalledWith(routeObj)
   })
 
-  it('respects noRel prop on button', () => {
+  it('respects noRel prop', () => {
     const { getByRole } = renderWithContext(
       <StoneLink href='https://no-rel.com' noRel>
         NoRel
       </StoneLink>
     )
 
-    const button = getByRole('button')
-    expect(button.getAttribute('rel')).toBeFalsy()
-    fireEvent.click(button)
+    const link = getByRole('link')
+    expect(link.getAttribute('rel')).toBeNull()
   })
 
-  it('respects noRel prop on link', () => {
+  it('calls user onClick before navigation', () => {
+    const onClick = vi.fn()
+
     const { getByRole } = renderWithContext(
-      <StoneLink to='https://no-rel.com' defaultNav noRel>
-        NoRel
+      <StoneLink to='/home' onClick={onClick}>
+        Home
       </StoneLink>
     )
 
     const link = getByRole('link')
-    expect(link.getAttribute('rel')).toBeFalsy()
+    fireEvent.click(link)
+
+    expect(onClick).toHaveBeenCalled()
+    expect(mockNavigate).toHaveBeenCalledWith('/home')
   })
 
-  it('respects noRel prop on external link', () => {
+  it('does not navigate if event is prevented', () => {
+    const onClick = vi.fn((e) => e.preventDefault())
+
     const { getByRole } = renderWithContext(
-      <StoneLink to='https://no-rel.com' external noRel>
-        NoRel
+      <StoneLink to='/home' onClick={onClick}>
+        Home
       </StoneLink>
     )
 
     const link = getByRole('link')
-    expect(link.getAttribute('rel')).toBeFalsy()
+    fireEvent.click(link)
+
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
+
+  it('applies selected class when route matches', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='/about'>About</StoneLink>
+    )
+
+    const link = getByRole('link')
+    expect(link.className).toContain('selected')
+  })
+
+  it('sets aria-current only when selected', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='/about'>About</StoneLink>
+    )
+
+    const link = getByRole('link')
+    expect(link.getAttribute('aria-current')).toBe('page')
+  })
+
+  it('logs a warning when neither "to" nor "href" is provided', () => {
+    const warnSpy = vi.spyOn(Logger, 'warn').mockImplementation(() => {})
+
+    renderWithContext(
+      // @ts-expect-error - testing purpose
+      <StoneLink>Missing</StoneLink>
+    )
+
+    expect(warnSpy).toHaveBeenCalledWith('StoneLink: missing "to" or "href"')
+
+    warnSpy.mockRestore()
+  })
+
+  it('does not set aria-current when not selected', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='/home'>Home</StoneLink>
+    )
+
+    const link = getByRole('link')
+    expect(link.getAttribute('aria-current')).toBeNull()
   })
 })
