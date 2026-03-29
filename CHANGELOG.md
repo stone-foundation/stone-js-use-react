@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Use React" extension will be documented in 
 ## Unreleased
 
 
+## [0.3.0](https://github.com/stone-foundation/stone-js-use-react/compare/v0.2.0...v0.3.0) (2026-03-29)
+
+
+### Features
+
+* improve StoneLink, StoneOutlet and Page ([#17](https://github.com/stone-foundation/stone-js-use-react/issues/17)) ([738ee77](https://github.com/stone-foundation/stone-js-use-react/commit/738ee7736347a79ab88cc9161d7660849d659203))
+
 ## [0.2.0](https://github.com/stone-foundation/stone-js-use-react/compare/v0.1.0...v0.2.0) (2025-06-16)
 
 
