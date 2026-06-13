@@ -7,6 +7,8 @@ Multiple event handlers will be processed by the router.
 
 ## Template
 
+**OutgoingResponseType**
+
 The type representing the outgoing response.
 
 ## Type Parameters

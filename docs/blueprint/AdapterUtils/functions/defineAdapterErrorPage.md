@@ -4,9 +4,13 @@ Utility function to define an adapter error page.
 
 ## Param
 
+**module**
+
 The adapter error page module.
 
 ## Param
+
+**options**
 
 Optional adapter error page options.
 

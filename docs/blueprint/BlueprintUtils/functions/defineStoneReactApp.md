@@ -4,13 +4,19 @@ Defines a Stone React app using a factory-based or class-based main handler.
 
 ## Param
 
+**moduleOrOptions**
+
 A factory function or class constructor for the main page.
 
 ## Param
 
+**optionsOrBlueprints**
+
 Optional application-level configuration.
 
 ## Param
+
+**maybeBlueprints**
 
 Additional blueprints to merge.
 
