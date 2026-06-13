@@ -5,6 +5,13 @@ All notable changes to the "Stone.js Use React" extension will be documented in 
 ## Unreleased
 
 
+## [0.3.1](https://github.com/stone-foundation/stone-js-use-react/compare/v0.3.0...v0.3.1) (2026-06-13)
+
+
+### Miscellaneous Chores
+
+* update Stone core dep ([#20](https://github.com/stone-foundation/stone-js-use-react/issues/20)) ([3191345](https://github.com/stone-foundation/stone-js-use-react/commit/319134518a471690f95933069a79f8952618b6e3))
+
 ## [0.3.0](https://github.com/stone-foundation/stone-js-use-react/compare/v0.2.0...v0.3.0) (2026-03-29)
 
 
