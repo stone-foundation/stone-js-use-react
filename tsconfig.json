@@ -19,7 +19,7 @@
     "skipLibCheck": true,
     "declarationMap": false,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "forceConsistentCasingInFileNames": true,

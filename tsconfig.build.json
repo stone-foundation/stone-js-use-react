@@ -16,7 +16,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDeclarationOnly": false,
     "types": ["node", "vite/client"],
     "allowSyntheticDefaultImports": true,

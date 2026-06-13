@@ -4,9 +4,13 @@ Utility function to define an error page.
 
 ## Param
 
+**module**
+
 The layout module.
 
 ## Param
+
+**options**
 
 Optional page layout definition options.
 

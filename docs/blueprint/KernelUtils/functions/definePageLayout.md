@@ -4,9 +4,13 @@ Utility function to define a page layout.
 
 ## Param
 
+**module**
+
 The layout module.
 
 ## Param
+
+**options**
 
 Optional page layout definition options.
 

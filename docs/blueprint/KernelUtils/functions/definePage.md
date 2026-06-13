@@ -4,9 +4,13 @@ Utility function to define a page.
 
 ## Param
 
+**module**
+
 The EventHandler module.
 
 ## Param
+
+**options**
 
 Page definition options.
 

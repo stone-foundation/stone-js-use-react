@@ -57,12 +57,12 @@
     "prepare": "husky"
   },
   "peerDependencies": {
-    "@stone-js/browser-adapter": "^0.1.0",
-    "@stone-js/browser-core": "^0.1.1",
-    "@stone-js/config": "^0.1.0",
-    "@stone-js/core": "^0.1.4",
-    "@stone-js/http-core": "^0.1.2",
-    "@stone-js/router": "^0.2.0",
+    "@stone-js/browser-adapter": "^0.1.1",
+    "@stone-js/browser-core": "^0.1.2",
+    "@stone-js/config": "^0.2.0",
+    "@stone-js/core": "^0.2.1",
+    "@stone-js/http-core": "^0.1.4",
+    "@stone-js/router": "^0.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
