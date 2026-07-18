@@ -9,6 +9,7 @@ import {
 import {
   SetUseReactHooksMiddleware,
   SetReactPageLayoutMiddleware,
+  SetReactViewProvidersMiddleware,
   SetUseReactEventHandlerMiddleware,
   SetReactKernelErrorPageMiddleware,
   SetReactRouteDefinitionsMiddleware
@@ -69,6 +70,7 @@ export const SetReactAdapterErrorPageMiddleware = (
 export const metaBrowserUseReactBlueprintMiddleware: Array<MetaMiddleware<BlueprintContext<IBlueprint, ClassType>, IBlueprint>> = [
   { module: SetUseReactHooksMiddleware, priority: 10 },
   { module: SetReactPageLayoutMiddleware, priority: 10 },
+  { module: SetReactViewProvidersMiddleware, priority: 10 },
   { module: SetUseReactEventHandlerMiddleware, priority: 2 },
   { module: SetReactKernelErrorPageMiddleware, priority: 10 },
   { module: SetReactAdapterErrorPageMiddleware, priority: 10 },

@@ -1,6 +1,6 @@
 {
   "name": "@stone-js/use-react",
-  "version": "0.3.1",
+  "version": "0.8.0",
   "description": "React integration for Stone.js, universal rendering, SSR hydration, layouts, pages, snapshots, head management, and more.",
   "author": "Mr. Stone <evensstone@gmail.com>",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "/dist"
   ],
   "type": "module",
+  "sideEffects": false,
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -48,7 +49,7 @@
     "predoc": "rimraf docs",
     "doc": "typedoc",
     "prebuild": "rimraf dist && npm run doc",
-    "build": "rollup -c",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 rollup -c",
     "test": "vitest run",
     "test:cvg": "npm run test -- --coverage",
     "test:text": "npm run test:cvg -- --coverage.reporter=text",
@@ -56,13 +57,16 @@
     "test:clover": "npm run test:cvg -- --coverage.reporter=clover",
     "prepare": "husky"
   },
+  "dependencies": {
+    "@stone-js/use-view": "workspace:*"
+  },
   "peerDependencies": {
-    "@stone-js/browser-adapter": "^0.1.1",
-    "@stone-js/browser-core": "^0.1.2",
-    "@stone-js/config": "^0.2.0",
-    "@stone-js/core": "^0.2.1",
-    "@stone-js/http-core": "^0.1.4",
-    "@stone-js/router": "^0.2.2",
+    "@stone-js/browser-adapter": "workspace:*",
+    "@stone-js/browser-core": "workspace:*",
+    "@stone-js/config": "workspace:*",
+    "@stone-js/core": "workspace:*",
+    "@stone-js/http-core": "workspace:*",
+    "@stone-js/router": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

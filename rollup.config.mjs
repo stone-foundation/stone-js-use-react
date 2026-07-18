@@ -54,7 +54,8 @@ export default [
   {
     input: [
       'dist/**/*.d.ts',
-      '!dist/server/**/*.d.ts' // browser build
+      '!dist/server/**/*.d.ts', // browser build
+      '!dist/index.d.ts' // never re-ingest the previous build's bundled output (stale-dts guard)
     ],
     output: [{ format: 'es' , file: 'dist/index.d.ts' }],
     plugins: [

@@ -1,5 +1,5 @@
 import { ReactRuntime } from '../src/ReactRuntime'
-import { applyHeadContextToDom } from '../src/DomUtils'
+import { applyHeadToDocument } from '@stone-js/use-view'
 import { isServer, resolveComponent, buildAppComponent, renderReactApp } from '../src/UseReactPageInternals'
 
 vi.mock('../src/UseReactPageInternals', async mod => ({
@@ -10,8 +10,9 @@ vi.mock('../src/UseReactPageInternals', async mod => ({
   resolveComponent: vi.fn()
 }))
 
-vi.mock('../src/DomUtils', () => ({
-  applyHeadContextToDom: vi.fn()
+vi.mock('@stone-js/use-view', async mod => ({
+  ...(await mod()),
+  applyHeadToDocument: vi.fn()
 }))
 
 const createMockSnapshot = (): any => ({
@@ -77,11 +78,11 @@ describe('ReactRuntime', () => {
   })
 
   describe('head()', () => {
-    it('calls applyHeadContextToDom', () => {
+    it('calls applyHeadToDocument', () => {
       const context = { title: 'Hello' }
       runtime.head(context)
 
-      expect(applyHeadContextToDom).toHaveBeenCalledWith(document, context)
+      expect(applyHeadToDocument).toHaveBeenCalledWith(document, context)
     })
   })
 

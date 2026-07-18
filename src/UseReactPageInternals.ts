@@ -39,13 +39,15 @@ import {
 } from './declarations'
 import { jsx } from 'react/jsx-runtime'
 import { STONE_SNAPSHOT } from './constants'
+import { renderSnapshotScript, composeProviders, MetaViewProvider, applyHeadToHtml } from '@stone-js/use-view'
 import { ElementType, ReactNode } from 'react'
 import { renderToString } from 'react-dom/server'
 import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
-import { applyHeadContextToHtmlString } from './DomUtils'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
+import { renderWithTransition } from './dom/viewTransitions'
+import { setupScrollRestoration } from './dom/scrollRestoration'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
 /**
@@ -73,7 +75,29 @@ export const buildAppComponent = async (
   const context: StoneContextType = { event, container, data }
   const children = layoutElement ?? componentElement
 
-  return jsx(StonePage, { context, children })
+  const app = jsx(StonePage, { context, children })
+
+  // Wrap the app root with any registered view providers (design-system theme providers,
+  // i18n, store, …). Registered imperatively via `defineViewProvider` / declaratively via
+  // `@ViewProvider`, stored under `stone.useReact.providers`. Tailwind/plain-CSS design
+  // systems need none of this — they are just a stylesheet import.
+  let providers: Array<MetaViewProvider<ElementType>> = []
+  try {
+    const registered = container.make<IBlueprint>('blueprint').get('stone.useReact.providers', [])
+    providers = Array.isArray(registered) ? registered : []
+  } catch {
+    providers = []
+  }
+
+  if (providers.length === 0) { return app }
+
+  return await composeProviders<ReactNode>(
+    providers,
+    app,
+    (comp, props, ...kids) => jsx(comp as ElementType, { ...props, children: kids.length === 1 ? kids[0] : kids }),
+    (provider) => (provider.isFactory === true ? (provider.module as (c: IContainer) => ElementType)(container) : provider.module),
+    { context }
+  )
 }
 
 /**
@@ -233,12 +257,26 @@ undefined
     metaComponent?.lazy === true &&
     isFunctionModule<Laziable<PageType<ReactIncomingEvent>>>(metaComponent?.module)
   ) {
-    metaComponent.lazy = false
-    metaComponent.module = await metaComponent.module()
+    // Never mutate the shared (blueprint-owned, process-wide) meta object, and never
+    // expose `lazy: false` before the import settles: doing so created a race where a
+    // concurrent SSR request saw `lazy: false` with `module` still the import factory.
+    // Resolve once (memoized across requests), then return a fresh, fully-resolved meta.
+    let resolved = lazyModuleCache.get(metaComponent)
+    if (resolved === undefined) {
+      resolved = await metaComponent.module()
+      lazyModuleCache.set(metaComponent, resolved)
+    }
+    return { ...metaComponent, lazy: false, module: resolved }
   }
 
   return metaComponent
 }
+
+/**
+ * Cache of resolved lazy modules, keyed by their (shared) meta object. Lets a lazily
+ * imported component be resolved once per process without mutating the shared meta.
+ */
+const lazyModuleCache = new WeakMap<object, PageType<ReactIncomingEvent>>()
 
 /**
  * Get the root element to render the React components.
@@ -262,14 +300,30 @@ export const getAppRootElement = (blueprint: IBlueprint): HTMLElement => {
  * @returns The React root instance.
  */
 export const renderReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRootInstance => {
-  const reactRoot = blueprint.get<ReactRootInstance>('stone.useReact.reactRoot') ??
-    createRoot(getAppRootElement(blueprint))
+  const existing = blueprint.get<ReactRootInstance>('stone.useReact.reactRoot')
+  const reactRoot = existing ?? createRoot(getAppRootElement(blueprint))
 
-  reactRoot.render(app)
+  // A re-render (root already existed) is a client navigation → eligible for a View Transition.
+  renderWithTransition(reactRoot, app, {
+    enabled: blueprint.get<boolean>('stone.useReact.viewTransitions', true),
+    isNavigation: existing !== undefined
+  })
 
   blueprint.setIf('stone.useReact.reactRoot', reactRoot)
+  ensureScrollRestoration(blueprint)
 
   return reactRoot
+}
+
+/**
+ * Installs SPA scroll restoration once per app (idempotent via a blueprint flag).
+ *
+ * @param blueprint - The blueprint.
+ */
+const ensureScrollRestoration = (blueprint: IBlueprint): void => {
+  if (blueprint.get<boolean>('stone.useReact.scrollRestorationReady', false)) { return }
+  setupScrollRestoration({ enabled: blueprint.get<boolean>('stone.useReact.scrollRestoration', true) })
+  blueprint.setIf('stone.useReact.scrollRestorationReady', true)
 }
 
 /**
@@ -282,6 +336,7 @@ export const renderReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRoot
 export const hydrateReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRootInstance => {
   const reactRoot = hydrateRoot(getAppRootElement(blueprint), app)
   blueprint.setIf('stone.useReact.reactRoot', reactRoot)
+  ensureScrollRestoration(blueprint)
 
   return reactRoot
 }
@@ -422,9 +477,11 @@ export function getServerContent (
   const template = htmlTemplate(container.make<IBlueprint>('blueprint'))
   const snapshot = snapshotResponse(event, container, data).concat('\n<!--app-head-->')
 
-  return applyHeadContextToHtmlString(head ?? {}, template)
-    .replace('<!--app-html-->', html)
-    .replace('<!--app-head-->', snapshot)
+  // Function replacers: rendered HTML / snapshot may contain `$&`, `$'`, `$1`… which
+  // String.replace would otherwise interpret as replacement patterns and corrupt the output.
+  return applyHeadToHtml(head ?? {}, template)
+    .replace('<!--app-html-->', () => html)
+    .replace('<!--app-head-->', () => snapshot)
 }
 
 /**
@@ -449,13 +506,17 @@ export function snapshotResponse (event: IncomingBrowserEvent, container: IConta
 }
 
 /**
- * Render Stone snapshot.
+ * Render Stone snapshot into an inline script tag.
  *
- * @param snapshot - The snapshot to render.
+ * Delegates to `@stone-js/use-view`'s XSS-safe serializer: the snapshot JSON is escaped
+ * (`< > &`, U+2028/U+2029) so user-controlled data returned by a page `handle()` cannot
+ * break out of the `<script>` tag. The payload stays valid JSON for the client parser.
+ *
+ * @param snapshot - The snapshot JSON to render.
  * @returns The script tag.
  */
 export function renderStoneSnapshot (snapshot: string): string {
-  return `<script id="${STONE_SNAPSHOT}" type="application/json">${snapshot}</script>`
+  return renderSnapshotScript(snapshot, STONE_SNAPSHOT)
 }
 
 /**

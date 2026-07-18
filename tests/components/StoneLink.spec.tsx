@@ -63,6 +63,17 @@ describe('StoneLink', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/home')
   })
 
+  it('does not intercept modified clicks (open in new tab keeps working)', () => {
+    const { getByRole } = renderWithContext(
+      <StoneLink to='/home'>Home</StoneLink>
+    )
+
+    const link = getByRole('link')
+    fireEvent.click(link, { metaKey: true })
+
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
+
   it('calls router.generate when to is an object', () => {
     const routeObj = { name: 'user', params: { id: '1' } }
 

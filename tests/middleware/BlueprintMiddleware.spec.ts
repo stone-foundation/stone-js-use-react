@@ -7,7 +7,7 @@ import {
   SetReactAdapterErrorPageMiddleware as ServerSetReactAdapterErrorPageMiddleware
 } from '../../src/server/middleware/BlueprintMiddleware'
 import { SetBrowserResponseMiddlewareMiddleware, SetReactAdapterErrorPageMiddleware } from '../../src/browser/middleware/BlueprintMiddleware'
-import { SetUseReactHooksMiddleware, SetReactKernelErrorPageMiddleware, SetReactRouteDefinitionsMiddleware, SetReactPageLayoutMiddleware, SetUseReactEventHandlerMiddleware } from '../../src/middleware/BlueprintMiddleware'
+import { SetUseReactHooksMiddleware, SetReactKernelErrorPageMiddleware, SetReactRouteDefinitionsMiddleware, SetReactPageLayoutMiddleware, SetReactViewProvidersMiddleware, SetUseReactEventHandlerMiddleware } from '../../src/middleware/BlueprintMiddleware'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 
@@ -176,6 +176,34 @@ describe('BlueprintMiddleware', () => {
     })
 
     expect(blueprint.set).toHaveBeenCalledWith('stone.useReact.layout.default', { isClass: true, module: fakeModule })
+  })
+
+  it('SetReactViewProvidersMiddleware registers @ViewProvider classes into stone.useReact.providers', async () => {
+    vi.mocked(hasMetadata).mockReturnValue(true)
+    vi.mocked(getMetadata).mockReturnValue({ priority: 5, props: { theme: 'dark' } })
+
+    const fakeProvider = class {}
+    const { blueprint } = await runMiddleware(SetReactViewProvidersMiddleware, {
+      modules: [fakeProvider]
+    })
+
+    expect(blueprint.add).toHaveBeenCalledWith('stone.useReact.providers', [expect.objectContaining({
+      __viewProvider: true,
+      module: fakeProvider,
+      isClass: true,
+      priority: 5,
+      props: { theme: 'dark' }
+    })])
+  })
+
+  it('SetReactViewProvidersMiddleware registers nothing when no module is decorated', async () => {
+    vi.mocked(hasMetadata).mockReturnValue(false)
+
+    const { blueprint } = await runMiddleware(SetReactViewProvidersMiddleware, {
+      modules: [class {}]
+    })
+
+    expect(blueprint.add).not.toHaveBeenCalledWith('stone.useReact.providers', expect.anything())
   })
 
   it('SetUseReactEventHandlerMiddleware sets default and event handler if present', async () => {

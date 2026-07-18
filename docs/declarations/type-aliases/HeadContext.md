@@ -4,6 +4,6 @@
 type HeadContext = BaseHeadContext;
 ```
 
-The type representing the Head Context for React.
-It extends the BaseHeadContext to include additional properties specific to React.
-This type is used to manage the head elements of a React application.
+The Head Context for React pages — the agnostic `@stone-js/use-view` head context
+(title, description, metas, links, scripts, styles, base, jsonLd, html/body attributes).
+Build it fluently with `createHead()` (see `./head`) or return a plain object.

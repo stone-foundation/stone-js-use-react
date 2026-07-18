@@ -1,5 +1,4 @@
-import { HeadContext } from '@stone-js/router'
-import { applyHeadContextToDom } from './DomUtils'
+import { HeadContext, applyHeadToDocument } from '@stone-js/use-view'
 import { IErrorPage, ISnapshot, MetaErrorPage, ReactIncomingEvent } from './declarations'
 import { IBlueprint, IContainer, isEmpty, isObjectLikeModule, Promiseable } from '@stone-js/core'
 import { buildAppComponent, isServer, renderReactApp, resolveComponent } from './UseReactPageInternals'
@@ -74,7 +73,7 @@ export class ReactRuntime {
    * @param value - The head context to set.
    */
   head (value: HeadContext): void {
-    applyHeadContextToDom(document, value)
+    applyHeadToDocument(document, value)
   }
 
   /**

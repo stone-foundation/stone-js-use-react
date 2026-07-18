@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { StonePage } from '../src/components/StonePage'
 import { StoneError } from '../src/components/StoneError'
 import { UseReactError } from '../src/errors/UseReactError'
-import { applyHeadContextToHtmlString } from '../src/DomUtils'
+import { applyHeadToHtml } from '@stone-js/use-view'
 import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, htmlTemplate, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
@@ -23,8 +23,9 @@ vi.mock('react-dom/server', () => ({
   renderToString: vi.fn().mockReturnValue('<div>SSR Content</div>')
 }))
 
-vi.mock('../src/DomUtils', () => ({
-  applyHeadContextToHtmlString: vi.fn((head, template) => {
+vi.mock('@stone-js/use-view', async (importOriginal) => ({
+  ...(await importOriginal()),
+  applyHeadToHtml: vi.fn((head, template) => {
     return template.replace('<!--app-html-->', '').replace('<!--app-head-->', '')
   })
 }))
@@ -262,19 +263,38 @@ describe('buildAdapterErrorComponent', () => {
 })
 
 describe('resolveLazyComponent', () => {
-  it('resolves and replaces lazy async factory modules', async () => {
+  it('resolves lazy modules without mutating the shared meta object', async () => {
     const resolved = { foo: 'bar' }
+    const factory = vi.fn().mockResolvedValue(resolved)
 
     const meta = {
       lazy: true,
-      module: vi.fn().mockResolvedValue(resolved)
+      module: factory
     }
 
     const result = await resolveLazyComponent(meta)
 
-    expect(result).toBe(meta)
-    expect(meta.lazy).toBe(false)
-    expect(meta.module).toBe(resolved)
+    // The result is a fresh, fully-resolved meta...
+    expect(result).not.toBe(meta)
+    expect(result?.lazy).toBe(false)
+    expect(result?.module).toBe(resolved)
+
+    // ...and the shared (blueprint-owned) meta is left untouched (no cross-request race).
+    expect(meta.lazy).toBe(true)
+    expect(meta.module).toBe(factory)
+  })
+
+  it('memoizes resolution so the import factory runs once across calls', async () => {
+    const resolved = { foo: 'bar' }
+    const factory = vi.fn().mockResolvedValue(resolved)
+    const meta = { lazy: true, module: factory }
+
+    const first = await resolveLazyComponent(meta)
+    const second = await resolveLazyComponent(meta)
+
+    expect(factory).toHaveBeenCalledTimes(1)
+    expect(first?.module).toBe(resolved)
+    expect(second?.module).toBe(resolved)
   })
 
   it('returns original if not lazy', async () => {
@@ -489,7 +509,7 @@ describe('getServerContent', () => {
     const component = '<App />'
     const data = { statusCode: 200, data: 'page' }
 
-    vi.mocked(applyHeadContextToHtmlString).mockReturnValue(`
+    vi.mocked(applyHeadToHtml).mockReturnValue(`
       <html><!--app-html--><!--app-head--></html>
     `)
 
@@ -558,6 +578,15 @@ describe('renderStoneSnapshot', () => {
     const html = renderStoneSnapshot(json)
 
     expect(html).toBe('<script id="__STONE_SNAPSHOT__" type="application/json">{"ssr":true}</script>')
+  })
+
+  it('escapes </script> in the snapshot so it cannot break out of the tag (XSS)', () => {
+    const json = JSON.stringify({ ssr: true, bio: '</script><script>alert(1)</script>' })
+    const html = renderStoneSnapshot(json)
+
+    // Exactly one closing tag: the payload did not create a second </script>.
+    expect(html.match(/<\/script>/g)).toHaveLength(1)
+    expect(html).toContain('\\u003C/script')
   })
 })
 

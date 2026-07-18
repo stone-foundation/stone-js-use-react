@@ -8,11 +8,12 @@ import { PageLayout } from '../../src/decorators/PageLayout'
 import { PageStatus } from '../../src/decorators/PageStatus'
 import { UseReact } from '../../src/browser/decorators/UseReact'
 import { AdapterErrorPage } from '../../src/decorators/AdapterErrorPage'
+import { ViewProvider } from '../../src/decorators/ViewProvider'
 import { UseReact as ServerUseReact } from '../../src/server/decorators/UseReact'
 import { useReactBlueprint } from '../../src/browser/options/BrowserUseReactBlueprint'
 import { setMetadata, addMetadata, LIFECYCLE_HOOK_KEY, addBlueprint } from '@stone-js/core'
 import { useReactBlueprint as serverUseReactBlueprint } from '../../src/server/options/ServerUseReactBlueprint'
-import { REACT_PAGE_KEY, REACT_ADAPTER_ERROR_PAGE_KEY, REACT_ERROR_PAGE_KEY, REACT_PAGE_LAYOUT_KEY, STONE_REACT_APP_KEY } from '../../src/decorators/constants'
+import { REACT_PAGE_KEY, REACT_ADAPTER_ERROR_PAGE_KEY, REACT_ERROR_PAGE_KEY, REACT_PAGE_LAYOUT_KEY, REACT_VIEW_PROVIDER_KEY, STONE_REACT_APP_KEY } from '../../src/decorators/constants'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 
@@ -192,6 +193,27 @@ describe('PageLayout decorator', () => {
       expect.any(Object),
       REACT_PAGE_LAYOUT_KEY,
       { ...opts, isClass: true }
+    )
+  })
+})
+
+describe('ViewProvider decorator', () => {
+  it('should call setMetadata with view provider options and isClass', () => {
+    const opts = { priority: 5, props: { theme: 'dark' } }
+    ViewProvider(opts)(class {})
+    expect(setMetadata).toHaveBeenCalledWith(
+      expect.any(Object),
+      REACT_VIEW_PROVIDER_KEY,
+      { ...opts, isClass: true }
+    )
+  })
+
+  it('should default to empty options', () => {
+    ViewProvider()(class {})
+    expect(setMetadata).toHaveBeenCalledWith(
+      expect.any(Object),
+      REACT_VIEW_PROVIDER_KEY,
+      { isClass: true }
     )
   })
 })

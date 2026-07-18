@@ -2,15 +2,16 @@
 import { ReactNode } from 'react'
 import { Config } from '@stone-js/config'
 import { BrowserContext, BrowserEvent, BrowserResponse } from '@stone-js/browser-adapter'
-import { DecoratorPageRouteDefinition, FunctionalEventHandler, HeadContext as BaseHeadContext, Route, Router } from '@stone-js/router'
+import { HeadContext as BaseHeadContext } from '@stone-js/use-view'
+import { DecoratorPageRouteDefinition, FunctionalEventHandler, Route, Router } from '@stone-js/router'
 import { IncomingHttpEvent, IncomingHttpEventOptions, OutgoingHttpResponse, OutgoingHttpResponseOptions, RedirectResponse, RedirectResponseOptions } from '@stone-js/http-core'
 import { IncomingBrowserEvent, IncomingBrowserEventOptions, OutgoingBrowserResponse, OutgoingBrowserResponseOptions, RedirectBrowserResponse, RedirectBrowserResponseOptions } from '@stone-js/browser-core'
 import { OutgoingResponseOptions, IContainer, AdapterContext, Promiseable, FunctionalErrorHandler, HookName as BaseHookName, IBlueprint, ErrorHandlerOptions, AdapterErrorHandlerOptions, FunctionalAdapterErrorHandler, Laziable, LifecycleHookType } from '@stone-js/core'
 
 /**
- * The type representing the Head Context for React.
- * It extends the BaseHeadContext to include additional properties specific to React.
- * This type is used to manage the head elements of a React application.
+ * The Head Context for React pages — the agnostic `@stone-js/use-view` head context
+ * (title, description, metas, links, scripts, styles, base, jsonLd, html/body attributes).
+ * Build it fluently with `createHead()` (see `./head`) or return a plain object.
 */
 export type HeadContext = BaseHeadContext
 
