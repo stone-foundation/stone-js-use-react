@@ -52,7 +52,18 @@ export const StoneLink: FunctionComponent<StoneLinkOptions> = ({
   const handleClick = (event: MouseEvent<HTMLAnchorElement>): void => {
     rest.onClick?.(event)
 
-    if (event.defaultPrevented || isExternal) return
+    // Let the browser handle the click natively (real <a href> fallback) for external
+    // links, already-handled clicks, modified clicks (Ctrl/Cmd/Shift/Alt), non-left
+    // clicks, and `target="_blank"` — so "open in new tab/window" keeps working.
+    if (
+      event.defaultPrevented ||
+      isExternal ||
+      event.button !== 0 ||
+      event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+      (isNotEmpty(rest.target) && rest.target !== '_self')
+    ) {
+      return
+    }
 
     event.preventDefault()
     isNotEmpty<string | NavigateOptions>(to) && router.navigate(to)

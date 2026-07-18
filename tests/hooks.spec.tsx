@@ -1,16 +1,18 @@
 import React from 'react'
-import { renderHook } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import { StoneContext } from '../src/StoneContext'
 import { StoneContextType } from '../src/declarations'
 import {
   useHead,
   useData,
+  useRoute,
   useStone,
   useEvent,
   useConfig,
   useRouter,
   useService,
   useRuntime,
+  useRawEvent,
   useBlueprint,
   useContainer,
   useEventEmitter
@@ -20,7 +22,7 @@ const makeContext = (): { context: StoneContextType, services: Record<string, an
   const services: Record<string, any> = {
     blueprint: { get: vi.fn() },
     config: { get: vi.fn() },
-    router: { navigate: vi.fn() },
+    router: { navigate: vi.fn(), getCurrentRoute: vi.fn(() => ({ path: '/now' })), on: vi.fn(), off: vi.fn() },
     reactRuntime: { head: vi.fn() },
     eventEmitter: { emit: vi.fn(), on: vi.fn() }
   }
@@ -29,7 +31,7 @@ const makeContext = (): { context: StoneContextType, services: Record<string, an
   }
   const context: StoneContextType = {
     container,
-    event: { fingerprint: () => 'fp' } as any,
+    event: { fingerprint: () => 'fp', source: { rawEvent: { native: true } } } as any,
     data: { user: 'John' }
   }
   return { context, services }
@@ -59,6 +61,24 @@ describe('React hooks', () => {
     const { context } = makeContext()
     const { result } = renderHook(() => useEvent(), { wrapper: wrapperFor(context) })
     expect(result.current).toBe(context.event)
+  })
+
+  it('useRawEvent returns the raw platform event from the event source', () => {
+    const { context } = makeContext()
+    const { result } = renderHook(() => useRawEvent<{ native: boolean }>(), { wrapper: wrapperFor(context) })
+    expect(result.current).toEqual({ native: true })
+  })
+
+  it('useRoute returns the current route and updates on navigation', () => {
+    const { context, services } = makeContext()
+    const { result } = renderHook(() => useRoute(), { wrapper: wrapperFor(context) })
+    expect(result.current).toEqual({ path: '/now' })
+    expect(services.router.on).toHaveBeenCalledWith('stonejs@router:routed', expect.any(Function))
+
+    // Simulate a navigation: the subscribed handler updates the route.
+    const onRouted = services.router.on.mock.calls[0][1]
+    void act(() => { onRouted({ get: () => ({ path: '/new' }) }) })
+    expect(result.current).toEqual({ path: '/new' })
   })
 
   it('useData returns the page data', () => {

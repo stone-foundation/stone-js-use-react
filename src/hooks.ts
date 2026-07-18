@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react'
+import { RouteEvent } from '@stone-js/router'
 import { Config } from '@stone-js/config'
 import { ReactRuntime } from './ReactRuntime'
 import { StoneContext } from './StoneContext'
 import { HeadContext } from '@stone-js/use-view'
+import { useContext, useEffect, useState } from 'react'
 import { EventEmitter, IBlueprint, IContainer } from '@stone-js/core'
-import { IRouter, ReactIncomingEvent, StoneContextType } from './declarations'
+import { IRoute, IRouter, ReactIncomingEvent, StoneContextType } from './declarations'
 
 /**
  * React hooks for Stone.js.
@@ -47,6 +48,42 @@ export function useContainer (): IContainer {
  */
 export function useEvent (): ReactIncomingEvent {
   return useStone().event
+}
+
+/**
+ * Access the raw, platform-specific event that produced this render.
+ *
+ * This is the untouched native event captured by the adapter (e.g. Node's
+ * `IncomingMessage`, the AWS Lambda event, or the browser event). Returns `undefined`
+ * when the adapter did not attach one. Prefer {@link useEvent} for normalised access;
+ * reach for the raw event only for platform-specific needs.
+ *
+ * @template TRawEvent - The expected raw event type.
+ * @returns The raw event, or `undefined`.
+ */
+export function useRawEvent<TRawEvent = unknown> (): TRawEvent | undefined {
+  return useEvent().source?.rawEvent as TRawEvent | undefined
+}
+
+/**
+ * Access the currently matched route, or `undefined` when none is active.
+ *
+ * Reactive on the client: it updates on every SPA navigation (the router's `ROUTED`
+ * event). On the server it reflects the route matched for the current request.
+ *
+ * @returns The current route, or `undefined`.
+ */
+export function useRoute (): IRoute | undefined {
+  const router = useRouter()
+  const [route, setRoute] = useState<IRoute | undefined>(() => router.getCurrentRoute())
+
+  useEffect(() => {
+    const onRouted = (event: RouteEvent): void => { setRoute(event.get<IRoute>('route')) }
+    router.on(RouteEvent.ROUTED, onRouted)
+    return () => { router.off(RouteEvent.ROUTED, onRouted) }
+  }, [router])
+
+  return route
 }
 
 /**
