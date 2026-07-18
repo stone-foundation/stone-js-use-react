@@ -1,12 +1,13 @@
 import { NAVIGATION_EVENT } from '@stone-js/router'
-import { applyHeadContextToDom } from '../../../src/DomUtils'
+import { applyHeadToDocument } from '@stone-js/use-view'
 import { STONE_PAGE_EVENT_OUTLET } from '../../../src/constants'
 import { UseReactError } from '../../../src/errors/UseReactError'
 import { hydrateReactApp, renderReactApp } from '../../../src/UseReactPageInternals'
 import { BrowserResponseMiddleware } from '../../../src/browser/middleware/BrowserResponseMiddleware'
 
-vi.mock('../../../src/DomUtils', () => ({
-  applyHeadContextToDom: vi.fn()
+vi.mock('@stone-js/use-view', async mod => ({
+  ...(await mod()),
+  applyHeadToDocument: vi.fn()
 }))
 
 vi.mock('../../../src/UseReactPageInternals', () => ({
@@ -78,7 +79,7 @@ describe('BrowserResponseMiddleware', () => {
     // @ts-expect-error - private access
     await middleware.renderComponent(context.outgoingResponse)
 
-    expect(applyHeadContextToDom).toHaveBeenCalledWith(document, head)
+    expect(applyHeadToDocument).toHaveBeenCalledWith(document, head)
   })
 
   it('hydrates app when ssr=true, not rendered, and app is present', async () => {

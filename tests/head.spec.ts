@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { createHead, defineHead } from '../src/head'
-import { applyHeadContextToHtmlString, applyHeadContextToDom } from '../src/DomUtils'
+import { createHead, defineHead, applyHeadToHtml, applyHeadToDocument } from '../src/head'
 
 const TEMPLATE = '<!DOCTYPE html><html><head><title></title>\n<!--app-head--></head><body></body></html>'
 
@@ -11,7 +10,7 @@ describe('use-react head API (re-exported from use-view)', () => {
   })
 })
 
-describe('applyHeadContextToHtmlString with createHead (SSR)', () => {
+describe('applyHeadToHtml with createHead (SSR)', () => {
   it('renders title, OG, canonical and JSON-LD from a fluent head', () => {
     const head = createHead()
       .title('My Post')
@@ -23,7 +22,7 @@ describe('applyHeadContextToHtmlString with createHead (SSR)', () => {
       .jsonLd({ '@context': 'https://schema.org', '@type': 'Article', headline: 'My Post' })
       .toContext()
 
-    const html = applyHeadContextToHtmlString(head, TEMPLATE)
+    const html = applyHeadToHtml(head, TEMPLATE)
 
     expect(html).toContain('<title>My Post — Stone.js</title>')
     expect(html).toContain('<meta property="og:type" content="article">')
@@ -38,19 +37,19 @@ describe('applyHeadContextToHtmlString with createHead (SSR)', () => {
 
   it('inserts a title containing $ literally (no String.replace pattern corruption)', () => {
     const head = createHead().title("Price: $& and $'").toContext()
-    const html = applyHeadContextToHtmlString(head, TEMPLATE)
-    expect(html).toContain("<title>Price: $&amp; and $&#039;</title>")
+    const html = applyHeadToHtml(head, TEMPLATE)
+    expect(html).toContain("<title>Price: $&amp; and $&#39;</title>")
   })
 
   it('applies html/body attributes', () => {
     const head = createHead().htmlAttributes({ lang: 'en' }).bodyAttributes({ class: 'app' }).toContext()
-    const html = applyHeadContextToHtmlString(head, TEMPLATE)
+    const html = applyHeadToHtml(head, TEMPLATE)
     expect(html).toContain('<html lang="en">')
     expect(html).toContain('<body class="app">')
   })
 })
 
-describe('applyHeadContextToDom with createHead (CSR)', () => {
+describe('applyHeadToDocument with createHead (CSR)', () => {
   it('applies title, metas, canonical and JSON-LD to the document', () => {
     document.head.innerHTML = ''
     document.title = ''
@@ -62,7 +61,7 @@ describe('applyHeadContextToDom with createHead (CSR)', () => {
       .jsonLd({ '@type': 'WebSite' })
       .toContext()
 
-    applyHeadContextToDom(document, head)
+    applyHeadToDocument(document, head)
 
     expect(document.title).toBe('Home')
     expect(document.head.querySelector('meta[property="og:type"]')?.getAttribute('content')).toBe('website')

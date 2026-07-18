@@ -24,7 +24,18 @@
 export {
   HeadManager,
   createHead,
-  defineHead
+  defineHead,
+  // Agnostic head application (client DOM + SSR HTML string), ported to `@stone-js/use-view`
+  // and re-exported here so `@stone-js/use-react` users keep a single import surface.
+  applyMeta,
+  applyLink,
+  applyStyle,
+  applyScript,
+  applyJsonLd,
+  STONE_HEAD_ATTR,
+  applyHeadToHtml,
+  applyHeadToDocument,
+  applyElementAttributes
 } from '@stone-js/use-view'
 
 // Note: `HeadContext` and the descriptor types are re-exported from `./declarations`

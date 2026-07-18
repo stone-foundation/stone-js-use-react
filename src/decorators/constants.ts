@@ -27,3 +27,8 @@ export const REACT_ADAPTER_ERROR_PAGE_KEY = Symbol.for('ReactAdapterErrorPage')
  * A unique symbol key to mark classes as React Stone application entry point.
  */
 export const STONE_REACT_APP_KEY = Symbol.for('StoneReactApp')
+
+/**
+ * A unique symbol key to mark classes as a React view provider (design-system/context wrapper).
+ */
+export const REACT_VIEW_PROVIDER_KEY = Symbol.for('ReactViewProvider')

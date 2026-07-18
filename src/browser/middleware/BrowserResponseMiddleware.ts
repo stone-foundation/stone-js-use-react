@@ -1,8 +1,7 @@
 import { ReactNode } from 'react'
-import { applyHeadContextToDom } from '../../DomUtils'
 import { STONE_PAGE_EVENT_OUTLET } from '../../constants'
 import { UseReactError } from '../../errors/UseReactError'
-import { HeadContext } from '@stone-js/use-view'
+import { HeadContext, applyHeadToDocument } from '@stone-js/use-view'
 import { NAVIGATION_EVENT } from '@stone-js/router'
 import { BrowserAdapterResponseBuilder } from '@stone-js/browser-adapter'
 import { hydrateReactApp, renderReactApp } from '../../UseReactPageInternals'
@@ -81,7 +80,7 @@ export class BrowserResponseMiddleware {
     }
 
     if (isNotEmpty<HeadContext>(content?.head)) {
-      applyHeadContextToDom(document, content.head)
+      applyHeadToDocument(document, content.head)
     }
 
     if (content?.ssr === true && !this.isRendered && isNotEmpty(content?.app)) {

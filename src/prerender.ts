@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import { ReactViewEngine } from './ReactViewEngine'
-import { applyHeadContextToHtmlString } from './DomUtils'
-import { HeadContext, PrerenderResult, renderSnapshotScript } from '@stone-js/use-view'
+import { HeadContext, PrerenderResult, renderSnapshotScript, applyHeadToHtml } from '@stone-js/use-view'
 
 /**
  * Static generation (SSG) render step for React.
@@ -41,7 +40,7 @@ export async function prerenderPage (options: PrerenderPageOptions): Promise<Pre
   const appHtml = await ReactViewEngine.renderToString(options.node)
 
   // Same assembly as the SSR path (function replacers guard against `$&`/`$'` in content).
-  let html = applyHeadContextToHtmlString(options.head ?? {}, options.template)
+  let html = applyHeadToHtml(options.head ?? {}, options.template)
   html = html.replace('<!--app-html-->', () => appHtml)
   const snapshotScript = renderSnapshotScript(options.snapshot ?? { ssr: true })
   html = html.replace('<!--app-head-->', () => snapshotScript)

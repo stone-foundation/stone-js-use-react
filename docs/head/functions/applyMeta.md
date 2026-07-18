@@ -4,7 +4,7 @@
 function applyMeta(document, meta): void;
 ```
 
-Apply meta tags to the document document.head.
+Apply (create or update) a `<meta>` tag in the document head.
 
 ## Parameters
 
@@ -12,13 +12,13 @@ Apply meta tags to the document document.head.
 
 `Document`
 
-The document object.
+The target document.
 
 ### meta
 
-`HTMLMetaDescriptor`
+`MetaDescriptor`
 
-The meta tag descriptor.
+The meta descriptor.
 
 ## Returns
 

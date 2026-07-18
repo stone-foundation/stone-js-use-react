@@ -39,13 +39,12 @@ import {
 } from './declarations'
 import { jsx } from 'react/jsx-runtime'
 import { STONE_SNAPSHOT } from './constants'
-import { renderSnapshotScript, composeProviders, MetaViewProvider } from '@stone-js/use-view'
+import { renderSnapshotScript, composeProviders, MetaViewProvider, applyHeadToHtml } from '@stone-js/use-view'
 import { ElementType, ReactNode } from 'react'
 import { renderToString } from 'react-dom/server'
 import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
-import { applyHeadContextToHtmlString } from './DomUtils'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
@@ -461,7 +460,7 @@ export function getServerContent (
 
   // Function replacers: rendered HTML / snapshot may contain `$&`, `$'`, `$1`… which
   // String.replace would otherwise interpret as replacement patterns and corrupt the output.
-  return applyHeadContextToHtmlString(head ?? {}, template)
+  return applyHeadToHtml(head ?? {}, template)
     .replace('<!--app-html-->', () => html)
     .replace('<!--app-head-->', () => snapshot)
 }

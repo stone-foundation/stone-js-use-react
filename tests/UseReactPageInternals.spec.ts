@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { StonePage } from '../src/components/StonePage'
 import { StoneError } from '../src/components/StoneError'
 import { UseReactError } from '../src/errors/UseReactError'
-import { applyHeadContextToHtmlString } from '../src/DomUtils'
+import { applyHeadToHtml } from '@stone-js/use-view'
 import { buildAdapterErrorComponent, buildAppComponent, buildLayoutComponent, buildPageComponent, executeHandler, executeHooks, getAppRootElement, getBrowserContent, getResponseSnapshot, getServerContent, htmlTemplate, hydrateReactApp, isClient, isServer, isSSR, renderReactApp, renderStoneSnapshot, resolveComponent, resolveLazyComponent, snapshotResponse } from '../src/UseReactPageInternals'
 
 /* eslint-disable @typescript-eslint/no-extraneous-class */
@@ -23,8 +23,9 @@ vi.mock('react-dom/server', () => ({
   renderToString: vi.fn().mockReturnValue('<div>SSR Content</div>')
 }))
 
-vi.mock('../src/DomUtils', () => ({
-  applyHeadContextToHtmlString: vi.fn((head, template) => {
+vi.mock('@stone-js/use-view', async (importOriginal) => ({
+  ...(await importOriginal()),
+  applyHeadToHtml: vi.fn((head, template) => {
     return template.replace('<!--app-html-->', '').replace('<!--app-head-->', '')
   })
 }))
@@ -508,7 +509,7 @@ describe('getServerContent', () => {
     const component = '<App />'
     const data = { statusCode: 200, data: 'page' }
 
-    vi.mocked(applyHeadContextToHtmlString).mockReturnValue(`
+    vi.mocked(applyHeadToHtml).mockReturnValue(`
       <html><!--app-html--><!--app-head--></html>
     `)
 
