@@ -1,5 +1,13 @@
 import { isEmpty, isNotEmpty } from '@stone-js/core'
-import { HTMLMetaDescriptor, HeadContext, HTMLLinkDescriptor, HTMLScriptDescriptor, HTMLStyleDescriptor } from '@stone-js/router'
+import {
+  HeadContext,
+  serializeHead,
+  serializeAttributes,
+  MetaDescriptor as HTMLMetaDescriptor,
+  LinkDescriptor as HTMLLinkDescriptor,
+  ScriptDescriptor as HTMLScriptDescriptor,
+  StyleDescriptor as HTMLStyleDescriptor
+} from '@stone-js/use-view'
 
 /**
   * Stone DOM Attribute.
@@ -54,18 +62,29 @@ const applyLink = (document: Document, link: HTMLLinkDescriptor): void => {
     }
     if (needsUpdate) {
       for (const [key, value] of Object.entries(link)) {
-        existing.setAttribute(key, value)
+        el2SetAttribute(existing, key, value)
       }
       existing.setAttribute(STONE_DOM_ATTR, '')
     }
   } else {
     const el = document.createElement('link')
     for (const [key, value] of Object.entries(link)) {
-      el.setAttribute(key, value)
+      el2SetAttribute(el, key, value)
     }
     el.setAttribute(STONE_DOM_ATTR, '')
     document.head.appendChild(el)
   }
+}
+
+/**
+ * Set an attribute, coercing the (possibly unknown) value to string.
+ *
+ * @param el - The target element.
+ * @param key - The attribute name.
+ * @param value - The attribute value.
+ */
+const el2SetAttribute = (el: Element, key: string, value: unknown): void => {
+  el.setAttribute(key, String(value))
 }
 
 /**
@@ -106,7 +125,7 @@ const needsAttributeUpdate = (el: HTMLElement, attrs: Record<string, unknown>): 
  * @param script - The script tag descriptor.
  */
 const applyScript = (document: Document, script: HTMLScriptDescriptor): void => {
-  const selector = `script[src="${script.src}"][${STONE_DOM_ATTR}]`
+  const selector = `script[src="${script.src ?? ''}"][${STONE_DOM_ATTR}]`
   const existing = document.head.querySelector<HTMLScriptElement>(selector)
 
   if (existing != null) {
@@ -147,22 +166,54 @@ const applyStyle = (document: Document, style: HTMLStyleDescriptor): void => {
  * @param context - The head context containing meta, link, script, and style descriptors.
  */
 export const applyHeadContextToDom = (document: Document, context: HeadContext): void => {
-  if (isNotEmpty<string>(context.title) && document.title !== context.title) {
-    document.title = context.title
+  const title = isNotEmpty<string>(context.titleTemplate) && isNotEmpty<string>(context.title)
+    ? context.titleTemplate.replace('%s', context.title)
+    : context.title
+
+  if (isNotEmpty<string>(title) && document.title !== title) {
+    document.title = title
   }
 
+  const metas = [...(context.metas ?? [])]
   if (isNotEmpty<string>(context.description)) {
-    context.metas = context.metas ?? []
-    context.metas.push({
-      name: 'description',
-      content: context.description
-    })
+    metas.push({ name: 'description', content: context.description })
   }
 
-  context.metas?.forEach(v => applyMeta(document, v))
+  metas.forEach(v => applyMeta(document, v))
   context.links?.forEach(v => applyLink(document, v))
   context.styles?.forEach(v => applyStyle(document, v))
   context.scripts?.forEach(v => applyScript(document, v))
+  context.jsonLd?.forEach(v => applyJsonLd(document, v))
+
+  applyElementAttributes(document.documentElement, context.htmlAttributes)
+  if (document.body !== null) { applyElementAttributes(document.body, context.bodyAttributes) }
+}
+
+/**
+ * Apply a JSON-LD structured-data block to the document head.
+ *
+ * @param document - The document object.
+ * @param data - The JSON-LD object.
+ */
+export const applyJsonLd = (document: Document, data: Record<string, unknown>): void => {
+  const script = document.createElement('script')
+  script.setAttribute('type', 'application/ld+json')
+  script.setAttribute(STONE_DOM_ATTR, 'true')
+  script.textContent = JSON.stringify(data)
+  document.head.appendChild(script)
+}
+
+/**
+ * Apply an attribute map to an element (used for `<html>` / `<body>` attributes).
+ *
+ * @param element - The target element.
+ * @param attributes - The attribute map.
+ */
+export const applyElementAttributes = (element: Element | null, attributes?: Record<string, string>): void => {
+  if (element === null || attributes === undefined) { return }
+  for (const [name, value] of Object.entries(attributes)) {
+    element.setAttribute(name, value)
+  }
 }
 
 /**
@@ -189,59 +240,28 @@ const escapeHtml = (input: string): string =>
 export const applyHeadContextToHtmlString = (context: HeadContext, html: string): string => {
   if (isEmpty(context) || isEmpty(html)) return html
 
-  // Replace the existing <title> tag with the new title (if provided)
-  if (isNotEmpty<string>(context.title)) {
-    html = html.replace(
-      /<title>.*?<\/title>/i,
-      `<title>${escapeHtml(context.title)}</title>`
-    )
+  // Title: apply the template then replace the existing <title>. Function replacer so a
+  // title containing `$&`/`$'` is inserted literally.
+  const title = isNotEmpty<string>(context.titleTemplate) && isNotEmpty<string>(context.title)
+    ? context.titleTemplate.replace('%s', context.title)
+    : context.title
+
+  if (isNotEmpty<string>(title)) {
+    html = html.replace(/<title>.*?<\/title>/i, () => `<title>${escapeHtml(title)}</title>`)
   }
 
-  // Build all additional head elements to insert into <!--app-head-->
-  const parts: string[] = []
+  // Everything else is serialized by the agnostic use-view head serializer, which escapes
+  // attribute names and values, leaves inline style/script content intact, and renders
+  // base/description/jsonLd. Title is excluded here (handled above) to avoid a duplicate.
+  const { title: _t, titleTemplate: _tt, htmlAttributes, bodyAttributes, ...rest } = context
+  const headString = serializeHead(rest).concat('\n<!--app-head-->')
+  html = html.replace('<!--app-head-->', () => headString)
 
-  // Meta tags
-  context.metas?.forEach((meta) => {
-    const attrs = Object.entries(meta)
-      .map(([key, value]) => `${key}="${escapeHtml(value)}"`)
-      .join(' ')
-    parts.push(`<meta ${attrs}>`)
-  })
+  // Optional <html>/<body> attributes.
+  const htmlAttrs = serializeAttributes(htmlAttributes)
+  if (htmlAttrs.length > 0) { html = html.replace(/<html\b([^>]*)>/i, (_m, existing) => `<html${String(existing)}${htmlAttrs}>`) }
+  const bodyAttrs = serializeAttributes(bodyAttributes)
+  if (bodyAttrs.length > 0) { html = html.replace(/<body\b([^>]*)>/i, (_m, existing) => `<body${String(existing)}${bodyAttrs}>`) }
 
-  // Link tags
-  context.links?.forEach((link) => {
-    const attrs = Object.entries(link)
-      .map(([key, value]) => `${key}="${escapeHtml(String(value))}"`)
-      .join(' ')
-    parts.push(`<link ${attrs}>`)
-  })
-
-  // Script tags
-  context.scripts?.forEach((script) => {
-    const getKeyValue = (key: string, value: any): string => isNotEmpty(value) ? `${key}` : ''
-    const attrs = Object.entries(script)
-      .map(([key, value]) =>
-        typeof value === 'boolean'
-          ? getKeyValue(key, value)
-          : `${key}="${escapeHtml(String(value))}"`
-      )
-      .filter(Boolean)
-      .join(' ')
-    parts.push(`<script ${attrs}></script>`)
-  })
-
-  // Style tags
-  context.styles?.forEach((style) => {
-    const attrs = Object.entries(style)
-      .filter(([key]) => key !== 'content')
-      .map(([key, value]) => `${key}="${escapeHtml(String(value))}"`)
-      .join(' ')
-    const content = escapeHtml(style.content)
-    parts.push(`<style ${attrs}>${content}</style>`)
-  })
-
-  // Inject generated tags into the placeholder
-  const headString = parts.join('\n').concat('\n<!--app-head-->')
-
-  return html.replace('<!--app-head-->', headString)
+  return html
 }

@@ -1,4 +1,4 @@
-import { HeadContext } from '@stone-js/router'
+import { HeadContext } from '@stone-js/use-view'
 import { applyHeadContextToDom } from './DomUtils'
 import { IErrorPage, ISnapshot, MetaErrorPage, ReactIncomingEvent } from './declarations'
 import { IBlueprint, IContainer, isEmpty, isObjectLikeModule, Promiseable } from '@stone-js/core'
