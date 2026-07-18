@@ -46,6 +46,8 @@ import { StonePage } from './components/StonePage'
 import { StoneError } from './components/StoneError'
 import { UseReactError } from './errors/UseReactError'
 import { IncomingBrowserEvent } from '@stone-js/browser-core'
+import { renderWithTransition } from './dom/viewTransitions'
+import { setupScrollRestoration } from './dom/scrollRestoration'
 import { createRoot, hydrateRoot, Root as ReactRootInstance } from 'react-dom/client'
 
 /**
@@ -298,14 +300,30 @@ export const getAppRootElement = (blueprint: IBlueprint): HTMLElement => {
  * @returns The React root instance.
  */
 export const renderReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRootInstance => {
-  const reactRoot = blueprint.get<ReactRootInstance>('stone.useReact.reactRoot') ??
-    createRoot(getAppRootElement(blueprint))
+  const existing = blueprint.get<ReactRootInstance>('stone.useReact.reactRoot')
+  const reactRoot = existing ?? createRoot(getAppRootElement(blueprint))
 
-  reactRoot.render(app)
+  // A re-render (root already existed) is a client navigation → eligible for a View Transition.
+  renderWithTransition(reactRoot, app, {
+    enabled: blueprint.get<boolean>('stone.useReact.viewTransitions', true),
+    isNavigation: existing !== undefined
+  })
 
   blueprint.setIf('stone.useReact.reactRoot', reactRoot)
+  ensureScrollRestoration(blueprint)
 
   return reactRoot
+}
+
+/**
+ * Installs SPA scroll restoration once per app (idempotent via a blueprint flag).
+ *
+ * @param blueprint - The blueprint.
+ */
+const ensureScrollRestoration = (blueprint: IBlueprint): void => {
+  if (blueprint.get<boolean>('stone.useReact.scrollRestorationReady', false)) { return }
+  setupScrollRestoration({ enabled: blueprint.get<boolean>('stone.useReact.scrollRestoration', true) })
+  blueprint.setIf('stone.useReact.scrollRestorationReady', true)
 }
 
 /**
@@ -318,6 +336,7 @@ export const renderReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRoot
 export const hydrateReactApp = (app: ReactNode, blueprint: IBlueprint): ReactRootInstance => {
   const reactRoot = hydrateRoot(getAppRootElement(blueprint), app)
   blueprint.setIf('stone.useReact.reactRoot', reactRoot)
+  ensureScrollRestoration(blueprint)
 
   return reactRoot
 }

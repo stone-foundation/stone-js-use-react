@@ -22,6 +22,8 @@
 - [decorators/PageStatus](decorators/PageStatus/README.md)
 - [decorators/Snapshot](decorators/Snapshot/README.md)
 - [decorators/ViewProvider](decorators/ViewProvider/README.md)
+- [dom/scrollRestoration](dom/scrollRestoration/README.md)
+- [dom/viewTransitions](dom/viewTransitions/README.md)
 - [errors/UseReactError](errors/UseReactError/README.md)
 - [head](head/README.md)
 - [hooks](hooks/README.md)

@@ -9,6 +9,8 @@
 - [useEvent](functions/useEvent.md)
 - [useEventEmitter](functions/useEventEmitter.md)
 - [useHead](functions/useHead.md)
+- [useRawEvent](functions/useRawEvent.md)
+- [useRoute](functions/useRoute.md)
 - [useRouter](functions/useRouter.md)
 - [useRuntime](functions/useRuntime.md)
 - [useService](functions/useService.md)
